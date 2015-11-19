@@ -1,0 +1,166 @@
+{# src/AppBundle/Resources/views/State/catalog_item.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ property.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ property.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('catalog_default', { 'id': property.id }) }}">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'id': property.id }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "en", 'id': property.id }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'id': property.id }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/catalog.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Інформація про обьект</h1>
+        <div class="outer substrate top-panel-holder inside">
+            <div class="inner white-back">
+                <div class="code-holder">
+                    <p>Код обьекта: <span>uk-245</span></p>
+                </div>
+                <div class="price-holder">
+                    <p><span>2,500.00$</span> / месяц</p>
+                </div>
+            </div>
+        </div>
+        <div class="outer substrate catalog-content inside">
+            <div class="inner white-back">
+                <article class="catalog-item">
+                    <div id="gallery-holder">
+                        <div class="photo-view">
+                            <figure>
+                                <img src="build/images/catalog/apartment-large.jpg" alt="apartment-large">
+                            </figure>
+                        </div>
+                        <div class="navigation-holder">
+                            <div class="navigation">
+                                <ul>
+                                    <li class="active" data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                    <li data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                    <li data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                    <li data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                    <li data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                    <li data-img="build/images/catalog/apartment.jpg">
+                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
+                                    </li>
+                                </ul>
+                            </div>
+                            <span class="arrow arrow-left icon icon-arrow-left"></span>
+                            <span class="arrow arrow-right icon icon-arrow-right"></span>
+                        </div>
+                    </div>
+                    <div class="info-holder">
+                        <h3>вул. Старокиевская,  д. 15, кв. 7,  Шевченківский район, м. Київ, Україна</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quia quae quisquam sunt esse ab, placeat rerum beatae tempora amet iure modi quas similique architecto saepe laudantium fuga, repellat aliquid.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia in velit doloribus quibusdam molestiae maiores facere illum provident dolor vero recusandae debitis, suscipit odit inventore, voluptate. Quaerat aspernatur ipsa reiciendis.</p>
+                        <ul>
+                            <li>
+                                <p><span class="icon icon-sq"></span>160m<sup>3</sup></p>
+                            </li>
+                            <li>
+                                <p><span class="icon icon-rooms"></span>5 кімнат</p>
+                            </li>
+                            <li>
+                                <p><span class="icon icon-bedroom"></span>3 кімнати</p>
+                            </li>
+                            <li>
+                                <p><span class="icon icon-bathroom"></span>2 кімнати</p>
+                            </li>
+                        </ul>
+                        <div class="features-holder">
+                            <span class="icon icon-accept">новий будинок</span>
+                            <span class="icon icon-accept">багатоповерховий</span>
+                            <span class="icon icon-accept">Ліфт</span>
+                            <span class="icon icon-accept">2 балкона</span>
+                            <span class="icon icon-accept">приватний ЖЕК</span>
+                            <span class="icon icon-accept">парко місце</span>
+                        </div>
+                    </div>
+                    <aside id="map-holder">
+                        <div id="map"></div>
+                    </aside>
+                </article>
+            </div>
+        </div>
+        <div class="navigation-holder">
+            <a href="#"><span class="icon icon-arrow-left"></span>попередній обьект</a>
+            <div class="btn-small flat">
+                <a href="#">повернутися до каталогу</a>
+            </div>
+            <a href="#">наступний обьект<span class="icon icon-arrow-right"></span></a>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/catalog.bundle.min.js') }}"></script>
+    <script>
+        window.places = {
+            center: {
+                lat: 50.4533345,
+                lng: 30.4713813
+            },
+            markers: [
+                {
+                    lat: 50.4533345,
+                    lng: 30.4713813,
+                    title: "вул. Старокиевская, д. 15",
+                    icon: "location"
+                },
+                {
+                    lat: 50.450851,
+                    lng: 30.466237,
+                    title: "ст. м. Політехнічний інститут",
+                    icon: "location-tube"
+                },
+                {
+                    lat: 50.4544563,
+                    lng: 30.4653904,
+                    "title": "Київський Зоопарк",
+                    "icon": "location-zoo"
+                }
+            ]
+        }
+
+        System.import("assets/js/app/catalog");
+    </script>
+{% endblock %}

@@ -21,21 +21,21 @@ class FormController extends Controller
 {
     use FormErrorHandlerTrait;
 
-    public function feedbackFormAction($_locale)
+    public function feedbackAction($_locale)
     {
         $feedbackForm = $this->createForm(new FeedbackType, new Feedback);
 
-        return $this->render('AppBundle:Form:feedbackForm.html.twig', [
+        return $this->render('AppBundle:Form:feedback.html.twig', [
             '_locale'      => $_locale,
             'feedbackForm' => $feedbackForm->createView()
         ]);
     }
 
-    public function proposalFormAction($_locale)
+    public function proposalAction($_locale)
     {
         $proposalForm = $this->createForm(new ProposalType($this->getDoctrine()->getManager()), new Proposal);
 
-        return $this->render('AppBundle:Form:proposalForm.html.twig', [
+        return $this->render('AppBundle:Form:proposal.html.twig', [
             '_locale'      => $_locale,
             'proposalForm' => $proposalForm->createView()
         ]);

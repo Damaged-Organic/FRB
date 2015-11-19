@@ -12,18 +12,182 @@ class LoadMetadata extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $metadata = (new Metadata)
-            ->setRoute("index")
-            ->setRobots("index, follow")
-            ->setTitle("Главная")
-            ->setDescription("");
-        $manager->persist($metadata);
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("index")
+                ->setRobots("index, follow")
+                ->setTitle("Головна")
+                ->setDescription("")
+        );
         $manager->flush();
 
-        $metadata->setTitle("Homepage")
-            ->setDescription("")
-            ->setTranslatableLocale('en');
-        $manager->persist($metadata);
+        $manager->persist
+        (
+            $metadata->setTitle("Homepage")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("catalog")
+                ->setRobots("index, follow")
+                ->setTitle("Каталог")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Catalog")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("services")
+                ->setRobots("index, follow")
+                ->setTitle("Послуги")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Services")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("staff")
+                ->setRobots("index, follow")
+                ->setTitle("Люди")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Staff")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("vacancies")
+                ->setRobots("index, follow")
+                ->setTitle("Вакансії")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Vacancies")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("news")
+                ->setRobots("index, follow")
+                ->setTitle("Новини")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("News")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("researches")
+                ->setRobots("index, follow")
+                ->setTitle("Дослідження")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Researches")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("expats_information")
+                ->setRobots("index, follow")
+                ->setTitle("Інформація для експатів")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Information for expats")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
+                ->setRoute("contacts")
+                ->setRobots("index, follow")
+                ->setTitle("Контакти")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Contacts")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
 
         // ---

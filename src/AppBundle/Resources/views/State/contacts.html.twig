@@ -1,0 +1,110 @@
+{# src/AppBundle/Resources/views/State/contacts.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('contacts_default') }}">
+    <link rel="alternate" href="{{ url('contacts', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('contacts', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('contacts', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/contacts.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Контакти</h1>
+        <div class="outer substrate contacts-holder">
+            <div class="inner white-back">
+                <section class="info">
+                    <ul>
+                        <li>
+                            <span class="icon icon-location"></span>
+                            <p>провулок. Кутузова, 18/7, 4 поверх 01133, Київ, Україна</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-phone"></span>
+                            <a href="tel:+380444597069">+38 (044) 459-70-69</a>
+                        </li>
+                        <li>
+                            <span class="icon icon-fax"></span>
+                            <p>+38 (044) 459-06-09</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-envelope"></span>
+                            <a href="mailto:office@frbrokerage.net">office@frbrokerage.net</a>
+                        </li>
+                    </ul>
+                    <form action="php/feedback.php" method="POST" id="contact-form">
+                        <div class="response-holder"></div>
+                        <div class="field-holder">
+                            <label for="contact-username" class="required">Ім'я</label>
+                            <input type="text" name="contact[username]" value="" placeholder="Введіть ваше ім'я" id="contact-username" data-rule-required="true" data-msg-required="Поле має бути заповненим">
+                            <!--div class="error-holder">
+                                <span></span>
+                            </div-->
+                        </div>
+                        <div class="field-holder">
+                            <label for="contact-userphone">Телефон</label>
+                            <input type="text" name="contact[userphone]" value="" placeholder="Введіть ваш номер телефону" id="contact-userphone" data-mask="+99 (999) 999-99-99">
+                            <!--div class="error-holder">
+                                <span></span>
+                            </div-->
+                        </div>
+                        <div class="field-holder">
+                            <label for="contact-useremail" class="required">Поштова скринька</label>
+                            <input type="text" name="contact[useremail]" value="" placeholder="Введіть адресу вашої поштової скриньки" id="contact-useremail" data-rule-required="true" data-msg-required="Поле має бути заповненим" data-rule-email="true" data-msg-email="Це не схоже на справжню адресу поштової скриньки">
+                            <!--div class="error-holder">
+                                <span></span>
+                            </div-->
+                        </div>
+                        <div class="field-holder">
+                            <label for="contact-usermessage" class="required">Повідомлення</label>
+                            <textarea name="contact[usermessage]" placeholder="Напишіть ваше повідомлення" id="contact-usermessage" data-rule-required="true" data-msg-required="Поле має бути заповненим"></textarea>
+                        </div>
+                        <button type="submit">
+                            <span>Надіслати</span>
+                        </button>
+                    </form>
+                </section>
+                <aside id="map-holder">
+                    <div id="map"></div>
+                    <a href="#">Завантажити детальну схему проїзда</a>
+                </aside>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/contacts.bundle.min.js') }}"></script>
+{% endblock %}

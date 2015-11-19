@@ -1,0 +1,5 @@
+{# src/AppBundle/Resources/views/Common/footer.html.twig #}
+<div class="cheers-logo">
+    <a href="{{ developers.link }}/{{ app.request.locale }}"><img src="{{ asset('bundles/app/images/cheers.png') }}" alt="{{ developers.name }}"></a>
+</div>
+<small>{{ 'common.footer'|trans({ '%developers.link%': developers.link, '%developers.name%': developers.name })|raw }}</small>

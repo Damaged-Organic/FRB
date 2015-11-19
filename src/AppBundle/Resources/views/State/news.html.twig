@@ -1,0 +1,121 @@
+{# src/AppBundle/Resources/views/State/news.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('news_default') }}">
+    <link rel="alternate" href="{{ url('news', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('news', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('news', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/news.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Новини</h1>
+        <div class="news-info-holder">
+            <div class="info-item-holder">
+                <div class="info-item">
+                    <span class="count">23</span>
+                    <span class="text">нових</span>
+                </div>
+                <p>доданих новин</p>
+            </div>
+            <div class="info-item-holder">
+                <div class="info-item">
+                    <span class="count">14</span>
+                    <span class="text">листопада</span>
+                </div>
+                <p>остання публікація</p>
+            </div>
+        </div>
+        <section class="outer substrate news-holder">
+            <div class="inner">
+                <div class="grid dbl" id="news-grid" data-url="php/lift.php">
+                    <article class="col">
+                        <div class="photo-holder">
+                            <figure>
+                                <img src="build/images/news/apartment.jpg" alt="">
+                            </figure>
+                            <time>14 листопада 2015р.</time>
+                        </div>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
+                    </article>
+                    <article class="col">
+                        <div class="photo-holder">
+                            <figure>
+                                <img src="build/images/news/apartment.jpg" alt="">
+                            </figure>
+                            <time>14 листопада 2015р.</time>
+                        </div>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
+                    </article>
+                    <article class="col">
+                        <div class="photo-holder">
+                            <figure>
+                                <img src="build/images/news/apartment.jpg" alt="">
+                            </figure>
+                            <time>14 листопада 2015р.</time>
+                        </div>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
+                    </article>
+                    <article class="col">
+                        <div class="photo-holder">
+                            <figure>
+                                <img src="build/images/news/apartment.jpg" alt="">
+                            </figure>
+                            <time>14 листопада 2015р.</time>
+                        </div>
+                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
+                    </article>
+                </div>
+            </div>
+            <div id="loader-holder">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </section>
+        <div id="to-up">
+            <span class="icon icon-arrow-up"></span>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/news.bundle.min.js') }}"></script>
+{% endblock %}

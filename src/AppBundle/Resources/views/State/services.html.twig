@@ -1,0 +1,225 @@
+{# src/AppBundle/Resources/views/State/services.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('services_default') }}">
+    <link rel="alternate" href="{{ url('services', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('services', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('services', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/services.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Наші послуги</h1>
+        <section class="outer substrate">
+            <div class="inner">
+                <div class="btn-long flat white">
+                    <a href="services-commercial.html">Коммерційна нерухомість</a>
+                </div>
+                <div class="btn-long flat white">
+                    <a href="services-private.html">Житлова нерухомість</a>
+                </div>
+                <div class="btn-long flat white">
+                    <a href="services-evaluation.html">Оцінка майна</a>
+                </div>
+                <div class="btn-long flat white">
+                    <a href="services-management.html">Управління нерухомістю</a>
+                </div>
+            </div>
+        </section>
+        <section class="outer extra-buttons-holder">
+            <div class="btn-long">
+                <a href="relocation.html">Релокація экспатів</a>
+            </div>
+            <div class="btn-long">
+                <a href="expats.html">Інформація для экспатів</a>
+            </div>
+        </section>
+        <div class="outer substrate">
+            <div class="inner white-back">
+                <section class="principles-holder">
+                    <h2>Основні принципи роботи</h2>
+                    <ul class="list-holder icon-list">
+                        <li>
+                            <span class="icon icon-connected"></span>
+                            <p>Виконання всіх функцій через одного провайдера</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-clock"></span>
+                            <p>Oптимізація щоденної роботи з підрядниками. Ми здійснюємо повне управління та контроль за виконанням робіт</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-credit-card"></span>
+                            <p>Зниження вартості придбання Клієнтом товарів та послуг за рахунок об'єднання об’ємів закупівель з об’ємами інших замовлень</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-staff"></span>
+                            <p>Залучення як власного висококваліфікованого персоналу і спеціалізованих субпідрядників, так і аут-стафінг персоналу клієнта</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-abacus"></span>
+                            <p>Зменшення об’ємів роботи бухгалтерії Клієнта - надання послуги списання товарів згідно Акту наданих послуг:  кави, продуктів, води тощо</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-package"></span>
+                            <p>В кінці звітного місяця Клієнт має один консолідований пакет документів  - один рахунок/один акт</p>
+                        </li>
+                    </ul>
+                </section>
+                <section class="clients-holder">
+                    <h2>Наші кліенти</h2>
+                    <ul class="list-holder icon-list">
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/botschaft.jpg" alt="Botschaft">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/ericsson.jpg" alt="Ericsson">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/austria.jpg" alt="Austria">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/iron-mountain.jpg" alt="Iron Mountain">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/pulse.jpg" alt="Pulse">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/pzu.jpg" alt="PZU">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/swiss.jpg" alt="Swiss">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/usa-embassy.jpg" alt="USA Embassy">
+                            </figure>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/volia.jpg" alt="Volia">
+                            </figure>
+                        </li>
+                    </ul>
+                </section>
+                <section class="client-comments-holder">
+                    <h2>Відгуки наших кліентів</h2>
+                    <ul class="list-holder icon-list full">
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/volia.jpg" alt="Volia">
+                            </figure>
+                            <span class="sprtr-h"></span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula. Fusce dolor lacus, finibus ac sagittis eget, auctor a erat. Ut dapibus ante eget blandit porta. Praesent ornare imperdiet nibh, non sodales orci aliquet sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget est interdum, molestie lorem sit amet, consequat odio.</p>
+                            <span>Воля кабель</span>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/volia.jpg" alt="Volia">
+                            </figure>
+                            <span class="sprtr-h"></span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula. Fusce dolor lacus, finibus ac sagittis eget, auctor a erat. Ut dapibus ante eget blandit porta. Praesent ornare imperdiet nibh, non sodales orci aliquet sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget est interdum, molestie lorem sit amet, consequat odio.</p>
+                            <span>Воля кабель</span>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="build/images/clients-logo/volia.jpg" alt="Volia">
+                            </figure>
+                            <span class="sprtr-h"></span>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula. Fusce dolor lacus, finibus ac sagittis eget, auctor a erat. Ut dapibus ante eget blandit porta. Praesent ornare imperdiet nibh, non sodales orci aliquet sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget est interdum, molestie lorem sit amet, consequat odio.</p>
+                            <span>Воля кабель</span>
+                        </li>
+                    </ul>
+                </section>
+                <div class="btn-extra-large flat" id="comment-button">
+                    <a href="#">Залишити відгук</a>
+                </div>
+            </div>
+        </div>
+        <div class="pop-up-holder" id="comment-pop-up">
+            <div class="pop-up">
+                <div class="outer">
+                    <div class="inner">
+                        <h2>Залиште ваш відгук</h2>
+                        <p>Ми цінуемо ваш час та вдячні за ваш відгук</p>
+                        <span class="sprtr-h"></span>
+                        <form action="php/comment.php" method="POST" id="comment-form">
+                            <div class="response-holder"></div>
+                            <div class="field-holder">
+                                <label for="comment-company-name">Назва компанії</label>
+                                <input type="text" name="comment[company_name]" value="" placeholder="Введіть назву вашої компаніїї" id="comment-company-name" data-rule-required="true" data-msg-required="Це поле має бути заповненним">
+                            </div>
+                            <div class="field-holder">
+                                <label for="comment-email">Електронна пошта</label>
+                                <input type="email" name="comment[email]" value="" placeholder="Введіть електронну пошту" id="comment-email" data-rule-required="true" data-msg-required="Це поле має бути заповненним" data-rule-email="true" data-msg-email="Це не схоже на справжню адресу електронної пошти">
+                            </div>
+                            <div class="field-holder">
+                                <label for="comment-message">Ваш відгук</label>
+                                <textarea name="comment[message]" value="" placeholder="Введіть ваш відгук" id="comment-message" data-rule-required="true" data-msg-required="Це поле має бути заповненним"></textarea>
+                            </div>
+                            <button type="submit">
+                                <span>Надіслати</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <span class="icon icon-close close"></span>
+        </div>
+        <div id="loader-holder">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/services.bundle.min.js') }}"></script>
+{% endblock %}

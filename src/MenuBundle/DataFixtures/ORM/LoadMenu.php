@@ -12,119 +12,138 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $menuItem = (new Menu)
-            ->setTitle("Главная")
-            ->setRoute("index");
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Каталог")
+                ->setRoute("catalog")
+        );
         $manager->flush();
 
-        $menuItem->setTitle("Homepage")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        // ---
-
-        $menuItem = (new Menu)
-            ->setTitle("Афиша")
-            ->setRoute("events");
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        $menuItem->setTitle("Events")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem->setTitle("Catalog")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
 
         // ---
 
-        $menuItem = (new Menu)
-            ->setTitle("Блог")
-            ->setRoute("blog");
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Послуги")
+                ->setRoute("services")
+        );
         $manager->flush();
 
-        $menuItem->setTitle("Blog")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        // ---
-
-        $menuItem = (new Menu)
-            ->setTitle("Музыка")
-            ->setRoute("music");
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        $menuItem->setTitle("Music")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem->setTitle("Services")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
 
         // ---
 
-        $menuItem = (new Menu)
-            ->setTitle("Книги")
-            ->setRoute("books");
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Люди")
+                ->setRoute("staff")
+        );
         $manager->flush();
 
-        $menuItem->setTitle("Books")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        // ---
-
-        $menuItem = (new Menu)
-            ->setTitle("Музыка")
-            ->setRoute("music");
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        $menuItem->setTitle("Music")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem->setTitle("Staff")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
 
         // ---
 
-        $menuItem = (new Menu)
-            ->setTitle("Книги")
-            ->setRoute("books");
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Вакансії")
+                ->setRoute("vacancies")
+        );
         $manager->flush();
 
-        $menuItem->setTitle("Books")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        // ---
-
-        $menuItem = (new Menu)
-            ->setTitle("Картины")
-            ->setRoute("pictures");
-        $manager->persist($menuItem);
-        $manager->flush();
-
-        $menuItem->setTitle("Pictures")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem->setTitle("Vacancies")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
 
         // ---
 
-        $menuItem = (new Menu)
-            ->setTitle("Биография")
-            ->setRoute("biography");
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Новини")
+                ->setRoute("news")
+        );
         $manager->flush();
 
-        $menuItem->setTitle("Biography")
-            ->setTranslatableLocale('en');
-        $manager->persist($menuItem);
+        $manager->persist
+        (
+            $menuItem->setTitle("News")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Дослідження")
+                ->setRoute("researches")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Researches")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Інформація для експатів")
+                ->setRoute("expats_information")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Information for expats")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Контакти")
+                ->setRoute("contacts")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Contacts")
+                ->setTranslatableLocale('en')
+        );
         $manager->flush();
     }
 

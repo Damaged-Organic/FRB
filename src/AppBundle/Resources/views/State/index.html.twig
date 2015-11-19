@@ -1,12 +1,125 @@
 {# src/AppBundle/Resources/views/State/index.html.twig #}
 {% extends 'AppBundle::layout.html.twig' %}
 
-{% block body %}
-    FIRST REALITY BROKERAGE
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ 'default.title'|trans }} | {{ metadata.title }}
 {% endblock %}
 
-{#
-{% render controller('AppBundle:Form:feedbackForm', { '_locale': app.request.locale }) %}
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
 
-{% render controller('AppBundle:Form:proposalForm', { '_locale': app.request.locale }) %}
-#}
+{% block locale %}
+    <link rel="canonical" href="{{ url('index_default') }}">
+    <link rel="alternate" href="{{ url('index', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('index', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('index', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/home.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+
+    {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'intro' })) }}
+
+{% endblock %}
+
+{% block content %}
+    <main id="content">
+        <section class="intro-holder">
+            <div id="prism-holder">
+                <div id="prism">
+                    <div class="prism-side front commercial">
+                        <div class="inner">
+                            <h2>Комерційна нерухомість</h2>
+                            <p>Комплексні брокерські послуги стосовно оренди / продажу всіх видів комерційної нерухомості як для корпоративних клієнтів так і для власників приміщень.</p>
+                            <div class="btn-large">
+                                <a href="services-commercial.html">детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prism-side top private">
+                        <div class="inner">
+                            <h2>Житлова нерухомість</h2>
+                            <p>Брокерські послуги з довгострокової оренди квартир та будинків представницького класу для міжнародних компаній та посольств; продаж та купівля житлової нерухомості</p>
+                            <div class="btn-large">
+                                <a href="services-private.html">детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prism-side back evaluation">
+                        <div class="inner">
+                            <h2>Оцінка майна</h2>
+                            <p>Послуги з оцінки майна для різних бізнес-цілей, що надаються сертифікованими спеціалістами у відповідності до Національних та міжнародних стандартів.</p>
+                            <div class="btn-large">
+                                <a href="services-evaluation.html">детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prism-side bottom management">
+                        <div class="inner">
+                            <h2>Управління нерухомістю</h2>
+                            <p>Послуги з комплексного управління будівлями та приміщеннями об’єктів нерухомості для власників та корпоративних орендарів</p>
+                            <div class="btn-large">
+                                <a href="services-management.html">детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prism-side left"></div>
+                    <div class="prism-side right"></div>
+                </div>
+            </div>
+            <div id="prism-state-holder">
+                <div class="arrow up"><span class="icon-arrow-up"></span></div>
+                <span>Послуги</span>
+                <div class="arrow down"><span class="icon-arrow-down"></span></div>
+            </div>
+            <div id="action-panel-holder">
+                <ul>
+                    <li>
+                        <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'commercial' }) }}">
+                            Пошук комерційної нерухомості
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('news', { '_locale': app.request.locale }) }}">
+                            Наші новини
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('expats_information', { '_locale': app.request.locale }) }}">
+                            Інформація для експатів
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">
+                            Пошук житлової нерухомості
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <div id="preloader-holder">
+        <span class="lane black"></span>
+        <span class="lane white"></span>
+        <span class="lane grey"></span>
+        <span class="lane red"></span>
+    </div>
+    <div id="frb-cube-holder">
+        <span class="frb-cube-side"></span>
+        <span class="frb-cube-side"></span>
+        <span class="frb-cube-side"></span>
+        <span class="frb-cube-side"></span>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/home.bundle.min.js') }}"></script>
+{% endblock %}

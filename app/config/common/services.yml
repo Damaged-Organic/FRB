@@ -1,26 +1,29 @@
 # app/config/common/services.yml
 services:
+    #Twig
+
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
 
-    app.page_init_listener:
-        class:     AppBundle\EventListener\PageInitListener
-        scope:     request
-        arguments: [ "@request", "@app.metadata", "@app.backlink" ]
+    app.website_metadata_extension:
+        class:  AppBundle\Twig\MetadataExtension
+        calls:
+             - [setRequestStack, [ "@request_stack" ]]
+             - [setManager, [ "@doctrine.orm.entity_manager" ]]
+        public: false
         tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+            - { name: twig.extension }
+
+    # Constraints
 
     app.constraint.is_type_valid:
         class: AppBundle\Validator\Constraints\IsTypeValidConstraint
         arguments:
             - "@doctrine.orm.entity_manager"
 
-    app.metadata:
-        class: AppBundle\Service\Metadata
-        arguments:
-            - "@doctrine.orm.entity_manager"
+    # Services
 
     app.backlink:
         class: AppBundle\Service\Backlink

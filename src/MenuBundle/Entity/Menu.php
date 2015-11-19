@@ -10,6 +10,9 @@ use Gedmo\Mapping\Annotation as Gedmo,
 
 use MenuBundle\Entity\MenuTranslation;
 
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
 /**
  * @ORM\Table(name="menu")
  * @ORM\Entity(repositoryClass="MenuBundle\Entity\Repository\MenuRepository")
@@ -18,22 +21,12 @@ use MenuBundle\Entity\MenuTranslation;
  */
 class Menu implements Translatable
 {
-    /**
-     * @Gedmo\Locale
-     */
-    protected $locale;
+    use IdMapper, TranslationMapper;
 
     /**
      * @ORM\OneToMany(targetEntity="MenuTranslation", mappedBy="object", cascade={"persist", "remove"})
      */
     protected $translations;
-
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="bigint")
-     */
-    protected $id;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -60,48 +53,7 @@ class Menu implements Translatable
      */
     public function __toString()
     {
-        return $this->getTitle();
-    }
-
-    /**
-     * Set Gedmo locale
-     *
-     * @param string $locale
-     */
-    public function setTranslatableLocale($locale)
-    {
-        $this->locale = $locale;
-    }
-
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    public function addTranslation(MenuTranslation $t)
-    {
-        $this->translations->add($t);
-        $t->setObject($this);
-    }
-
-    public function removeTranslation(MenuTranslation $t)
-    {
-        $this->translations->removeElement($t);
-    }
-
-    public function setTranslations($translations)
-    {
-        $this->translations = $translations;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
+        return ( $this->title ) ? $this->title : "";
     }
 
     /**

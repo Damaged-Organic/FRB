@@ -1,1 +1,8 @@
 # src/AppBundle/Resources/translations/messages.en.yml
+default:
+    title: First Reality Brokerage
+
+common:
+    footer: >
+        © First Reality Brokerage. Создано в <a href="%developers.link%">%developers.name%</a>, 2015.
+        Website personal materials usage without owners permission is prohibited.

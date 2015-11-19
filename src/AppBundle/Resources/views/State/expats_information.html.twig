@@ -1,0 +1,184 @@
+{# src/AppBundle/Resources/views/State/expats_information.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('expats_information_default') }}">
+    <link rel="alternate" href="{{ url('expats_information', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('expats_information', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('expats_information', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/expats.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Інформація для експатів</h1>
+        <section class="outer substrate location-categories-holder">
+            <div class="inner">
+                <form action="php/location.php" method="POST" id="location-form">
+                    <div class="item">
+                        <input type="checkbox" name="location[hospital]" value="yes" id="location-hospital">
+                        <label for="location-hospital">
+                            <div class="inside">
+                                <span class="icon icon-location-hospital"></span>
+                                <p>Лікарні</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[school]" value="yes" id="location-school">
+                        <label for="location-school">
+                            <div class="inside">
+                                <span class="icon icon-location-university"></span>
+                                <p>Школа</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[entertainment]" value="yes" id="location-entertainment">
+                        <label for="location-entertainment">
+                            <div class="inside">
+                                <span class="icon icon-location-zoo"></span>
+                                <p>Розваги</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[tube]" value="yes" id="location-tube">
+                        <label for="location-tube">
+                            <div class="inside">
+                                <span class="icon icon-location-tube"></span>
+                                <p>Метро</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[shop]" value="yes" id="location-shop">
+                        <label for="location-shop">
+                            <div class="inside">
+                                <span class="icon icon-location-shop"></span>
+                                <p>Магазини</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[gym]" value="yes" id="location-gym">
+                        <label for="location-gym">
+                            <div class="inside">
+                                <span class="icon icon-location-gym"></span>
+                                <p>Спортзали</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[rent]" value="yes" id="location-rent">
+                        <label for="location-rent">
+                            <div class="inside">
+                                <span class="icon icon-location-rent"></span>
+                                <p>Оренда авто</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[pressa]" value="yes" id="location-pressa">
+                        <label for="location-pressa">
+                            <div class="inside">
+                                <span class="icon icon-location-pressa"></span>
+                                <p>преса</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[taxi]" value="yes" id="location-taxi">
+                        <label for="location-taxi">
+                            <div class="inside">
+                                <span class="icon icon-location-taxi"></span>
+                                <p>Таксі</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="location[community]" value="yes" id="location-community">
+                        <label for="location-community">
+                            <div class="inside">
+                                <span class="icon icon-location-community"></span>
+                                <p>Спільноти</p>
+                            </div>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- add class active to display button -->
+        <div class="btn-extra-large flat white" id="map-button">
+            <a href="#"><span class="icon icon-map"></span>Дивитися на мапі</a>
+        </div>
+        <div id="map-holder">
+            <span class="icon icon-close close"></span>
+            <div id="map"></div>
+        </div>
+        <!-- add class active to switch views -->
+        <div class="outer substrate" id="expats-holder">
+            <div class="inner white-back">
+                <section class="expats-intro-holder">
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum eveniet, repellat doloribus non iusto ipsum voluptatum ut odit inventore temporibus dolores expedita, quidem quo, velit quam quos ipsam molestiae quibusdam!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus sunt nostrum placeat est dolores ab ea provident quibusdam eaque odio. Natus recusandae laudantium nobis earum pariatur dolore ullam optio qui.</p>
+                    <ul class="list-holder icon-list">
+                        <li>
+                            <span class="icon icon-building"></span>
+                            <p>Дізнайтеся що знаходится у місті та за його межами</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-information"></span>
+                            <p>Отримайте детальну інформацію о місцях які вас цікавлять</p>
+                        </li>
+                        <li>
+                            <span class="icon icon-map"></span>
+                            <p>Подивітся місцезнаходження об'єктів на мапі</p>
+                        </li>
+                    </ul>
+                </section>
+                <section class="expats-location-info"></section>
+            </div>
+        </div>
+    </main>
+    <div id="loader-holder">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/expats.bundle.min.js') }}"></script>
+{% endblock %}
