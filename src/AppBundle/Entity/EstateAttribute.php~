@@ -1,0 +1,41 @@
+<?php
+// src/AppBundle/Entity/EstateAttribute.php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper;
+
+/**
+ * @ORM\Table(name="estate_attributes")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\EstateAttributesRepository")
+ */
+class EstateAttribute
+{
+    use IdMapper;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EstateAttributeType", inversedBy="estateAttribute")
+     * @ORM\JoinColumn(name="estate_attribute_type_id", referencedColumnName="id")
+     **/
+    protected $estateAttributeType;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Estate", inversedBy="estateAttribute")
+     * @ORM\JoinColumn(name="estate_id", referencedColumnName="id")
+     **/
+    protected $estate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     **/
+    protected $value;
+
+    /**
+     * To string
+     */
+    public function __toString()
+    {
+        return ( $this->value ) ? $this->value : "";
+    }
+}

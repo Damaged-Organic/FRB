@@ -1,0 +1,36 @@
+# app/config/common/services.yml
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
+    app.page_init_listener:
+        class:     AppBundle\EventListener\PageInitListener
+        scope:     request
+        arguments: [ "@request", "@app.metadata", "@app.backlink" ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    app.constraint.is_type_valid:
+        class: AppBundle\Validator\Constraints\IsTypeValidConstraint
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.metadata:
+        class: AppBundle\Service\Metadata
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    app.backlink:
+        class: AppBundle\Service\Backlink
+        arguments:
+            - "@session"
+
+    app.mailer_shortcut:
+        class: AppBundle\Service\MailerShortcut
+        arguments:
+            - "@mailer"
+
+    app.geo_coder:
+        class: AppBundle\Service\GeoCoder

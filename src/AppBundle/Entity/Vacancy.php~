@@ -1,0 +1,92 @@
+<?php
+// src/AppBundle/Entity/Vacancy.php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
+/**
+ * @ORM\Table(name="vacancies")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\VacancyRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\VacancyTranslation")
+ */
+class Vacancy implements Translatable
+{
+    use IdMapper, TranslationMapper;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VacancyTranslation", mappedBy="object", cascade={"persist", "remove"})
+     **/
+    protected $translations;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $requirements;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $rawRequirements;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $requirementsFormatter;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $additional;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $rawAdditional;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $additionalFormatter;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     **/
+    protected $isActive;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection;
+
+        $this->isActive = TRUE;
+    }
+
+    /**
+     * To string
+     */
+    public function __toString()
+    {
+        return ( $this->title ) ? $this->title : "";
+    }
+}

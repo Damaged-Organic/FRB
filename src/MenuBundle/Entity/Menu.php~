@@ -1,0 +1,36 @@
+<?php
+// src/MenuBundle/Entity/Menu.php
+namespace MenuBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+/**
+ * @ORM\Table(name="menu")
+ * @ORM\Entity(repositoryClass="MenuBundle\Entity\Repository\MenuRepository")
+ *
+ * @Gedmo\TranslationEntity(class="MenuBundle\Entity\MenuTranslation")
+ */
+class Menu implements Translatable
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="bigint")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     *
+     * @Gedmo\Translatable
+     */
+    protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $route;
+}

@@ -1,0 +1,5 @@
+# app/config/common/twig.yml
+twig:
+    globals:
+        default_locale: "%locale%"
+        developers:     "%developers%"

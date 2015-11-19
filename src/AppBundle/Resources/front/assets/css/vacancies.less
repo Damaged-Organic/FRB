@@ -1,0 +1,72 @@
+@import "components/common.less";
+@import "components/lists.less";
+@import "components/tabs.less";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page{
+	background: transparent url("@{images}vacancies-bg.jpg") no-repeat 50% 0 fixed;
+	background-size: auto 75%;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	vacancies start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.vacancies-holder{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	.vacancy-holder{
+		width: 100%;
+		height: auto;
+		margin: 40px auto;
+		padding: 0 40px;
+		box-sizing: border-box;
+		overflow: hidden;
+		&:last-child{ margin-bottom: 0; }
+		.entitled{
+			position: relative;
+			border-bottom: 2px solid @red;
+			overflow: hidden;
+			h2{
+				text-align: left;
+				font-size: 1.125em;
+				padding-right: 200px;
+				margin: 0 0 10px 0;
+				color: @black;
+			}
+			time{
+				display: block;
+				width: 200px;
+				height: auto;
+				position: absolute;
+				top: 0;
+				right: 0;
+				text-align: right;
+			}
+		}
+		p{
+			padding: 20px 0;
+			text-align: left;
+		}
+		.list-holder{
+			margin: 20px auto;
+		}
+		.btn-extra-large{
+			float: right;
+			margin: 20px 0 40px;
+		}
+	}
+	.tabs{
+		margin-top: 20px;
+		li{
+			width: 33.33333333333333%;
+		}
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	vacancies end							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

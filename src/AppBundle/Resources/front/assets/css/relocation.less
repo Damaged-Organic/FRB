@@ -1,0 +1,89 @@
+@import "components/common.less";
+@import "components/lists.less";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page{
+	background: transparent url("@{images}services-bg.jpg") no-repeat 50% 0 fixed;
+	background-size: auto 75%;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	relocation start						  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.relocation-holder{
+	height: auto;
+	overflow: hidden;
+	.inner{
+		padding: 0 40px;
+		counter-reset: itemnum;
+	}
+	h2{
+		margin-bottom: 0;
+	}
+	p{
+		text-align: center;
+		margin-bottom: 40px;
+	}
+	.item-holder{
+		width: 100%;
+		height: auto;
+		position: relative;
+		float: left;
+		//margin-left: 16.34615384615385%;
+		counter-increment: itemnum;
+		overflow: hidden;
+		&:before,
+		&:after{
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 0;
+			background: @lightGrey;
+			content: "";
+			overflow: hidden;
+		}
+		&:before{
+			width: 4px;
+			height: 100%;
+			left: 8px;
+		}
+		&:after{
+			width: 20px;
+			height: 20px;
+			content: counter(itemnum);
+			font-family: "PT Sans", sans-serif;
+			color: @white;
+			text-align: center;
+			line-height: 20px;
+			font-size: .875em;
+		}
+		&:last-child{ margin-bottom: 40px; }
+		.list-items{
+			padding: 30px 0 20px 40px;
+			h3{
+				text-transform: uppercase;
+				line-height: 40px;
+				margin-bottom: 10px;
+				.icon{
+					float: right;
+					line-height: 40px;
+					color: @red;
+					margin-right: 10px;
+					pointer-events: none;
+				}
+			}
+			p{
+				text-align: left;
+				margin: 0;
+			}
+		}
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	relocation end							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

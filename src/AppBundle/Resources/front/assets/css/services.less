@@ -1,0 +1,120 @@
+@import "components/common.less";
+@import "components/lists.less";
+@import "components/forms.less";
+@import "components/tabs.less";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page{
+	background: transparent url("@{images}services-bg.jpg") no-repeat 50% 0% fixed;
+	background-size: auto 75%;
+}
+.extra-buttons-holder{
+	width: 620px;
+	margin: 0 auto;
+	overflow: hidden;
+	.btn-long{
+		width: 300px;
+		height: 60px;
+		float: left;
+		margin: 0 20px 0 0;
+		&:last-child{ margin-right: 0; }
+		a{
+			line-height: 60px;
+			color: @red;
+			text-transform: uppercase;
+		}
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	layout end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	services start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.principles-holder,
+.clients-holder,
+.client-comments-holder,
+.benefits-holder{
+	h2{ margin-bottom: 0; }
+	.list-holder{ margin: 60px auto 80px; }
+}
+
+.clients-holder{
+	h2{ margin: 0; }
+	li{ margin: 0 20px; }
+}
+.client-comments-holder{
+	.list-holder.full{
+		li{
+			text-align: right;
+			padding: 0 40px;
+			figure{
+				width: 60px;
+				height: 60px;
+				margin: 0 auto;
+			}
+			span{
+				color: @lightGrey;
+				padding-right: 20px;
+			}
+		}
+	}
+}
+#comment-button{ margin: 20px auto 80px; }
+#comment-pop-up{
+	h2{ margin-bottom: 0; }
+	p{ text-align: center; }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	services end							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	service start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page{
+	&.inside-commercial,
+	&.inside-private,
+	&.inside-evaluation,
+	&.inside-management{
+		.tabs{ margin-bottom: 40px; }
+		h3{
+			padding: 40px;
+			font-weight: bold;
+		}
+		.list-holder.numbered-list{
+			margin: 0;
+			padding: 0 40px;
+			box-sizing: border-box;
+		}
+	}
+	&.inside-commercial{
+		background: transparent url("@{images}services-commercial-bg.jpg") no-repeat 50% 0%;
+		background-size: contain;
+	}
+	&.inside-private{
+		background: transparent url("@{images}services-private-bg.jpg") no-repeat 50% 0%;
+		background-size: contain;
+		.benefits-holder{
+			& > .list-holder{
+				li{
+					max-width: 24%;
+					p{ padding: 20px 10px; }
+				}
+			}
+		}
+	}
+	&.inside-evaluation{
+		background: transparent url("@{images}services-evaluation-bg.jpg") no-repeat 50% 0%;
+		background-size: contain;
+	}
+	&.inside-management{
+		background: transparent url("@{images}services-management-bg.jpg") no-repeat 50% 0%;
+		background-size: contain;
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	service end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -1,0 +1,4 @@
+# src/AppBundle/Resources/translations/responses.ua.yml
+feedback:
+    success: Спасибо за ваш интерес! Я обязательно отвечу
+    fail:    Что-то пошло не так. Пожалуйста, попробуйте отправить сообщение еще раз

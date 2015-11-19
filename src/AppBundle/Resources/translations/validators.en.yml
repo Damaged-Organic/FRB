@@ -1,0 +1,82 @@
+# src/AppBundle/Resources/translations/validators.en.yml
+feedback:
+    name:
+        not_blank:  Please, state yourself
+        length:
+            min: This name is too short. Maybe you've made a mistake?
+            max: This name is too long. Maybe you've made a mistake?
+
+    email:
+        not_blank: Please, provide an e-mail
+        valid:     Please, provide a valid email address
+
+    message:
+        not_blank:  Please, enter your message
+        length:
+            min: Message is too short
+            max: Message is too long. Please, shorten it to at least 1500 symbols
+
+proposal:
+    name:
+        not_blank:  Please, state yourself
+        length:
+            min: This name is too short. Maybe you've made a mistake?
+            max: This name is too long. Maybe you've made a mistake?
+
+    phone:
+        not_blank: Please, provide your phone number
+        valid:     Please, provide a valid phone number
+
+    email:
+        not_blank: Please, provide your e-mail
+        valid:     Please, provide a valid email address
+
+    type:
+        not_blank: Please, provide property type
+        valid:     Please, provide a valid property type
+
+    price_value:
+        not_blank: Please, enter your price
+        range:
+            min: Please, enter correct price
+
+    price_currency:
+        not_blank: Please, provide currency value
+        valid:     Please, provide a correct currency value
+
+    address:
+        not_blank: Please, enter your property address
+        length:
+            min: This address is too short. Maybe you've made a mistake?
+            max: This address is too long. Maybe you've made a mistake?
+
+    space:
+        not_blank: Please, enter your property total space
+        range:
+            min: Such space value is too small. Maybe you've made a mistake?
+            max: Such space value is too large. Maybe you've made a mistake?
+
+    floor:
+        range:
+            min: Such floor value is too small. Maybe you've made a mistake?
+            max: Such floor value is too large. Maybe you've made a mistake?
+
+    floorsNumber:
+        range:
+            min: Such floors number value is too small. Maybe you've made a mistake?
+            max: Such floors number value is too large. Maybe you've made a mistake?
+
+    rooms_number:
+        not_blank: Please, enter your property rooms nubmer
+        range:
+            min: Such rooms number value is too small. Maybe you've made a mistake?
+            max: Such rooms number value is too large. Maybe you've made a mistake?
+
+    bathrooms_number:
+        not_blank: Please, enter your property bathrooms number
+        range:
+            min: Such bathrooms number value is too small. Maybe you've made a mistake?
+            max: Such bathrooms number value is too large. Maybe you've made a mistake?
+
+    checkbox:
+        valid: Checkbox value is invalid

@@ -1,0 +1,71 @@
+# src/AppBundle/Resources/translations/forms.ua.yml
+feedback:
+    name:
+        label: Введіть ваше ім’я
+
+    email:
+        label: Введіть ваш e-mail
+
+    message:
+        label: Введіть ваше повідомлення
+
+    submit:
+        label: Відправити
+
+proposal:
+    name:
+        label: Введіть ваше ім’я
+
+    phone:
+        label: Введіть ваш телефон
+
+    email:
+        label: Введіть ваш e-mail
+
+    type:
+        label: Вкажіть тип приміщення
+
+    price_value:
+        label: Введіть ціну
+
+    price_currency:
+        label: Вкажіть валюту
+
+    address:
+        label: Введіть адресу
+
+    space:
+        label: Введіть площу приміщення
+
+    floor:
+        label: Введіть поверх приміщення
+
+    floors_number:
+        label: Введіть кількість поверхів
+
+    rooms_number:
+        label: Введіть кількість кімнат
+
+    bathrooms_number:
+        label: Введіть кількість санвузлів
+
+    is_cashless:
+        label: Безготівковий розрахунок
+
+    is_new_building:
+        label: Нова будівля
+
+    has_elevator:
+        label: Ліфт
+
+    has_parking:
+        label: Парковка
+
+    has_furniture:
+        label: Наявність меблів
+
+    has_registration:
+        label: Реєстрація для нерезидента
+
+    submit:
+        label: Запропонувати

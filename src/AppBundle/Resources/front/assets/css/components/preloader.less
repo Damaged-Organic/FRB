@@ -1,0 +1,54 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	preloader start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#preloader-holder{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 998;
+	background: @white;
+	transition: all .75s @easing .5s;
+	overflow: hidden;
+	.lane{
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		transform: translateY(100%);
+		&.black{
+			background: @black;
+			animation: loadFill 1s @easing .5s 1 forwards;
+		}
+		&.white{
+			background: @white;
+			z-index: 1;
+			animation: loadFill 1s @easing 1.5s 1 forwards;
+		}
+		&.grey{
+			background: @lightGrey;
+			z-index: 2;
+			animation: loadFill 1s @easing 2.5s 1 forwards;
+		}
+		&.red{
+			background: @red;
+			z-index: 3;
+			animation: loadFill 1s @easing 3.5s 1 forwards;
+		}
+	}
+	&.loaded{
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+}
+
+@keyframes loadFill{
+	0% { transform: translateY(100%); }
+	100% { transform: translateY(0%); }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	preloader end 							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

@@ -1,0 +1,146 @@
+<?php
+// src/AppBundle/Entity/Staff.php
+namespace AppBundle\Entity;
+
+use DateTime;
+
+use Symfony\Component\HttpFoundation\File\File,
+    Symfony\Component\Validator\Constraints as Assert;
+
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
+/**
+ * @ORM\Table(name="staff")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\StaffRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\StaffTranslation")
+ *
+ * @Vich\Uploadable
+ */
+class Staff implements Translatable
+{
+    use IdMapper, TranslationMapper;
+
+    const WEB_PATH = "/uploads/staff/photos/";
+
+    /**
+     * @ORM\OneToMany(targetEntity="StaffTranslation", mappedBy="object", cascade={"persist", "remove"})
+     **/
+    protected $translations;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Service")
+     * @ORM\JoinTable(name="staff_services",
+     *      joinColumns={
+     *          @ORM\JoinColumn(name="staff_id", referencedColumnName="id")
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="service_id", referencedColumnName="id")
+     *      }
+     * )
+     **/
+    protected $services;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     **/
+    protected $position;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $education;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     **/
+    protected $degree;
+
+    /**
+     * @ORM\Column(type="string", length=20, nullable=false)
+     **/
+    protected $phone;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=false)
+     **/
+    protected $email;
+
+    /**
+     * @Assert\File(
+     *     maxSize="5M",
+     *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg", "image/gif"}
+     * )
+     *
+     * @Vich\UploadableField(mapping="staff_photo", fileNameProperty="photoName")
+     */
+    protected $photoFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     **/
+    protected $photoName;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     **/
+    protected $updatedAt;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection;
+    }
+
+    /**
+     * To string
+     */
+    public function __toString()
+    {
+        return ( $this->name ) ? $this->name : "";
+    }
+
+    /* Vich uploadable methods */
+
+    public function setPhotoFile($photoFile = NULL)
+    {
+        $this->photoFile = $photoFile;
+
+        if( $photoFile instanceof File )
+            $this->updatedAt = new DateTime;
+    }
+
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    public function getPhotoPath()
+    {
+        return ( $this->photoName )
+            ? self::WEB_PATH.$this->photoName
+            : FALSE;
+    }
+
+    /* END Vich uploadable methods */
+
+
+}

@@ -1,0 +1,71 @@
+# src/AppBundle/Resources/translations/forms.en.yml
+feedback:
+    name:
+        label: Enter your name
+
+    email:
+        label: Enter your e-mail
+
+    message:
+        label: Enter your message
+
+    submit:
+        label: Send
+
+proposal:
+    name:
+        label: Enter your name
+
+    phone:
+        label: Enter your phone number
+
+    email:
+        label: Enter your e-mail
+
+    type:
+        label: Enter your property type
+
+    price_value:
+        label: Enter rent price
+
+    price_currency:
+        label: Select currency
+
+    address:
+        label: Enter your estate address
+
+    space:
+        label: Enter your estate total space
+
+    floor:
+        label: Enter floor
+
+    floors_number:
+        label: Enter floors number
+
+    rooms_number:
+        label: Enter rooms number
+
+    bathrooms_number:
+        label: Enter bathrooms number
+
+    is_cashless:
+        label: Non-cash payment
+
+    is_new_building:
+        label: New building
+
+    has_elevator:
+        label: Elevator
+
+    has_parking:
+        label: Parking
+
+    has_furniture:
+        label: Furnishing
+
+    has_registration:
+        label: Registration for non-resident
+
+    submit:
+        label: Propose

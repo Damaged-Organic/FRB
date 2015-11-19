@@ -1,0 +1,245 @@
+# app/config/common/config_sonata_admin.yml
+doctrine:
+    dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
+                    ApplicationSonataUserBundle: ~
+
+twig:
+    form:
+        resources:
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        sonata.admin.block.search_result:
+            contexts: [admin]
+        sonata.user.block.menu:
+        sonata.user.block.account:
+        sonata.block.service.text:
+
+parameters:
+    sonata.user.admin.user.class: AppBundle\Admin\UserAdmin
+
+sonata_user:
+    #security_acl: true
+    manager_type: orm
+    class:
+        user:         Application\Sonata\UserBundle\Entity\User
+        group:        Application\Sonata\UserBundle\Entity\Group
+
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    user_class:    Application\Sonata\UserBundle\Entity\User
+
+    group:
+        group_class:   Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+
+    service:
+        user_manager: sonata.user.orm.user_manager
+
+sonata_admin:
+    title:      "Dashboard"
+    #title_logo: bundles/app/images/boilerplate_logo.jpg
+    dashboard:
+        blocks:
+            -
+                position: left
+                type:     sonata.admin.block.admin_list
+            -
+                position: right
+                type:     sonata.block.service.text
+                settings:
+                    content: >
+                        <h2>Система керування контентом</h2>
+                        <p>На вашому сайті доступні для адміністрування наступні розділи:</p>
+                        <h4>Нерухомість</h4>
+                        <p>
+                            Об’єкти та характеристики нерухомості.
+                        </p>
+                        <h4>Дослідження</h4>
+                        <p>
+                            Матеріли та категорії досліджень.
+                        </p>
+                        <h4>Інформація для експатів</h4>
+                        <p>
+                            Пункти та категорії інформації для експатів.
+                        </p>
+                        <h4>Контент</h4>
+                        <p>
+                            Статичний та динамічний контент сайту.
+                        </p>
+                        <h4>SEO (Пошукова оптимізація)</h4>
+                        <p>
+                            В основному це службова інформація для пошукових роботів.
+                        </p>
+                        <h4>Користувачі</h4>
+                        <p>
+                            Контроль користувачів системи керування.
+                        </p>
+    templates:
+        layout:     ApplicationSonataUserBundle:Admin:standard_layout.html.twig
+        user_block: ApplicationSonataUserBundle:Admin\Core:user_block.html.twig
+
+services:
+    sonata.user.admin.group:
+        abstract: true
+        public: false
+
+    #sonata.admin.menu:
+    #    class: MenuBundle\Admin\MenuAdmin
+    #    tags:
+    #        - { name:  sonata.admin, manager_type: orm, group: "Меню", label: "Пункты меню"}
+    #    arguments:
+    #        - ~
+    #        - MenuBundle\Entity\Menu
+    #        - ~
+    #    calls:
+    #        - [ setTranslationDomain, [MenuBundle] ]
+    #        - [ setRouter, ["@router"] ]
+
+    sonata.admin.metadata:
+        class: AppBundle\Admin\MetadataAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "SEO", label: "Метадані" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Metadata
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.estate:
+        class: AppBundle\Admin\EstateAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Нерухомість", label: "Об'єкти" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Estate
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+            - [ setGeoCoder, ["@app.geo_coder"] ]
+
+    sonata.admin.estate_photo:
+        class: AppBundle\Admin\EstatePhotoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Нерухомість", label: "Фотографії", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\EstatePhoto
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.estate_attribute_type:
+        class: AppBundle\Admin\EstateAttributeTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Нерухомість", label: "Характеристики" }
+        arguments:
+            - ~
+            - AppBundle\Entity\EstateAttributeType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.research_category:
+        class: AppBundle\Admin\ResearchCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Дослідження", label: "Категорії" }
+        arguments:
+            - ~
+            - AppBundle\Entity\ResearchCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.research:
+        class: AppBundle\Admin\ResearchAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Дослідження", label: "Матеріали" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Research
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.information_category:
+        class: AppBundle\Admin\InformationCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Інформація для експатів", label: "Категорії" }
+        arguments:
+            - ~
+            - AppBundle\Entity\InformationCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.information:
+        class: AppBundle\Admin\InformationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Інформація для експатів", label: "Пункти" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Information
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+
+    sonata.admin.service:
+        class: AppBundle\Admin\ServiceAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Послуги" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Service
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.staff:
+        class: AppBundle\Admin\StaffAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Співробітники" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Staff
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.vacancy:
+        class: AppBundle\Admin\VacancyAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Вакансії" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Vacancy
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.article:
+        class: AppBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Новини" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Article
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]

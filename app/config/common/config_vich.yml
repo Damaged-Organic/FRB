@@ -1,0 +1,50 @@
+# app/config/common/config_vich.yml
+twig:
+    form_themes:
+        - 'VichUploaderBundle:Form:fields.html.twig'
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        estate_photo:
+            uri_prefix:         /uploads/estate/photos
+            upload_destination: %kernel.root_dir%/../www/uploads/estate/photos
+            namer:              vich_uploader.namer_uniqid
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        service_photo:
+            uri_prefix:         /uploads/service/photos
+            upload_destination: %kernel.root_dir%/../www/uploads/service/photos
+            namer:              vich_uploader.namer_uniqid
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        staff_photo:
+            uri_prefix:         /uploads/staff/photos
+            upload_destination: %kernel.root_dir%/../www/uploads/staff/photos
+            namer:              vich_uploader.namer_uniqid
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        researches_pdf:
+            uri_prefix:         /uploads/researches/pdf
+            upload_destination: %kernel.root_dir%/../www/uploads/researches/pdf
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        information_logo:
+            uri_prefix:         /uploads/information/logos
+            upload_destination: %kernel.root_dir%/../www/uploads/information/logos
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        information_photo:
+            uri_prefix:         /uploads/information/photos
+            upload_destination: %kernel.root_dir%/../www/uploads/information/photos
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true

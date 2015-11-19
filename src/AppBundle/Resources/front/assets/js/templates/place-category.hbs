@@ -1,0 +1,36 @@
+{{#if error.message.length }}
+	
+	<div class="error-holder">
+		<p>{{ error.message }}</p>
+	</div>
+
+{{else}}
+
+	{{#each categories}}
+		<div class="category-holder">
+			<h2><span class="icon icon-location-{{ this.icon }}"></span>{{ this.title }}</h2>
+			{{#each this.places}}
+				<article class="item">
+					<div class="entitled">
+						<h3>{{ title }}</h3>
+						<figure><img src="build/images/company-logo/{{ photo }}" alt="{{ title }}"></figure>
+					</div>
+					<div class="phones-holder">
+						<span class="icon icon-phone"></span>
+						<span class="text">{{ phone_label }}: </span>
+						{{#each phones}}
+							<a href="tel:{{clearPhone this.[0]}}">{{ this.[0] }}</a>
+						{{/each}}
+					</div>
+					<div class="address-holder">
+						<span class="icon icon-location"></span>
+						<span class="text">{{ address_label }}: </span>
+						<p>{{ address }}</p>
+					</div>
+					<p>{{ text }}</p>
+				</article>
+			{{/each}}
+		</div>
+	{{/each}}
+
+{{/if}}

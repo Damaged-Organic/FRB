@@ -1,0 +1,13 @@
+# src/AppBundle/Resources/translations/districts.en.yml
+holosiivskyi:    Holosiivskyi
+darnytskyi:      Darnytskyi
+desnianskyi:     Desnianskyi
+dniprovskyi:     Dniprovskyi
+obolonskyi:      Obolonskyi
+pecherskyi:      Pecherskyi
+podilskyi:       Podilskyi
+sviatoshynskyi:  Sviatoshynskyi
+solomianskyi:    Solomianskyi
+shevchenkivskyi: Shevchenkivskyi
+kiev_oblast:     Kiev Oblast
+other:           other cities
