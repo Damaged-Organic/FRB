@@ -34,39 +34,32 @@ class ServiceAdmin extends Admin
     {
         if( $service = $this->getSubject() )
         {
-            $photoRequired = ( $service->getPhotoName() ) ? FALSE : TRUE;
+            /*$photoRequired = ( $service->getPhotoName() ) ? FALSE : TRUE;
 
             $photoHelpOption = ( $photoPath = $service->getPhotoPath() )
                 ? '<img src="'.$photoPath.'" class="admin-preview" />'
-                : FALSE;
+                : FALSE;*/
+
+            $serviceBenefits = $service->getServiceBenefits();
         } else {
-            $photoRequired   = TRUE;
-            $photoHelpOption = FALSE;
+            /*$photoRequired   = TRUE;
+            $photoHelpOption = FALSE;*/
+            $serviceBenefits = FALSE;
         }
 
         $formMapper
-            ->add("title", "text", [
-                "label" => "Назва послуги"
-            ])
-            ->add("shortDescription", "textarea", [
-                "label" => "Короткий опис"
-            ])
-            ->add('photoFile', 'vich_file', [
-                'label'         => "Фотографія",
-                'required'      => $photoRequired,
-                'allow_delete'  => FALSE,
-                'download_link' => FALSE,
-                'help'          => $photoHelpOption
-            ])
-            ->end()
-            ->with("Локалізації")
+            ->with("Послуги")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
+                    "locales"            => ['ua', 'en'],
+                    "label"              => "Контент та локалізації",
                     "translatable_class" => 'AppBundle\Entity\Service',
-                    "required"           => TRUE,
+                    "required"           => FALSE,
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Назва послуги"
+                                ],
                                 "en" => [
                                     "label" => "Service title"
                                 ]
@@ -74,6 +67,9 @@ class ServiceAdmin extends Admin
                         ],
                         "shortDescription" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Опис послуги"
+                                ],
                                 "en" => [
                                     "label" => "Short description"
                                 ]
@@ -81,6 +77,31 @@ class ServiceAdmin extends Admin
                         ]
                     ]
                 ])
+            ->end()
+            /*->add('photoFile', 'vich_file', [
+                'label'         => "Фотографія",
+                'required'      => $photoRequired,
+                'allow_delete'  => FALSE,
+                'download_link' => FALSE,
+                'help'          => $photoHelpOption
+            ])*/
         ;
+
+        if( count($serviceBenefits) )
+        {
+            $formMapper
+                ->with('Редагування переваг')
+                    ->add("serviceBenefits", "sonata_type_collection", [
+                        "type_options" => [
+                            'delete' => FALSE
+                        ],
+                        "label" => FALSE,
+                    ], [
+                        'edit' => 'inline',
+                        'inline' => 'table'
+                    ])
+                ->end()
+            ;
+        }
     }
 }

@@ -211,6 +211,39 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
 
+    sonata.admin.service_benefit:
+        class: AppBundle\Admin\ServiceBenefitAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\ServiceBenefit
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.service_list:
+        class: AppBundle\Admin\ServiceListAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Списки послуг" }
+        arguments:
+            - ~
+            - AppBundle\Entity\ServiceList
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.service_list_item:
+        class: AppBundle\Admin\ServiceListItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\ServiceListItem
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
     sonata.admin.staff:
         class: AppBundle\Admin\StaffAdmin
         tags:

@@ -1,0 +1,108 @@
+<?php
+// src/AppBundle/Entity/ServiceBenefit.php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
+/**
+ * @ORM\Table(name="services_benefits")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ServiceBenefitRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\ServiceBenefitTranslation")
+ */
+class ServiceBenefit implements Translatable
+{
+    use IdMapper, TranslationMapper;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ServiceBenefitTranslation", mappedBy="object", cascade={"persist", "remove"})
+     **/
+    protected $translations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Service", inversedBy="serviceBenefits")
+     * @ORM\JoinColumn(name="service_id", referencedColumnName="id")
+     */
+    protected $service;
+
+    /**
+     * @ORM\Column(type="string", length=200, nullable=false)
+     **/
+    protected $icon;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $thesis;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection;
+    }
+
+    /**
+     * To string
+     */
+    public function __toString()
+    {
+        return ( $this->thesis ) ? $this->thesis : "";
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     * @return ServiceBenefit
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string 
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Set thesis
+     *
+     * @param string $thesis
+     * @return ServiceBenefit
+     */
+    public function setThesis($thesis)
+    {
+        $this->thesis = $thesis;
+
+        return $this;
+    }
+
+    /**
+     * Get thesis
+     *
+     * @return string 
+     */
+    public function getThesis()
+    {
+        return $this->thesis;
+    }
+}

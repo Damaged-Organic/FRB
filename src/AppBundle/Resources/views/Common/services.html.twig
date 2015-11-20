@@ -1,0 +1,14 @@
+{# src/AppBundle/Resources/views/Common/services.html.twig #}
+<section class="outer substrate">
+    <div class="inner">
+
+        {% for service in services %}
+            <div class="btn-long flat white {{ ( service.alias == alias ) ? 'active' }}">
+                <a href="{{ path('services', { '_locale': app.request.locale, 'alias': service.alias }) }}">
+                    {{ service.title }}
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>

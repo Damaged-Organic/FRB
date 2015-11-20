@@ -1,0 +1,112 @@
+{# src/AppBundle/Resources/views/State/service.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('services_default', { 'alias': service.alias }) }}">
+    <link rel="alternate" href="{{ url('services', { '_locale': "ua", 'alias': service.alias }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('services', { '_locale': "en", 'alias': service.alias }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('services', { '_locale': "ua", 'alias': service.alias }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/services.bundle.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="page" class="inside-{{ service.alias }}">
+        {% block header %}
+            <header id="header" class="common">
+
+                {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+            </header>
+        {% endblock %}
+
+        {% block content %}
+            <main id="content" class="sticky">
+                <h1>Коммерційна нерухомість</h1>
+
+                {{ render(controller('AppBundle:Common:services', { 'alias': service.alias })) }}
+
+                <div class="outer substrate">
+                    <div class="inner white-back">
+                        <section class="benefits-holder">
+
+                            {% if service.serviceBenefits|length %}
+
+                                <h2>Наші переваги</h2>
+                                <ul class="list-holder icon-list">
+
+                                    {% for serviceBenefit in service.serviceBenefits %}
+                                        <li>
+                                            <span class="icon {{ serviceBenefit.icon }}"></span>
+                                            <p>{{ serviceBenefit.thesis }}</p>
+                                        </li>
+                                    {% endfor %}
+
+                                </ul>
+
+                            {% endif %}
+
+                            <div class="outer">
+                                <div class="tabs">
+                                    <ul>
+
+                                        {% for serviceList in service.serviceLists %}
+                                            <li class="label {{ ( loop.first ) ? 'active' }}">
+                                                <span>{{ serviceList.title }}</span>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                    <div class="container">
+
+                                        {% for serviceList in service.serviceLists %}
+                                            <div class="content {{ ( loop.first ) ? 'active' }}">
+                                                <h3>{{ serviceList.shortDescription }}</h3>
+                                                <ul class="list-holder numbered-list">
+
+                                                    {% for serviceListItem in serviceList.serviceListItems %}
+                                                        <li><p>{{ serviceListItem.text }}</p></li>
+                                                    {% endfor %}
+
+                                                </ul>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </main>
+        {% endblock %}
+
+    </div>
+
+    {% block footer %}
+        <div id="footer">
+
+            {{ render(controller('AppBundle:Common:footer')) }}
+
+        </div>
+    {% endblock %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/services.bundle.min.js') }}"></script>
+{% endblock %}

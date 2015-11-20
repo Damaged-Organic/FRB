@@ -30,12 +30,22 @@ class Service implements Translatable
 {
     use IdMapper, TranslationMapper;
 
-    const WEB_PATH = "/uploads/service/photos/";
+    //const WEB_PATH = "/uploads/service/photos/";
 
     /**
      * @ORM\OneToMany(targetEntity="ServiceTranslation", mappedBy="object", cascade={"persist", "remove"})
      **/
     protected $translations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ServiceBenefit", mappedBy="service", cascade={"persist", "remove"})
+     */
+    protected $serviceBenefits;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ServiceList", mappedBy="service", cascade={"persist", "remove"})
+     */
+    protected $serviceLists;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -52,6 +62,16 @@ class Service implements Translatable
     protected $shortDescription;
 
     /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    protected $alias;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    protected $cssPosition;
+
+    /**
      * @Assert\File(
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg", "image/gif"}
@@ -59,24 +79,26 @@ class Service implements Translatable
      *
      * @Vich\UploadableField(mapping="service_photo", fileNameProperty="photoName")
      */
-    protected $photoFile;
+    //protected $photoFile;
 
     /**
      * @ORM\Column(type="string", length=255)
      **/
-    protected $photoName;
+    //protected $photoName;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      **/
-    protected $updatedAt;
+    //protected $updatedAt;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->translations = new ArrayCollection;
+        $this->translations    = new ArrayCollection;
+        $this->serviceBenefits = new ArrayCollection;
+        $this->serviceLists    = new ArrayCollection;
     }
 
     /**
@@ -89,7 +111,7 @@ class Service implements Translatable
 
     /* Vich uploadable methods */
 
-    public function setPhotoFile($photoFile = NULL)
+    /*public function setPhotoFile($photoFile = NULL)
     {
         $this->photoFile = $photoFile;
 
@@ -107,7 +129,7 @@ class Service implements Translatable
         return ( $this->photoName )
             ? self::WEB_PATH.$this->photoName
             : FALSE;
-    }
+    }*/
 
     /* END Vich uploadable methods */
 
@@ -163,22 +185,22 @@ class Service implements Translatable
      * @param string $photoName
      * @return Service
      */
-    public function setPhotoName($photoName)
+    /*public function setPhotoName($photoName)
     {
         $this->photoName = $photoName;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get photoName
      *
      * @return string 
      */
-    public function getPhotoName()
+    /*public function getPhotoName()
     {
         return $this->photoName;
-    }
+    }*/
 
     /**
      * Set updatedAt
@@ -186,20 +208,134 @@ class Service implements Translatable
      * @param \DateTime $updatedAt
      * @return Service
      */
-    public function setUpdatedAt($updatedAt)
+    /*public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get updatedAt
      *
      * @return \DateTime 
      */
-    public function getUpdatedAt()
+    /*public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }*/
+
+    /**
+     * Set alias
+     *
+     * @param string $alias
+     * @return Service
+     */
+    public function setAlias($alias)
+    {
+        $this->alias = $alias;
+
+        return $this;
+    }
+
+    /**
+     * Get alias
+     *
+     * @return string 
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
+
+    /**
+     * Set cssPosition
+     *
+     * @param string $cssPosition
+     * @return Service
+     */
+    public function setCssPosition($cssPosition)
+    {
+        $this->cssPosition = $cssPosition;
+
+        return $this;
+    }
+
+    /**
+     * Get cssPosition
+     *
+     * @return string 
+     */
+    public function getCssPosition()
+    {
+        return $this->cssPosition;
+    }
+
+    /**
+     * Add serviceBenefit
+     *
+     * @param \AppBundle\Entity\ServiceBenefit $serviceBenefit
+     * @return Service
+     */
+    public function addServiceBenefit(\AppBundle\Entity\ServiceBenefit $serviceBenefit)
+    {
+        $serviceBenefit->setService($this);
+        $this->serviceBenefits[] = $serviceBenefit;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceBenefits
+     *
+     * @param \AppBundle\Entity\ServiceBenefit $serviceBenefits
+     */
+    public function removeServiceBenefit(\AppBundle\Entity\ServiceBenefit $serviceBenefits)
+    {
+        $this->serviceBenefits->removeElement($serviceBenefits);
+    }
+
+    /**
+     * Get serviceBenefits
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getServiceBenefits()
+    {
+        return $this->serviceBenefits;
+    }
+
+    /**
+     * Add serviceList
+     *
+     * @param \AppBundle\Entity\ServiceList $serviceList
+     * @return Service
+     */
+    public function addServiceList(\AppBundle\Entity\ServiceList $serviceList)
+    {
+        $serviceList->setService($this);
+        $this->serviceLists[] = $serviceList;
+
+        return $this;
+    }
+
+    /**
+     * Remove serviceLists
+     *
+     * @param \AppBundle\Entity\ServiceList $serviceLists
+     */
+    public function removeServiceList(\AppBundle\Entity\ServiceList $serviceLists)
+    {
+        $this->serviceLists->removeElement($serviceLists);
+    }
+
+    /**
+     * Get serviceLists
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getServiceLists()
+    {
+        return $this->serviceLists;
     }
 }

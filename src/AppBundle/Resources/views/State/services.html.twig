@@ -35,22 +35,9 @@
 {% block content %}
     <main id="content" class="sticky">
         <h1>Наші послуги</h1>
-        <section class="outer substrate">
-            <div class="inner">
-                <div class="btn-long flat white">
-                    <a href="services-commercial.html">Коммерційна нерухомість</a>
-                </div>
-                <div class="btn-long flat white">
-                    <a href="services-private.html">Житлова нерухомість</a>
-                </div>
-                <div class="btn-long flat white">
-                    <a href="services-evaluation.html">Оцінка майна</a>
-                </div>
-                <div class="btn-long flat white">
-                    <a href="services-management.html">Управління нерухомістю</a>
-                </div>
-            </div>
-        </section>
+
+        {{ render(controller('AppBundle:Common:services')) }}
+
         <section class="outer extra-buttons-holder">
             <div class="btn-long">
                 <a href="relocation.html">Релокація экспатів</a>

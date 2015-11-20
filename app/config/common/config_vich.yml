@@ -14,12 +14,12 @@ vich_uploader:
             delete_on_remove:   true
             delete_on_update:   true
 
-        service_photo:
-            uri_prefix:         /uploads/service/photos
-            upload_destination: %kernel.root_dir%/../www/uploads/service/photos
-            namer:              vich_uploader.namer_uniqid
-            delete_on_remove:   true
-            delete_on_update:   true
+        #service_photo:
+        #    uri_prefix:         /uploads/service/photos
+        #    upload_destination: %kernel.root_dir%/../www/uploads/service/photos
+        #    namer:              vich_uploader.namer_uniqid
+        #    delete_on_remove:   true
+        #    delete_on_update:   true
 
         staff_photo:
             uri_prefix:         /uploads/staff/photos

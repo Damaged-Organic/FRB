@@ -32,8 +32,20 @@ class CommonController extends Controller
         ]);
     }
 
-    public function footerAction(Request $request)
+    public function footerAction()
     {
         return $this->render('AppBundle:Common:footer.html.twig');
+    }
+
+    public function servicesAction($alias = NULL)
+    {
+        $manager = $this->getdoctrine()->getManager();
+
+        $services = $manager->getRepository('AppBundle:Service')->findAll();
+
+        return $this->render('AppBundle:Common:services.html.twig', [
+            'alias'    => $alias,
+            'services' => $services
+        ]);
     }
 }

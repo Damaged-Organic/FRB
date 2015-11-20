@@ -29,7 +29,16 @@ class StateController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:State:index.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $services = $manager->getRepository('AppBundle:Service')->findAll();
+
+        if( !$services )
+            throw $this->createNotFoundException();
+
+        return $this->render('AppBundle:State:index.html.twig', [
+            'services' => $services
+        ]);
     }
 
     /**
@@ -58,32 +67,48 @@ class StateController extends Controller
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/services",
+     *      "/services/{alias}",
      *      name="services",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "alias" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "alias" = "[a-z]+"}
      * )
      * @Route(
-     *      "/services",
+     *      "/services/{alias}",
      *      name="services_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "alias" = null},
+     *      requirements={"domain" = "%domain%", "alias" = "[a-z]+"}
      * )
      */
-    public function servicesAction()
+    public function servicesAction($alias = NULL)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $services = $manager->getRepository('AppBundle:Service')->findAll();
+        if( $alias )
+        {
+            $service = $manager->getRepository('AppBundle:Service')->findOneBy(['alias' => $alias]);
 
-        if( !$services )
-            throw $this->createNotFoundException();
+            if( !$service )
+                throw $this->createNotFoundException();
 
-        return $this->render('AppBundle:State:services.html.twig', [
-            'services' => $services
-        ]);
+            $response = [
+                'view' => 'AppBundle:State:service.html.twig',
+                'data' => ['service' => $service]
+            ];
+        } else {
+            $services = $manager->getRepository('AppBundle:Service')->findAll();
+
+            if( !$services )
+                throw $this->createNotFoundException();
+
+            $response = [
+                'view' => 'AppBundle:State:services.html.twig',
+                'data' => ['services' => $services]
+            ];
+        }
+
+        return $this->render($response['view'], $response['data']);
     }
 
     /**

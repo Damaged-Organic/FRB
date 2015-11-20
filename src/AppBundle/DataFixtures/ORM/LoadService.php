@@ -15,7 +15,9 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $service_1 = (new Service)
             ->setTitle("Комерційна нерухомість")
             ->setShortDescription("Комплексні брокерські послуги стосовно оренди / продажу всіх видів комерційної нерухомості як для корпоративних клієнтів так і для власників приміщень")
-            ->setPhotoName("...")
+            ->setAlias("commercial")
+            ->setCssPosition("front")
+            //->setPhotoName("...")
         ;
 
         $manager->persist($service_1);
@@ -30,14 +32,14 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($service_1);
         $manager->flush();
 
-        $this->addReference('service_commercial', $service_1);
-
         // ---
 
         $service_2 = (new Service)
             ->setTitle("Житлова нерухомість")
             ->setShortDescription("Брокерські послуги з довгострокової оренди квартир та будинків представницького класу для міжнародних компаній та посольств; продаж та купівля житлової нерухомості")
-            ->setPhotoName("...")
+            ->setAlias("private")
+            ->setCssPosition("top")
+            //->setPhotoName("...")
         ;
 
         $manager->persist($service_2);
@@ -52,14 +54,14 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($service_2);
         $manager->flush();
 
-        $this->addReference('service_residential', $service_2);
-
         // ---
 
         $service_3 = (new Service)
             ->setTitle("Оцінка майна")
             ->setShortDescription("Послуги з оцінки майна для різних бізнес-цілей, що надаються сертифікованими спеціалістами у відповідності до Національних та міжнародних стандартів")
-            ->setPhotoName("...")
+            ->setAlias("evaluation")
+            ->setCssPosition("back")
+            //->setPhotoName("...")
         ;
 
         $manager->persist($service_3);
@@ -74,14 +76,14 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($service_3);
         $manager->flush();
 
-        $this->addReference('service_valuation', $service_3);
-
         // ---
 
         $service_4 = (new Service)
             ->setTitle("Управління нерухомістю")
             ->setShortDescription("Послуги з комплексного управління будівлями та приміщеннями об’єктів нерухомості для власників та корпоративних орендарів")
-            ->setPhotoName("...")
+            ->setAlias("management")
+            ->setCssPosition("bottom")
+            //->setPhotoName("...")
         ;
 
         $manager->persist($service_4);
@@ -96,6 +98,11 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($service_4);
         $manager->flush();
 
+        // ---
+
+        $this->addReference('service_commercial', $service_1);
+        $this->addReference('service_residential', $service_2);
+        $this->addReference('service_valuation', $service_3);
         $this->addReference('service_management', $service_4);
     }
 

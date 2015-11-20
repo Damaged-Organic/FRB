@@ -35,42 +35,19 @@
         <section class="intro-holder">
             <div id="prism-holder">
                 <div id="prism">
-                    <div class="prism-side front commercial">
-                        <div class="inner">
-                            <h2>Комерційна нерухомість</h2>
-                            <p>Комплексні брокерські послуги стосовно оренди / продажу всіх видів комерційної нерухомості як для корпоративних клієнтів так і для власників приміщень.</p>
-                            <div class="btn-large">
-                                <a href="services-commercial.html">детальніше</a>
+
+                    {% for service in services %}
+                        <div class="prism-side {{ service.cssPosition ~ ' ' ~ service.alias }}">
+                            <div class="inner">
+                                <h2>{{ service.title }}</h2>
+                                <p>{{ service.shortDescription }}</p>
+                                <div class="btn-large">
+                                    <a href="{{ path('services', { '_locale': app.request.locale, 'alias': service.alias }) }}">детальніше</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="prism-side top private">
-                        <div class="inner">
-                            <h2>Житлова нерухомість</h2>
-                            <p>Брокерські послуги з довгострокової оренди квартир та будинків представницького класу для міжнародних компаній та посольств; продаж та купівля житлової нерухомості</p>
-                            <div class="btn-large">
-                                <a href="services-private.html">детальніше</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prism-side back evaluation">
-                        <div class="inner">
-                            <h2>Оцінка майна</h2>
-                            <p>Послуги з оцінки майна для різних бізнес-цілей, що надаються сертифікованими спеціалістами у відповідності до Національних та міжнародних стандартів.</p>
-                            <div class="btn-large">
-                                <a href="services-evaluation.html">детальніше</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="prism-side bottom management">
-                        <div class="inner">
-                            <h2>Управління нерухомістю</h2>
-                            <p>Послуги з комплексного управління будівлями та приміщеннями об’єктів нерухомості для власників та корпоративних орендарів</p>
-                            <div class="btn-large">
-                                <a href="services-management.html">детальніше</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                     <div class="prism-side left"></div>
                     <div class="prism-side right"></div>
                 </div>
