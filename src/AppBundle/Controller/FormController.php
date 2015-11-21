@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use AppBundle\Controller\Utility\FormErrorHandlerTrait;
+use AppBundle\Controller\Utility\Traits\FormErrorHandlerTrait;
 
 use AppBundle\Model\Feedback,
     AppBundle\Form\Type\FeedbackType,

@@ -1,5 +1,14 @@
+redirect_to_default_locale:
+    path: "/{url}"
+    host: "{domain}"
+    defaults:
+        _controller: AppBundle:Redirect:redirectToDefaultLocale
+    requirements:
+        url:    .*
+        domain: "%domain%"
+
 app:
-    resource: "@AppBundle/Controller/"
+    resource: "@AppBundle/Controller"
     type:     annotation
 
 sonata_user_profile_show:

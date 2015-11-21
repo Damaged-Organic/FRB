@@ -1,6 +1,6 @@
 <?php
 // src/AppBundle/Controller/Utility/FormErrorHandlerTrait.php
-namespace AppBundle\Controller\Utility;
+namespace AppBundle\Controller\Utility\Traits;
 
 use Symfony\Component\Form\Form;
 
