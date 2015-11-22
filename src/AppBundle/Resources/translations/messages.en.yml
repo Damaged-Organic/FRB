@@ -3,6 +3,24 @@ default:
     title: First Reality Brokerage
 
 common:
+    header:
+        menu: Menu
+
+        map_full:  Find us on the map
+        map_short: Our location
+
     footer: >
         © First Reality Brokerage. Создано в <a href="%developers.link%">%developers.name%</a>, 2015.
         Website personal materials usage without owners permission is prohibited.
+
+state:
+    index:
+        services: Services
+
+        details: Details
+
+        bottom_menu:
+            catalog_commercial:  Find commercial real estate
+            news:                Our news
+            expats_information:  Information for expats
+            catalog_residential: Find residential real estate

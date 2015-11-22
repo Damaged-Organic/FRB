@@ -3,3 +3,4 @@ twig:
     globals:
         default_locale: "%locale%"
         developers:     "%developers%"
+        email:          "%email%"

@@ -63,6 +63,9 @@ class VacancyAdmin extends Admin
                 ])
             ->end()
             ->with("Вакансія - Загальні дані")
+                ->add("publicationDate", "sonata_type_date_picker", [
+                    'label' => "Дата розміщення"
+                ])
                 ->add("isActive", "checkbox", [
                     'required' => FALSE,
                     'label'    => "Відображати на сайті"

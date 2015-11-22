@@ -2,6 +2,8 @@
 // src/AppBundle/Entity/Vacancy.php
 namespace AppBundle\Entity;
 
+use DateTime;
+
 use Doctrine\ORM\Mapping as ORM,
     Doctrine\Common\Collections\ArrayCollection;
 
@@ -49,6 +51,11 @@ class Vacancy implements Translatable
     protected $title;
 
     /**
+     * @ORM\Column(type="date", nullable=false)
+     */
+    protected $publicationDate;
+
+    /**
      * @ORM\Column(type="text", nullable=false)
      *
      * @Gedmo\Translatable
@@ -79,6 +86,8 @@ class Vacancy implements Translatable
         $this->listRequirements = new ArrayCollection;
         $this->listTasks        = new ArrayCollection;
         $this->listAdvantages   = new ArrayCollection;
+
+        $this->publicationDate = new DateTime;
     }
 
     /**
@@ -179,6 +188,29 @@ class Vacancy implements Translatable
     public function getShortDescriptionFormatter()
     {
         return $this->shortDescriptionFormatter;
+    }
+
+    /**
+     * Set publicationDate
+     *
+     * @param \DateTime $publicationDate
+     * @return Vacancy
+     */
+    public function setPublicationDate($publicationDate)
+    {
+        $this->publicationDate = $publicationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get publicationDate
+     *
+     * @return \DateTime
+     */
+    public function getPublicationDate()
+    {
+        return $this->publicationDate;
     }
 
     /**

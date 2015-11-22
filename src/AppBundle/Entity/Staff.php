@@ -59,6 +59,8 @@ class Staff implements Translatable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
      **/
     protected $position;
 
@@ -89,7 +91,7 @@ class Staff implements Translatable
 
     /**
      * @Assert\File(
-     *     maxSize="5M",
+     *     maxSize="2M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg", "image/gif"}
      * )
      *

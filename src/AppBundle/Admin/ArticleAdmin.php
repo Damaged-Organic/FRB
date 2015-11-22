@@ -28,6 +28,18 @@ class ArticleAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        if( $article = $this->getSubject() )
+        {
+            $photoRequired = ( $article->getPhotoName() ) ? FALSE : TRUE;
+
+            $photoHelpOption = ( $photoPath = $article->getPhotoPath() )
+                ? '<img src="'.$photoPath.'" class="admin-preview" />'
+                : FALSE;
+        } else {
+            $photoRequired   = TRUE;
+            $photoHelpOption = FALSE;
+        }
+
         $formMapper
             ->with("Новина - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
@@ -42,7 +54,8 @@ class ArticleAdmin extends Admin
                                     "label" => "Заголовок"
                                 ],
                                 "en" => [
-                                    "label" => "Headline"
+                                    "required" => FALSE,
+                                    "label"    => "Headline"
                                 ]
                             ]
                         ],
@@ -52,7 +65,8 @@ class ArticleAdmin extends Admin
                                     "label" => "Контент"
                                 ],
                                 "en" => [
-                                    "label" => "Content"
+                                    "required" => FALSE,
+                                    "label"    => "Content"
                                 ]
                             ]
                         ]
@@ -62,6 +76,13 @@ class ArticleAdmin extends Admin
             ->with("Новина - Загальні дані")
                 ->add("publicationDate", "sonata_type_date_picker", [
                     'label' => "Дата публікації"
+                ])
+                ->add('photoFile', 'vich_file', [
+                    'label'         => "Фотографія",
+                    'required'      => $photoRequired,
+                    'allow_delete'  => FALSE,
+                    'download_link' => FALSE,
+                    'help'          => $photoHelpOption
                 ])
             ->end()
         ;

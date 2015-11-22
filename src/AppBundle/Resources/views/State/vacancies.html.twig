@@ -1,6 +1,8 @@
 {# src/AppBundle/Resources/views/State/vacancies.html.twig #}
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% set intl_locale = ( app.request.locale != 'ua' ) ?: 'uk' %}
+
 {% set metadata = getMetadata() %}
 
 {% block title %}
@@ -37,176 +39,73 @@
         <h1>Вакансії</h1>
         <section class="outer substrate vacancies-holder">
             <div class="inner white-back">
-                <article class="vacancy-holder">
-                    <div class="entitled">
-                        <h2>Провідний спеціалaіст департаменту управління нерухомістю</h2>
-                        <time datetime="2015-11-13">13 листопада 2015р.</time>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis totam saepe distinctio, commodi, aliquid et harum illo mollitia modi tempora qui. Cupiditate facere veritatis dolor iusto, accusamus autem architecto perferendis.</p>
-                    <div class="tabs">
-                        <ul>
-                            <li class="label active"><span>Требования к кандидатам</span></li>
-                            <li class="label"><span>Основные задачи</span></li>
-                            <li class="label"><span>будет преимуществом</span></li>
-                        </ul>
-                        <div class="container">
-                            <div class="content active">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="content">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="content">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
+
+                {% for vacancy in vacancies %}
+                    <article class="vacancy-holder">
+                        <div class="entitled">
+                            <h2>{{ vacancy.title }}</h2>
+
+                            <time datetime="{{ vacancy.publicationDate|date('Y-m-d') }}">
+                                {{ vacancy.publicationDate|localizeddate('long', 'none', intl_locale) }}
+                            </time>
+                        </div>
+                        {{ vacancy.shortDescription|striptags('<p><em><strong><u>')|raw }}
+                        <div class="tabs">
+                            <ul>
+                                <li class="label active"><span>Требования к кандидатам</span></li>
+                                <li class="label"><span>Основные задачи</span></li>
+                                <li class="label"><span>будет преимуществом</span></li>
+                            </ul>
+                            <div class="container">
+                                <div class="content active">
+                                    <ul class="list-holder numbered-list red-squares">
+
+                                        {% for requirement in vacancy.listRequirements %}
+                                            <li>
+                                                <p>{{ requirement.listItem }}</p>
+                                            </li>
+                                        {% else %}
+                                            <p>No requirements</p>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                <div class="content">
+                                    <ul class="list-holder numbered-list red-squares">
+
+                                        {% for task in vacancy.listTasks %}
+                                            <li>
+                                                <p>{{ task.listItem }}</p>
+                                            </li>
+                                        {% else %}
+                                            <p>No tasks</p>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                <div class="content">
+                                    <ul class="list-holder numbered-list red-squares">
+
+                                        {% for advantage in vacancy.listAdvantages %}
+                                            <li>
+                                                <p>{{ advantage.listItem }}</p>
+                                            </li>
+                                        {% else %}
+                                            <p>No advantages</p>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="btn-extra-large flat">
-                        <a href="#">Отправить резюме</a>
-                    </div>
-                </article>
-                <article class="vacancy-holder">
-                    <div class="entitled">
-                        <h2>Провідний спеціалaіст департаменту управління нерухомістю</h2>
-                        <time datetime="2015-11-13">13 листопада 2015р.</time>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis totam saepe distinctio, commodi, aliquid et harum illo mollitia modi tempora qui. Cupiditate facere veritatis dolor iusto, accusamus autem architecto perferendis.</p>
-                    <div class="tabs">
-                        <ul>
-                            <li class="label active"><span>Требования к кандидатам</span></li>
-                            <li class="label"><span>Основные задачи</span></li>
-                            <li class="label"><span>будет преимуществом</span></li>
-                        </ul>
-                        <div class="container">
-                            <div class="content active">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="content">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="content">
-                                <ul class="list-holder numbered-list red-squares">
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                    <li>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio molestiae ullam in eius a architecto illum at eos natus ab quaerat vitae rerum nostrum debitis, maxime eaque expedita reprehenderit tenetur.</p>
-                                    </li>
-                                </ul>
-                            </div>
+                        <div class="btn-extra-large flat">
+                            <a href="mailto:{{ email.resume }}?subject={{ vacancy.title }}">Отправить резюме</a>
                         </div>
-                    </div>
-                    <div class="btn-extra-large flat">
-                        <a href="#">Отправить резюме</a>
-                    </div>
-                </article>
+                    </article>
+                {% else %}
+                    <p>No vacancies</p>
+                {% endfor %}
+
             </div>
         </section>
     </main>

@@ -6,24 +6,12 @@
 
     {{ knp_menu_render('main', {'currentClass': 'active'}) }}
 
-    {#
-    <ul>
-        <li><a href="catalog.html">Каталог</a></li>
-        <li class="active"><a href="services.html">Послуги</a></li>
-        <li><a href="people.html">Люди</a></li>
-        <li><a href="vacancies.html">Вакансії</a></li>
-        <li><a href="news.html">Новини</a></li>
-        <li><a href="research.html">Дослідження</a></li>
-        <li><a href="expats.html">Інформація для экспатів</a></li>
-        <li><a href="contacts.html">Контакти</a></li>
-    </ul>
-    #}
 </nav>
 <div class="contact-info">
     <a href="tel:+380449999999"><span class="icon-phone"></span>+38 (044) 999-99-99</a>
     <a href="{{ path('contacts', { '_locale': app.request.locale }) }}">
         <span class="icon-location"></span>
-        Знайти нас на мапі
+        {{ 'common.header.map_full'|trans }}
     </a>
 </div>
 <div class="lang">

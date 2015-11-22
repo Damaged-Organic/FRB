@@ -1,6 +1,8 @@
 {# src/AppBundle/Resources/views/State/news.html.twig #}
 {% extends 'AppBundle::layout.html.twig' %}
 
+{% set intl_locale = ( app.request.locale != 'ua' ) ?: 'uk' %}
+
 {% set metadata = getMetadata() %}
 
 {% block title %}
@@ -38,15 +40,15 @@
         <div class="news-info-holder">
             <div class="info-item-holder">
                 <div class="info-item">
-                    <span class="count">23</span>
+                    <span class="count">{{ articlesAmount }}</span>
                     <span class="text">нових</span>
                 </div>
                 <p>доданих новин</p>
             </div>
             <div class="info-item-holder">
                 <div class="info-item">
-                    <span class="count">14</span>
-                    <span class="text">листопада</span>
+                    <span class="count">{{ articlesLastDate|date('d') }}</span>
+                    <span class="text">{{ articlesLastDate|localizeddate("full", "none", intl_locale, null, "MMMM")|lower }}</span>
                 </div>
                 <p>остання публікація</p>
             </div>
@@ -54,46 +56,25 @@
         <section class="outer substrate news-holder">
             <div class="inner">
                 <div class="grid dbl" id="news-grid" data-url="php/lift.php">
-                    <article class="col">
-                        <div class="photo-holder">
-                            <figure>
-                                <img src="build/images/news/apartment.jpg" alt="">
-                            </figure>
-                            <time>14 листопада 2015р.</time>
-                        </div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
-                    </article>
-                    <article class="col">
-                        <div class="photo-holder">
-                            <figure>
-                                <img src="build/images/news/apartment.jpg" alt="">
-                            </figure>
-                            <time>14 листопада 2015р.</time>
-                        </div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
-                    </article>
-                    <article class="col">
-                        <div class="photo-holder">
-                            <figure>
-                                <img src="build/images/news/apartment.jpg" alt="">
-                            </figure>
-                            <time>14 листопада 2015р.</time>
-                        </div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
-                    </article>
-                    <article class="col">
-                        <div class="photo-holder">
-                            <figure>
-                                <img src="build/images/news/apartment.jpg" alt="">
-                            </figure>
-                            <time>14 листопада 2015р.</time>
-                        </div>
-                        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum ipsum in erat egestas.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam officia, libero, illum, quisquam porro natus officiis, fuga error cum odit provident veritatis deserunt alias maiores aliquam commodi iste distinctio esse!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quam sit quo fuga veritatis eaque voluptatibus, autem, animi soluta quae adipisci eos eveniet, accusamus labore ut numquam aut nemo suscipit.</p>
-                    </article>
+
+                    {% for article in news %}
+                        <article class="col">
+                            <div class="photo-holder">
+                                <figure>
+                                    <img src="{{ vich_uploader_asset(article, 'photoFile') }}" alt="{{ article.title }}">
+                                </figure>
+
+                                <time datetime="{{ article.publicationDate|date('Y-m-d') }}">
+                                    {{ article.publicationDate|localizeddate('long', 'none', intl_locale) }}
+                                </time>
+                            </div>
+                            <h2>{{ article.title }}</h2>
+                            <p>{{ article.content }}</p>
+                        </article>
+                    {% else %}
+                        <p>No news</p>
+                    {% endfor %}
+
                 </div>
             </div>
             <div id="loader-holder">

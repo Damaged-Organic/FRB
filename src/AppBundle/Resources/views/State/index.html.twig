@@ -42,7 +42,7 @@
                                 <h2>{{ service.title }}</h2>
                                 <p>{{ service.shortDescription }}</p>
                                 <div class="btn-large">
-                                    <a href="{{ path('services', { '_locale': app.request.locale, 'alias': service.alias }) }}">детальніше</a>
+                                    <a href="{{ path('services', { '_locale': app.request.locale, 'alias': service.alias }) }}">{{ 'state.index.details'|trans }}</a>
                                 </div>
                             </div>
                         </div>
@@ -54,29 +54,29 @@
             </div>
             <div id="prism-state-holder">
                 <div class="arrow up"><span class="icon-arrow-up"></span></div>
-                <span>Послуги</span>
+                <span>{{ 'state.index.services'|trans }}</span>
                 <div class="arrow down"><span class="icon-arrow-down"></span></div>
             </div>
             <div id="action-panel-holder">
                 <ul>
                     <li>
                         <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'commercial' }) }}">
-                            Пошук комерційної нерухомості
+                            {{ 'state.index.bottom_menu.catalog_commercial'|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('news', { '_locale': app.request.locale }) }}">
-                            Наші новини
+                            {{ 'state.index.bottom_menu.news'|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('expats_information', { '_locale': app.request.locale }) }}">
-                            Інформація для експатів
+                            {{ 'state.index.bottom_menu.expats_information'|trans }}
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">
-                            Пошук житлової нерухомості
+                            {{ 'state.index.bottom_menu.catalog_residential'|trans }}
                         </a>
                     </li>
                 </ul>

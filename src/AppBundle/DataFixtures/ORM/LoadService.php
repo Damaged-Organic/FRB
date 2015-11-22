@@ -37,7 +37,7 @@ class LoadService extends AbstractFixture implements OrderedFixtureInterface
         $service_2 = (new Service)
             ->setTitle("Житлова нерухомість")
             ->setShortDescription("Брокерські послуги з довгострокової оренди квартир та будинків представницького класу для міжнародних компаній та посольств; продаж та купівля житлової нерухомості")
-            ->setAlias("private")
+            ->setAlias("residential")
             ->setCssPosition("top")
             //->setPhotoName("...")
         ;

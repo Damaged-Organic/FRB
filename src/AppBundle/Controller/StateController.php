@@ -2,11 +2,15 @@
 // src/AppBundle/Controller/StateController.php
 namespace AppBundle\Controller;
 
+use DateTime;
+
 use Symfony\Component\HttpFoundation\Request,
     Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+use AppBundle\Entity\Article;
 
 class StateController extends Controller
 {
@@ -118,28 +122,57 @@ class StateController extends Controller
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/staff",
+     *      "/staff/{service}",
      *      name="staff",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "service" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "service" = "[a-z_]+"}
      * )
      * @Route(
-     *      "/staff",
+     *      "/staff/{service}",
      *      name="staff_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "service" = null},
+     *      requirements={"domain" = "%domain%", "service" = "[a-z_]+"}
      * )
      */
-    public function staffAction()
+    public function staffAction($service = NULL)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $staff = $manager->getRepository('AppBundle:Staff')->findAll();
+        switch($service)
+        {
+            case NULL:
+                $staff = $manager->getRepository('AppBundle:Staff')->findAll();
+            break;
+
+            case 'agency':
+                $staff = $manager->getRepository('AppBundle:Staff')->findByServices([
+                    'commercial',
+                    'residential'
+                ]);
+            break;
+
+            case 'evaluation':
+                $staff = $manager->getRepository('AppBundle:Staff')->findByServices([
+                    $service
+                ]);
+            break;
+
+            case 'management':
+                $staff = $manager->getRepository('AppBundle:Staff')->findByServices([
+                    $service
+                ]);
+            break;
+
+            default:
+                throw $this->createNotFoundException();
+            break;
+        }
 
         return $this->render('AppBundle:State:staff.html.twig', [
-            'staff' => $staff
+            'service' => $service,
+            'staff'   => $staff
         ]);
     }
 
@@ -162,7 +195,13 @@ class StateController extends Controller
      */
     public function vacanciesAction()
     {
-        return $this->render('AppBundle:State:vacancies.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $vacancies = $manager->getRepository('AppBundle:Vacancy')->findAll();
+
+        return $this->render('AppBundle:State:vacancies.html.twig', [
+            'vacancies' => $vacancies
+        ]);
     }
 
     /**
@@ -184,7 +223,21 @@ class StateController extends Controller
      */
     public function newsAction()
     {
-        return $this->render('AppBundle:State:news.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $news = $manager->getRepository('AppBundle:Article')->findBy([], ['publicationDate' => 'DESC'], Article::ARTICLES_PER_LIFT);
+
+        $articlesAmount   = count($news);
+
+        $articlesLastDate = ( $news[0] instanceof Article )
+            ? $news[0]->getPublicationDate()
+            : new DateTime;
+
+        return $this->render('AppBundle:State:news.html.twig', [
+            'articlesAmount'   => $articlesAmount,
+            'articlesLastDate' => $articlesLastDate,
+            'news'             => $news
+        ]);
     }
 
     /**

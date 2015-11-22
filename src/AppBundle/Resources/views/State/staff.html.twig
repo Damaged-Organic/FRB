@@ -37,17 +37,25 @@
         <h1>Співробітники</h1>
         <section class="outer substrate categories-holder">
             <div class="inner">
-                <div class="btn-long flat white active">
-                    <a href="#">Усі</a>
+                <div class="btn-long flat white {{ ( not service ) ? 'active' }}">
+                    <a href="{{ path('staff', { '_locale': app.request.locale }) }}">
+                        Усі
+                    </a>
                 </div>
-                <div class="btn-long flat white">
-                    <a href="#">Агентські</a>
+                <div class="btn-long flat white {{ ( service == 'agency' ) ? 'active' }}">
+                    <a href="{{ path('staff', { '_locale': app.request.locale, 'service': 'agency' }) }}">
+                        Агентські
+                    </a>
                 </div>
-                <div class="btn-long flat white">
-                    <a href="#">Оцінка</a>
+                <div class="btn-long flat white {{ ( service == 'evaluation' ) ? 'active' }}">
+                    <a href="{{ path('staff', { '_locale': app.request.locale, 'service': 'evaluation' }) }}">
+                        Оцінка
+                    </a>
                 </div>
-                <div class="btn-long flat white">
-                    <a href="#">Управління</a>
+                <div class="btn-long flat white {{ ( service == 'management' ) ? 'active' }}">
+                    <a href="{{ path('staff', { '_locale': app.request.locale, 'service': 'management' }) }}">
+                        Управління
+                    </a>
                 </div>
             </div>
         </section>
@@ -79,7 +87,7 @@
                                     {% if employee.skype %}
                                         <a href="skype:{{ employee.skype }}?chat">{{ employee.skype }}</a>
                                     {% else %}
-                                        <a href="#">не вказано</a>
+                                        <a href='#'>не вказано</a>
                                     {% endif %}
                                 </li>
                             </ul>
