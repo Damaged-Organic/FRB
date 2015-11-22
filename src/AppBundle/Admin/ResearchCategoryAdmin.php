@@ -24,10 +24,6 @@ class ResearchCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add("title", "text", [
-                "label" => "Назва категорії"
-            ])
-            ->end()
             ->with("Локалізації")
                 ->add("translations", "a2lix_translations_gedmo", [
                     "label"              => "Керування локалізаціями",
@@ -36,6 +32,9 @@ class ResearchCategoryAdmin extends Admin
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Назва категорії"
+                                ],
                                 "en" => [
                                     "label" => "Category title"
                                 ]
@@ -43,6 +42,7 @@ class ResearchCategoryAdmin extends Admin
                         ]
                     ]
                 ])
+            ->end()
         ;
     }
 }

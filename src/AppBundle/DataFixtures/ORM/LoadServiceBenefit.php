@@ -13,6 +13,98 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
     public function load(ObjectManager $manager)
     {
         $manager->persist(
+            $benefit_0_1 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-connected")
+                ->setThesis("Виконання всіх функцій через одного провайдера")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_1
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_2 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-clock")
+                ->setThesis("Oптимізація щоденної роботи з підрядниками. Ми здійснюємо повне управління та контроль за виконанням робіт")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_2
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_3 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-credit-card")
+                ->setThesis("Зниження вартості придбання Клієнтом товарів та послуг за рахунок об'єднання об’ємів закупівель з об’ємами інших замовлень")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_3
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_4 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-staff")
+                ->setThesis("Залучення як власного висококваліфікованого персоналу і спеціалізованих субпідрядників, так і аут-стафінг персоналу клієнта")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_4
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_5 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-abacus")
+                ->setThesis("Зменшення об’ємів роботи бухгалтерії Клієнта - надання послуги списання товарів згідно Акту наданих послуг: кави, продуктів, води тощо")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_5
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_6 = (new ServiceBenefit)
+                ->setService(NULL)
+                ->setIcon("icon-package")
+                ->setThesis("В кінці звітного місяця Клієнт має один консолідований пакет документів - один рахунок/один акт")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_0_6
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist(
             $benefit_1_1 = (new ServiceBenefit)
                 ->setService($this->getReference('service_commercial'))
                 ->setIcon("icon-deal")

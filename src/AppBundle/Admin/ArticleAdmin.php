@@ -29,24 +29,18 @@ class ArticleAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add("title", "text", [
-                "label" => "Заголовок"
-            ])
-            ->add("publicationDate", "sonata_type_date_picker", [
-                'label' => "Дата публікації"
-            ])
-            ->add("content", "textarea", [
-                "label" => "Контент"
-            ])
-            ->end()
-            ->with("Локалізації")
+            ->with("Новина - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
                     "translatable_class" => 'AppBundle\Entity\Article',
                     "required"           => TRUE,
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Заголовок"
+                                ],
                                 "en" => [
                                     "label" => "Headline"
                                 ]
@@ -54,6 +48,9 @@ class ArticleAdmin extends Admin
                         ],
                         "content" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Контент"
+                                ],
                                 "en" => [
                                     "label" => "Content"
                                 ]
@@ -61,6 +58,12 @@ class ArticleAdmin extends Admin
                         ]
                     ]
                 ])
+            ->end()
+            ->with("Новина - Загальні дані")
+                ->add("publicationDate", "sonata_type_date_picker", [
+                    'label' => "Дата публікації"
+                ])
+            ->end()
         ;
     }
 }

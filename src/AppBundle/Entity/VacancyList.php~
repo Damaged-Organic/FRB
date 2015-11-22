@@ -1,0 +1,53 @@
+<?php
+// src/AppBundle/Entity/VacancyList.php
+namespace  AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
+/**
+ * @ORM\Table(name="vacancies_lists")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\VacancyListRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\VacancyListTranslation")
+ */
+class VacancyList implements Translatable
+{
+    use IdMapper, TranslationMapper;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VacancyListTranslation", mappedBy="object", cascade={"persist", "remove"})
+     **/
+    protected $translations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Vacancy", inversedBy="listRequirements")
+     * @ORM\JoinColumn(name="vacancy_id", referencedColumnName="id")
+     */
+    protected $vacancyRequirement;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Vacancy", inversedBy="listTasks")
+     * @ORM\JoinColumn(name="vacancy_id", referencedColumnName="id")
+     */
+    protected $vacancyTask;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Vacancy", inversedBy="listAdvantages")
+     * @ORM\JoinColumn(name="vacancy_id", referencedColumnName="id")
+     */
+    protected $vacancyAdvantage;
+
+    /**
+     * @ORM\Column(type="string", length=1000, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $listItem;
+}

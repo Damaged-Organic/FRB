@@ -42,82 +42,92 @@ class StaffAdmin extends Admin
         }
 
         $formMapper
-            ->add("name", "text", [
-                "label" => "ПІБ"
-            ])
-            ->add("position", "text", [
-                "label" => "Посада"
-            ])
-            ->add("education", "text", [
-                "label"    => "Освіта",
-                'required' => FALSE
-            ])
-            ->add("degree", "text", [
-                "label"    => "Наукова ступінь",
-                'required' => FALSE
-            ])
-            ->add("phone", "text", [
-                "label" => "Телефон"
-            ])
-            ->add("email", "text", [
-                "label" => "E-mail"
-            ])
-            ->add('photoFile', 'vich_file', [
-                'label'         => "Фотографія",
-                'required'      => $photoRequired,
-                'allow_delete'  => FALSE,
-                'download_link' => FALSE,
-                'help'          => $photoHelpOption
-            ])
-            ->add("services", "collection", [
-                'type'         => 'entity',
-                'allow_add'    => TRUE,
-                'allow_delete' => TRUE,
-                'by_reference' => FALSE,
-                'label'        => "Відділи",
-                'options' => [
-                    'class'    => 'AppBundle:Service',
-                    'property' => 'title',
-                    'label'    => FALSE,
-                ]
-            ])
-            ->end()
-            ->with("Локалізації")
+            ->with("Співробітник - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
                     "translatable_class" => 'AppBundle\Entity\Staff',
                     "required"           => TRUE,
                     "fields"             => [
                         "name" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "ПІБ"
+                                ],
                                 "en" => [
-                                    "label" => "Full name"
+                                    "required" => FALSE,
+                                    "label"    => "Full name"
                                 ]
                             ]
                         ],
                         "position" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Посада"
+                                ],
                                 "en" => [
-                                    "label" => "Position"
+                                    "required" => FALSE,
+                                    "label"    => "Position"
                                 ]
                             ]
                         ],
-                        "education" => [
+                        /*"education" => [
+                            'required'       => FALSE,
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Освіта"
+                                ],
                                 "en" => [
                                     "label" => "Education"
                                 ]
                             ]
-                        ],
-                        "degree" => [
+                        ],*/
+                        /*"degree" => [
+                            'required'       => FALSE,
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Наукова ступінь"
+                                ],
                                 "en" => [
                                     "label" => "Degree"
                                 ]
                             ]
-                        ]
+                        ]*/
                     ]
                 ])
+            ->end()
+            ->with("Співробітник - Загальні дані")
+                ->add("phone", "text", [
+                    "label" => "Телефон"
+                ])
+                ->add("email", "text", [
+                    "label" => "E-mail"
+                ])
+                ->add("skype", "text", [
+                    "required" => FALSE,
+                    "label"    => "Skype"
+                ])
+                ->add('photoFile', 'vich_file', [
+                    'label'         => "Фотографія",
+                    'required'      => $photoRequired,
+                    'allow_delete'  => FALSE,
+                    'download_link' => FALSE,
+                    'help'          => $photoHelpOption
+                ])
+                ->add("services", "collection", [
+                    'required'     => TRUE,
+                    'type'         => 'entity',
+                    'allow_add'    => TRUE,
+                    'allow_delete' => TRUE,
+                    'by_reference' => FALSE,
+                    'label'        => "Відділи",
+                    'options' => [
+                        'class'    => 'AppBundle:Service',
+                        'property' => 'title',
+                        'label'    => FALSE,
+                    ]
+                ])
+            ->end()
         ;
     }
 }

@@ -36,7 +36,7 @@
 
         {% block content %}
             <main id="content" class="sticky">
-                <h1>Коммерційна нерухомість</h1>
+                <h1>{{ service.title }}</h1>
 
                 {{ render(controller('AppBundle:Common:services', { 'alias': service.alias })) }}
 

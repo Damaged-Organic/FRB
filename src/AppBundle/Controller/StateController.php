@@ -97,14 +97,18 @@ class StateController extends Controller
                 'data' => ['service' => $service]
             ];
         } else {
-            $services = $manager->getRepository('AppBundle:Service')->findAll();
+            $serviceBenefits = $manager->getRepository('AppBundle:ServiceBenefit')->findBy(['service' => NULL]);
 
-            if( !$services )
-                throw $this->createNotFoundException();
+            $clients      = $manager->getRepository('AppBundle:Client')->findAll();
+            $clientsChits = $manager->getRepository('AppBundle:ClientChit')->findAll();
 
             $response = [
                 'view' => 'AppBundle:State:services.html.twig',
-                'data' => ['services' => $services]
+                'data' => [
+                    'serviceBenefits' => $serviceBenefits,
+                    'clients'         => $clients,
+                    'clientsChits'    => $clientsChits
+                ]
             ];
         }
 
@@ -130,7 +134,13 @@ class StateController extends Controller
      */
     public function staffAction()
     {
-        return $this->render('AppBundle:State:staff.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $staff = $manager->getRepository('AppBundle:Staff')->findAll();
+
+        return $this->render('AppBundle:State:staff.html.twig', [
+            'staff' => $staff
+        ]);
     }
 
     /**
@@ -197,6 +207,28 @@ class StateController extends Controller
     public function researchesAction()
     {
         return $this->render('AppBundle:State:researches.html.twig');
+    }
+
+    /**
+     * @Method({"GET"})
+     * @Route(
+     *      "/expats_relocation",
+     *      name="expats_relocation",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     * )
+     * @Route(
+     *      "/expats_relocation",
+     *      name="expats_relocation_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"domain" = "%domain%"}
+     * )
+     */
+    public function expatsRelocationAction()
+    {
+        return $this->render('AppBundle:State:expats_relocation.html.twig');
     }
 
     /**

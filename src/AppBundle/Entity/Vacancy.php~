@@ -27,6 +27,21 @@ class Vacancy implements Translatable
     protected $translations;
 
     /**
+     * @ORM\OneToMany(targetEntity="VacancyList", mappedBy="vacancyRequirement", cascade={"persist", "remove"}, orphanRemoval=true)
+     **/
+    protected $listRequirements;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VacancyList", mappedBy="vacancyTask", cascade={"persist", "remove"}, orphanRemoval=true)
+     **/
+    protected $listTasks;
+
+    /**
+     * @ORM\OneToMany(targetEntity="VacancyList", mappedBy="vacancyAdvantage", cascade={"persist", "remove"}, orphanRemoval=true)
+     **/
+    protected $listAdvantages;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=false)
      *
      * @Gedmo\Translatable
@@ -38,39 +53,22 @@ class Vacancy implements Translatable
      *
      * @Gedmo\Translatable
      **/
-    protected $requirements;
+    protected $shortDescription;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      **/
-    protected $rawRequirements;
+    protected $rawShortDescription;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      **/
-    protected $requirementsFormatter;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     *
-     * @Gedmo\Translatable
-     **/
-    protected $additional;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     **/
-    protected $rawAdditional;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     **/
-    protected $additionalFormatter;
+    protected $shortDescriptionFormatter;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      **/
-    protected $isActive;
+    protected $isActive = TRUE;
 
     /**
      * Constructor
@@ -78,8 +76,6 @@ class Vacancy implements Translatable
     public function __construct()
     {
         $this->translations = new ArrayCollection;
-
-        $this->isActive = TRUE;
     }
 
     /**
@@ -89,4 +85,6 @@ class Vacancy implements Translatable
     {
         return ( $this->title ) ? $this->title : "";
     }
+
+
 }

@@ -38,12 +38,12 @@ class Service implements Translatable
     protected $translations;
 
     /**
-     * @ORM\OneToMany(targetEntity="ServiceBenefit", mappedBy="service", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ServiceBenefit", mappedBy="service", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $serviceBenefits;
 
     /**
-     * @ORM\OneToMany(targetEntity="ServiceList", mappedBy="service", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="ServiceList", mappedBy="service", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $serviceLists;
 

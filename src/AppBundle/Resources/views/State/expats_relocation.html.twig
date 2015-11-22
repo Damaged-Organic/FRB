@@ -1,0 +1,169 @@
+{# src/AppBundle/Resources/views/State/expats_relocation.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('expats_relocation_default') }}">
+    <link rel="alternate" href="{{ url('expats_relocation', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('expats_relocation', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('expats_relocation', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/relocation.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>Релокація експатів</h1>
+        <section class="outer substrate relocation-holder">
+            <div class="inner white-back">
+                <h2>Концепція релокаційних послуг</h2>
+                <p>склалаєтья з наступних кроків</p>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Базова організація поїздки<span class="icon icon-documents"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Переміщення через кордон<span class="icon icon-passport"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Імміграційні послуги<span class="icon icon-certificates"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Ознайомчий тур та поселення<span class="icon icon-library"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Пошук квартир та домів для довгострокової оренди<span class="icon icon-house"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Підтримка на протязі терміну оренди житла<span class="icon icon-support"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="item-holder">
+                    <div class="list-items">
+                        <h3>Підтримка при виїзді<span class="icon icon-departure"></span></h3>
+                        <ul class="list-holder numbered-list red-squares">
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/relocation.bundle.min.js') }}"></script>
+{% endblock %}

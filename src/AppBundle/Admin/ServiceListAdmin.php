@@ -36,41 +36,48 @@ class ServiceListAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add("translations", "a2lix_translations_gedmo", [
-                "locales"            => ['ua', 'en'],
-                "label"              => "Контент та локалізації",
-                "translatable_class" => 'AppBundle\Entity\ServiceList',
-                "required"           => FALSE,
-                "fields"             => [
-                    "title" => [
-                        "locale_options" => [
-                            "en" => [
-                                "label" => "List title"
-                            ],
-                            "ua" => [
-                                "label" => "Назва списку"
+            ->with("Список послуг - Локалізований контент")
+                ->add("translations", "a2lix_translations_gedmo", [
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
+                    "translatable_class" => 'AppBundle\Entity\ServiceList',
+                    "required"           => TRUE,
+                    "fields"             => [
+                        "title" => [
+                            "locale_options" => [
+                                "ua" => [
+                                    "label" => "Назва списку"
+                                ],
+                                "en" => [
+                                    "required" => FALSE,
+                                    "label"    => "List title"
+                                ]
                             ]
-                        ]
-                    ],
-                    "shortDescription" => [
-                        "locale_options" => [
-                            "en" => [
-                                "label" => "List short description"
-                            ],
-                            "ua" => [
-                                "label" => "Короткий опис списку"
+                        ],
+                        "shortDescription" => [
+                            "locale_options" => [
+                                "ua" => [
+                                    "label" => "Короткий опис списку"
+                                ],
+                                "en" => [
+                                    "required" => FALSE,
+                                    "label"    => "List short description"
+                                ]
                             ]
                         ]
                     ]
-                ]
-            ])
-            ->add("serviceListItems", "sonata_type_collection", [
-                'by_reference' => FALSE,
-                "label"        => FALSE,
-            ], [
-                'edit' => 'inline',
-                'inline' => 'table'
-            ])
+                ])
+            ->end()
+            ->with("Пункти списку")
+                ->add("serviceListItems", "sonata_type_collection", [
+                    'by_reference' => FALSE,
+                    "label"        => FALSE,
+                    "btn_add"      => "Додати послугу"
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
         ;
     }
 }

@@ -23,7 +23,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setDegree("PhD")
             ->setPhone("+38 (050) 310 1010")
             ->setEmail("v.livshyts@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("vadim.jpg")
         ;
 
         $manager->persist($staff_1);
@@ -49,7 +49,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Голова департаменту агентських послуг")
             ->setPhone("+38 (050) 353 7100")
             ->setEmail("t.klimenchuk@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("tatiana.jpg")
         ;
 
         $manager->persist($staff_2);
@@ -73,7 +73,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Консультант департаменту агентських послуг")
             ->setPhone("+38 (050) 332 5838")
             ->setEmail("y.borisova@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("yana.jpg")
         ;
 
         $manager->persist($staff_3);
@@ -96,7 +96,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Провідний спеціаліст департаменту оцінки та ринкових досліджень")
             ->setPhone("+38 (050) 356 40 01")
             ->setEmail("i.trunova@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("irina.jpg")
         ;
 
         $manager->persist($staff_4);
@@ -119,7 +119,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Консультант департаменту оцінки та ринкових досліджень")
             ->setPhone("+38 (050) 438 2525")
             ->setEmail("m.kravchenko@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("marina.jpg")
         ;
 
         $manager->persist($staff_5);
@@ -142,7 +142,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Провідний спеціаліст з експлуатації нерухомості")
             ->setPhone("+38 (050) 356 4177")
             ->setEmail("z.melua@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("zurab.jpg")
         ;
 
         $manager->persist($staff_6);
@@ -165,7 +165,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Спеціаліст з експлуатації нерухомості")
             ->setPhone("+38 (050) 483 30 30")
             ->setEmail("e.medvedeva@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("elena.jpg")
         ;
 
         $manager->persist($staff_7);
@@ -188,7 +188,7 @@ class LoadStaff extends AbstractFixture implements OrderedFixtureInterface
             ->setPosition("Адміністратор департаменту експлуатації нерухомості")
             ->setPhone("+38 (050) 446 82 27")
             ->setEmail("n.lobur@frbrokerage.net")
-            ->setPhotoName("...")
+            ->setPhotoName("natalia.jpg")
         ;
 
         $manager->persist($staff_8);

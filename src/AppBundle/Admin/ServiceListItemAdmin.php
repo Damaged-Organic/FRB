@@ -15,17 +15,18 @@ class ServiceListItemAdmin extends Admin
         $formMapper
             ->add("translations", "a2lix_translations_gedmo", [
                 "locales"            => ['ua', 'en'],
-                "label"              => "Контент та локалізації",
+                "label"              => "Пункт списку - Локалізований контент",
                 "translatable_class" => 'AppBundle\Entity\ServiceListItem',
-                "required"           => FALSE,
+                "required"           => TRUE,
                 "fields"             => [
                     "text" => [
                         "locale_options" => [
-                            "en" => [
-                                "label" => "List item text",
-                            ],
                             "ua" => [
                                 "label" => "Текст пункта списку"
+                            ],
+                            "en" => [
+                                "required" => FALSE,
+                                "label"    => "List item text",
                             ]
                         ]
                     ]

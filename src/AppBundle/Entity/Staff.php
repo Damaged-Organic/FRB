@@ -83,6 +83,11 @@ class Staff implements Translatable
     protected $email;
 
     /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     **/
+    protected $skype;
+
+    /**
      * @Assert\File(
      *     maxSize="5M",
      *     mimeTypes={"image/png", "image/jpeg", "image/pjpeg", "image/gif"}
@@ -279,6 +284,29 @@ class Staff implements Translatable
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set skype
+     *
+     * @param string $skype
+     * @return Staff
+     */
+    public function setSkype($skype)
+    {
+        $this->skype = $skype;
+
+        return $this;
+    }
+
+    /**
+     * Get skype
+     *
+     * @return string
+     */
+    public function getSkype()
+    {
+        return $this->skype;
     }
 
     /**

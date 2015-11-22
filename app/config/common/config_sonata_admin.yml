@@ -244,6 +244,28 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
 
+    sonata.admin.client:
+        class: AppBundle\Admin\ClientAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Клієнти" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Client
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.client_chit:
+        class: AppBundle\Admin\ClientChitAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\ClientChit
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
     sonata.admin.staff:
         class: AppBundle\Admin\StaffAdmin
         tags:
@@ -262,6 +284,17 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Vacancy
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.vacancy_list:
+        class: AppBundle\Admin\VacancyListAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\VacancyList
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]

@@ -48,20 +48,21 @@ class ServiceAdmin extends Admin
         }
 
         $formMapper
-            ->with("Послуги")
+            ->with("Послуга - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
                     "locales"            => ['ua', 'en'],
-                    "label"              => "Контент та локалізації",
+                    "label"              => FALSE,
                     "translatable_class" => 'AppBundle\Entity\Service',
-                    "required"           => FALSE,
+                    "required"           => TRUE,
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
                                 "ua" => [
-                                    "label" => "Назва послуги"
+                                    "label" => "Назва послуги",
                                 ],
                                 "en" => [
-                                    "label" => "Service title"
+                                    "required" => FALSE,
+                                    "label"    => "Service title"
                                 ]
                             ]
                         ],
@@ -71,7 +72,8 @@ class ServiceAdmin extends Admin
                                     "label" => "Опис послуги"
                                 ],
                                 "en" => [
-                                    "label" => "Short description"
+                                    "required" => FALSE,
+                                    "label"    => "Short description"
                                 ]
                             ]
                         ]
@@ -90,12 +92,13 @@ class ServiceAdmin extends Admin
         if( count($serviceBenefits) )
         {
             $formMapper
-                ->with('Редагування переваг')
+                ->with('Переваги послуги')
                     ->add("serviceBenefits", "sonata_type_collection", [
                         "type_options" => [
                             'delete' => FALSE
                         ],
-                        "label" => FALSE,
+                        'by_reference' => FALSE,
+                        "label"        => FALSE
                     ], [
                         'edit' => 'inline',
                         'inline' => 'table'

@@ -24,25 +24,25 @@ class InformationCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add("title", "text", [
-                "label" => "Назва категорії"
-            ])
-            ->end()
             ->with("Локалізації")
-            ->add("translations", "a2lix_translations_gedmo", [
-                "label"              => "Керування локалізаціями",
-                "translatable_class" => 'AppBundle\Entity\ResearchCategory',
-                "required"           => TRUE,
-                "fields"             => [
-                    "title" => [
-                        "locale_options" => [
-                            "en" => [
-                                "label" => "Category title"
+                ->add("translations", "a2lix_translations_gedmo", [
+                    "label"              => "Керування локалізаціями",
+                    "translatable_class" => 'AppBundle\Entity\ResearchCategory',
+                    "required"           => TRUE,
+                    "fields"             => [
+                        "title" => [
+                            "locale_options" => [
+                                "ua" => [
+                                    "label" => "Назва категорії"
+                                ],
+                                "en" => [
+                                    "label" => "Category title"
+                                ]
                             ]
                         ]
                     ]
-                ]
-            ])
+                ])
+            ->end()
         ;
     }
 }

@@ -26,77 +26,78 @@ class VacancyAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add("title", "text", [
-                "label" => "Вакансія"
-            ])
-            ->add("requirements", "sonata_formatter_type", [
-                "label"                => "Вимоги",
-                "event_dispatcher"     => $formMapper->getFormBuilder()->getEventDispatcher(),
-                "format_field"         => "requirementsFormatter",
-                "source_field"         => "rawRequirements",
-                "ckeditor_context"     => "extended_config",
-                "source_field_options" => [
-                    "attr" => [
-                        "class" => "span10", "rows" => 10
-                    ]
-                ],
-                "listener"     => TRUE,
-                "target_field" => "requirements"
-            ])
-            ->add("additional", "sonata_formatter_type", [
-                'required'             => FALSE,
-                "label"                => "Додатково",
-                "event_dispatcher"     => $formMapper->getFormBuilder()->getEventDispatcher(),
-                "format_field"         => "additionalFormatter",
-                "source_field"         => "rawAdditional",
-                "ckeditor_context"     => "extended_config",
-                "source_field_options" => [
-                    "attr" => [
-                        "class" => "span10", "rows" => 10
-                    ]
-                ],
-                "listener"     => TRUE,
-                "target_field" => "additional"
-            ])
-            ->add("isActive", "checkbox", [
-                'required' => FALSE,
-                'label'    => "Відображати"
-            ])
-            ->end()
-            ->with("Локалізації")
+            ->with("Вакансія - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
                     "translatable_class" => 'AppBundle\Entity\Vacancy',
                     "required"           => TRUE,
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "label" => "Вакансія"
+                                ],
                                 "en" => [
-                                    "label" => "Vacancy"
+                                    "required" => FALSE,
+                                    "label"    => "Vacancy"
                                 ]
                             ]
                         ],
-                        'requirements' => [
+                        'shortDescription' => [
                             'locale_options' => [
-                                'en' => [
-                                    'label'       => 'Requirements',
+                                'ua' => [
+                                    'label'       => 'Короткий опис',
                                     'field_type'  => 'ckeditor',
-                                    'config_name' => 'extended_config'
-                                ]
-                            ]
-                        ],
-                        'additional' => [
-                            'required'       => FALSE,
-                            'locale_options' => [
+                                    'config_name' => 'base_config'
+                                ],
                                 'en' => [
-                                    'label'       => 'Additional',
+                                    "required"    => FALSE,
+                                    'label'       => 'Short Description',
                                     'field_type'  => 'ckeditor',
-                                    'config_name' => 'extended_config'
+                                    'config_name' => 'base_config'
                                 ]
                             ]
                         ]
                     ]
                 ])
+            ->end()
+            ->with("Вакансія - Загальні дані")
+                ->add("isActive", "checkbox", [
+                    'required' => FALSE,
+                    'label'    => "Відображати на сайті"
+                ])
+            ->end()
+            ->with("Вимоги до кандидатів")
+                ->add("listRequirements", "sonata_type_collection", [
+                    'by_reference' => FALSE,
+                    "label"        => FALSE,
+                    "btn_add"      => "Додати вимогу"
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
+            ->with("Основні завдання")
+                ->add("listTasks", "sonata_type_collection", [
+                    'by_reference' => FALSE,
+                    "label"        => FALSE,
+                    "btn_add"      => "Додати завдання"
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
+            ->with("Буде перевагою")
+                ->add("listAdvantages", "sonata_type_collection", [
+                    'by_reference' => FALSE,
+                    "label"        => FALSE,
+                    "btn_add"      => "Додати перевагу"
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
         ;
     }
 }

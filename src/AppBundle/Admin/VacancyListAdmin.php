@@ -1,40 +1,33 @@
 <?php
-// src/AppBundle/Admin/ServiceBenefitAdmin.php
+// src/AppBundle/Admin/VacancyListAdmin.php
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\ListMapper,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
-    Sonata\AdminBundle\Form\FormMapper,
-    Sonata\AdminBundle\Route\RouteCollection;
+    Sonata\AdminBundle\Form\FormMapper;
 
-class ServiceBenefitAdmin extends Admin
+use AppBundle\Entity\VacancyList;
+
+class VacancyListAdmin extends Admin
 {
-    protected function configureRoutes(RouteCollection $collection)
-    {
-        $collection
-            ->remove('create')
-            ->remove('delete')
-        ;
-    }
-
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add("translations", "a2lix_translations_gedmo", [
                 "locales"            => ['ua', 'en'],
-                "label"              => "Перевага сервісу - Локалізований контент",
-                "translatable_class" => 'AppBundle\Entity\ServiceBenefit',
+                "label"              => "Пункт списку - Локалізований контент",
+                "translatable_class" => 'AppBundle\Entity\VacancyList',
                 "required"           => TRUE,
                 "fields"             => [
-                    "thesis" => [
+                    "listItem" => [
                         "locale_options" => [
                             "ua" => [
-                                "label" => "Опис переваги"
+                                "label" => "Текст пункта списку"
                             ],
                             "en" => [
                                 "required" => FALSE,
-                                "label"    => "Benefit thesis"
+                                "label"    => "List item text",
                             ]
                         ]
                     ]
