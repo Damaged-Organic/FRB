@@ -3,7 +3,7 @@
 export default function getTemplate(name){
 
 	if(Handlebars.templates === undefined || Handlebars.templates[name] === undefined){
-		var path = "assets/js/templates/" + name + ".hbs";
+		var path = "bundles/app/js/templates/" + name + ".hbs";
 
 		$.ajax({
 			url: path,

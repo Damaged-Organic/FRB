@@ -45,20 +45,20 @@ export default class LiftNews{
 			type: "POST",
 			data: { count: newsCount }
 		})
-		.done((response) => {
-			response = JSON.parse(response);
+			.done((response) => {
+				response = JSON.parse(response);
 
-			isLast = response.isLast;
-			delete response.isLast;
+				isLast = response.isLast;
+				delete response.isLast;
 
-			let tplHtml = tpl({ news: response });
+				let tplHtml = tpl({ news: response });
 
-			this.el.append(tplHtml);
-			this._updateNewsCount();
+				this.el.append(tplHtml);
+				this._updateNewsCount();
 
-			this.loader.removeClass("active");
-			isLoading = false;
-		});		
+				this.loader.removeClass("active");
+				isLoading = false;
+			});
 	}
 	_updateNewsCount(){
 		newsCount = this.el.find(".col").length;
