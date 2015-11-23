@@ -31,6 +31,13 @@ vich_uploader:
         researches_pdf:
             uri_prefix:         /uploads/researches/pdf
             upload_destination: %kernel.root_dir%/../www/uploads/researches/pdf
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        researches_photo:
+            uri_prefix:         /uploads/researches/photos
+            upload_destination: %kernel.root_dir%/../www/uploads/researches/photos
             namer:              vich_uploader.namer_uniqid
             inject_on_load:     true
             delete_on_remove:   true

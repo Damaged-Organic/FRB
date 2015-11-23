@@ -36,7 +36,7 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Вакансії</h1>
+        <h1>{{ 'state.vacancies.headline'|trans }}</h1>
         <section class="outer substrate vacancies-holder">
             <div class="inner white-back">
 
@@ -52,9 +52,15 @@
                         {{ vacancy.shortDescription|striptags('<p><em><strong><u>')|raw }}
                         <div class="tabs">
                             <ul>
-                                <li class="label active"><span>Требования к кандидатам</span></li>
-                                <li class="label"><span>Основные задачи</span></li>
-                                <li class="label"><span>будет преимуществом</span></li>
+                                <li class="label active">
+                                    <span>{{ 'state.vacancies.tabs.requirements'|trans }}</span>
+                                </li>
+                                <li class="label">
+                                    <span>{{ 'state.vacancies.tabs.tabs'|trans }}</span>
+                                </li>
+                                <li class="label">
+                                    <span>{{ 'state.vacancies.tabs.advantages'|trans }}</span>
+                                </li>
                             </ul>
                             <div class="container">
                                 <div class="content active">
@@ -65,7 +71,7 @@
                                                 <p>{{ requirement.listItem }}</p>
                                             </li>
                                         {% else %}
-                                            <p>No requirements</p>
+                                            <p>{{ 'state.vacancies.empty.requirements'|trans }}</p>
                                         {% endfor %}
 
                                     </ul>
@@ -78,7 +84,7 @@
                                                 <p>{{ task.listItem }}</p>
                                             </li>
                                         {% else %}
-                                            <p>No tasks</p>
+                                            <p>{{ 'state.vacancies.empty.tasks'|trans }}</p>
                                         {% endfor %}
 
                                     </ul>
@@ -91,7 +97,7 @@
                                                 <p>{{ advantage.listItem }}</p>
                                             </li>
                                         {% else %}
-                                            <p>No advantages</p>
+                                            <p>{{ 'state.vacancies.empty.advantages'|trans }}</p>
                                         {% endfor %}
 
                                     </ul>
@@ -99,11 +105,13 @@
                             </div>
                         </div>
                         <div class="btn-extra-large flat">
-                            <a href="mailto:{{ email.resume }}?subject={{ vacancy.title }}">Отправить резюме</a>
+                            <a href="mailto:{{ email.resume }}?subject={{ vacancy.title }}">
+                                {{ 'state.vacancies.resume.send'|trans }}
+                            </a>
                         </div>
                     </article>
                 {% else %}
-                    <p>No vacancies</p>
+                    <p>{{ 'state.vacancies.empty.vacancies'|trans }}</p>
                 {% endfor %}
 
             </div>

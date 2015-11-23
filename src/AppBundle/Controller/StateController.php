@@ -243,23 +243,40 @@ class StateController extends Controller
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/researches",
+     *      "/researches/{year}",
      *      name="researches",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "year" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "year" = "[0-9]+"}
      * )
      * @Route(
-     *      "/researches",
+     *      "/researches/{year}",
      *      name="researches_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "year" = null},
+     *      requirements={"domain" = "%domain%", "year" = "[0-9]+"}
      * )
      */
-    public function researchesAction()
+    public function researchesAction($year = NULL)
     {
-        return $this->render('AppBundle:State:researches.html.twig');
+        $currentYear = (new DateTime)->format('Y');
+
+        $years = range($currentYear - 3, $currentYear);
+
+        if( $year && !in_array($year, $years) )
+            throw $this->createNotFoundException();
+
+        $year = ( $year ) ?: $currentYear;
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $researches = $manager->getRepository('AppBundle:Research')->findBy(['year' => $year]);
+
+        return $this->render('AppBundle:State:researches.html.twig', [
+            'requestYear' => $year,
+            'years'       => $years,
+            'researches'  => $researches
+        ]);
     }
 
     /**

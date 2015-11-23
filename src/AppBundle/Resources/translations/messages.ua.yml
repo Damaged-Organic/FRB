@@ -6,11 +6,12 @@ common:
     header:
         menu: Меню
 
-        map_full:  Знайти нас на мапі
-        map_short: Ми на мапі
+        map:
+            full:  Знайти нас на мапі
+            short: Ми на мапі
 
     footer: >
-        © First Reality Brokerage. Розроблено в <a href="%developers.link%">%developers.name%</a>, 2015.
+        © First Reality Brokerage. Створено в <a href="%developers.link%">%developers.name%</a>, 2015.
         Використання власних матеріалів сайту без згоди власників заборонено.
 
 state:
@@ -19,8 +20,72 @@ state:
 
         details: Детальніше
 
-        bottom_menu:
+        menu:
             catalog_commercial:  Пошук комерційної нерухомості
             news:                Наші новини
             expats_information:  Інформація для експатів
             catalog_residential: Пошук житлової нерухомості
+
+    services:
+        headline: Наші послуги
+
+        menu:
+            expats_information: Інформація для экспатів
+            expats_relocation:  Релокація экспатів
+
+        principles: Основні принципи роботи
+
+        clients: Наші кліенти
+
+        chits:
+            headline: Відгуки наших кліентів
+            send:     Залишити відгук
+
+    service:
+        benefits: Наші переваги
+
+    staff:
+        headline: Співробітники
+
+        sort:
+            all:        Усі
+            agency:     Агентські
+            evaluation: Оцінка
+            management: Управління
+
+        empty:
+            skype: не вказано
+
+            staff: На даний час немає інформації про співробітників
+
+    vacancies:
+        headline: Вакансії
+
+        tabs:
+            requirements: Вимоги до кандидатів
+            tasks:        Основні задачі
+            advantages:   Буде перевагою
+
+        resume:
+            send: Отправить резюме
+
+        empty:
+            requirements: Вимоги не вказані
+            tasks:        Задачі не вказані
+            advantages:   Переваги не вказані
+
+            vacancies:    На даний час вакансій немає
+
+    news:
+        headline: Новини
+
+        counter:
+            news:
+                topline:    новини
+                bottomline: доданих новин
+
+            date:
+                bottomline: остання публікація
+
+        empty:
+            news: На даний час новин немає

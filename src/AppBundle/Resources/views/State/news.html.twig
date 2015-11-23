@@ -36,21 +36,21 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Новини</h1>
+        <h1>{{ 'state.news.headline'|trans }}</h1>
         <div class="news-info-holder">
             <div class="info-item-holder">
                 <div class="info-item">
                     <span class="count">{{ articlesAmount }}</span>
-                    <span class="text">нових</span>
+                    <span class="text">{{ 'state.news.counter.news.topline'|trans }}</span>
                 </div>
-                <p>доданих новин</p>
+                <p>{{ 'state.news.counter.news.bottomline'|trans }}</p>
             </div>
             <div class="info-item-holder">
                 <div class="info-item">
                     <span class="count">{{ articlesLastDate|date('d') }}</span>
                     <span class="text">{{ articlesLastDate|localizeddate("full", "none", intl_locale, null, "MMMM")|lower }}</span>
                 </div>
-                <p>остання публікація</p>
+                <p>{{ 'state.news.counter.date.bottomline'|trans }}</p>
             </div>
         </div>
         <section class="outer substrate news-holder">
@@ -72,7 +72,7 @@
                             <p>{{ article.content }}</p>
                         </article>
                     {% else %}
-                        <p>No news</p>
+                        <p>{{ 'state.news.empty.news'|trans }}</p>
                     {% endfor %}
 
                 </div>

@@ -6,12 +6,13 @@ common:
     header:
         menu: Menu
 
-        map_full:  Find us on the map
-        map_short: Our location
+        map:
+            full:  Find us on the map
+            short: Our location
 
     footer: >
-        © First Reality Brokerage. Создано в <a href="%developers.link%">%developers.name%</a>, 2015.
-        Website personal materials usage without owners permission is prohibited.
+        © First Reality Brokerage. Created by <a href="%developers.link%">%developers.name%</a>, 2015.
+        Website personal materials usage without owners' permission is prohibited.
 
 state:
     index:
@@ -24,3 +25,67 @@ state:
             news:                Our news
             expats_information:  Information for expats
             catalog_residential: Find residential real estate
+
+    services:
+        headline: Our services
+
+        menu:
+            expats_information: Information for expats
+            expats_relocation:  Expats relocation
+
+        principles: Our main principles
+
+        clients: Our clients
+
+        chits:
+            headline: Our clients' feedback
+            send:     Send feedback
+
+    service:
+        benefits: Our benefits
+
+    staff:
+        headline: Staff
+
+        sort:
+            all:        All
+            agency:     Agency
+            evaluation: Evaluation
+            management: Management
+
+        empty:
+            skype: unknown
+
+            staff: There's no information about employees at this time
+
+    vacancies:
+        headline: Vacancies
+
+        tabs:
+            requirements: Requirements
+            tabs:         Main tasks
+            advantages:   Would be an advantage
+
+        resume:
+            send: Send your CV
+
+        empty:
+            requirements: Requirements not specified
+            tabs:         Tasks not specified
+            advantages:   Advantages not specified
+
+            vacancies:    No vacancies at this time
+
+    news:
+        headline: News
+
+        counter:
+            news:
+                topline:    articles
+                bottomline: articles published
+
+            date:
+                bottomline: last publication
+
+        empty:
+            news: No news at this time

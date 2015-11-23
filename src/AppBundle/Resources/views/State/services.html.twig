@@ -34,19 +34,19 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Наші послуги</h1>
+        <h1>{{ 'state.services.headline'|trans }}</h1>
 
         {{ render(controller('AppBundle:Common:services')) }}
 
         <section class="outer extra-buttons-holder">
             <div class="btn-long">
                 <a href="{{ path('expats_relocation', { '_locale': app.request.locale }) }}">
-                    Релокація экспатів
+                    {{ 'state.services.menu.expats_relocation'|trans }}
                 </a>
             </div>
             <div class="btn-long">
                 <a href="{{ path('expats_information', { '_locale': app.request.locale }) }}">
-                    Інформація для экспатів
+                    {{ 'state.services.menu.expats_information'|trans }}
                 </a>
             </div>
         </section>
@@ -56,7 +56,7 @@
                 {% if serviceBenefits|length %}
 
                     <section class="principles-holder">
-                        <h2>Основні принципи роботи</h2>
+                        <h2>{{ 'state.services.principles'|trans }}</h2>
                         <ul class="list-holder icon-list">
 
                             {% for serviceBenefit in serviceBenefits %}
@@ -74,7 +74,7 @@
                 {% if clients|length %}
 
                     <section class="clients-holder">
-                        <h2>Наші кліенти</h2>
+                        <h2>{{ 'state.services.clients'|trans }}</h2>
                         <ul class="list-holder icon-list">
 
                             {% for client in clients %}
@@ -93,7 +93,7 @@
                 {% if clientsChits|length %}
 
                     <section class="client-comments-holder">
-                        <h2>Відгуки наших кліентів</h2>
+                        <h2>{{ 'state.services.chits.headline'|trans }}</h2>
                         <ul class="list-holder icon-list full">
 
                             {% for clientsChit in clientsChits %}
@@ -113,7 +113,7 @@
                 {% endif %}
 
                 <div class="btn-extra-large flat" id="comment-button">
-                    <a href="#">Залишити відгук</a>
+                    <a href="#">{{ 'state.services.chits.send'|trans }}</a>
                 </div>
             </div>
         </div>

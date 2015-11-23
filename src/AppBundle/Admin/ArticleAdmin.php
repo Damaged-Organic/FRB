@@ -78,7 +78,7 @@ class ArticleAdmin extends Admin
                     'label' => "Дата публікації"
                 ])
                 ->add('photoFile', 'vich_file', [
-                    'label'         => "Фотографія",
+                    'label'         => "Зображення",
                     'required'      => $photoRequired,
                     'allow_delete'  => FALSE,
                     'download_link' => FALSE,

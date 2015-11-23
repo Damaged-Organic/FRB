@@ -2,6 +2,8 @@
 // src/AppBundle/Admin/ResearchAdmin.php
 namespace AppBundle\Admin;
 
+use DateTime;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Sonata\AdminBundle\Admin\Admin,
@@ -42,14 +44,18 @@ class ResearchAdmin extends Admin
         }
 
         $formMapper
-            ->add("quarter", "number", [
+            ->add("quarter", "choice", [
                 "label"       => "Квартал",
+                "choices"     => range(1, 4),
                 'constraints' => [
                     new Assert\Range(['min' => 0, 'max' => 4])
                 ]
             ])
-            ->add("year", "number", [
+            ->add("year", "choice", [
                 "label"       => "Рік",
+                "choices"     => array_reverse(
+                    range(2000, (new DateTime)->format('Y'))
+                ),
                 "constraints" => [
                     new Assert\Range(['min' => 0])
                 ]
