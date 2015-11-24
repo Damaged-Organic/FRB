@@ -259,23 +259,41 @@ class StateController extends Controller
      */
     public function researchesAction($year = NULL)
     {
+        $indexByCategory = function(array $researches)
+        {
+            $indexedByCategory = [];
+
+            foreach($researches as $research) {
+                $indexedByCategory[$research->getResearchCategory()->getId()][] = $research;
+            }
+
+            return $indexedByCategory;
+        };
+
         $currentYear = (new DateTime)->format('Y');
 
         $years = range($currentYear - 3, $currentYear);
 
-        if( $year && !in_array($year, $years) )
-            throw $this->createNotFoundException();
-
-        $year = ( $year ) ?: $currentYear;
+        if( $year ) {
+            if( !in_array($year, $years) )
+                throw $this->createNotFoundException();
+        } else {
+            $year = $currentYear;
+        }
 
         $manager = $this->getDoctrine()->getManager();
 
-        $researches = $manager->getRepository('AppBundle:Research')->findBy(['year' => $year]);
+        $researches = $indexByCategory(
+            $manager->getRepository('AppBundle:Research')->findBy(['year' => $year], ['quarter' => 'ASC'])
+        );
+
+        $researchCategories = $manager->getRepository('AppBundle:ResearchCategory')->findAll();
 
         return $this->render('AppBundle:State:researches.html.twig', [
-            'requestYear' => $year,
-            'years'       => $years,
-            'researches'  => $researches
+            'requestYear'        => $year,
+            'years'              => $years,
+            'researches'         => $researches,
+            'researchCategories' => $researchCategories
         ]);
     }
 
@@ -298,7 +316,16 @@ class StateController extends Controller
      */
     public function expatsRelocationAction()
     {
-        return $this->render('AppBundle:State:expats_relocation.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $relocationSteps = $manager->getRepository('AppBundle:RelocationStep')->findAll();
+
+        if( !$relocationSteps )
+            throw $this->createNotFoundException();
+
+        return $this->render('AppBundle:State:expats_relocation.html.twig', [
+            'relocationSteps' => $relocationSteps
+        ]);
     }
 
     /**
@@ -342,6 +369,15 @@ class StateController extends Controller
      */
     public function contactsAction()
     {
-        return $this->render('AppBundle:State:contacts.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
+
+        if( !$contact )
+            throw $this->createNotFoundException();
+
+        return $this->render('AppBundle:State:contacts.html.twig', [
+            'contact' => $contact
+        ]);
     }
 }

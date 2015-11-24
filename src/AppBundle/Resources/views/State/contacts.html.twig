@@ -34,26 +34,30 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Контакти</h1>
+        <h1>{{ 'state.contacts.headline'|trans }}</h1>
         <div class="outer substrate contacts-holder">
             <div class="inner white-back">
                 <section class="info">
                     <ul>
                         <li>
                             <span class="icon icon-location"></span>
-                            <p>провулок. Кутузова, 18/7, 4 поверх 01133, Київ, Україна</p>
+                            <p>{{ contact.address }}</p>
                         </li>
                         <li>
                             <span class="icon icon-phone"></span>
-                            <a href="tel:+380444597069">+38 (044) 459-70-69</a>
+                            <a href="tel:{{ contact.phone|replace({' ': '', '(': '', ')': ''}) }}">
+                                {{ contact.phone }}
+                            </a>
                         </li>
                         <li>
                             <span class="icon icon-fax"></span>
-                            <p>+38 (044) 459-06-09</p>
+                            <p>{{ contact.fax }}</p>
                         </li>
                         <li>
                             <span class="icon icon-envelope"></span>
-                            <a href="mailto:office@frbrokerage.net">office@frbrokerage.net</a>
+                            <a href="mailto:{{ contact.email }}">
+                                {{ contact.email }}
+                            </a>
                         </li>
                     </ul>
                     <form action="php/feedback.php" method="POST" id="contact-form">
@@ -90,7 +94,9 @@
                 </section>
                 <aside id="map-holder">
                     <div id="map"></div>
-                    <a href="#">Завантажити детальну схему проїзда</a>
+                    <a href="{{ vich_uploader_asset(contact, 'pdfPreviewFile') }}">
+                        {{ 'state.contacts.download'|trans }}
+                    </a>
                 </aside>
             </div>
         </div>

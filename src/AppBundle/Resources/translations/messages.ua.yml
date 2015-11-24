@@ -89,3 +89,22 @@ state:
 
         empty:
             news: На даний час новин немає
+
+    researches:
+        headline: Дослідження
+
+        reports: Оберіть звіт за кварталом:
+
+        empty:
+            researches: Не знайдено досліджень за даний період
+
+    expats_relocation:
+        headline: Релокація експатів
+
+        title:    Концепція релокаційних послуг
+        subtitle: складаєтья з наступних етапів
+
+    contacts:
+        headline: Контакти
+
+        download: Завантажити детальну схему проїзда

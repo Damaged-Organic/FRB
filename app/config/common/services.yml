@@ -12,11 +12,17 @@ services:
         tags:
             - { name: twig.extension }
 
-    app.website_metadata_extension:
+    app.metadata_extension:
         class:  AppBundle\Twig\MetadataExtension
         calls:
              - [setRequestStack, [ "@request_stack" ]]
              - [setManager, [ "@doctrine.orm.entity_manager" ]]
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    app.roman_number_extension:
+        class:  AppBundle\Twig\RomanNumberExtension
         public: false
         tags:
             - { name: twig.extension }

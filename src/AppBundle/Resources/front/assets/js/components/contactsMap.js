@@ -21,7 +21,7 @@ export default class ContactsMap extends Map{
 			map: this.map,
 			title: "First Realty Brokerage",
 			icon: {
-				url: "build/images/location-icons/location.png",
+				url: "bundles/app/images/location-icons/location.png",
 				scaledSize: super.getSize(),
 				anchor: super.getPoint()
 			}

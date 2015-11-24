@@ -27,7 +27,7 @@ export default class CatalogMap extends Map{
 				map: this.map,
 				title: marker.title,
 				icon: {
-					url: "build/images/location-icons/"+ marker.icon +".png",
+					url: "bundles/app/images/location-icons/"+ marker.icon +".png",
 					scaledSize: super.getSize(),
 					anchor: super.getPoint()
 				}

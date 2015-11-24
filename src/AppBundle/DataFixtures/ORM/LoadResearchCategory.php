@@ -16,6 +16,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_1 = (new ResearchCategory)
                 ->setTitle("Огляд ринку офісної нерухомості")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -24,6 +25,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_1
                 ->setTranslatableLocale('en')
+                ->setDescription("")
                 ->setTitle("")
         );
         $manager->flush();
@@ -36,6 +38,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_2 = (new ResearchCategory)
                 ->setTitle("Огляд ринку торгівельної нерухомості")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -45,6 +48,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
             $research_category_2
                 ->setTranslatableLocale('en')
                 ->setTitle("")
+                ->setDescription("")
         );
         $manager->flush();
 
@@ -56,6 +60,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_3 = (new ResearchCategory)
                 ->setTitle("Огляд ринку складської нерухомості")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -65,6 +70,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
             $research_category_3
                 ->setTranslatableLocale('en')
                 ->setTitle("")
+                ->setDescription("")
         );
         $manager->flush();
 
@@ -76,6 +82,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_4 = (new ResearchCategory)
                 ->setTitle("Огляд ринку готельної нерухомості")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -85,6 +92,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
             $research_category_4
                 ->setTranslatableLocale('en')
                 ->setTitle("")
+                ->setDescription("")
         );
         $manager->flush();
 
@@ -96,6 +104,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         (
             $research_category_5 = (new ResearchCategory)
                 ->setTitle("Огляд ринку житлової нерухомості")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -105,6 +114,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
             $research_category_5
                 ->setTranslatableLocale('en')
                 ->setTitle("")
+                ->setDescription("")
         );
         $manager->flush();
 
@@ -115,7 +125,8 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
         $manager->persist
         (
             $research_category_6 = (new ResearchCategory)
-                ->setTitle("Ринок нерухомості україни")
+                ->setTitle("Ринок нерухомості України")
+                ->setDescription("")
                 ->setPhotoName("")
         );
         $manager->flush();
@@ -125,6 +136,7 @@ class LoadResearchCategory extends AbstractFixture implements OrderedFixtureInte
             $research_category_6
                 ->setTranslatableLocale('en')
                 ->setTitle("")
+                ->setDescription("")
         );
         $manager->flush();
 

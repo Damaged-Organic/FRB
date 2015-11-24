@@ -1,0 +1,61 @@
+<?php
+// src/AppBundle/Entity/RelocationStep.php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
+
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
+
+/**
+ * @ORM\Table(name="relocation_steps")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelocationStepRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\RelocationStepTranslation")
+ */
+class RelocationStep implements Translatable
+{
+    use IdMapper, TranslationMapper;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RelocationStepTranslation", mappedBy="object", cascade={"persist", "remove"})
+     */
+    protected $translations;
+
+    /**
+     * @ORM\OneToMany(targetEntity="RelocationStepItem", mappedBy="relocationStep", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $relocationStepItems;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=false)
+     **/
+    protected $icon;
+
+    /**
+     * @ORM\Column(type="string", length=150, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $title;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection;
+    }
+
+    /**
+     * To string
+     */
+    public function __toString()
+    {
+        return ( $this->title ) ? $this->title : '';
+    }
+}

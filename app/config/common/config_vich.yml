@@ -74,3 +74,10 @@ vich_uploader:
             inject_on_load:     true
             delete_on_remove:   true
             delete_on_update:   true
+
+        contacts_pdf:
+            uri_prefix:         /uploads/contacts/pdf
+            upload_destination: %kernel.root_dir%/../www/uploads/contacts/pdf
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true

@@ -34,123 +34,29 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Релокація експатів</h1>
+        <h1>{{ 'state.expats_relocation.headline'|trans }}</h1>
         <section class="outer substrate relocation-holder">
             <div class="inner white-back">
-                <h2>Концепція релокаційних послуг</h2>
-                <p>склалаєтья з наступних кроків</p>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Базова організація поїздки<span class="icon icon-documents"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
+                <h2>{{ 'state.expats_relocation.title'|trans }}</h2>
+                <p>{{ 'state.expats_relocation.subtitle'|trans }}</p>
+
+                {% for relocationStep in relocationSteps %}
+                    <div class="item-holder">
+                        <div class="list-items">
+                            <h3>{{ relocationStep.title }}<span class="icon {{ relocationStep.icon }}"></span></h3>
+                            <ul class="list-holder numbered-list red-squares">
+
+                                {% for relocationStepItem in relocationStep.relocationStepItems %}
+                                    <li>
+                                        <p>{{ relocationStepItem.text }}</p>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Переміщення через кордон<span class="icon icon-passport"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Імміграційні послуги<span class="icon icon-certificates"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Ознайомчий тур та поселення<span class="icon icon-library"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Пошук квартир та домів для довгострокової оренди<span class="icon icon-house"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Підтримка на протязі терміну оренди житла<span class="icon icon-support"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="item-holder">
-                    <div class="list-items">
-                        <h3>Підтримка при виїзді<span class="icon icon-departure"></span></h3>
-                        <ul class="list-holder numbered-list red-squares">
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae ex ex. Aenean iaculis magna mi, in gravida risus placerat tempus. Nam interdum ante hendrerit ornare vehicula</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
         </section>
     </main>

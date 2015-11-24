@@ -89,3 +89,22 @@ state:
 
         empty:
             news: No news at this time
+
+    researches:
+        headline: Researches
+
+        reports: Choose a quarterly report:
+
+        empty:
+            researches: There are currently no reports found
+
+    expats_relocation:
+        headline: Expats relocation
+
+        title:    Relocation services concept
+        subtitle: made up of the following milestones
+
+    contacts:
+        headline: Contacts
+
+        download: Download detailed location map

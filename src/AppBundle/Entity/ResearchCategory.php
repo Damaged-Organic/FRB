@@ -72,6 +72,11 @@ class ResearchCategory implements Translatable
     protected $photoName;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     **/
+    protected $updatedAt;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -156,6 +161,29 @@ class ResearchCategory implements Translatable
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Staff
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**

@@ -34,7 +34,7 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Дослідження</h1>
+        <h1>{{ 'state.researches.headline'|trans }}</h1>
         <div class="outer substrate research-years-holder">
             <div class="inner">
 
@@ -49,180 +49,39 @@
         <section class="outer substrate research-holder">
             <div class="inner white-back">
                 <div class="grid dbl">
+                    {% if researches %}
 
-                    {% for research in researches %}
-                        <div class="col">
-                            <figure>
-                                <img src="{{ asset('bundles/app/images/research/research-item.jpg') }}" alt="research item">
-                            </figure>
-                            <div class="info-holder">
-                                <h2>Обзор рынка офисной недвижимости</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                            </div>
-                            <div class="buttons-holder">
-                                <p>Оберіть квартал звіту</p>
-                                <div class="btn-small flat">
-                                    <a href="#">I</a>
+                        {% for researchCategory in researchCategories %}
+
+                            {% if researches[researchCategory.id] is defined %}
+                                <div class="col">
+                                    <figure>
+                                        <img src="{{ vich_uploader_asset(researchCategory, 'photoFile') }}" alt="{{ researchCategory.title }}">
+                                    </figure>
+                                    <div class="info-holder">
+                                        <h2>{{ researchCategory.title }}</h2>
+                                        <p>{{ researchCategory.description }}</p>
+                                    </div>
+                                    <div class="buttons-holder">
+                                        <p>{{ 'state.researches.reports'|trans }}</p>
+
+                                        {% for research in researches[researchCategory.id] %}
+                                            <div class="btn-small flat">
+                                                <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}">
+                                                    {{ research.quarter|roman_number }}
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
                                 </div>
-                                <div class="btn-small flat">
-                                    <a href="#">II</a>
-                                </div>
-                                <div class="btn-small flat">
-                                    <a href="#">III</a>
-                                </div>
-                                <div class="btn-small flat">
-                                    <a href="#">IV</a>
-                                </div>
-                            </div>
-                        </div>
+                            {% endif %}
+
+                        {% endfor %}
+
                     {% else %}
-                        <p>No reasearches</p>
-                    {% endfor %}
-
-                    <div class="col">
-                        <figure>
-                            <img src="{{ asset('bundles/app/images/research/research-item.jpg') }}" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <figure>
-                            <img src="build/images/research/research-item.jpg" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <figure>
-                            <img src="build/images/research/research-item.jpg" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <figure>
-                            <img src="build/images/research/research-item.jpg" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <figure>
-                            <img src="build/images/research/research-item.jpg" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <figure>
-                            <img src="build/images/research/research-item.jpg" alt="research item">
-                        </figure>
-                        <div class="info-holder">
-                            <h2>Обзор рынка офисной недвижимости</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt animi sed repudiandae laborum eveniet maiores molestias fugit, ipsum repellat. Vel eaque, atque sequi, qui accusantium alias! Explicabo mollitia vitae dolorem.</p>
-                        </div>
-                        <div class="buttons-holder">
-                            <p>Оберіть квартал звіту</p>
-                            <div class="btn-small flat">
-                                <a href="#">I</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">II</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">III</a>
-                            </div>
-                            <div class="btn-small flat">
-                                <a href="#">IV</a>
-                            </div>
-                        </div>
-                    </div>
+                        <p>{{ 'state.researches.empty.researches'|trans }}</p>
+                    {% endif %}
                 </div>
             </div>
         </section>

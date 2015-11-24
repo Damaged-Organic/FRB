@@ -46,7 +46,7 @@ class ResearchAdmin extends Admin
         $formMapper
             ->add("quarter", "choice", [
                 "label"       => "Квартал",
-                "choices"     => range(1, 4),
+                "choices"     => array_combine(range(1, 4), range(1, 4)),
                 'constraints' => [
                     new Assert\Range(['min' => 0, 'max' => 4])
                 ]
@@ -54,7 +54,7 @@ class ResearchAdmin extends Admin
             ->add("year", "choice", [
                 "label"       => "Рік",
                 "choices"     => array_reverse(
-                    range(2000, (new DateTime)->format('Y'))
+                    array_combine(range(2000, (new DateTime)->format('Y')), range(2000, (new DateTime)->format('Y'))), TRUE
                 ),
                 "constraints" => [
                     new Assert\Range(['min' => 0])
