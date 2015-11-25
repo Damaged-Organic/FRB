@@ -41,6 +41,10 @@ state:
             headline: Відгуки наших кліентів
             send:     Залишити відгук
 
+        feedback:
+            headline:   Залиште ваш відгук
+            bottomline: Ми цінуємо ваш час та будемо вдячні за ваш відгук
+
     service:
         benefits: Наші переваги
 

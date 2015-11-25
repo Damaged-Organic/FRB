@@ -1,1 +1,9 @@
 # src/AppBundle/Resources/translations/emails.ua.yml
+feedback:
+    subject: Зворотній зв’язок - нове повідомлення від користувача!
+
+comment:
+    subject: Відгук - новий відгук від клієнта!
+
+proposal:
+    subject: Пропозиція - нова пропозиція від власника нерухомості!

@@ -1,4 +1,12 @@
 # src/AppBundle/Resources/translations/responses.en.yml
 feedback:
-    success: Thank you for your feedback! I'll reach you as soon as possible
-    fail:    Something went wrong. Please, try to send the message again
+    success: Thank you for your feedback!
+    fail:    Something went wrong. Please, try to send your feedback again
+
+comment:
+    success: Thank you for your comment!
+    fail:    Something went wrong. Please, try to send your comment again
+
+proposal:
+    success: Thank you for your proposal! We will surely consider it
+    fail:    Something went wrong. Please, try to send your proposal again

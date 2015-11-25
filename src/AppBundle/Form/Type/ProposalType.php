@@ -29,45 +29,81 @@ class ProposalType extends AbstractType
 
         $builder
             ->add("name", 'text', [
-                'label' => "proposal.name.label"
+                'label' => "proposal.name.label",
+                'attr'  => [
+                    'placeholder' => "proposal.name.placeholder"
+                ]
             ])
             ->add("phone", 'text', [
-                'label' => "proposal.phone.label"
+                'label' => "proposal.phone.label",
+                'attr'  => [
+                    'placeholder' => "proposal.phone.placeholder"
+                ]
             ])
             ->add("email", 'email', [
-                'label' => "proposal.email.label"
+                'label' => "proposal.email.label",
+                'attr'  => [
+                    'placeholder' => "proposal.email.placeholder"
+                ]
             ])
             ->add("type", 'choice', [
                 'label'       => "proposal.type.label",
+                'attr'  => [
+                    'placeholder' => "proposal.type.placeholder"
+                ],
                 'placeholder' => "...",
                 'choices'     => $propertyTypeChoices
             ])
             ->add("priceValue", 'number', [
                 'label'     => "proposal.price_value.label",
+                'attr'  => [
+                    'placeholder' => "proposal.price_value.placeholder"
+                ],
                 'precision' => 2
             ])
             ->add("priceCurrency", 'choice', [
-                'label'   => "proposal.price_value.label",
+                'label'   => "proposal.price_currency.label",
+                'attr'  => [
+                    'placeholder' => "proposal.price_currency.placeholder"
+                ],
                 'choices' => ["UAH", "USD"]
             ])
             ->add("address", "text", [
-                'label'   => "proposal.address.label"
+                'label'   => "proposal.address.label",
+                'attr'  => [
+                    'placeholder' => "proposal.address.placeholder"
+                ]
             ])
             ->add("space", "number", [
                 'label'     => "proposal.space.label",
+                'attr'  => [
+                    'placeholder' => "proposal.space.placeholder"
+                ],
                 'precision' => 2
             ])
             ->add("floor", "integer", [
-                'label'   => "proposal.floor.label"
+                'label'   => "proposal.floor.label",
+                'attr'  => [
+                    'placeholder' => "proposal.floor.placeholder"
+                ]
             ])
             ->add("floorsNumber", "integer", [
-                'label'   => "proposal.floors_number.label"
+                'label'   => "proposal.floors_number.label",
+                'attr'  => [
+                    'placeholder' => "proposal.floors_number.placeholder"
+                ]
             ])
             ->add("roomsNumber", "integer", [
-                'label'   => "proposal.rooms_number.label"
+                'label'   => "proposal.rooms_number.label",
+                'attr'  => [
+                    'placeholder' => "proposal.rooms_number.placeholder"
+                ]
             ])
             ->add("bathroomsNumber", "integer", [
-                'label'   => "proposal.bathrooms_number.label"
+                'label'   => "proposal.bathrooms_number.label",
+                'attr'  => [
+                    'placeholder' => "proposal.bathrooms_number.placeholder"
+                ]
             ])
             ->add("isCashless", "checkbox", [
                 'label'   => "proposal.is_cashless.label"
@@ -102,6 +138,6 @@ class ProposalType extends AbstractType
 
     public function getName()
     {
-        return "proposalType";
+        return "proposal_type";
     }
 }

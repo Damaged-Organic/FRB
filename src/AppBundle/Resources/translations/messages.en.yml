@@ -38,8 +38,12 @@ state:
         clients: Our clients
 
         chits:
-            headline: Our clients' feedback
-            send:     Send feedback
+            headline: Our clients' comments
+            send:     Send comment
+
+        feedback:
+            headline:   Leave your comment
+            bottomline: We appreciate your time and your feedback
 
     service:
         benefits: Our benefits

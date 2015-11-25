@@ -1,53 +1,88 @@
 # src/AppBundle/Resources/translations/forms.ua.yml
 feedback:
     name:
-        label: Введіть ваше ім’я
+        label:       Ім’я
+        placeholder: Введіть ваше ім’я
+
+    phone:
+        label:       Телефон
+        placeholder: Введіть ваш номер телефону
 
     email:
-        label: Введіть ваш e-mail
+        label:       Електронна пошта
+        placeholder: Введіть адресу електронної пошти
 
     message:
-        label: Введіть ваше повідомлення
+        label:       Повідомлення
+        placeholder: Введіть ваше повідомлення
 
     submit:
-        label: Відправити
+        label: Надіслати
+
+comment:
+    company:
+        label:       Назва компанії
+        placeholder: Введіть назву вашої компанії
+
+    email:
+        label:       Електронна пошта
+        placeholder: Введіть адресу електронної пошти
+
+    comment:
+        label:       Відгук
+        placeholder: Введіть ваш відгук
+
+    submit:
+        label: Надіслати
 
 proposal:
     name:
-        label: Введіть ваше ім’я
+        label:       Ім’я
+        placeholder: Введіть ваше ім’я
 
     phone:
-        label: Введіть ваш телефон
+        label:       Телефон
+        placeholder: Введіть ваш номер телефону
 
     email:
-        label: Введіть ваш e-mail
+        label:       Електронна пошта
+        placeholder: Введіть адресу електронної пошти
 
     type:
-        label: Вкажіть тип приміщення
+        label:       Тип приміщення
+        placeholder: Вкажіть тип приміщення
 
     price_value:
-        label: Введіть ціну
+        label:       Ціна
+        placeholder: Введіть ціну
 
     price_currency:
-        label: Вкажіть валюту
+        label:       Валюта
+        placeholder: Вкажіть валюту
 
     address:
-        label: Введіть адресу
+        label:       Адреса
+        placeholder: Введіть адресу
 
     space:
-        label: Введіть площу приміщення
+        label:       Площа приміщення
+        placeholder: Введіть площу приміщення
 
     floor:
-        label: Введіть поверх приміщення
+        label:       Поверх приміщення
+        placeholder: Введіть поверх приміщення
 
     floors_number:
-        label: Введіть кількість поверхів
+        label:       Кількість поверхів
+        placeholder: Введіть кількість поверхів
 
     rooms_number:
-        label: Введіть кількість кімнат
+        label:       Кількість кімнат
+        placeholder: Введіть кількість кімнат
 
     bathrooms_number:
-        label: Введіть кількість санвузлів
+        label:       Кількість санвузлів
+        placeholder: Введіть кількість санвузлів
 
     is_cashless:
         label: Безготівковий розрахунок

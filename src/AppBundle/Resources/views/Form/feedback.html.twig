@@ -1,4 +1,51 @@
 {# src/AppBundle/Resources/views/Form/feedback.html.twig #}
-{{ form_start(feedbackForm) }}
-{{ form_widget(feedbackForm) }}
-{{ form_end(feedbackForm) }}
+<form action="{{ path('feedback_send', { 'locale': locale }) }}" method="POST" id="contact-form" {{ form_enctype(form) }}>
+    <div class="response-holder"></div>
+    <div class="field-holder">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'feedback.name.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.name.length_min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.name.length_max'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone, {
+            'attr': {
+                'data-mask': "+38 (099) 999-99-99"
+            }
+        }) }}
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'feedback.email.not_blank'|trans({}, "validators"),
+                'data-rule-email': "true", 'data-msg-email': 'feedback.email.valid'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.message) }}
+        {{ form_widget(form.message, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'feedback.message.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.message.length_min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.message.length_max'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+
+    <button type="submit">
+        <span>{{ 'feedback.submit.label'|trans({}, "forms") }}</span>
+    </button>
+
+</form>

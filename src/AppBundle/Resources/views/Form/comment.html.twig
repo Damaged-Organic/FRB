@@ -1,0 +1,41 @@
+{# src/AppBundle/Resources/views/Form/comment.html.twig #}
+<form action="{{ path('comment_send', { 'locale': locale }) }}" method="POST" id="comment-form" {{ form_enctype(form) }}>
+    <div class="response-holder"></div>
+    <div class="field-holder">
+        {{ form_label(form.company) }}
+        {{ form_widget(form.company, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'comment.company.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "2", 'data-msg-minlength': 'comment.company.length_min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'comment.company.length_max'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'comment.email.not_blank'|trans({}, "validators"),
+                'data-rule-email': "true", 'data-msg-email': 'comment.email.valid'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.comment) }}
+        {{ form_widget(form.comment, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'comment.comment.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "5", 'data-msg-minlength': 'comment.comment.length_min'|trans({}, "validators"),
+                'data-rule-maxlength': "1500", 'data-msg-maxlength': 'comment.comment.length_max'|trans({}, "validators")
+            }
+        }) }}
+    </div>
+
+    {{ form_widget(form._token) }}
+
+    <button type="submit">
+        <span>{{ 'comment.submit.label'|trans({}, "forms") }}</span>
+    </button>
+</form>

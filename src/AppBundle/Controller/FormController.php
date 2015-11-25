@@ -3,41 +3,49 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    Symfony\Component\HttpFoundation\Request,
-    Symfony\Component\HttpFoundation\Response,
-    Symfony\Component\HttpFoundation\JsonResponse;
+    Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use AppBundle\Controller\Utility\Traits\FormErrorHandlerTrait;
-
 use AppBundle\Model\Feedback,
     AppBundle\Form\Type\FeedbackType,
+    AppBundle\Model\Comment,
+    AppBundle\Form\Type\CommentType,
     AppBundle\Model\Proposal,
     AppBundle\Form\Type\ProposalType;
 
 class FormController extends Controller
 {
-    use FormErrorHandlerTrait;
-
-    public function feedbackAction($_locale)
+    public function feedbackAction(Request $request)
     {
         $feedbackForm = $this->createForm(new FeedbackType, new Feedback);
 
         return $this->render('AppBundle:Form:feedback.html.twig', [
-            '_locale'      => $_locale,
-            'feedbackForm' => $feedbackForm->createView()
+            'locale' => $request->getLocale(),
+            'form'   => $feedbackForm->createView()
         ]);
     }
 
-    public function proposalAction($_locale)
+    public function commentAction(Request $request)
     {
-        $proposalForm = $this->createForm(new ProposalType($this->getDoctrine()->getManager()), new Proposal);
+        $commentForm = $this->createForm(new CommentType, new Comment);
+
+        return $this->render('AppBundle:Form:comment.html.twig', [
+            'locale' => $request->getLocale(),
+            'form'   => $commentForm->createView()
+        ]);
+    }
+
+    public function proposalAction(Request $request)
+    {
+        $_manager = $this->getDoctrine()->getManager();
+
+        $proposalForm = $this->createForm(new ProposalType($_manager), new Proposal);
 
         return $this->render('AppBundle:Form:proposal.html.twig', [
-            '_locale'      => $_locale,
-            'proposalForm' => $proposalForm->createView()
+            'locale' => $request->getLocale(),
+            'form'   => $proposalForm->createView()
         ]);
     }
 }

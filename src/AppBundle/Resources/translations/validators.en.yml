@@ -1,4 +1,8 @@
 # src/AppBundle/Resources/translations/validators.en.yml
+common:
+    phone:
+        valid: Please, provide a valid phone number
+
 feedback:
     name:
         not_blank:  Please, state yourself
@@ -16,6 +20,24 @@ feedback:
             min: Message is too short
             max: Message is too long. Please, shorten it to at least 1500 symbols
 
+comment:
+    company:
+        not_blank: Please, state your company name
+
+        length:
+            min: This name is too short. Maybe you've made a mistake?
+            max: This name is too long. Maybe you've made a mistake?
+
+    email:
+        not_blank: Please, provide an e-mail
+        valid:     Please, provide a valid email address
+
+    comment:
+        not_blank:  Please, enter your comment
+        length:
+            min: Comment is too short
+            max: Comment is too long. Please, shorten it to at least 1500 symbols
+
 proposal:
     name:
         not_blank:  Please, state yourself
@@ -25,7 +47,6 @@ proposal:
 
     phone:
         not_blank: Please, provide your phone number
-        valid:     Please, provide a valid phone number
 
     email:
         not_blank: Please, provide your e-mail

@@ -1,53 +1,88 @@
 # src/AppBundle/Resources/translations/forms.en.yml
 feedback:
     name:
-        label: Enter your name
+        label:       Name
+        placeholder: Enter your name
+
+    phone:
+        label:       Phone number
+        placeholder: Enter your phone number
 
     email:
-        label: Enter your e-mail
+        label:       E-mail
+        placeholder: Enter your e-mail
 
     message:
-        label: Enter your message
+        label:       Message
+        placeholder: Enter your message
+
+    submit:
+        label: Send
+
+comment:
+    company:
+        label:       Company name
+        placeholder: Enter your company name
+
+    email:
+        label:       E-mail
+        placeholder: Enter your e-mail
+
+    comment:
+        label:       Comment
+        placeholder: Enter your comment
 
     submit:
         label: Send
 
 proposal:
     name:
-        label: Enter your name
+        label:       Name
+        placeholder: Enter your name
 
     phone:
-        label: Enter your phone number
+        label:       Phone number
+        placeholder: Enter your phone number
 
     email:
-        label: Enter your e-mail
+        label:       E-mail
+        placeholder: Enter your e-mail
 
     type:
-        label: Enter your property type
+        label:       Property type
+        placeholder: Enter your property type
 
     price_value:
-        label: Enter rent price
+        label:       Rent price
+        placeholder: Enter rent price
 
     price_currency:
-        label: Select currency
+        label:       Currency
+        placeholder: Select currency
 
     address:
-        label: Enter your estate address
+        label:      Address
+        placholder: Enter your estate address
 
     space:
-        label: Enter your estate total space
+        label:       Total space
+        placeholder: Enter your estate total space
 
     floor:
-        label: Enter floor
+        label:       Floor
+        placeholder: Enter estate floor
 
     floors_number:
-        label: Enter floors number
+        label:       Floors number
+        placeholder: Enter floors number
 
     rooms_number:
-        label: Enter rooms number
+        label:       Rooms number
+        placeholder: Enter rooms number
 
     bathrooms_number:
-        label: Enter bathrooms number
+        label:       Bathrooms number
+        placeholder: Enter bathrooms number
 
     is_cashless:
         label: Non-cash payment

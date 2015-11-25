@@ -12,17 +12,31 @@ class FeedbackType extends AbstractType
     {
         $builder
             ->add("name", 'text', [
-                'label' => "feedback.name.label"
+                'label' => "feedback.name.label",
+                'attr'  => [
+                    'placeholder' => "feedback.name.placeholder"
+                ]
             ])
             ->add("email", 'email', [
-                'label' => "feedback.email.label"
+                'label' => "feedback.email.label",
+                'attr'  => [
+                    'placeholder' => "feedback.email.placeholder"
+                ]
+            ])
+            ->add("phone", 'text', [
+                'required' => FALSE,
+                'label'    => "feedback.phone.label",
+                'attr'     => [
+                    'placeholder' => "feedback.email.placeholder"
+                ]
             ])
             ->add("message", 'textarea', [
-                'label' => "feedback.message.label"
+                'label' => "feedback.message.label",
+                'attr'  => [
+                    'placeholder' => "feedback.message.placeholder"
+                ]
             ])
-            ->add("send", 'submit', [
-                'label' => "feedback.submit.label"
-            ]);
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -35,6 +49,6 @@ class FeedbackType extends AbstractType
 
     public function getName()
     {
-        return "feedbackType";
+        return "feedback_type";
     }
 }

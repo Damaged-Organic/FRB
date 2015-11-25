@@ -121,27 +121,12 @@
             <div class="pop-up">
                 <div class="outer">
                     <div class="inner">
-                        <h2>Залиште ваш відгук</h2>
-                        <p>Ми цінуемо ваш час та вдячні за ваш відгук</p>
+                        <h2>{{ 'state.services.feedback.headline'|trans }}</h2>
+                        <p>{{ 'state.services.feedback.bottomline'|trans }}</p>
                         <span class="sprtr-h"></span>
-                        <form action="php/comment.php" method="POST" id="comment-form">
-                            <div class="response-holder"></div>
-                            <div class="field-holder">
-                                <label for="comment-company-name">Назва компанії</label>
-                                <input type="text" name="comment[company_name]" value="" placeholder="Введіть назву вашої компаніїї" id="comment-company-name" data-rule-required="true" data-msg-required="Це поле має бути заповненним">
-                            </div>
-                            <div class="field-holder">
-                                <label for="comment-email">Електронна пошта</label>
-                                <input type="email" name="comment[email]" value="" placeholder="Введіть електронну пошту" id="comment-email" data-rule-required="true" data-msg-required="Це поле має бути заповненним" data-rule-email="true" data-msg-email="Це не схоже на справжню адресу електронної пошти">
-                            </div>
-                            <div class="field-holder">
-                                <label for="comment-message">Ваш відгук</label>
-                                <textarea name="comment[message]" value="" placeholder="Введіть ваш відгук" id="comment-message" data-rule-required="true" data-msg-required="Це поле має бути заповненним"></textarea>
-                            </div>
-                            <button type="submit">
-                                <span>Надіслати</span>
-                            </button>
-                        </form>
+
+                        {% render controller('AppBundle:Form:comment', { 'request': app.request }) %}
+
                     </div>
                 </div>
             </div>

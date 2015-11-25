@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsPhone extends Constraint
 {
-   public $message = "proposal.phone.valid";
+   public $message = "common.phone.valid";
 }

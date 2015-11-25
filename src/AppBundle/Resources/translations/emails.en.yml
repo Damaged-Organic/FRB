@@ -1,1 +1,9 @@
 # src/AppBundle/Resources/translations/emails.en.yml
+feedback:
+    subject: Feedback - new feedback from a user!
+
+comment:
+    subject: Comment - new comment from a client!
+
+proposal:
+    subject: Proposal - new proposal from a property owner!

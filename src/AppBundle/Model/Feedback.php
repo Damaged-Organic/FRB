@@ -4,6 +4,8 @@ namespace AppBundle\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+use AppBundle\Validator\Constraints as CustomAssert;
+
 class Feedback
 {
     /**
@@ -15,6 +17,11 @@ class Feedback
      * )
      */
     protected $name;
+
+    /**
+     * @CustomAssert\IsPhoneConstraint
+     */
+    protected $phone;
 
     /**
      * @Assert\NotBlank(
@@ -49,6 +56,18 @@ class Feedback
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
     }
 
     public function setEmail($email)
