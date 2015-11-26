@@ -1,1 +1,8 @@
 {# src/AppBundle/Resources/views/Email/comment.html.twig #}
+<h3>{{ 'comment.intro'|trans({}, 'emails') }}</h3>
+
+<p>{{ 'comment.body'|trans({ '%company%': comment.company, '%email%': comment.email }, 'emails') }}</p>
+
+<p>{{ comment.comment }}</p>
+
+<p>{{ 'comment.outro'|trans({ '%date%': 'now'|date('Y-m-d, H:i') }, 'emails') }}</p>

@@ -6,8 +6,8 @@
         {{ form_widget(form.name, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'feedback.name.not_blank'|trans({}, "validators"),
-                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.name.length_min'|trans({}, "validators"),
-                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.name.length_max'|trans({}, "validators")
+                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.name.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.name.length.max'|trans({}, "validators")
             }
         }) }}
     </div>
@@ -36,8 +36,8 @@
         {{ form_widget(form.message, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'feedback.message.not_blank'|trans({}, "validators"),
-                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.message.length_min'|trans({}, "validators"),
-                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.message.length_max'|trans({}, "validators")
+                'data-rule-minlength': "2", 'data-msg-minlength': 'feedback.message.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'feedback.message.length.max'|trans({}, "validators")
             }
         }) }}
     </div>

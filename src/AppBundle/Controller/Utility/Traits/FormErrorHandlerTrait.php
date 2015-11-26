@@ -14,6 +14,6 @@ trait FormErrorHandlerTrait
             $errors[] = $error->getMessage();
         }
 
-        return implode(', ', $errors);
+        return implode('<br>', $errors);
     }
 }

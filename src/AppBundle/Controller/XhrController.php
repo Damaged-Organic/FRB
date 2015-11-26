@@ -56,7 +56,7 @@ class XhrController extends Controller
             $_translator     = $this->get('translator');
             $_mailerShortcut = $this->get('app.mailer_shortcut');
 
-            $from = $this->container->getParameter('email')['no-reply'];
+            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
 
             $to = $this->container->getParameter('email')['comment'];
 
@@ -116,7 +116,7 @@ class XhrController extends Controller
             $_translator     = $this->get('translator');
             $_mailerShortcut = $this->get('app.mailer_shortcut');
 
-            $from = $this->container->getParameter('email')['no-reply'];
+            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
 
             $to = $this->container->getParameter('email')['feedback'];
 
@@ -178,7 +178,7 @@ class XhrController extends Controller
             $_translator     = $this->get('translator');
             $_mailerShortcut = $this->get('app.mailer_shortcut');
 
-            $from = $this->container->getParameter('email')['no-reply'];
+            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
 
             $to = $this->container->getParameter('email')['proposal'];
 

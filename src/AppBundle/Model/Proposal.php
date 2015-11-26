@@ -27,7 +27,7 @@ class Proposal
      *      message="proposal.phone.not_blank"
      * )
      *
-     * @CustomAssert\IsPhone
+     * @CustomAssert\IsPhoneConstraint
      */
     protected $phone;
 
@@ -37,7 +37,8 @@ class Proposal
      * )
      *
      * @Assert\Email(
-     *      message="proposal.email.valid"
+     *      message="proposal.email.valid",
+     *      checkMX=true
      * )
      */
     protected $email;
@@ -47,7 +48,7 @@ class Proposal
      *      message="proposal.type.not_blank"
      * )
      *
-     * @CustomAssert\IsTypeValid
+     * @CustomAssert\IsTypeValidConstraint
      */
     protected $type;
 

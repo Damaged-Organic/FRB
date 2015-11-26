@@ -2,33 +2,12 @@
 // src/AppBundle/Validator/Constraints/IsTypeValidConstraint.php
 namespace AppBundle\Validator\Constraints;
 
-use Symfony\Component\Validator\Constraint,
-    Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Constraint;
 
-use Doctrine\ORM\EntityManager;
-
-class IsTypeValidConstraint extends ConstraintValidator
+/**
+ * @Annotation
+ */
+class IsTypeValidConstraint extends Constraint
 {
-    protected $_entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->_entityManager = $entityManager;
-    }
-
-    public function validate($value, Constraint $constraint)
-    {
-        $validStringIds = [];
-
-        $validTypes = $this->_entityManager->getRepository("AppBundle:EstateType")->findSpecificType(1);
-
-        foreach($validTypes as $validType) {
-            $validStringIds[] = $validType['stringId'];
-        }
-
-        if( !in_array($value, $validStringIds) ) {
-            $this->context->buildViolation($constraint->message)
-                ->addViolation();
-        }
-    }
+    public $message = "proposal.type.valid";
 }

@@ -347,7 +347,13 @@ class StateController extends Controller
      */
     public function expatsInformationAction()
     {
-        return $this->render('AppBundle:State:expats_information.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        $informationCategories = $manager->getRepository('AppBundle:InformationCategory')->findAll();
+
+        return $this->render('AppBundle:State:expats_information.html.twig', [
+            'informationCategories' => $informationCategories
+        ]);
     }
 
     /**

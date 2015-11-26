@@ -5,10 +5,19 @@ namespace AppBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\ListMapper,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
-    Sonata\AdminBundle\Form\FormMapper;
+    Sonata\AdminBundle\Form\FormMapper,
+    Sonata\AdminBundle\Route\RouteCollection;
 
 class InformationCategoryAdmin extends Admin
 {
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('create')
+            ->remove('delete')
+        ;
+    }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -24,10 +33,11 @@ class InformationCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->with("Локалізації")
+            ->with("Категорії - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
-                    "translatable_class" => 'AppBundle\Entity\ResearchCategory',
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
+                    "translatable_class" => 'AppBundle\Entity\InformationCategory',
                     "required"           => TRUE,
                     "fields"             => [
                         "title" => [
@@ -36,7 +46,8 @@ class InformationCategoryAdmin extends Admin
                                     "label" => "Назва категорії"
                                 ],
                                 "en" => [
-                                    "label" => "Category title"
+                                    "required" => FALSE,
+                                    "label"    => "Category title"
                                 ]
                             ]
                         ]

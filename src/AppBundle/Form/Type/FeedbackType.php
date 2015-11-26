@@ -27,7 +27,7 @@ class FeedbackType extends AbstractType
                 'required' => FALSE,
                 'label'    => "feedback.phone.label",
                 'attr'     => [
-                    'placeholder' => "feedback.email.placeholder"
+                    'placeholder' => "feedback.phone.placeholder"
                 ]
             ])
             ->add("message", 'textarea', [

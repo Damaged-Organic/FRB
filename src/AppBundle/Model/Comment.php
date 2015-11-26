@@ -24,7 +24,8 @@ class Comment
      *      message="comment.email.not_blank"
      * )
      * @Assert\Email(
-     *      message="comment.email.valid"
+     *      message="comment.email.valid",
+     *      checkMX=true
      * )
      */
     protected $email;

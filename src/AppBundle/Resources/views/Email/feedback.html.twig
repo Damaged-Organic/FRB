@@ -1,1 +1,10 @@
 {# src/AppBundle/Resources/views/Email/feedback.html.twig #}
+{% set contacts = ( feedback.phone ) ? feedback.email ~ ', ' ~ feedback.phone : feedback.email %}
+
+<h3>{{ 'feedback.intro'|trans({}, 'emails') }}</h3>
+
+<p>{{ 'feedback.body'|trans({ '%name%': feedback.name, '%contacts%': contacts }, 'emails') }}</p>
+
+<p>{{ feedback.message }}</p>
+
+<p>{{ 'feedback.outro'|trans({ '%date%': 'now'|date('Y-m-d, H:i') }, 'emails') }}</p>

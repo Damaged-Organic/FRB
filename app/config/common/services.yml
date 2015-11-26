@@ -30,7 +30,7 @@ services:
     # Constraints
 
     app.constraint.is_type_valid:
-        class: AppBundle\Validator\Constraints\IsTypeValidConstraint
+        class: AppBundle\Validator\Constraints\IsTypeValidConstraintValidator
         arguments:
             - "@doctrine.orm.entity_manager"
 

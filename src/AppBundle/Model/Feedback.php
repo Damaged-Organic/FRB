@@ -28,7 +28,8 @@ class Feedback
      *      message="feedback.email.not_blank"
      * )
      * @Assert\Email(
-     *      message="feedback.email.valid"
+     *      message="feedback.email.valid",
+     *      checkMX=true
      * )
      */
     protected $email;

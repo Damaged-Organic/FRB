@@ -108,6 +108,23 @@ state:
         title:    Концепція релокаційних послуг
         subtitle: складаєтья з наступних етапів
 
+    expats_information:
+        headline: Lorem ipsum dolor sit amet, consectetur adipisicing elit
+
+        text: >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum eveniet, repellat doloribus non iusto ipsum
+            voluptatum ut odit inventore temporibus dolores expedita, quidem quo, velit quam quos ipsam molestiae
+            quibusdam!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus sunt nostrum placeat est
+            dolores ab ea provident quibusdam eaque odio. Natus recusandae laudantium nobis earum pariatur dolore ullam
+            optio qui.
+
+        benefits:
+            1: Дізнайтеся що знаходится у місті та за його межами
+            2: Отримайте детальну інформацію про місця, які вас цікавлять
+            3: Подивітся місцезнаходження об’єктів на мапі
+
+        map: Дивитися на мапі
+
     contacts:
         headline: Контакти
 

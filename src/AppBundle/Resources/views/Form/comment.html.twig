@@ -6,8 +6,8 @@
         {{ form_widget(form.company, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'comment.company.not_blank'|trans({}, "validators"),
-                'data-rule-minlength': "2", 'data-msg-minlength': 'comment.company.length_min'|trans({}, "validators"),
-                'data-rule-maxlength': "200", 'data-msg-maxlength': 'comment.company.length_max'|trans({}, "validators")
+                'data-rule-minlength': "2", 'data-msg-minlength': 'comment.company.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'comment.company.length.max'|trans({}, "validators")
             }
         }) }}
     </div>
@@ -27,8 +27,8 @@
         {{ form_widget(form.comment, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'comment.comment.not_blank'|trans({}, "validators"),
-                'data-rule-minlength': "5", 'data-msg-minlength': 'comment.comment.length_min'|trans({}, "validators"),
-                'data-rule-maxlength': "1500", 'data-msg-maxlength': 'comment.comment.length_max'|trans({}, "validators")
+                'data-rule-minlength': "5", 'data-msg-minlength': 'comment.comment.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "1500", 'data-msg-maxlength': 'comment.comment.length.max'|trans({}, "validators")
             }
         }) }}
     </div>

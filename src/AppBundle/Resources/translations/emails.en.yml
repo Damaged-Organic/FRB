@@ -2,8 +2,16 @@
 feedback:
     subject: Feedback - new feedback from a user!
 
+    intro: New feedback message received from FRBrokerage.Net!
+    body:  User "%name%" (%contacts%):
+    outro: Message sent at %date%.
+
 comment:
     subject: Comment - new comment from a client!
+
+    intro: New client comment received from FRBrokerage.Net!
+    body:  Company "%company%" (%email%):
+    outro: Message sent at %date%.
 
 proposal:
     subject: Proposal - new proposal from a property owner!
