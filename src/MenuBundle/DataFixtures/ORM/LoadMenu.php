@@ -49,14 +49,14 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist
         (
             $menuItem = (new Menu)
-                ->setTitle("Люди")
+                ->setTitle("Про нас")
                 ->setRoute("staff")
         );
         $manager->flush();
 
         $manager->persist
         (
-            $menuItem->setTitle("Staff")
+            $menuItem->setTitle("About us")
                 ->setTranslatableLocale('en')
         );
         $manager->flush();

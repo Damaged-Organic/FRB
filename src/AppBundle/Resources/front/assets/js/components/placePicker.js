@@ -71,6 +71,8 @@ export default class PlacePicker{
 			
 			let placesHtml = placeTpl({error: error});
 			this.expatsHolder.find(".expats-location-info").html(placesHtml);
+
+			this.mapButton.removeClass('active');
 		})
 		.always(() => {
 			this.loaderHolder.removeClass("active");

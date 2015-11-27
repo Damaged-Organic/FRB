@@ -2,6 +2,8 @@
 // src/AppBundle/Entity/Repository/StaffRepository.php
 namespace AppBundle\Entity\Repository;
 
+use Doctrine\ORM\Query;
+
 use AppBundle\Entity\Repository\Contract\CustomEntityRepository;
 
 class StaffRepository extends CustomEntityRepository
@@ -14,6 +16,11 @@ class StaffRepository extends CustomEntityRepository
             ->where('sr.alias IN (:services)')
             ->setParameter('services', $services)
             ->getQuery();
+
+        $query->setHint(
+            Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
 
         return $query->getResult();
     }

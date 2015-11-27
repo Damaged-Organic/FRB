@@ -55,7 +55,7 @@
         </div>
         <section class="outer substrate news-holder">
             <div class="inner">
-                <div class="grid dbl" id="news-grid" data-url="php/lift.php">
+                <div class="grid dbl" id="news-grid" data-url="{{ path('news_load', { '_locale': app.request.locale }) }}">
 
                     {% for article in news %}
                         <article class="col">

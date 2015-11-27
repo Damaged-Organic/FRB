@@ -7,7 +7,8 @@ use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
     Sonata\AdminBundle\Form\FormMapper;
 
-use AppBundle\Entity\Repository\InformationCategoryRepository;
+use AppBundle\Entity\Repository\InformationCategoryRepository,
+    AppBundle\Entity\Information;
 
 class InformationAdmin extends Admin
 {
@@ -28,65 +29,129 @@ class InformationAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        if ( $information = $this->getSubject() ) {
+        if ( $information = $this->getSubject() )
+        {
+            $logoRequired = ( $information->getLogoName() ) ? FALSE : TRUE;
+
             $logoHelpOption = ( $logoPath = $information->getLogoPath() )
                 ? '<img src="' . $logoPath . '" class="admin-preview" />'
                 : FALSE;
 
+            /*$photoRequired = ( $information->getPhotoName() ) ? FALSE : TRUE;
+
             $photoHelpOption = ( $photoPath = $information->getPhotoPath() )
                 ? '<img src="' . $photoPath . '" class="admin-preview" />'
-                : FALSE;
+                : FALSE;*/
         } else {
-            $logoHelpOption  = FALSE;
-            $photoHelpOption = FALSE;
+            $logoRequired   = TRUE;
+            $logoHelpOption = FALSE;
+            /*$photoRequired   = TRUE;
+            $photoHelpOption = FALSE;*/
         }
 
         $formMapper
-            ->add("title", "text", [
-                "label" => "Назва пункту"
-            ])
-            ->add('informationCategory','entity', [
-                'class'         => 'AppBundle:InformationCategory',
-                'query_builder' => function(InformationCategoryRepository $repository) { return $repository->createQueryBuilder('c')->orderBy('c.id', 'ASC'); },
-                'property'      => 'title',
-                'label'         => 'Категорія',
-                'empty_value'   => 'Оберіть категорію...'
-            ])
-            ->add("description", "textarea", [
-                "label" => "Опис"
-            ])
-            ->add('logoFile', 'vich_file', [
-                'label'         => "Логотип",
-                'required'      => FALSE,
-                'allow_delete'  => TRUE,
-                'download_link' => FALSE,
-                'help'          => $logoHelpOption
-            ])
-            ->add('photoFile', 'vich_file', [
-                'label'         => "Фотографія",
-                'required'      => FALSE,
-                'allow_delete'  => TRUE,
-                'download_link' => FALSE,
-                'help'          => $logoHelpOption
-            ])
-            ->add("link", "text", [
-                'label' => "Посилання"
-            ])
-            ->add("emails", "textarea", [
-                'label'    => "Електронна пошта",
-                'required' => FALSE,
-                'help'     => "Введіть електронні адреси по одній у рядок"
-            ])
-            ->add("phones", "textarea", [
-                'label'    => "Телефони",
-                'required' => FALSE,
-                'help'     => "Введіть телефони по одній у рядок"
-            ])
-            ->add("addresses", "textarea", [
-                'label'    => "Адреси",
-                'required' => FALSE,
-                'help'     => "Введіть адреси по одній у рядок"
-            ])
+            ->with("Інформація - Локалізований контент")
+                ->add("translations", "a2lix_translations_gedmo", [
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
+                    "translatable_class" => 'AppBundle\Entity\Information',
+                    "required"           => TRUE,
+                    "fields"             => [
+                        "title" => [
+                            "locale_options" => [
+                                "ua" => [
+                                    "label" => "Назва пункту"
+                                ],
+                                "en" => [
+                                    "required" => FALSE,
+                                    "label"    => "Item name"
+                                ]
+                            ]
+                        ],
+                        'description' => [
+                            'locale_options' => [
+                                'ua' => [
+                                    'label' => 'Опис'
+                                ],
+                                'en' => [
+                                    "required" => FALSE,
+                                    'label' => 'Description'
+                                ]
+                            ]
+                        ],
+                        'addresses' => [
+                            'locale_options' => [
+                                'ua' => [
+                                    'label' => 'Адреси - введіть адреси по одній у рядок (через Enter)'
+                                ],
+                                'en' => [
+                                    "required" => FALSE,
+                                    'label' => 'Addresses - enter each address on a new line'
+                                ]
+                            ]
+                        ]
+                    ]
+                ])
+            ->end()
+            ->with("Інформація - Загальні дані")
+                ->add('informationCategory','entity', [
+                    'class'         => 'AppBundle:InformationCategory',
+                    'query_builder' => function(InformationCategoryRepository $repository) { return $repository->createQueryBuilder('c')->orderBy('c.id', 'ASC'); },
+                    'property'      => 'title',
+                    'label'         => 'Категорія',
+                    'empty_value'   => 'Оберіть категорію...'
+                ])
+                ->add('logoFile', 'vich_file', [
+                    'label'         => "Логотип",
+                    'required'      => $logoRequired,
+                    'allow_delete'  => FALSE,
+                    'download_link' => FALSE,
+                    'help'          => $logoHelpOption
+                ])
+                /*->add('photoFile', 'vich_file', [
+                    'label'         => "Фотографія",
+                    'required'      => $photoRequired,
+                    'allow_delete'  => FALSE,
+                    'download_link' => FALSE,
+                    'help'          => $logoHelpOption
+                ])*/
+                ->add("link", "text", [
+                    'label' => "Посилання"
+                ])
+                ->add("emails", "textarea", [
+                    'label'    => "Електронна пошта",
+                    'required' => FALSE,
+                    'help'     => "Введіть електронні адреси по одній у рядок (через Enter)"
+                ])
+                ->add("phones", "textarea", [
+                    'label'    => "Телефони",
+                    'required' => FALSE,
+                    'help'     => "Введіть телефони по одному у рядок (через Enter)"
+                ])
+            ->end()
         ;
+    }
+
+    public function preUpdate($information)
+    {
+        if( !($information instanceof Information) )
+            return;
+
+        if( !($information->getAddresses()) )
+            return;
+
+        $geoCoder = $this->getConfigurationPool()->getContainer()->get('app.geo_coder');
+
+        $addresses = explode(PHP_EOL, $information->getAddresses());
+
+        $coordinates = [];
+
+        foreach($addresses as $address)
+        {
+            $coordinates[] = $geoCoder->getCoordinates($address);
+        }
+
+        if( $coordinates )
+            $information->setCoordinates($coordinates);
     }
 }

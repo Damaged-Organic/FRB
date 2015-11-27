@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use DateTime;
 
+use IntlDateFormatter;
+
 use Symfony\Component\HttpFoundation\File\File,
     Symfony\Component\Validator\Constraints as Assert;
 
@@ -231,5 +233,32 @@ class Article implements Translatable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    static public function getTransformedArticles(array $news, $isLast, $locale)
+    {
+        // Dirty hack
+        $locale = ( $locale != 'ua' ) ?: 'uk';
+
+        $articles = [];
+
+        $formatter = IntlDateFormatter::create($locale, IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+
+        foreach($news as $article)
+        {
+            if( $article instanceof Article )
+            {
+                $articles[] = [
+                    'photo' => $article->getPhotoName(),
+                    'date' 	=> $formatter->format($article->getPublicationDate()),
+                    'title'	=> $article->getTitle(),
+                    'text' 	=> $article->getContent()
+                ];
+            }
+        }
+
+        $articles['isLast'] = $isLast;
+
+        return $articles;
     }
 }

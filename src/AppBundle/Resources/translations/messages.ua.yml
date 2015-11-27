@@ -49,7 +49,7 @@ state:
         benefits: Наші переваги
 
     staff:
-        headline: Співробітники
+        headline: Про нас
 
         sort:
             all:        Усі
@@ -124,6 +124,17 @@ state:
             3: Подивітся місцезнаходження об’єктів на мапі
 
         map: Дивитися на мапі
+
+        block:
+            phones:    Телефони
+            addresses: Адреси
+
+        empty:
+            information: Нажаль, на даний час такої інформації не знайдено
+
+            phones:      Не вказано
+            addresses:   Не вказано
+            description: Опис цього закладу відсутній
 
     contacts:
         headline: Контакти

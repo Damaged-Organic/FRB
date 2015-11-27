@@ -39,7 +39,7 @@ export default class PlacesMap extends Map{
 				map: this.map,
 				title: location.title,
 				icon: {
-					url: "build/images/location-icons/location-"+ location.icon +".png",
+					url: "bundles/app/images/location-icons/location-"+ location.icon +".png",
 					scaledSize: super.getSize(),
 					anchor: super.getPoint()
 				}

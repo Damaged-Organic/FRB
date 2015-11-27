@@ -15,10 +15,11 @@ class GeoCoder
         $response = json_decode($response, TRUE);
 
         if( $response['status'] == "OK" ) {
-            $coordinates = [
-                'latitude'  => $response['results'][0]['geometry']['location']['lat'],
-                'longitude' => $response['results'][0]['geometry']['location']['lng']
-            ];
+            $coordinates =
+                $response['results'][0]['geometry']['location']['lat']
+                . ';' .
+                $response['results'][0]['geometry']['location']['lng']
+            ;
         } else {
             $coordinates = NULL;
         }

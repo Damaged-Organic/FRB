@@ -49,7 +49,7 @@ state:
         benefits: Our benefits
 
     staff:
-        headline: Staff
+        headline: About us
 
         sort:
             all:        All
@@ -124,6 +124,17 @@ state:
             3: Подивітся місцезнаходження об’єктів на мапі
 
         map: See locations on map
+
+        block:
+            phones:    Phones
+            addresses: Addresses
+
+        empty:
+            information: Unfortunately, there's no such information at this time
+
+            phones:      Not specified
+            addresses:   Not specified
+            description: There's no description for this place yet
 
     contacts:
         headline: Contacts

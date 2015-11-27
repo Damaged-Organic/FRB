@@ -31,7 +31,7 @@ class StateController extends Controller
      *      requirements={"domain" = "%domain%"}
      * )
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
@@ -227,11 +227,13 @@ class StateController extends Controller
 
         $news = $manager->getRepository('AppBundle:Article')->findBy([], ['publicationDate' => 'DESC'], Article::ARTICLES_PER_LIFT);
 
-        $articlesAmount   = count($news);
-
-        $articlesLastDate = ( $news[0] instanceof Article )
-            ? $news[0]->getPublicationDate()
-            : new DateTime;
+        if( $news ) {
+            $articlesAmount   = count($news);
+            $articlesLastDate = $news[0]->getPublicationDate();
+        } else {
+            $articlesAmount   = 0;
+            $articlesLastDate = new DateTime;
+        }
 
         return $this->render('AppBundle:State:news.html.twig', [
             'articlesAmount'   => $articlesAmount,

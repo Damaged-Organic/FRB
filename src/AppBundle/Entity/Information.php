@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use DateTime;
 
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpFoundation\File\File,
     Symfony\Component\Validator\Constraints as Assert;
 
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM,
 use Gedmo\Mapping\Annotation as Gedmo,
     Gedmo\Translatable\Translatable;
 
+use Symfony\Component\Translation\TranslatorInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
@@ -79,12 +81,12 @@ class Information implements Translatable
      *
      * @Vich\UploadableField(mapping="information_photo", fileNameProperty="photoName")
      */
-    protected $photoFile;
+    //protected $photoFile;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $photoName;
+    //protected $photoName;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -110,6 +112,11 @@ class Information implements Translatable
      * @ORM\Column(type="text", nullable=true)
      */
     protected $addresses;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $coordinates;
 
     /**
      * Constructor
@@ -149,7 +156,7 @@ class Information implements Translatable
             : FALSE;
     }
 
-    public function setPhotoFile($photoFile = NULL)
+    /*public function setPhotoFile($photoFile = NULL)
     {
         $this->photoFile = $photoFile;
 
@@ -167,7 +174,7 @@ class Information implements Translatable
         return ( $this->photoName )
             ? self::WEB_PATH_PHOTOS.$this->photoName
             : FALSE;
-    }
+    }*/
 
     /* END Vich uploadable methods */
 
@@ -246,22 +253,22 @@ class Information implements Translatable
      * @param string $photoName
      * @return Information
      */
-    public function setPhotoName($photoName)
+    /*public function setPhotoName($photoName)
     {
         $this->photoName = $photoName;
 
         return $this;
-    }
+    }*/
 
     /**
      * Get photoName
      *
      * @return string 
      */
-    public function getPhotoName()
+    /*public function getPhotoName()
     {
         return $this->photoName;
-    }
+    }*/
 
     /**
      * Set updatedAt
@@ -379,6 +386,29 @@ class Information implements Translatable
     }
 
     /**
+     * Set coordinates
+     *
+     * @param string $coordinates
+     * @return Information
+     */
+    public function setCoordinates(array $coordinates)
+    {
+        $this->coordinates = implode(PHP_EOL, $coordinates);
+
+        return $this;
+    }
+
+    /**
+     * Get coordinates
+     *
+     * @return array
+     */
+    public function getCoordinates()
+    {
+        return explode(PHP_EOL, $this->coordinates);
+    }
+
+    /**
      * Set informationCategory
      *
      * @param \AppBundle\Entity\InformationCategory $informationCategory
@@ -399,5 +429,91 @@ class Information implements Translatable
     public function getInformationCategory()
     {
         return $this->informationCategory;
+    }
+
+    static public function getTransformedCategories(array $information, TranslatorInterface $translator)
+    {
+        $categorize = function(array $information)
+        {
+            $categorized = [];
+
+            foreach($information as $location)
+            {
+                if( $location instanceof Information && $location->getInformationCategory() )
+                    $categorized[$location->getInformationCategory()->getId()][] = $location;
+            }
+
+            return $categorized;
+        };
+
+        $categories = [];
+
+        foreach($categorize($information) as $locations)
+        {
+            $places = [];
+
+            foreach($locations as $location)
+            {
+                $phones = ( $location->getPhones() )
+                    ? explode(PHP_EOL, $location->getPhones())
+                    : $translator->trans('state.expats_information.empty.phones');
+
+                $address = ( $location->getAddresses() )
+                    ? str_replace(PHP_EOL, '; ', $location->getAddresses())
+                    : $translator->trans('state.expats_information.empty.addresses');
+
+                $text = ( $location->getDescription() )
+                    ? $location->getDescription()
+                    : $translator->trans('state.expats_information.empty.description');
+
+                $places[] = [
+                    'title'         => $location->getTitle(),
+                    'photo'         => $location->getLogoName(),
+                    'phone_label'   => $translator->trans('state.expats_information.block.phones'),
+                    'phones'        => $phones,
+                    'address_label' => $translator->trans('state.expats_information.block.addresses'),
+                    'address'       => $address,
+                    'text'          => $text
+                ];
+            }
+
+            if( $places )
+            {
+                $categories[] = [
+                    'title'  => $locations[0]->getInformationCategory()->getTitle(),
+                    'icon'   => $locations[0]->getInformationCategory()->getAlias(),
+                    'places' => $places
+                ];
+            }
+        }
+
+        return $categories;
+    }
+
+    static public function getTransformedLocations(array $information)
+    {
+        $locations = [];
+
+        foreach($information as $location)
+        {
+            if( $location instanceof Information && $location->getInformationCategory() )
+            {
+                $coordinates = $location->getCoordinates();
+
+                foreach($coordinates as $coordinate)
+                {
+                    $coordinate = explode(';', $coordinate);
+
+                    $locations[] = [
+                        'title' => $location->getTitle(),
+                        'icon'  => $location->getInformationCategory()->getAlias(),
+                        'lat'   => $coordinate[0],
+                        'lng'   => $coordinate[1]
+                    ];
+                }
+            }
+        }
+
+        return $locations;
     }
 }

@@ -2,13 +2,16 @@
 // src/AppBundle/Entity/InformationCategory.php
 namespace AppBundle\Entity;
 
+use ReflectionClass;
+
 use Doctrine\ORM\Mapping as ORM,
     Doctrine\Common\Collections\ArrayCollection;
 
 use Gedmo\Mapping\Annotation as Gedmo,
     Gedmo\Translatable\Translatable;
 
-use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+use AppBundle\Entity\Utility\InformationCategoriesListInterface,
+    AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
     AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
 
 /**
@@ -17,7 +20,7 @@ use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
  *
  * @Gedmo\TranslationEntity(class="AppBundle\Entity\InformationCategoryTranslation")
  */
-class InformationCategory implements Translatable
+class InformationCategory implements Translatable, InformationCategoriesListInterface
 {
     use IdMapper, TranslationMapper;
 
@@ -27,7 +30,7 @@ class InformationCategory implements Translatable
     protected $translations;
 
     /**
-     * @ORM\OneToMany(targetEntity="Information", mappedBy="object", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Information", mappedBy="informationCategory", cascade={"persist"})
      */
     protected $information;
 
@@ -138,5 +141,10 @@ class InformationCategory implements Translatable
     public function getInformation()
     {
         return $this->information;
+    }
+
+    static public function getInformationCategories()
+    {
+        return (new ReflectionClass('AppBundle\Entity\Utility\InformationCategoriesListInterface'))->getConstants();
     }
 }

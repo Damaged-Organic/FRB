@@ -77,14 +77,14 @@ class LoadMetadata extends AbstractFixture implements OrderedFixtureInterface
             $metadata = (new Metadata)
                 ->setRoute("staff")
                 ->setRobots("index, follow")
-                ->setTitle("Люди")
+                ->setTitle("Про нас")
                 ->setDescription("")
         );
         $manager->flush();
 
         $manager->persist
         (
-            $metadata->setTitle("Staff")
+            $metadata->setTitle("About us")
                 ->setDescription("")
                 ->setTranslatableLocale('en')
         );
