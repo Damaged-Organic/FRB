@@ -132,6 +132,17 @@ class InformationAdmin extends Admin
         ;
     }
 
+    public function prePersist($information)
+    {
+        if( !($information instanceof Information) )
+            return;
+
+        if( !($information->getAddresses()) )
+            return;
+
+        $this->setCoordinates($information);
+    }
+
     public function preUpdate($information)
     {
         if( !($information instanceof Information) )
@@ -140,6 +151,11 @@ class InformationAdmin extends Admin
         if( !($information->getAddresses()) )
             return;
 
+        $this->setCoordinates($information);
+    }
+
+    protected function setCoordinates($information)
+    {
         $geoCoder = $this->getConfigurationPool()->getContainer()->get('app.geo_coder');
 
         $addresses = explode(PHP_EOL, $information->getAddresses());

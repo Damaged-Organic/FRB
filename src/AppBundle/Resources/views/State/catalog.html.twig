@@ -198,6 +198,43 @@
                 </aside>
                 <section class="catalog-holder">
                     <div class="grid">
+
+                        {% for estate in estates %}
+
+                            {{ dump(estate) }}
+                            <article class="col item">
+                                <div class="inner">
+                                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id }) }}">
+                                        <div class="photo-holder">
+                                            <figure>
+                                                <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+                                            </figure>
+                                            <span class="deal-type">{{ estate.tradeType }}</span>
+                                            <div class="price-holder">
+                                                <p><span>{{ estate.price|number_format(2, ',') }}</span>/месяц</p>
+                                            </div>
+                                        </div>
+                                        <p>Код об'єкта: <span>{{ estate.code }}</span></p>
+                                        <p class="address">{{ estate.address }}</p>
+                                        <ul>
+                                            <li>
+                                                <p><span class="icon icon-sq"></span>160 m²</p>
+                                            </li>
+                                            <li>
+                                                <p><span class="icon icon-rooms"></span>5 кімнат</p>
+                                            </li>
+                                            <li>
+                                                <p><span class="icon icon-bedroom"></span>3 спальні</p>
+                                            </li>
+                                            <li>
+                                                <p><span class="icon icon-bathroom"></span>2 ванни</p>
+                                            </li>
+                                        </ul>
+                                    </a>
+                                </div>
+                            </article>
+                        {% endfor %}
+
                         <article class="col item">
                             <div class="inner">
                                 <a href="catalog-item.html">

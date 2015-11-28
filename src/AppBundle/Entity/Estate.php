@@ -43,7 +43,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $estateType;
 
     /**
-     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estate", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estate", cascade={"persist", "remove"}, orphanRemoval=true)
      **/
     protected $estateAttribute;
 
@@ -134,14 +134,9 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $hasRegistration;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=false)
-     **/
-    protected $latitude;
-
-    /**
-     * @ORM\Column(type="string", length=20, nullable=false)
-     **/
-    protected $longitude;
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $coordinates;
 
     /**
      * Constructor
@@ -470,6 +465,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
      */
     public function addEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
     {
+        $estateAttribute->setEstate($this);
         $this->estateAttribute[] = $estateAttribute;
 
         return $this;
@@ -634,49 +630,26 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
-     * Set latitude
+     * Set coordinates
      *
-     * @param string $latitude
-     * @return Estate
+     * @param string $coordinates
+     * @return Information
      */
-    public function setLatitude($latitude)
+    public function setCoordinates($coordinates)
     {
-        $this->latitude = $latitude;
+        $this->coordinates = $coordinates;
 
         return $this;
     }
 
     /**
-     * Get latitude
+     * Get coordinates
      *
-     * @return string 
+     * @return array
      */
-    public function getLatitude()
+    public function getCoordinates()
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param string $longitude
-     * @return Estate
-     */
-    public function setLongitude($longitude)
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return string 
-     */
-    public function getLongitude()
-    {
-        return $this->longitude;
+        return $this->coordinates;
     }
 
     /**

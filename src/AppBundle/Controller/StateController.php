@@ -48,24 +48,56 @@ class StateController extends Controller
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/catalog/{estateType}",
+     *      "/catalog/{estateType}/{id}",
      *      name="catalog",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+"}
      * )
      * @Route(
-     *      "/catalog/{estateType}",
+     *      "/catalog/{estateType}/{id}",
      *      name="catalog_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
-     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+"}
      * )
      */
-    public function catalogAction($estateType)
+    public function catalogAction($estateType, $id = NULL)
     {
-        //TODO: residential parameter kludge
-        return $this->render('AppBundle:State:catalog.html.twig');
+        $manager = $this->getDoctrine()->getManager();
+
+        if( !$estateType )
+            $estateType = 'commercial';
+
+        $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
+
+        if( !$estateType )
+            throw $this->createNotFoundException();
+
+        if( $id )
+        {
+            $estate = $manager->getRepository('AppBundle:Estate')->find($id);
+
+            $response = [
+                'view' => 'AppBundle:State:catalog_item.html.twig',
+                'data' => [
+                    'estateType' => $estateType->getStringId(),
+                    'estate'     => $estate
+                ]
+            ];
+        } else {
+            $estates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
+
+            $response = [
+                'view' => 'AppBundle:State:catalog.html.twig',
+                'data' => [
+                    'estateType' => $estateType->getStringId(),
+                    'estates'    => $estates
+                ]
+            ];
+        }
+
+        return $this->render($response['view'], $response['data']);
     }
 
     /**

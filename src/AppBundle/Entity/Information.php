@@ -388,7 +388,7 @@ class Information implements Translatable
     /**
      * Set coordinates
      *
-     * @param string $coordinates
+     * @param array $coordinates
      * @return Information
      */
     public function setCoordinates(array $coordinates)

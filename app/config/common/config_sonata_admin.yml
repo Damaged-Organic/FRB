@@ -131,12 +131,11 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
-            - [ setGeoCoder, ["@app.geo_coder"] ]
 
     sonata.admin.estate_photo:
         class: AppBundle\Admin\EstatePhotoAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Нерухомість", label: "Фотографії", show_in_dashboard: false }
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
         arguments:
             - ~
             - AppBundle\Entity\EstatePhoto
@@ -151,6 +150,17 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\EstateAttributeType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.estate_attribute:
+        class: AppBundle\Admin\EstateAttributeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\EstateAttribute
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]

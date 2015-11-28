@@ -14,13 +14,6 @@ use AppBundle\Entity\Estate,
 
 class EstateAdmin extends Admin
 {
-    protected $_geoCoder;
-
-    public function setGeoCoder(GeoCoder $geoCoder)
-    {
-        $this->_geoCoder = $geoCoder;
-    }
-
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -63,112 +56,49 @@ class EstateAdmin extends Admin
             ->createQueryBuilder()
             ->select("estateType")
             ->from('AppBundle\Entity\EstateType', 'estateType')
-            ->where("estateType.parent IS NOT NULL");
+            ->where("estateType.parent IS NOT NULL")
+        ;
 
         $formMapper
-            ->add("code", "text", [
-                "label" => "ID"
-            ])
-            ->add("tradeType", "choice", [
-                "label"       => "Тип транзакції",
-                "placeholder" => "Оберіть тип транзакції...",
-                "choices"     => $tradeTypes
-            ])
-            ->add("estateType", NULL, [
-                "label"         => "Тип нерухомості",
-                "required"      => TRUE,
-                "placeholder"   => "Оберіть тип нерухомості...",
-                "class"         => 'AppBundle\Entity\EstateType',
-                "query_builder" => $estateTypeQuery
-            ], [
-                'edit' => 'standard'
-            ])
-            ->add("title", "text", [
-                "label"    => "Назва об'єкту",
-                "required" => FALSE
-            ])
-            ->add("address", "text", [
-                "label" => "Точна адреса об'єкту"
-            ])
-            ->add("district", "choice", [
-                "label"       => "Район",
-                "placeholder" => "Оберіть район...",
-                "choices"     => $districts
-            ])
-            ->add("space", "number", [
-                "label"     => "Площа",
-                "precision" => 2
-            ])
-            ->add("price", "number", [
-                "label"       => "Ціна",
-                "precision"   => 2,
-                "constraints" => [
-                    new Assert\Range(["min" => 0])
-                ]
-            ])
-            ->add("isCashless", "checkbox", [
-                "label"    => "Безготівковий розрахунок",
-                "required" => FALSE
-            ])
-            ->add("isNewBuilding", "checkbox", [
-                "label"    => "Нова будівля",
-                "required" => FALSE
-            ])
-            ->add("hasElevator", "checkbox", [
-                "label"    => "Наявність ліфту",
-                "required" => FALSE
-            ])
-            ->add("hasParking", "checkbox", [
-                "label"    => "Наявність парковки",
-                "required" => FALSE
-            ])
-            ->add("hasFurniture", "checkbox", [
-                "label"    => "Наявність меблів",
-                "required" => FALSE
-            ])
-            ->add("hasRegistration", "checkbox", [
-                "label"    => "Реєстрація для нерезидентів",
-                "required" => FALSE
-            ])
-            ->add("description", "sonata_formatter_type", [
-                "label"                => "Опис",
-                "event_dispatcher"     => $formMapper->getFormBuilder()->getEventDispatcher(),
-                "format_field"         => "descriptionFormatter",
-                "source_field"         => "rawDescription",
-                "ckeditor_context"     => "base_config",
-                "source_field_options" => [
-                    "attr" => [
-                        "class" => "span10", "rows" => 10
-                    ]
-                ],
-                "listener"             => TRUE,
-                "target_field"         => "description"
-            ])
-            ->add('estatePhoto', 'sonata_type_collection', [
-                'label'        => "Управление изображениями",
-                'by_reference' => FALSE,
-                'btn_add'      => "Добавить изображение"
-            ], [
-                'edit'   => 'inline',
-                'inline' => 'table'
-            ])
-            ->end()
-            ->with("Локалізації")
+            ->with("Нерухомість - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
-                    "label"              => "Керування локалізаціями",
+                    "locales"            => ['ua', 'en'],
+                    "label"              => FALSE,
                     "translatable_class" => 'AppBundle\Entity\Estate',
                     "required"           => TRUE,
                     "fields"             => [
                         "title" => [
                             "locale_options" => [
+                                "ua" => [
+                                    "required" => FALSE,
+                                    "label"    => "Назва об'єкту"
+                                ],
                                 "en" => [
-                                    "label" => "Estate title"
+                                    "required" => FALSE,
+                                    "label"    => "Estate title"
+                                ]
+                            ]
+                        ],
+                        "address" => [
+                            "locale_options" => [
+                                "ua" => [
+                                    "label" => "Точна адреса об'єкту"
+                                ],
+                                "en" => [
+                                    "required" => FALSE,
+                                    "label"    => "Exact property address"
                                 ]
                             ]
                         ],
                         "description" => [
                             "locale_options" => [
+                                'ua' => [
+                                    'label'       => 'Опис',
+                                    'field_type'  => 'ckeditor',
+                                    'config_name' => 'base_config'
+                                ],
                                 'en' => [
+                                    "required"    => FALSE,
                                     'label'       => 'Description',
                                     'field_type'  => 'ckeditor',
                                     'config_name' => 'base_config'
@@ -180,6 +110,86 @@ class EstateAdmin extends Admin
                         ]
                     ]
                 ])
+            ->end()
+            ->with("Нерухомість - Загальні дані")
+                ->add("code", "text", [
+                    "label" => "ID"
+                ])
+                ->add("tradeType", "choice", [
+                    "label"       => "Тип транзакції",
+                    "placeholder" => "Оберіть тип транзакції...",
+                    "choices"     => $tradeTypes
+                ])
+                ->add("estateType", NULL, [
+                    "label"         => "Тип нерухомості",
+                    "required"      => TRUE,
+                    "placeholder"   => "Оберіть тип нерухомості...",
+                    "class"         => 'AppBundle\Entity\EstateType',
+                    "query_builder" => $estateTypeQuery
+                ], [
+                    'edit' => 'standard'
+                ])
+                ->add("district", "choice", [
+                    "label"       => "Район",
+                    "placeholder" => "Оберіть район...",
+                    "choices"     => $districts
+                ])
+                ->add("space", "number", [
+                    "label"     => "Площа",
+                    "precision" => 2
+                ])
+                ->add("price", "number", [
+                    "label"       => "Ціна",
+                    "precision"   => 2,
+                    "constraints" => [
+                        new Assert\Range(["min" => 0])
+                    ]
+                ])
+                ->add("isCashless", "checkbox", [
+                    "label"    => "Безготівковий розрахунок",
+                    "required" => FALSE
+                ])
+                ->add("isNewBuilding", "checkbox", [
+                    "label"    => "Нова будівля",
+                    "required" => FALSE
+                ])
+                ->add("hasElevator", "checkbox", [
+                    "label"    => "Наявність ліфту",
+                    "required" => FALSE
+                ])
+                ->add("hasParking", "checkbox", [
+                    "label"    => "Наявність парковки",
+                    "required" => FALSE
+                ])
+                ->add("hasFurniture", "checkbox", [
+                    "label"    => "Наявність меблів",
+                    "required" => FALSE
+                ])
+                ->add("hasRegistration", "checkbox", [
+                    "label"    => "Реєстрація для нерезидентів",
+                    "required" => FALSE
+                ])
+            ->end()
+            ->with("Нерухомість - Характеристики")
+                ->add('estateAttribute', 'sonata_type_collection', [
+                    'label'        => FALSE,
+                    'by_reference' => FALSE,
+                    'btn_add'      => "Додати характеристику"
+                ], [
+                    'edit'   => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
+            ->with("Нерухомість - Фотографії")
+                ->add('estatePhoto', 'sonata_type_collection', [
+                    'label'        => "Управление изображениями",
+                    'by_reference' => FALSE,
+                    'btn_add'      => "Добавить изображение"
+                ], [
+                    'edit'   => 'inline',
+                    'inline' => 'table'
+                ])
+            ->end()
         ;
     }
 
@@ -201,12 +211,12 @@ class EstateAdmin extends Admin
 
     protected function setCoordinates($estate)
     {
-        $coordinates = $this->_geoCoder->getCoordinates($estate->getAddress());
+        $geoCoder = $this->getConfigurationPool()->getContainer()->get('app.geo_coder');
 
-        $estate
-            ->setLatitude($coordinates['latitude'])
-            ->setLongitude($coordinates['longitude'])
-        ;
+        $coordinates = $geoCoder->getCoordinates($estate->getAddress());
+
+        if( $coordinates )
+            $estate->setCoordinates($coordinates);
     }
 
     public function getFormTheme()

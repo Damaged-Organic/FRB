@@ -27,7 +27,7 @@ class EstateAttributeType implements Translatable
     protected $translations;
 
     /**
-     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estateAttributeType")
+     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estateAttributeType", cascade={"persist"}, orphanRemoval=true)
      **/
     protected $estateAttribute;
 

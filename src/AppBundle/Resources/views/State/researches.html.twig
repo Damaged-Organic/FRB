@@ -56,7 +56,7 @@
                             {% if researches[researchCategory.id] is defined %}
                                 <div class="col">
                                     <figure>
-                                        <img src="{{ vich_uploader_asset(researchCategory, 'photoFile') }}" alt="{{ researchCategory.title }}">
+                                        <img src="{{ vich_uploader_asset(researchCategory, 'photoFile')|imagine_filter('research_category_thumb') }}" alt="{{ researchCategory.title }}">
                                     </figure>
                                     <div class="info-holder">
                                         <h2>{{ researchCategory.title }}</h2>

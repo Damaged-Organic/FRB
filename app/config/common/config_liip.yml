@@ -4,7 +4,7 @@ liip_imagine:
        default:
           web_path:
               web_root:     %kernel.root_dir%/../www
-              cache_prefix: media/cache
+              cache_prefix: thumbs/cache
 
     loaders:
        default:
@@ -14,7 +14,18 @@ liip_imagine:
     filter_sets:
         cache: ~
 
-        standard_thumb:
+        staff_thumb:
             quality: 100
             filters:
-                thumbnail: { size: [350, 350], mode: outbound }
+                thumbnail: { size: [420, 320], mode: outbound }
+
+        article_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [600, 337], mode: outbound }
+
+
+        research_category_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [600, 337], mode: outbound }

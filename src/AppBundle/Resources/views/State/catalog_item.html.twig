@@ -4,20 +4,20 @@
 {% set metadata = getMetadata() %}
 
 {% block title %}
-    {{ property.title }} | {{ 'default.title'|trans }}
+    {{ estate.title }} | {{ 'default.title'|trans }}
 {% endblock %}
 
 {% block metadata %}
     {{ parent() }}
-    <meta name="description" content="{{ property.description }}">
+    <meta name="description" content="{{ estate.description }}">
     <meta name="robots" content="{{ metadata.robots }}">
 {% endblock %}
 
 {% block locale %}
-    <link rel="canonical" href="{{ url('catalog_default', { 'id': property.id }) }}">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'id': property.id }) }}" hreflang="x-default">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "en", 'id': property.id }) }}" hreflang="en-us">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'id': property.id }) }}" hreflang="uk-ua">
+    <link rel="canonical" href="{{ url('catalog_default', { 'estateType': estateType, 'id': estate.id }) }}">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "en", 'estateType': estateType, 'id': estate.id }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id }) }}" hreflang="uk-ua">
 {% endblock %}
 
 {% block stylesheets %}
