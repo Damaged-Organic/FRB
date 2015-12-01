@@ -1,0 +1,12 @@
+{# src/AppBundle/Resources/views/Filter/district.html.twig #}
+<div class="item">
+    <h3>Район</h3>
+
+    {% for district in districts %}
+        <div class="check-holder full-w">
+            <input type="checkbox" name="filter[district][]" value="{{ district }}" id="district-{{ district }}">
+            <label for="district-{{ district }}"><span>{{ district|trans({}, 'districts') }}</span></label>
+        </div>
+    {% endfor %}
+
+</div>

@@ -1,0 +1,21 @@
+{# src/AppBundle/Resources/views/Filter/attribute.html.twig #}
+<div class="item">
+    <h3>Кількість кімнат</h3>
+    <div class="range-holder" data-min="1" data-range-min="1" data-max="5" data-range-max="5"></div>
+    <div class="field-holder text">
+        <span>від</span>
+        <input type="text" name="filter[rooms_min]" value="1" id="rooms-min" class="counter">
+        <span>до</span>
+        <input type="text" name="filter[rooms_max]" value="5" id="rooms-max" class="counter">
+    </div>
+</div>
+<div class="item">
+    <h3>Поверх квартири</h3>
+    <div class="range-holder" data-min="1" data-range-min="1" data-max="31" data-range-max="31"></div>
+    <div class="field-holder">
+        <span>від</span>
+        <input type="text" name="filter[floor_min]" value="1" id="floor-min" class="counter">
+        <span>до</span>
+        <input type="text" name="filter[floor_max]" value="31" id="floor-max" class="counter">
+    </div>
+</div>

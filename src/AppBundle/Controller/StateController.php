@@ -46,7 +46,7 @@ class StateController extends Controller
     }
 
     /**
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Route(
      *      "/catalog/{estateType}/{id}/{slug}",
      *      name="catalog",
