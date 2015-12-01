@@ -48,41 +48,52 @@ class StateController extends Controller
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/catalog/{estateType}/{id}",
+     *      "/catalog/{estateType}/{id}/{slug}",
      *      name="catalog",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null, "slug" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
      * )
      * @Route(
-     *      "/catalog/{estateType}/{id}",
+     *      "/catalog/{estateType}/{id}/{slug}",
      *      name="catalog_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null},
-     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null, "slug" = null},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
      * )
      */
-    public function catalogAction($estateType, $id = NULL)
+    public function catalogAction(Request $request, $estateType, $id = NULL)
     {
         $manager = $this->getDoctrine()->getManager();
 
         if( !$estateType )
-            $estateType = 'commercial';
+            return $this->redirectToRoute('catalog', [
+                'estateType' => 'commercial'
+            ], 307);
 
         $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
 
         if( !$estateType )
             throw $this->createNotFoundException();
 
+        $currency = 'USD';
+
         if( $id )
         {
             $estate = $manager->getRepository('AppBundle:Estate')->find($id);
 
+            if( !$estate )
+                throw $this->createNotFoundException();
+
+            $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id);
+
             $response = [
                 'view' => 'AppBundle:State:catalog_item.html.twig',
                 'data' => [
-                    'estateType' => $estateType->getStringId(),
-                    'estate'     => $estate
+                    'estateType'     => $estateType->getStringId(),
+                    'estate'         => $estate,
+                    'currency'       => $currency,
+                    'nearestEstates' => $nearestEstates
                 ]
             ];
         } else {
@@ -92,7 +103,8 @@ class StateController extends Controller
                 'view' => 'AppBundle:State:catalog.html.twig',
                 'data' => [
                     'estateType' => $estateType->getStringId(),
-                    'estates'    => $estates
+                    'estates'    => $estates,
+                    'currency'   => $currency
                 ]
             ];
         }

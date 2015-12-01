@@ -13,7 +13,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
     public function load(ObjectManager $manager)
     {
         $estateAttributeType_1 = (new EstateAttributeType)
+            ->setIcon("icon-floors")
             ->setTitle("Кількість поверхів")
+            ->setPostfix("floors")
         ;
 
         $manager->persist($estateAttributeType_1);
@@ -32,7 +34,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_2 = (new EstateAttributeType)
+            ->setIcon("icon-rooms")
             ->setTitle("Кількість кімнат")
+            ->setPostfix("room")
         ;
 
         $manager->persist($estateAttributeType_2);
@@ -51,7 +55,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_3 = (new EstateAttributeType)
+            ->setIcon("icon-bathroom")
             ->setTitle("Кількість санвузлів")
+            ->setPostfix("bathroom")
         ;
 
         $manager->persist($estateAttributeType_3);
@@ -70,7 +76,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_4 = (new EstateAttributeType)
+            ->setIcon("icon-bedroom")
             ->setTitle("Кількість спальних кімнат")
+            ->setPostfix("bedroom")
         ;
 
         $manager->persist($estateAttributeType_4);
@@ -89,7 +97,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_5 = (new EstateAttributeType)
+            ->setIcon("icon-floor")
             ->setTitle("Поверх")
+            ->setPostfix("floor")
         ;
 
         $manager->persist($estateAttributeType_5);
@@ -108,7 +118,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_6 = (new EstateAttributeType)
+            ->setIcon("icon-building")
             ->setTitle("Клас будівлі")
+            ->setPostfix("class")
         ;
 
         $manager->persist($estateAttributeType_6);
@@ -127,7 +139,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_7 = (new EstateAttributeType)
+            ->setIcon("icon-cash")
             ->setTitle("Експлуатаційні витрати")
+            ->setPostfix(NULL)
         ;
 
         $manager->persist($estateAttributeType_7);
@@ -146,7 +160,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_8 = (new EstateAttributeType)
+            ->setIcon("icon-plan")
             ->setTitle("Тип планування")
+            ->setPostfix(NULL)
         ;
 
         $manager->persist($estateAttributeType_8);
@@ -165,7 +181,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_9 = (new EstateAttributeType)
+            ->setIcon("icon-wall")
             ->setTitle("Тип оздоблення")
+            ->setPostfix(NULL)
         ;
 
         $manager->persist($estateAttributeType_9);

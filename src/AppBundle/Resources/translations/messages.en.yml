@@ -20,11 +20,44 @@ state:
 
         details: Details
 
-        bottom_menu:
+        menu:
             catalog_commercial:  Find commercial real estate
             news:                Our news
             expats_information:  Information for expats
             catalog_residential: Find residential real estate
+
+    catalog:
+        headline:      Real estate objects
+        headline_item: Object information
+
+        trade_type_sale: sale
+        trade_type_rent: rent
+
+        month: month
+        code:  Object code
+
+        attribute:
+            floors:   '{0} -|{1} %count% floor |[2, Inf] %count% floors'
+            room:     '{0} -|{1} %count% room |[2, Inf] %count% rooms'
+            bathroom: '{0} -|{1} %count% bathroom |[2, Inf] %count% bathrooms'
+            bedroom:  '{0} -|{1} %count% bedroom |[2, Inf] %count% bedrooms'
+            floor:    '{0} -|{1} %count% floor |[2, Inf] %count% floor'
+            class:    '{0} -|{1} %count% class |[2, Inf] %count% class'
+
+        feature:
+            is_cashless:      cashless payment
+            is_new_building:  new building
+            has_elevator:     elevator
+            has_parking:      parking
+            has_furniture:    furniture
+            has_registration: registration for non-residents
+
+        next: next object
+        back: back to catalog
+        prev: previous object
+
+        empty:
+            estate: No objects was found with such parameters
 
     services:
         headline: Our services

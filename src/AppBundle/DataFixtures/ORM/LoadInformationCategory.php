@@ -61,7 +61,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_3
                 ->setTranslatableLocale("en")
-                ->setTitle("Entertainment")
+                ->setTitle("Fun")
         );
         $manager->flush();
 

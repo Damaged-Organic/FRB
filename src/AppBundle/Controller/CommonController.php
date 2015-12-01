@@ -28,7 +28,7 @@ class CommonController extends Controller
         }
 
         return $this->render($template, [
-            'route' => $request->get('_route')
+            'path' => trim($request->getPathInfo(), '/')
         ]);
     }
 

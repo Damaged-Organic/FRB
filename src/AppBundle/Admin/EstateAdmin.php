@@ -138,8 +138,15 @@ class EstateAdmin extends Admin
                     "label"     => "Площа",
                     "precision" => 2
                 ])
-                ->add("price", "number", [
-                    "label"       => "Ціна",
+                ->add("priceUAH", "number", [
+                    "label"       => "Ціна (UAH)",
+                    "precision"   => 2,
+                    "constraints" => [
+                        new Assert\Range(["min" => 0])
+                    ]
+                ])
+                ->add("priceUSD", "number", [
+                    "label"       => "Ціна (USD)",
                     "precision"   => 2,
                     "constraints" => [
                         new Assert\Range(["min" => 0])
@@ -182,6 +189,7 @@ class EstateAdmin extends Admin
             ->end()
             ->with("Нерухомість - Фотографії")
                 ->add('estatePhoto', 'sonata_type_collection', [
+                    'required'     => TRUE,
                     'label'        => "Управление изображениями",
                     'by_reference' => FALSE,
                     'btn_add'      => "Добавить изображение"

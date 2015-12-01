@@ -20,8 +20,24 @@ class EstateAttributeAdmin extends Admin
                 'class' => 'AppBundle\Entity\EstateAttributeType',
                 'label' => 'Характеристика'
             ])
-            ->add('value', 'text', [
-                'label' => 'Значення характеристики'
+            ->add("translations", "a2lix_translations_gedmo", [
+                "locales"            => ['ua', 'en'],
+                "label"              => "Характеристика - Локалізований контент",
+                "translatable_class" => 'AppBundle\Entity\EstateAttribute',
+                "required"           => TRUE,
+                "fields"             => [
+                    "value" => [
+                        "locale_options" => [
+                            "ua" => [
+                                "label" => "Значення характеристики"
+                            ],
+                            "en" => [
+                                "required" => FALSE,
+                                "label"    => "Attribute value"
+                            ]
+                        ]
+                    ]
+                ]
             ])
         ;
     }

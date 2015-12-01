@@ -9,12 +9,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait SlugMapper
 {
     /**
-     * @ORM\Column(length=128, unique=true)
+     * @ORM\Column(length=510, unique=true)
      *
      * @Gedmo\Slug(
-     *      fields={"title"},
+     *      fields={"title", "address"},
      *      separator="_",
-     *      style="camel"
+     *      style="lower"
      * )
      * @Gedmo\Translatable
      */

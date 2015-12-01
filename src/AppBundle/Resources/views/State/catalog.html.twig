@@ -38,10 +38,10 @@
         <div class="outer substrate top-panel-holder">
             <div class="inner">
                 <div class="btn-large flat white">
-                    <a href="#">Комерційна</a>
+                    <a href="{{ path('catalog', { 'estateType': 'commercial' }) }}">Комерційна</a>
                 </div>
                 <div class="btn-large flat white">
-                    <a href="#">Житлова</a>
+                    <a href="{{ path('catalog', { 'estateType': 'residential' }) }}">Житлова</a>
                 </div>
                 <form action="#" method="POST" id="search-form">
                     <div class="field-holder">
@@ -200,289 +200,62 @@
                     <div class="grid">
 
                         {% for estate in estates %}
-
-                            {{ dump(estate) }}
                             <article class="col item">
                                 <div class="inner">
-                                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id }) }}">
+                                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}">
                                         <div class="photo-holder">
                                             <figure>
-                                                <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+
+                                                {% if estate.estatePhoto|length %}
+                                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+                                                {% endif %}
+
                                             </figure>
-                                            <span class="deal-type">{{ estate.tradeType }}</span>
+                                            <span class="deal-type">{{ ('state.catalog.' ~ estate.tradeType)|trans }}</span>
                                             <div class="price-holder">
-                                                <p><span>{{ estate.price|number_format(2, ',') }}</span>/месяц</p>
+                                                <p>
+
+                                                    {% set month = ( estate.tradeType == 'trade_type_rent' ) ? '/' ~ 'state.catalog.month'|trans : null %}
+
+                                                    {% if currency == 'USD' %}
+                                                        <span>{{ estate.priceUSD|number_format(0, '.', ',') ~ '$' }}</span>{{ month }}
+                                                    {% else %}
+                                                        <span>{{ estate.priceUAH|number_format(0, '.', ',') ~ '₴' }}</span>{{ month }}
+                                                    {% endif %}
+
+                                                </p>
                                             </div>
                                         </div>
-                                        <p>Код об'єкта: <span>{{ estate.code }}</span></p>
-                                        <p class="address">{{ estate.address }}</p>
+                                        <p>{{ 'state.catalog.code'|trans }}: <span>{{ estate.code }}</span></p>
+                                        <p class="address">{{ (( estate.title ) ? estate.title ~ ' - ' : null) ~ estate.address }}</p>
                                         <ul>
+
                                             <li>
-                                                <p><span class="icon icon-sq"></span>160 m²</p>
+                                                <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
                                             </li>
-                                            <li>
-                                                <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                            </li>
-                                            <li>
-                                                <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                            </li>
-                                            <li>
-                                                <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                            </li>
+
+                                            {% for attribute in estate.estateAttribute[:3] %}
+                                                <li>
+                                                    <p>
+                                                        <span class="icon {{ attribute.estateAttributeType.icon }}"></span>
+
+                                                        {% if attribute.estateAttributeType.postfix %}
+                                                            {{ ('state.catalog.attribute.' ~ attribute.estateAttributeType.postfix)|transchoice(attribute.value) }}
+                                                        {% else %}
+                                                            {{ attribute.value }}
+                                                        {% endif %}
+                                                    </p>
+                                                </li>
+                                            {% endfor %}
+
                                         </ul>
                                     </a>
                                 </div>
                             </article>
+                        {% else %}
+                            <p>{{ 'state.catalog.empty.estate'|trans }}</p>
                         {% endfor %}
 
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
-                        <article class="col item">
-                            <div class="inner">
-                                <a href="catalog-item.html">
-                                    <div class="photo-holder">
-                                        <figure>
-                                            <img src="build/images/catalog/apartment.jpg" alt="apartment">
-                                        </figure>
-                                        <span class="deal-type">оренда</span>
-                                        <div class="price-holder">
-                                            <p><span>2,500.00$</span>/месяц</p>
-                                        </div>
-                                    </div>
-                                    <p>Код об'єкта: <span>uk-245</span></p>
-                                    <p class="address">ул. Старокиевская,  д. 15, кв. 7, Шевченковский район, г. Киев, Украина</p>
-                                    <ul>
-                                        <li>
-                                            <p><span class="icon icon-sq"></span>160 m²</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bedroom"></span>3 спальні</p>
-                                        </li>
-                                        <li>
-                                            <p><span class="icon icon-bathroom"></span>2 ванни</p>
-                                        </li>
-                                    </ul>
-                                </a>
-                            </div>
-                        </article>
                     </div>
                 </section>
                 <aside class="pagination-holder">

@@ -4,7 +4,7 @@
 {% set metadata = getMetadata() %}
 
 {% block title %}
-    {{ estate.title }} | {{ 'default.title'|trans }}
+    {{ estate.address ~ (( estate.title ) ? ' - ' ~ estate.title : null) }} | {{ 'default.title'|trans }}
 {% endblock %}
 
 {% block metadata %}
@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block locale %}
-    <link rel="canonical" href="{{ url('catalog_default', { 'estateType': estateType, 'id': estate.id }) }}">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id }) }}" hreflang="x-default">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "en", 'estateType': estateType, 'id': estate.id }) }}" hreflang="en-us">
-    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id }) }}" hreflang="uk-ua">
+    <link rel="canonical" href="{{ url('catalog_default', { 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "en", 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('catalog', { '_locale': "ua", 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}" hreflang="uk-ua">
 {% endblock %}
 
 {% block stylesheets %}
@@ -34,14 +34,24 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Інформація про обьект</h1>
+        <h1>{{ 'state.catalog.headline_item'|trans }}</h1>
         <div class="outer substrate top-panel-holder inside">
             <div class="inner white-back">
                 <div class="code-holder">
-                    <p>Код обьекта: <span>uk-245</span></p>
+                    <p>{{ 'state.catalog.code'|trans }}: <span>{{ estate.code }}</span></p>
                 </div>
                 <div class="price-holder">
-                    <p><span>2,500.00$</span> / месяц</p>
+
+                    {% set month = ( estate.tradeType == 'trade_type_rent' ) ? '/' ~ 'state.catalog.month'|trans : null %}
+
+                    <p>
+                        {% if currency == 'USD' %}
+                            <span>{{ estate.priceUSD|number_format(0, '.', ',') ~ '$' }}</span>{{ month }}
+                        {% else %}
+                            <span>{{ estate.priceUAH|number_format(0, '.', ',') ~ '₴' }}</span>{{ month }}
+                        {% endif %}
+                    </p>
+
                 </div>
             </div>
         </div>
@@ -51,60 +61,81 @@
                     <div id="gallery-holder">
                         <div class="photo-view">
                             <figure>
-                                <img src="build/images/catalog/apartment-large.jpg" alt="apartment-large">
+
+                                {% if estate.estatePhoto|length %}
+                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+                                {% endif %}
+
                             </figure>
                         </div>
-                        <div class="navigation-holder">
-                            <div class="navigation">
-                                <ul>
-                                    <li class="active" data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                    <li data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                    <li data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                    <li data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                    <li data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                    <li data-img="build/images/catalog/apartment.jpg">
-                                        <figure><img src="build/images/catalog/apartment.jpg" alt="apartment"></figure>
-                                    </li>
-                                </ul>
+
+                        {% if estate.estatePhoto|length %}
+                            <div class="navigation-holder">
+                                <div class="navigation">
+                                    <ul>
+
+                                        {% for estatePhoto in estate.estatePhoto %}
+                                            <li class="{{ ( loop.first ) ? 'active' }}" data-img="{{ vich_uploader_asset(estatePhoto, 'photoFile') }}">
+                                                <figure>
+                                                    <img src="{{ vich_uploader_asset(estatePhoto, 'photoFile') }}" alt="{{ estate.address }}">
+                                                </figure>
+                                            </li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                <span class="arrow arrow-left icon icon-arrow-left"></span>
+                                <span class="arrow arrow-right icon icon-arrow-right"></span>
                             </div>
-                            <span class="arrow arrow-left icon icon-arrow-left"></span>
-                            <span class="arrow arrow-right icon icon-arrow-right"></span>
-                        </div>
+                        {% endif %}
+
                     </div>
                     <div class="info-holder">
-                        <h3>вул. Старокиевская,  д. 15, кв. 7,  Шевченківский район, м. Київ, Україна</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quia quae quisquam sunt esse ab, placeat rerum beatae tempora amet iure modi quas similique architecto saepe laudantium fuga, repellat aliquid.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia in velit doloribus quibusdam molestiae maiores facere illum provident dolor vero recusandae debitis, suscipit odit inventore, voluptate. Quaerat aspernatur ipsa reiciendis.</p>
+                        <h3>{{ (( estate.title ) ? estate.title ~ ' - ' : null) ~ estate.address }}</h3>
+
+                        {{ estate.description|raw }}
+
                         <ul>
                             <li>
-                                <p><span class="icon icon-sq"></span>160m<sup>3</sup></p>
+                                <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
                             </li>
-                            <li>
-                                <p><span class="icon icon-rooms"></span>5 кімнат</p>
-                            </li>
-                            <li>
-                                <p><span class="icon icon-bedroom"></span>3 кімнати</p>
-                            </li>
-                            <li>
-                                <p><span class="icon icon-bathroom"></span>2 кімнати</p>
-                            </li>
+
+                            {% for attribute in estate.estateAttribute %}
+                                <li>
+                                    <p>
+                                        <span class="icon {{ attribute.estateAttributeType.icon }}"></span>
+                                        {{ attribute.estateAttributeType.title ~ ': ' ~ attribute.value }}
+                                    </p>
+                                </li>
+                            {% endfor %}
+
                         </ul>
                         <div class="features-holder">
-                            <span class="icon icon-accept">новий будинок</span>
-                            <span class="icon icon-accept">багатоповерховий</span>
-                            <span class="icon icon-accept">Ліфт</span>
-                            <span class="icon icon-accept">2 балкона</span>
-                            <span class="icon icon-accept">приватний ЖЕК</span>
-                            <span class="icon icon-accept">парко місце</span>
+
+                            {% if estate.isCashless %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.is_cashless'|trans }}</span>
+                            {% endif %}
+
+                            {% if estate.isNewBuilding %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.is_new_building'|trans }}</span>
+                            {% endif %}
+
+                            {% if estate.hasElevator %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_elevator'|trans }}</span>
+                            {% endif %}
+
+                            {% if estate.hasParking %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_parking'|trans }}</span>
+                            {% endif %}
+
+                            {% if estate.hasFurniture %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_furniture'|trans }}</span>
+                            {% endif %}
+
+                            {% if estate.hasRegistration %}
+                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_registration'|trans }}</span>
+                            {% endif %}
+
                         </div>
                     </div>
                     <aside id="map-holder">
@@ -114,11 +145,32 @@
             </div>
         </div>
         <div class="navigation-holder">
-            <a href="#"><span class="icon icon-arrow-left"></span>попередній обьект</a>
+
+            {% if nearestEstates.previous %}
+                {% set previousLink = path('catalog', { '_locale': "ua", 'estateType': estateType, 'id': nearestEstates.previous.id, 'slug': nearestEstates.previous.slug }) %}
+            {% else %}
+                {% set previousLink = null %}
+            {% endif %}
+
+            <a href="{{ ( previousLink ) ?: null }}" {{ ( not previousLink ) ? 'onclick="return false"' }}>
+                <span class="icon icon-arrow-left"></span>
+                {{ 'state.catalog.prev'|trans }}
+            </a>
+
             <div class="btn-small flat">
-                <a href="#">повернутися до каталогу</a>
+                <a href="{{ path('catalog', { 'estateType': estateType } ) }}">{{ 'state.catalog.back'|trans }}</a>
             </div>
-            <a href="#">наступний обьект<span class="icon icon-arrow-right"></span></a>
+
+            {% if nearestEstates.next %}
+                {% set nextLink = path('catalog', { '_locale': "ua", 'estateType': estateType, 'id': nearestEstates.next.id, 'slug': nearestEstates.next.slug }) %}
+            {% else %}
+                {% set nextLink = null %}
+            {% endif %}
+
+            <a href="{{ ( nextLink ) ?: null }}" {{ ( not nextLink ) ? 'onclick="return false"' }}>
+                {{ 'state.catalog.next'|trans }}
+                <span class="icon icon-arrow-right"></span>
+            </a>
         </div>
     </main>
 {% endblock %}
@@ -133,11 +185,14 @@
 
 {% block javascripts %}
     <script src="{{ asset('bundles/app/js/catalog.bundle.min.js') }}"></script>
+
+    {% set coordinates = estate.coordinates|split(';') %}
+
     <script>
         window.places = {
             center: {
-                lat: 50.4533345,
-                lng: 30.4713813
+                lat: {{ ( coordinates[0] ) ?: null }},
+                lng: {{ ( coordinates[1] ) ?: null }}
             },
             markers: [
                 {
@@ -160,7 +215,5 @@
                 }
             ]
         }
-
-        System.import("assets/js/app/catalog");
     </script>
 {% endblock %}

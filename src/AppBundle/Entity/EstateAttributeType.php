@@ -33,17 +33,28 @@ class EstateAttributeType implements Translatable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     **/
+    protected $icon;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
      *
      * @Gedmo\Translatable
      **/
     protected $title;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $postfix;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->translations = new ArrayCollection;
+        $this->translations    = new ArrayCollection;
+        $this->estateAttribute = new ArrayCollection;
     }
 
     /**
@@ -75,6 +86,52 @@ class EstateAttributeType implements Translatable
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     * @return EstateAttributeType
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Set postfix
+     *
+     * @param string $postfix
+     * @return EstateAttributeType
+     */
+    public function setPostfix($postfix)
+    {
+        $this->postfix = $postfix;
+
+        return $this;
+    }
+
+    /**
+     * Get postfix
+     *
+     * @return string
+     */
+    public function getPostfix()
+    {
+        return $this->postfix;
     }
 
     /**

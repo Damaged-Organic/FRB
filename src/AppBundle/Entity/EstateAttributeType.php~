@@ -27,9 +27,14 @@ class EstateAttributeType implements Translatable
     protected $translations;
 
     /**
-     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estateAttributeType")
+     * @ORM\OneToMany(targetEntity="EstateAttribute", mappedBy="estateAttributeType", cascade={"persist"}, orphanRemoval=true)
      **/
     protected $estateAttribute;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     **/
+    protected $icon;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -37,6 +42,13 @@ class EstateAttributeType implements Translatable
      * @Gedmo\Translatable
      **/
     protected $title;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $postfix;
 
     /**
      * Constructor
@@ -52,5 +64,61 @@ class EstateAttributeType implements Translatable
     public function __toString()
     {
         return ( $this->title ) ? $this->title : "";
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return EstateAttributeType
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Add estateAttribute
+     *
+     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
+     * @return EstateAttributeType
+     */
+    public function addEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
+    {
+        $this->estateAttribute[] = $estateAttribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove estateAttribute
+     *
+     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
+     */
+    public function removeEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
+    {
+        $this->estateAttribute->removeElement($estateAttribute);
+    }
+
+    /**
+     * Get estateAttribute
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstateAttribute()
+    {
+        return $this->estateAttribute;
     }
 }

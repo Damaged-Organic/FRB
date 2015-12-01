@@ -2,17 +2,29 @@
 // src/AppBundle/Entity/EstateAttribute.php
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection;
 
-use AppBundle\Entity\Utility\DoctrineMapping\IdMapper;
+use Gedmo\Mapping\Annotation as Gedmo,
+    Gedmo\Translatable\Translatable;
+
+use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
+    AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper;
 
 /**
  * @ORM\Table(name="estate_attributes")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\EstateAttributeRepository")
+ *
+ * @Gedmo\TranslationEntity(class="AppBundle\Entity\EstateAttributeTranslation")
  */
-class EstateAttribute
+class EstateAttribute implements Translatable
 {
-    use IdMapper;
+    use IdMapper, TranslationMapper;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EstateAttributeTranslation", mappedBy="object", cascade={"persist", "remove"})
+     **/
+    protected $translations;
 
     /**
      * @ORM\ManyToOne(targetEntity="EstateAttributeType", inversedBy="estateAttribute")
@@ -28,8 +40,18 @@ class EstateAttribute
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
      **/
     protected $value;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new ArrayCollection;
+    }
 
     /**
      * To string

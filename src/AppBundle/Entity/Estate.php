@@ -101,7 +101,12 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      **/
-    protected $price;
+    protected $priceUAH;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     **/
+    protected $priceUSD;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -143,7 +148,9 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
      */
     public function __construct()
     {
-        $this->translations = new ArrayCollection;
+        $this->translations    = new ArrayCollection;
+        $this->estateAttribute = new ArrayCollection;
+        $this->estatePhoto     = new ArrayCollection;
     }
 
     /**
@@ -175,17 +182,17 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     static public function getDistricts()
     {
         return [
-            self::DISTRICT_HO => "holosiivskyi",
-            self::DISTRICT_DA => "darnytskyi",
-            self::DISTRICT_DE => "desnianskyi",
-            self::DISTRICT_DN => "dniprovskyi",
-            self::DISTRICT_OB => "obolonskyi",
-            self::DISTRICT_PE => "pecherskyi",
-            self::DISTRICT_PO => "podilskyi",
-            self::DISTRICT_SV => "sviatoshynskyi",
-            self::DISTRICT_SO => "solomianskyi",
-            self::DISTRICT_SH => "shevchenkivskyi",
-            self::DISTRICT_KO => "kiev_oblast",
+            self::DISTRICT_HO    => "holosiivskyi",
+            self::DISTRICT_DA    => "darnytskyi",
+            self::DISTRICT_DE    => "desnianskyi",
+            self::DISTRICT_DN    => "dniprovskyi",
+            self::DISTRICT_OB    => "obolonskyi",
+            self::DISTRICT_PE    => "pecherskyi",
+            self::DISTRICT_PO    => "podilskyi",
+            self::DISTRICT_SV    => "sviatoshynskyi",
+            self::DISTRICT_SO    => "solomianskyi",
+            self::DISTRICT_SH    => "shevchenkivskyi",
+            self::DISTRICT_KO    => "kiev_oblast",
             self::DISTRICT_OTHER => "other"
         ];
     }
@@ -378,117 +385,49 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
-     * Set price
+     * Set priceUAH
      *
-     * @param string $price
+     * @param string $priceUAH
      * @return Estate
      */
-    public function setPrice($price)
+    public function setPriceUAH($priceUAH)
     {
-        $this->price = $price;
+        $this->priceUAH = $priceUAH;
 
         return $this;
     }
 
     /**
-     * Get price
+     * Get priceUAH
      *
-     * @return string 
+     * @return string
      */
-    public function getPrice()
+    public function getPriceUAH()
     {
-        return $this->price;
+        return $this->priceUAH;
     }
 
     /**
-     * Add estatePhoto
+     * Set priceUSD
      *
-     * @param \AppBundle\Entity\EstatePhoto $estatePhoto
+     * @param string $priceUSD
      * @return Estate
      */
-    public function addEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
+    public function setPriceUSD($priceUSD)
     {
-        $estatePhoto->setEstate($this);
-        $this->estatePhoto[] = $estatePhoto;
+        $this->priceUSD = $priceUSD;
 
         return $this;
     }
 
     /**
-     * Remove estatePhoto
+     * Get priceUSD
      *
-     * @param \AppBundle\Entity\EstatePhoto $estatePhoto
+     * @return string
      */
-    public function removeEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
+    public function getPriceUSD()
     {
-        $this->estatePhoto->removeElement($estatePhoto);
-    }
-
-    /**
-     * Get estatePhoto
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEstatePhoto()
-    {
-        return $this->estatePhoto;
-    }
-
-    /**
-     * Set estateType
-     *
-     * @param \AppBundle\Entity\EstateType $estateType
-     * @return Estate
-     */
-    public function setEstateType(\AppBundle\Entity\EstateType $estateType = null)
-    {
-        $this->estateType = $estateType;
-
-        return $this;
-    }
-
-    /**
-     * Get estateType
-     *
-     * @return \AppBundle\Entity\EstateType 
-     */
-    public function getEstateType()
-    {
-        return $this->estateType;
-    }
-
-    /**
-     * Add estateAttribute
-     *
-     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
-     * @return Estate
-     */
-    public function addEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
-    {
-        $estateAttribute->setEstate($this);
-        $this->estateAttribute[] = $estateAttribute;
-
-        return $this;
-    }
-
-    /**
-     * Remove estateAttribute
-     *
-     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
-     */
-    public function removeEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
-    {
-        $this->estateAttribute->removeElement($estateAttribute);
-    }
-
-    /**
-     * Get estateAttribute
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEstateAttribute()
-    {
-        return $this->estateAttribute;
+        return $this->priceUSD;
     }
 
     /**
@@ -673,5 +612,96 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Add estatePhoto
+     *
+     * @param \AppBundle\Entity\EstatePhoto $estatePhoto
+     * @return Estate
+     */
+    public function addEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
+    {
+        $estatePhoto->setEstate($this);
+        $this->estatePhoto[] = $estatePhoto;
+
+        return $this;
+    }
+
+    /**
+     * Remove estatePhoto
+     *
+     * @param \AppBundle\Entity\EstatePhoto $estatePhoto
+     */
+    public function removeEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
+    {
+        $this->estatePhoto->removeElement($estatePhoto);
+    }
+
+    /**
+     * Get estatePhoto
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEstatePhoto()
+    {
+        return $this->estatePhoto;
+    }
+
+    /**
+     * Set estateType
+     *
+     * @param \AppBundle\Entity\EstateType $estateType
+     * @return Estate
+     */
+    public function setEstateType(\AppBundle\Entity\EstateType $estateType = null)
+    {
+        $this->estateType = $estateType;
+
+        return $this;
+    }
+
+    /**
+     * Get estateType
+     *
+     * @return \AppBundle\Entity\EstateType
+     */
+    public function getEstateType()
+    {
+        return $this->estateType;
+    }
+
+    /**
+     * Add estateAttribute
+     *
+     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
+     * @return Estate
+     */
+    public function addEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
+    {
+        $estateAttribute->setEstate($this);
+        $this->estateAttribute[] = $estateAttribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove estateAttribute
+     *
+     * @param \AppBundle\Entity\EstateAttribute $estateAttribute
+     */
+    public function removeEstateAttribute(\AppBundle\Entity\EstateAttribute $estateAttribute)
+    {
+        $this->estateAttribute->removeElement($estateAttribute);
+    }
+
+    /**
+     * Get estateAttribute
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEstateAttribute()
+    {
+        return $this->estateAttribute;
     }
 }
