@@ -4,15 +4,17 @@ namespace AppBundle\Controller;
 
 use DateTime;
 
-use Symfony\Component\HttpFoundation\Request,
+use Symfony\Component\HttpKernel\Exception\HttpException,
+    Symfony\Component\HttpFoundation\Request,
     Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-use AppBundle\Entity\Article;
+use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
+    AppBundle\Entity\Article;
 
-class StateController extends Controller
+class StateController extends Controller implements FilterArgumentsInterface
 {
     /**
      * @Method({"GET"})
@@ -64,12 +66,12 @@ class StateController extends Controller
      */
     public function catalogAction(Request $request, $estateType, $id = NULL)
     {
-        $manager = $this->getDoctrine()->getManager();
-
         if( !$estateType )
             return $this->redirectToRoute('catalog', [
                 'estateType' => 'commercial'
             ], 307);
+
+        $manager = $this->getDoctrine()->getManager();
 
         $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
 
@@ -97,14 +99,36 @@ class StateController extends Controller
                 ]
             ];
         } else {
-            $estates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
+            $unfilteredEstates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
+
+            $filterValidator = $this->get('app.filter.validator');
+
+            if( $request->request->has(self::FILTER_ROOT) )
+            {
+                $query = http_build_query($request->request->get(self::FILTER_ROOT));
+
+                return $this->redirect(strtok($request->getRequestUri(), '?') . '?' . $query);
+            }
+
+            if( $request->query->all() )
+            {
+                $filterArguments = $request->query->all();
+
+                if( !$filterValidator->validateArguments($filterArguments, $unfilteredEstates) )
+                    throw new HttpException(418, "I'm a teapot");
+
+                $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments);
+            } else {
+                $estates = $unfilteredEstates;
+            }
 
             $response = [
                 'view' => 'AppBundle:State:catalog.html.twig',
                 'data' => [
-                    'estateType' => $estateType->getStringId(),
-                    'estates'    => $estates,
-                    'currency'   => $currency
+                    'estateType'        => $estateType->getStringId(),
+                    'estates'           => $estates,
+                    'unfilteredEstates' => $unfilteredEstates,
+                    'currency'          => $currency
                 ]
             ];
         }

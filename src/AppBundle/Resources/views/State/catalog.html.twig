@@ -38,10 +38,10 @@
         <div class="outer substrate top-panel-holder">
             <div class="inner">
                 <div class="btn-large flat white">
-                    <a href="{{ path('catalog', { 'estateType': 'commercial' }) }}">Комерційна</a>
+                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'commercial' }) }}">Комерційна</a>
                 </div>
                 <div class="btn-large flat white">
-                    <a href="{{ path('catalog', { 'estateType': 'residential' }) }}">Житлова</a>
+                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">Житлова</a>
                 </div>
                 <form action="#" method="POST" id="search-form">
                     <div class="field-holder">
@@ -59,26 +59,32 @@
         <div class="outer substrate catalog-content">
             <div class="inner">
                 <aside class="filter-holder">
-                    <!--div class="btn-small flat">
-                        <a href="#">Очистити</a>
-                    </div-->
+
+                    {% if app.request.query|length %}
+                        <div class="btn-small flat">
+                            <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType }) }}">Очистити фільтр</a>
+                        </div>
+                    {% endif %}
+
+                    {% set arguments = { 'request': app.request, 'estates': unfilteredEstates } %}
+
                     <form action="" method="POST" id="filter-form">
 
-                        {{ render(controller('AppBundle:Filter:estateTypeFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:estateTypeFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:tradeTypeFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:tradeTypeFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:featureFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:currencyFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:currencyFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:priceFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:priceFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:spaceFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:attributeFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:attributeFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:districtFilter', { 'request': app.request })) }}
+                        {{ render(controller('AppBundle:Filter:districtFilter', arguments)) }}
 
                     </form>
                 </aside>

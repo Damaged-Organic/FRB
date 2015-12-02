@@ -7,9 +7,9 @@
         <div class="item lang">
 
             {% if app.request.locale == default_locale %}
-                <a href="{{ path(route, { '_locale': 'en' }) }}">EN</a>
+                <a href="{{ path('index', { '_locale': 'en' }) }}">EN</a>
             {% else %}
-                <a href="{{ path(route, { '_locale': 'ua' }) }}">UA</a>
+                <a href="{{ path('index', { '_locale': 'ua' }) }}">UA</a>
             {% endif %}
 
         </div>

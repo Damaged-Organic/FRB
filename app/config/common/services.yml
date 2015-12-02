@@ -48,3 +48,11 @@ services:
 
     app.geo_coder:
         class: AppBundle\Service\GeoCoder
+
+    app.filter.available_values_extractor:
+        class: AppBundle\Service\Filter\AvailableValuesExtractor
+
+    app.filter.validator:
+        class: AppBundle\Service\Filter\Validator
+        calls:
+            - [setAvailableValuesExtractor, ["@app.filter.available_values_extractor"]]

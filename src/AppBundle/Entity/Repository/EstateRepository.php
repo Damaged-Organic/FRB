@@ -4,10 +4,11 @@ namespace AppBundle\Entity\Repository;
 
 use Doctrine\ORM\Query;
 
-use AppBundle\Entity\Repository\Contract\CustomEntityRepository,
+use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
+    AppBundle\Entity\Repository\Contract\CustomEntityRepository,
     AppBundle\Entity\EstateType;
 
-class EstateRepository extends CustomEntityRepository
+class EstateRepository extends CustomEntityRepository implements FilterArgumentsInterface
 {
     public function find($id)
     {
@@ -45,6 +46,44 @@ class EstateRepository extends CustomEntityRepository
             ->setParameter('estateType', $estateType)
             ->getQuery()
         ;
+
+        $query->setHint(
+            Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
+
+        return $query->getResult();
+    }
+
+    public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments)
+    {
+        $query = $this->createQueryBuilder('e')
+            ->select('e, ep, et, ea, eat')
+            ->leftJoin('e.estatePhoto', 'ep')
+            ->leftJoin('e.estateType', 'et')
+            ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('ea.estateAttributeType', 'eat')
+            ->where('et.parent = :estateType')
+            ->setParameter('estateType', $estateType);
+        ;
+
+        if( !empty($filterArguments[self::FILTER_DISTRICTS]) )
+        {
+            $query
+                ->andWhere('e.district IN (:districts)')
+                ->setParameter('districts', $filterArguments[self::FILTER_DISTRICTS])
+            ;
+        }
+
+        if( !empty($filterArguments[self::FILTER_ESTATE_TYPE]) )
+        {
+            $query
+                ->andWhere('et.id = :estateTypeId')
+                ->setParameter('estateTypeId', $filterArguments[self::FILTER_ESTATE_TYPE])
+            ;
+        }
+
+        $query = $query->getQuery();
 
         $query->setHint(
             Query::HINT_CUSTOM_OUTPUT_WALKER,
