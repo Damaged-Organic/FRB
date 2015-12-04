@@ -56,3 +56,8 @@ services:
         class: AppBundle\Service\Filter\Validator
         calls:
             - [setAvailableValuesExtractor, ["@app.filter.available_values_extractor"]]
+
+    app.filter.utility.currency:
+        class: AppBundle\Service\Filter\Utility\Currency
+        calls:
+            - [setSession, ["@session"]]

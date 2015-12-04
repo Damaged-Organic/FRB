@@ -9,17 +9,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
-    AppBundle\Entity\Estate;
+    AppBundle\Entity\Estate,
+    AppBundle\Service\Filter\Utility\Currency;
 
 class FilterController extends Controller implements FilterArgumentsInterface
 {
-    public function estateTypeFilterAction(Request $request, $estates)
+    public function estateTypeFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $estateTypes = $filterAvailableValuesExtractor->availableEstateTypes($estates);
 
-        $checked = ( $request->query->get(self::FILTER_ESTATE_TYPE) ) ?: [];
+        $checked = ( !empty($filterArguments[self::FILTER_ESTATE_TYPE]) ) ? $filterArguments[self::FILTER_ESTATE_TYPE] : [];
 
         return $this->render('AppBundle:Filter:estate_type.html.twig', [
             'estateTypes' => $estateTypes,
@@ -27,13 +28,13 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
-    public function tradeTypeFilterAction(Request $request, $estates)
+    public function tradeTypeFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $tradeTypes = $filterAvailableValuesExtractor->availableTradeTypes($estates);
 
-        $checked = ( $request->query->get(self::FILTER_TRADE_TYPE) ) ?: [];
+        $checked = ( !empty($filterArguments[self::FILTER_TRADE_TYPE]) ) ? $filterArguments[self::FILTER_TRADE_TYPE] : [];
 
         return $this->render('AppBundle:Filter:trade_type.html.twig', [
             'tradeTypes' => $tradeTypes,
@@ -41,38 +42,68 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
-    public function currencyFilterAction()
+    public function currencyFilterAction(array $filterArguments, array $estates)
     {
-        return $this->render('AppBundle:Filter:currency.html.twig');
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $currencies = $filterAvailableValuesExtractor->availableCurrencies();
+
+        $checked = ( !empty($filterArguments[self::FILTER_CURRENCY]) ) ? $filterArguments[self::FILTER_CURRENCY] : Currency::getDefaultCurrency();
+
+        return $this->render('AppBundle:Filter:currency.html.twig', [
+            'currencies' => $currencies,
+            'checked'    => $checked
+        ]);
     }
 
-    public function spaceFilterAction(Request $request)
+    public function priceFilterAction(array $filterArguments, array $estates, $currency)
     {
-        return $this->render('AppBundle:Filter:space.html.twig');
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $priceRange = $filterAvailableValuesExtractor->availablePriceRange($estates, $currency);
+
+        $values = ( !empty($filterArguments[self::FILTER_PRICE]) ) ? $filterArguments[self::FILTER_PRICE] : [];
+
+        return $this->render('AppBundle:Filter:price.html.twig', [
+            'currency'   => $currency,
+            'priceRange' => $priceRange,
+            'values'     => $values
+        ]);
     }
 
-    public function priceFilterAction(Request $request)
+    public function spaceFilterAction(array $filterArguments, array $estates)
     {
-        return $this->render('AppBundle:Filter:price.html.twig');
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $spaceRange = $filterAvailableValuesExtractor->availableSpaceRange($estates);
+
+        $values = ( !empty($filterArguments[self::FILTER_SPACE]) ) ? $filterArguments[self::FILTER_SPACE] : [];
+
+        return $this->render('AppBundle:Filter:space.html.twig', [
+            'spaceRange' => $spaceRange,
+            'values'     => $values
+        ]);
     }
 
-    public function attributeFilterAction(Request $request)
+    public function attributeFilterAction(array $filterArguments, array $estates)
     {
         return $this->render('AppBundle:Filter:attribute.html.twig');
     }
 
-    public function featureFilterAction(Request $request)
+    public function featureFilterAction(array $filterArguments, array $estates)
     {
+        
+
         return $this->render('AppBundle:Filter:feature.html.twig');
     }
 
-    public function districtFilterAction(Request $request, $estates)
+    public function districtFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $districts = $filterAvailableValuesExtractor->availableDistricts($estates);
 
-        $checked = ( $request->query->get(self::FILTER_DISTRICTS) ) ?: [];
+        $checked = ( !empty($filterArguments[self::FILTER_DISTRICTS]) ) ? $filterArguments[self::FILTER_DISTRICTS] : [];
 
         return $this->render('AppBundle:Filter:district.html.twig', [
             'districts' => $districts,

@@ -48,6 +48,11 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $estateAttribute;
 
     /**
+     * @ORM\OneToOne(targetEntity="EstateFeatures", mappedBy="estate", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $estateFeatures;
+
+    /**
      * @ORM\Column(type="string", length=15, nullable=false)
      **/
     protected $tradeType;
@@ -107,36 +112,6 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      **/
     protected $priceUSD;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $isCashless;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $isNewBuilding;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $hasElevator;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $hasParking;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $hasFurniture;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     **/
-    protected $hasRegistration;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -216,7 +191,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get tradeType
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getTradeType()
     {
@@ -239,7 +214,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -262,7 +237,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -285,7 +260,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -308,7 +283,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get rawDescription
      *
-     * @return string 
+     * @return string
      */
     public function getRawDescription()
     {
@@ -331,7 +306,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get descriptionFormatter
      *
-     * @return string 
+     * @return string
      */
     public function getDescriptionFormatter()
     {
@@ -377,7 +352,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get space
      *
-     * @return string 
+     * @return string
      */
     public function getSpace()
     {
@@ -431,144 +406,6 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
-     * Set isCashless
-     *
-     * @param boolean $isCashless
-     * @return Estate
-     */
-    public function setIsCashless($isCashless)
-    {
-        $this->isCashless = $isCashless;
-
-        return $this;
-    }
-
-    /**
-     * Get isCashless
-     *
-     * @return boolean 
-     */
-    public function getIsCashless()
-    {
-        return $this->isCashless;
-    }
-
-    /**
-     * Set isNewBuilding
-     *
-     * @param boolean $isNewBuilding
-     * @return Estate
-     */
-    public function setIsNewBuilding($isNewBuilding)
-    {
-        $this->isNewBuilding = $isNewBuilding;
-
-        return $this;
-    }
-
-    /**
-     * Get isNewBuilding
-     *
-     * @return boolean 
-     */
-    public function getIsNewBuilding()
-    {
-        return $this->isNewBuilding;
-    }
-
-    /**
-     * Set hasElevator
-     *
-     * @param boolean $hasElevator
-     * @return Estate
-     */
-    public function setHasElevator($hasElevator)
-    {
-        $this->hasElevator = $hasElevator;
-
-        return $this;
-    }
-
-    /**
-     * Get hasElevator
-     *
-     * @return boolean 
-     */
-    public function getHasElevator()
-    {
-        return $this->hasElevator;
-    }
-
-    /**
-     * Set hasParking
-     *
-     * @param boolean $hasParking
-     * @return Estate
-     */
-    public function setHasParking($hasParking)
-    {
-        $this->hasParking = $hasParking;
-
-        return $this;
-    }
-
-    /**
-     * Get hasParking
-     *
-     * @return boolean 
-     */
-    public function getHasParking()
-    {
-        return $this->hasParking;
-    }
-
-    /**
-     * Set hasFurniture
-     *
-     * @param boolean $hasFurniture
-     * @return Estate
-     */
-    public function setHasFurniture($hasFurniture)
-    {
-        $this->hasFurniture = $hasFurniture;
-
-        return $this;
-    }
-
-    /**
-     * Get hasFurniture
-     *
-     * @return boolean 
-     */
-    public function getHasFurniture()
-    {
-        return $this->hasFurniture;
-    }
-
-    /**
-     * Set hasRegistration
-     *
-     * @param boolean $hasRegistration
-     * @return Estate
-     */
-    public function setHasRegistration($hasRegistration)
-    {
-        $this->hasRegistration = $hasRegistration;
-
-        return $this;
-    }
-
-    /**
-     * Get hasRegistration
-     *
-     * @return boolean 
-     */
-    public function getHasRegistration()
-    {
-        return $this->hasRegistration;
-    }
-
-    /**
      * Set coordinates
      *
      * @param string $coordinates
@@ -607,7 +444,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -703,5 +540,28 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getEstateAttribute()
     {
         return $this->estateAttribute;
+    }
+
+    /**
+     * Set estateFeatures
+     *
+     * @param \AppBundle\Entity\EstateFeatures $estateFeatures
+     * @return Estate
+     */
+    public function setEstateFeatures(\AppBundle\Entity\EstateFeatures $estateFeatures = null)
+    {
+        $this->estateFeatures = $estateFeatures;
+
+        return $this;
+    }
+
+    /**
+     * Get estateFeatures
+     *
+     * @return \AppBundle\Entity\EstateFeatures
+     */
+    public function getEstateFeatures()
+    {
+        return $this->estateFeatures;
     }
 }

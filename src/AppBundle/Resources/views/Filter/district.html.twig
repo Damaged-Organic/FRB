@@ -2,12 +2,15 @@
 <div class="item">
     <h3>Район</h3>
 
+    {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+    {% set FILTER_DISTRICTS = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_DISTRICTS') %}
+
     {% for id, title in districts %}
 
         {% set is_checked = ( id in checked ) %}
 
         <div class="check-holder full-w">
-            <input type="checkbox" name="{{ constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') }}[{{ constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_DISTRICTS') }}][]" value="{{ id }}" id="district-{{ id }}" {{ ( is_checked ) ? 'checked' }}>
+            <input type="checkbox" name="{{ FILTER_ROOT }}[{{ FILTER_DISTRICTS }}][]" value="{{ id }}" id="district-{{ id }}" {{ ( is_checked ) ? 'checked' }}>
             <label for="district-{{ id }}"><span>{{ title|trans({}, 'districts') }}</span></label>
         </div>
     {% endfor %}

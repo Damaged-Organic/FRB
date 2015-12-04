@@ -2,14 +2,16 @@
 <div class="item">
     <h3>Тип нерухомості</h3>
 
+    {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+    {% set FILTER_ESTATE_TYPE = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ESTATE_TYPE') %}
+
     {% for id, estateType in estateTypes %}
 
         {% set is_checked = ( id in checked ) %}
 
         <div class="check-holder full-w">
-            <input type="radio" name="{{ constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') }}[{{ constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ESTATE_TYPE') }}]" value="{{ id }}" id="estate-type-{{ id }}" {{ ( is_checked ) ? 'checked' }}>
+            <input type="radio" name="{{ FILTER_ROOT }}[{{ FILTER_ESTATE_TYPE }}]" value="{{ id }}" id="estate-type-{{ id }}" {{ ( is_checked ) ? 'checked' }}>
             <label for="estate-type-{{ id }}"><span>{{ estateType.title|lower }}</span></label>
         </div>
     {% endfor %}
-
 </div>

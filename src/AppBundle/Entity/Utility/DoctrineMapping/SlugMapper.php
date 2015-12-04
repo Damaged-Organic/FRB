@@ -9,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait SlugMapper
 {
     /**
-     * @ORM\Column(length=510, unique=true)
+     * @ORM\Column(length=255, unique=true)
      *
      * @Gedmo\Slug(
      *      fields={"title", "address"},

@@ -6,7 +6,8 @@ use Doctrine\ORM\Query;
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
     AppBundle\Entity\Repository\Contract\CustomEntityRepository,
-    AppBundle\Entity\EstateType;
+    AppBundle\Entity\EstateType,
+    AppBundle\Service\Filter\Utility\Currency;
 
 class EstateRepository extends CustomEntityRepository implements FilterArgumentsInterface
 {
@@ -55,7 +56,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         return $query->getResult();
     }
 
-    public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments)
+    public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments, $currency)
     {
         $query = $this->createQueryBuilder('e')
             ->select('e, ep, et, ea, eat')
@@ -80,6 +81,40 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             $query
                 ->andWhere('et.id = :estateTypeId')
                 ->setParameter('estateTypeId', $filterArguments[self::FILTER_ESTATE_TYPE])
+            ;
+        }
+
+        if( !empty($filterArguments[self::FILTER_TRADE_TYPE]) )
+        {
+            $query
+                ->andWhere('e.tradeType = :tradeType')
+                ->setParameter('tradeType', $filterArguments[self::FILTER_TRADE_TYPE])
+            ;
+        }
+
+        if( !empty($filterArguments[self::FILTER_PRICE]) )
+        {
+            if( $currency == Currency::CURRENCY_CODE_USD ) {
+                $field = 'priceUSD';
+            } else {
+                $field = 'priceUAH';
+            }
+
+            $query
+                ->andWhere("e.{$field} >= :price_min")
+                ->andWhere("e.{$field} <= :price_max")
+                ->setParameter('price_min', $filterArguments[self::FILTER_PRICE]['min'])
+                ->setParameter('price_max', $filterArguments[self::FILTER_PRICE]['max'])
+            ;
+        }
+
+        if( !empty($filterArguments[self::FILTER_SPACE]) )
+        {
+            $query
+                ->andWhere('e.space >= :space_min')
+                ->andWhere('e.space <= :space_max')
+                ->setParameter('space_min', $filterArguments[self::FILTER_SPACE]['min'])
+                ->setParameter('space_max', $filterArguments[self::FILTER_SPACE]['max'])
             ;
         }
 

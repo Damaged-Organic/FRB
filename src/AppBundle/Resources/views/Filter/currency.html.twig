@@ -1,12 +1,18 @@
 {# src/AppBundle/Resources/views/Filter/currency.html.twig #}
 <div class="item">
     <h3>Валюта</h3>
-    <div class="check-holder">
-        <input type="radio" name="filter[currency]" value="usd" id="currency-usd">
-        <label for="currency-usd"><span>USD</span></label>
-    </div>
-    <div class="check-holder">
-        <input type="radio" name="filter[currency]" value="uah" id="currency-uah">
-        <label for="currency-uah"><span>UAH</span></label>
-    </div>
+
+    {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+    {% set FILTER_CURRENCY = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_CURRENCY') %}
+
+    {% for id in currencies %}
+
+        {% set is_checked = ( id in checked ) %}
+
+        <div class="check-holder">
+            <input type="radio" name="{{ FILTER_ROOT }}[{{ FILTER_CURRENCY }}]" value="{{ id }}" id="currency-{{ id }}" {{ ( is_checked ) ? 'checked' }}>
+            <label for="currency-{{ id }}"><span>{{ id }}</span></label>
+        </div>
+    {% endfor %}
+
 </div>

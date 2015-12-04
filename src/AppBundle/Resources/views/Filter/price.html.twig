@@ -1,11 +1,21 @@
 {# src/AppBundle/Resources/views/Filter/price.html.twig #}
 <div class="item">
-    <h3>Ціна</h3>
-    <div class="range-holder" data-min="0" data-range-min="0" data-max="1000" data-range-max="1000"></div>
+    <h3>Ціна ({{ currency }})</h3>
+
+    {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+    {% set FILTER_PRICE = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_PRICE') %}
+
+    {% set priceMin = ( values['min'] is defined ) ? values['min'] : priceRange['min'] %}
+    {% set priceMax = ( values['max'] is defined ) ? values['max'] : priceRange['max'] %}
+
+    <div class="range-holder"
+         data-min="{{ priceMin }}" data-range-min="{{ priceRange['min'] }}"
+         data-max="{{ priceMax }}" data-range-max="{{ priceRange['max'] }}">
+    </div>
     <div class="field-holder">
         <span>від</span>
-        <input type="text" name="filter[price_min]" value="0" id="price-min" class="counter">
+        <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_PRICE }}][min]" value="{{ priceMin|number_format(0, '', '') }}" id="price-min" class="counter">
         <span>до</span>
-        <input type="text" name="filter[price_max]" value="1000" id="price-max" class="counter">
+        <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_PRICE }}][max]" value="{{ priceMax|number_format(0, '', '') }}" id="price-max" class="counter">
     </div>
 </div>

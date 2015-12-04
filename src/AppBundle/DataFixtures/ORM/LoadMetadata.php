@@ -55,6 +55,26 @@ class LoadMetadata extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist
         (
             $metadata = (new Metadata)
+                ->setRoute("catalog_item")
+                ->setRobots("index, follow")
+                ->setTitle("Об’єкт нерухомості")
+                ->setDescription("")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $metadata->setTitle("Estate object")
+                ->setDescription("")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $metadata = (new Metadata)
                 ->setRoute("services")
                 ->setRobots("index, follow")
                 ->setTitle("Послуги")

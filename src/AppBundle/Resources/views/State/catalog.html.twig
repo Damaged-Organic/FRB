@@ -66,7 +66,7 @@
                         </div>
                     {% endif %}
 
-                    {% set arguments = { 'request': app.request, 'estates': unfilteredEstates } %}
+                    {% set arguments = { 'filterArguments': filterArguments, 'estates': unfilteredEstates } %}
 
                     <form action="" method="POST" id="filter-form">
 
@@ -78,7 +78,7 @@
 
                         {{ render(controller('AppBundle:Filter:currencyFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:priceFilter', arguments)) }}
+                        {{ render(controller('AppBundle:Filter:priceFilter', arguments|merge({ 'currency': currency }))) }}
 
                         {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
 
@@ -94,7 +94,7 @@
                         {% for estate in estates %}
                             <article class="col item">
                                 <div class="inner">
-                                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}">
+                                    <a href="{{ path('catalog_item', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}">
                                         <div class="photo-holder">
                                             <figure>
 

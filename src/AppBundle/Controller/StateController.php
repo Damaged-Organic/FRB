@@ -50,21 +50,21 @@ class StateController extends Controller implements FilterArgumentsInterface
     /**
      * @Method({"GET", "POST"})
      * @Route(
-     *      "/catalog/{estateType}/{id}/{slug}",
+     *      "/catalog/{estateType}",
      *      name="catalog",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null, "slug" = null},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
      * )
      * @Route(
-     *      "/catalog/{estateType}/{id}/{slug}",
+     *      "/catalog/{estateType}",
      *      name="catalog_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "id" = null, "slug" = null},
-     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
      * )
      */
-    public function catalogAction(Request $request, $estateType, $id = NULL)
+    public function catalogAction(Request $request, $estateType)
     {
         if( !$estateType )
             return $this->redirectToRoute('catalog', [
@@ -78,62 +78,96 @@ class StateController extends Controller implements FilterArgumentsInterface
         if( !$estateType )
             throw $this->createNotFoundException();
 
-        $currency = 'USD';
+        if( $request->request->has(self::FILTER_ROOT) )
+            return $this->redirect(
+                strtok($request->getRequestUri(), '?') . '?' . http_build_query($request->request->get(self::FILTER_ROOT))
+            );
 
-        if( $id )
+        $filterValidator = $this->get('app.filter.validator');
+        $filterCurrency  = $this->get('app.filter.utility.currency');
+
+        $unfilteredEstates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
+
+        if( $request->query->all() )
         {
-            $estate = $manager->getRepository('AppBundle:Estate')->find($id);
+            $filterArguments = $request->query->all();
 
-            if( !$estate )
-                throw $this->createNotFoundException();
+            if( !empty($filterArguments[self::FILTER_CURRENCY]) )
+            {
+                if( $filterCurrency->getCurrency() && $filterCurrency->getCurrency() !== $filterArguments[self::FILTER_CURRENCY] )
+                    $filterArguments[self::FILTER_PRICE] = [];
 
-            $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id);
+                $filterCurrency->setCurrency($filterArguments[self::FILTER_CURRENCY]);
+            }
 
-            $response = [
-                'view' => 'AppBundle:State:catalog_item.html.twig',
-                'data' => [
-                    'estateType'     => $estateType->getStringId(),
-                    'estate'         => $estate,
-                    'currency'       => $currency,
-                    'nearestEstates' => $nearestEstates
-                ]
-            ];
+            $currency = ( $filterCurrency->getCurrency() ) ?: $filterCurrency->getDefaultCurrency();
+
+            if( !($filterArguments = $filterValidator->validateArguments($filterArguments, $unfilteredEstates, $currency)) )
+                throw new HttpException(418, "I'm a teapot");
+
+            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency);
         } else {
-            $unfilteredEstates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
+            $filterArguments = [];
 
-            $filterValidator = $this->get('app.filter.validator');
+            $filterCurrency->removeCurrency();
 
-            if( $request->request->has(self::FILTER_ROOT) )
-            {
-                $query = http_build_query($request->request->get(self::FILTER_ROOT));
+            $currency = $filterCurrency->getDefaultCurrency();
 
-                return $this->redirect(strtok($request->getRequestUri(), '?') . '?' . $query);
-            }
-
-            if( $request->query->all() )
-            {
-                $filterArguments = $request->query->all();
-
-                if( !$filterValidator->validateArguments($filterArguments, $unfilteredEstates) )
-                    throw new HttpException(418, "I'm a teapot");
-
-                $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments);
-            } else {
-                $estates = $unfilteredEstates;
-            }
-
-            $response = [
-                'view' => 'AppBundle:State:catalog.html.twig',
-                'data' => [
-                    'estateType'        => $estateType->getStringId(),
-                    'estates'           => $estates,
-                    'unfilteredEstates' => $unfilteredEstates,
-                    'currency'          => $currency
-                ]
-            ];
+            $estates = $unfilteredEstates;
         }
 
-        return $this->render($response['view'], $response['data']);
+        return $this->render('AppBundle:State:catalog.html.twig', [
+            'estateType'        => $estateType->getStringId(),
+            'estates'           => $estates,
+            'unfilteredEstates' => $unfilteredEstates,
+            'filterArguments'   => $filterArguments,
+            'currency'          => $currency
+        ]);
+    }
+
+    /**
+     * @Method({"GET"})
+     * @Route(
+     *      "/catalog/{estateType}/{id}/{slug}",
+     *      name="catalog_item",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     * )
+     * @Route(
+     *      "/catalog/{estateType}/{id}/{slug}",
+     *      name="catalog_item_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     * )
+     */
+    public function catalogItemAction(Request $request, $estateType, $id)
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
+
+        if( !$estateType )
+            throw $this->createNotFoundException();
+
+        $estate = $manager->getRepository('AppBundle:Estate')->find($id);
+
+        if( !$estate )
+            throw $this->createNotFoundException();
+
+        $filterCurrency = $this->get('app.filter.utility.currency');
+
+        $currency = ( $filterCurrency->getCurrency() ) ?: $filterCurrency->getDefaultCurrency();
+
+        $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id);
+
+        return $this->render('AppBundle:State:catalog_item.html.twig', [
+            'estateType'     => $estateType->getStringId(),
+            'estate'         => $estate,
+            'currency'       => $currency,
+            'nearestEstates' => $nearestEstates
+        ]);
     }
 
     /**
