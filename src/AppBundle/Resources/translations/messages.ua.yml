@@ -3,6 +3,9 @@ default:
     title: First Reality Brokerage
 
 common:
+    yes: Так
+    no:  Ні
+
     header:
         menu: Меню
 
@@ -45,12 +48,24 @@ state:
             class:    '{0} -|{1} %count% клас |[2, 4] %count% клас |[5, Inf] %count% клас'
 
         feature:
-            is_cashless:      безготівковий розрахунок
-            is_new_building:  нова будівля
-            has_elevator:     наявність ліфту
-            has_parking:      наявність парковки
-            has_furniture:    наявність меблів
-            has_registration: реєстрація для нерезидентів
+            isCashless:
+                catalog: безготівковий
+                object:  безготівковий розрахунок
+            isNewBuilding:
+                catalog: нова будівля
+                object:  нова будівля
+            hasElevator:
+                catalog: наявність ліфту
+                object:  наявність ліфту
+            hasParking:
+                catalog: наявність парковки
+                object:  наявність парковки
+            hasFurniture:
+                catalog: наявність меблів
+                object:  наявність меблів
+            hasRegistration:
+                catalog: реєстрація
+                object:  реєстрація для нерезидентів
 
         next: наступний об’єкт
         back: повернутися до каталогу

@@ -85,16 +85,23 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    public function featureFilterAction(array $filterArguments, array $estates)
+    {
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $features = $filterAvailableValuesExtractor->availableFeatures($estates);
+
+        $checked = ( !empty($filterArguments[self::FILTER_FEATURES]) ) ? $filterArguments[self::FILTER_FEATURES] : [];
+
+        return $this->render('AppBundle:Filter:feature.html.twig', [
+            'features' => $features,
+            'checked'  => $checked
+        ]);
+    }
+
     public function attributeFilterAction(array $filterArguments, array $estates)
     {
         return $this->render('AppBundle:Filter:attribute.html.twig');
-    }
-
-    public function featureFilterAction(array $filterArguments, array $estates)
-    {
-        
-
-        return $this->render('AppBundle:Filter:feature.html.twig');
     }
 
     public function districtFilterAction(array $filterArguments, array $estates)

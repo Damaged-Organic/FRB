@@ -118,6 +118,11 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             ;
         }
 
+        if( !empty($filterArguments[self::FILTER_FEATURES]) )
+        {
+
+        }
+
         $query = $query->getQuery();
 
         $query->setHint(

@@ -94,7 +94,7 @@ class StateController extends Controller implements FilterArgumentsInterface
 
             if( !empty($filterArguments[self::FILTER_CURRENCY]) )
             {
-                if( $filterCurrency->getCurrency() && $filterCurrency->getCurrency() !== $filterArguments[self::FILTER_CURRENCY] )
+                if( !$filterCurrency->getCurrency() || ($filterCurrency->getCurrency() !== $filterArguments[self::FILTER_CURRENCY]) )
                     $filterArguments[self::FILTER_PRICE] = [];
 
                 $filterCurrency->setCurrency($filterArguments[self::FILTER_CURRENCY]);

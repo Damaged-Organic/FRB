@@ -5,7 +5,8 @@ namespace AppBundle\Service\Filter;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
-    AppBundle\Entity\Estate;
+    AppBundle\Entity\Estate,
+    AppBundle\Entity\EstateFeatures;
 
 class Validator implements FilterArgumentsInterface
 {
@@ -36,11 +37,11 @@ class Validator implements FilterArgumentsInterface
                 return FALSE;
         }
 
-        // if( !empty($filterArguments[self::FILTER_CURRENCY]) )
-        // {
-        //     if( !$this->validateCurrency($filterArguments[self::FILTER_CURRENCY]) )
-        //         return FALSE;
-        // }
+        if( !empty($filterArguments[self::FILTER_CURRENCY]) )
+        {
+            if( !$this->validateCurrency($filterArguments[self::FILTER_CURRENCY]) )
+                return FALSE;
+        }
 
         if( !empty($filterArguments[self::FILTER_PRICE]) )
         {
@@ -50,6 +51,12 @@ class Validator implements FilterArgumentsInterface
         if( !empty($filterArguments[self::FILTER_SPACE]) )
         {
             $filterArguments[self::FILTER_SPACE] = $this->sanitizeSpaceRange($filterArguments[self::FILTER_SPACE], $estates);
+        }
+
+        if( !empty($filterArguments[self::FILTER_FEATURES]) )
+        {
+            if( !$this->validateFeatures($filterArguments[self::FILTER_FEATURES]) )
+                return FALSE;
         }
 
         return $filterArguments;
@@ -67,7 +74,7 @@ class Validator implements FilterArgumentsInterface
 
     protected function validateTradeType($tradeType, $estates)
     {
-        $existingTradeTypes = $this->_availableValuesExtractor->availableTradeTypes($estates);
+        $existingTradeTypes = array_keys($this->_availableValuesExtractor->availableTradeTypes($estates));
 
         if( !in_array($tradeType, $existingTradeTypes, TRUE) )
             return FALSE;
@@ -117,6 +124,22 @@ class Validator implements FilterArgumentsInterface
             $spaceRange['max'] = $existingSpaceRange['max'];
 
         return $spaceRange;
+    }
+
+    public function validateFeatures($features)
+    {
+        $existingEstateFeatures = EstateFeatures::getEstateFeatures();
+
+        foreach ($features as $feature => $value)
+        {
+            if( !in_array($feature, $existingEstateFeatures, TRUE) )
+                return FALSE;
+
+            if( !in_array($value, ['yes', 'no'], TRUE) )
+                return FALSE;
+        }
+
+        return TRUE;
     }
 
     protected function validateDistricts(array $districts)

@@ -132,13 +132,13 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
 
-    sonata.admin.estate_photo:
-        class: AppBundle\Admin\EstatePhotoAdmin
+    sonata.admin.estate_features:
+        class: AppBundle\Admin\EstateFeaturesAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
         arguments:
             - ~
-            - AppBundle\Entity\EstatePhoto
+            - AppBundle\Entity\EstateFeatures
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
@@ -150,6 +150,17 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\EstateAttributeType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.estate_photo:
+        class: AppBundle\Admin\EstatePhotoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\EstatePhoto
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]

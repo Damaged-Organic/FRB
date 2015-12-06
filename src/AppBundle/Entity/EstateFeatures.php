@@ -218,4 +218,25 @@ class EstateFeatures
     {
         return $this->estate;
     }
+
+    public function getFeatureByName($featureName)
+    {
+        if( !in_array($featureName, self::getEstateFeatures(), TRUE) )
+            return NULL;
+
+        // Warning! Getting variable value by another string variable
+        return $this->{$featureName};
+    }
+
+    static public function getEstateFeatures()
+    {
+        return [
+            'isCashless',
+            'isNewBuilding',
+            'hasElevator',
+            'hasParking',
+            'hasFurniture',
+            'hasRegistration'
+        ];
+    }
 }

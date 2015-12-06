@@ -3,6 +3,9 @@ default:
     title: First Reality Brokerage
 
 common:
+    yes: Yes
+    no:  No
+
     header:
         menu: Menu
 
@@ -45,12 +48,24 @@ state:
             class:    '{0} -|{1} %count% class |[2, Inf] %count% class'
 
         feature:
-            is_cashless:      cashless payment
-            is_new_building:  new building
-            has_elevator:     elevator
-            has_parking:      parking
-            has_furniture:    furniture
-            has_registration: registration for non-residents
+            isCashless:
+                catalog: cashless
+                object:  cashless payment
+            isNewBuilding:
+                catalog: new building
+                object:  new building
+            hasElevator:
+                catalog: elevator
+                object:  elevator
+            hasParking:
+                catalog: parking
+                object:  parking
+            hasFurniture:
+                catalog: furniture
+                object:  furniture
+            hasRegistration:
+                catalog: registration
+                object:  registration for non-residents
 
         next: next object
         back: back to catalog

@@ -3,6 +3,7 @@
 namespace AppBundle\Service\Filter;
 
 use AppBundle\Entity\Estate,
+    AppBundle\Entity\EstateFeatures,
     AppBundle\Service\Filter\Utility\Currency;
 
 class AvailableValuesExtractor
@@ -61,10 +62,23 @@ class AvailableValuesExtractor
             }
         }
 
-        return [
-            'min' => min($availablePrices),
-            'max' => max($availablePrices)
-        ];
+        if( $availablePrices )
+        {
+            $priceMin = min($availablePrices);
+            $priceMax = max($availablePrices);
+
+            $availablePrices = [
+                'min' => ( $priceMin != $priceMax ) ? $priceMin : 0,
+                'max' => $priceMax
+            ];
+        } else {
+            $availablePrices = [
+                'min' => NULL,
+                'max' => NULL
+            ];
+        }
+
+        return $availablePrices;
     }
 
     public function availableSpaceRange(array $estates)
@@ -74,15 +88,52 @@ class AvailableValuesExtractor
         foreach( $estates as $estate )
         {
             if( $estate instanceof Estate )
-            {
                 $availableSpaces[] = $estate->getSpace();
+        }
+
+        if( $availableSpaces )
+        {
+            $spaceMin = min($availableSpaces);
+            $spaceMax = max($availableSpaces);
+
+            $availableSpaces = [
+                'min' => ( $spaceMin != $spaceMax ) ? $spaceMin : 0,
+                'max' => $spaceMax
+            ];
+        } else {
+            $availableSpaces = [
+                'min' => NULL,
+                'max' => NULL
+            ];
+        }
+
+        return $availableSpaces;
+    }
+
+    public function availableFeatures($estates)
+    {
+        $availableFeatures = [];
+
+        $existingEstateFeatures = EstateFeatures::getEstateFeatures();
+
+        foreach( $estates as $estate )
+        {
+            if( $estate instanceof Estate )
+            {
+                $estateFeatures = $estate->getEstateFeatures();
+
+                if( $estateFeatures instanceof EstateFeatures )
+                {
+                    foreach( $existingEstateFeatures as $feature )
+                    {
+                        if( $estateFeatures->getFeatureByName($feature) )
+                            $availableFeatures[$feature] = $estateFeatures->getFeatureByName($feature);
+                    }
+                }
             }
         }
 
-        return [
-            'min' => min($availableSpaces),
-            'max' => max($availableSpaces)
-        ];
+        return $availableFeatures;
     }
 
     public function availableDistricts(array $estates)

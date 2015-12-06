@@ -70,23 +70,28 @@
 
                     <form action="" method="POST" id="filter-form">
 
-                        {{ render(controller('AppBundle:Filter:estateTypeFilter', arguments)) }}
+                        {% if unfilteredEstates|length %}
+                            {{ render(controller('AppBundle:Filter:estateTypeFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:tradeTypeFilter', arguments)) }}
-
-                        {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
+                            {{ render(controller('AppBundle:Filter:tradeTypeFilter', arguments)) }}
+                        {% endif %}
 
                         {{ render(controller('AppBundle:Filter:currencyFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:priceFilter', arguments|merge({ 'currency': currency }))) }}
+                        {% if unfilteredEstates|length %}
+                            {{ render(controller('AppBundle:Filter:priceFilter', arguments|merge({ 'currency': currency }))) }}
 
-                        {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
+                            {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:attributeFilter', arguments)) }}
+                            {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
 
-                        {{ render(controller('AppBundle:Filter:districtFilter', arguments)) }}
+                            {{ render(controller('AppBundle:Filter:attributeFilter', arguments)) }}
+
+                            {{ render(controller('AppBundle:Filter:districtFilter', arguments)) }}
+                        {% endif %}
 
                     </form>
+
                 </aside>
                 <section class="catalog-holder">
                     <div class="grid">

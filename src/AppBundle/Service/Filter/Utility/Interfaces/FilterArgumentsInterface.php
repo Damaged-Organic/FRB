@@ -12,4 +12,5 @@ interface FilterArgumentsInterface
     const FILTER_CURRENCY    = 'currency';
     const FILTER_PRICE       = 'price';
     const FILTER_SPACE       = 'space';
+    const FILTER_FEATURES    = 'features';
 }

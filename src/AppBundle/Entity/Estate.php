@@ -550,6 +550,9 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
      */
     public function setEstateFeatures(\AppBundle\Entity\EstateFeatures $estateFeatures = null)
     {
+        if( $estateFeatures instanceof EstateFeatures )
+            $estateFeatures->setEstate($this);
+
         $this->estateFeatures = $estateFeatures;
 
         return $this;
