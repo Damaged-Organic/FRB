@@ -48,23 +48,23 @@ class StateController extends Controller implements FilterArgumentsInterface
     }
 
     /**
-     * @Method({"GET", "POST"})
+     * @Method({"GET"})
      * @Route(
-     *      "/catalog/{estateType}",
+     *      "/catalog/{estateType}/{page}",
      *      name="catalog",
      *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "page" = 1},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "page" = "\d+"}
      * )
      * @Route(
-     *      "/catalog/{estateType}",
+     *      "/catalog/{estateType}/{page}",
      *      name="catalog_default",
      *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
-     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null, "page" = 1},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "page" = "\d+"}
      * )
      */
-    public function catalogAction(Request $request, $estateType)
+    public function catalogAction(Request $request, $estateType, $page = NULL)
     {
         if( !$estateType )
             return $this->redirectToRoute('catalog', [
@@ -78,13 +78,11 @@ class StateController extends Controller implements FilterArgumentsInterface
         if( !$estateType )
             throw $this->createNotFoundException();
 
-        if( $request->request->has(self::FILTER_ROOT) )
-            return $this->redirect(
-                strtok($request->getRequestUri(), '?') . '?' . http_build_query($request->request->get(self::FILTER_ROOT))
-            );
-
         $filterValidator = $this->get('app.filter.validator');
         $filterCurrency  = $this->get('app.filter.utility.currency');
+
+        $results_per_page = 9;
+        $pages_step       = 5;
 
         $unfilteredEstates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
 
@@ -105,7 +103,7 @@ class StateController extends Controller implements FilterArgumentsInterface
             if( !($filterArguments = $filterValidator->validateArguments($filterArguments, $unfilteredEstates, $currency)) )
                 throw new HttpException(418, "I'm a teapot");
 
-            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency);
+            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency, $page, $results_per_page);
         } else {
             $filterArguments = [];
 
@@ -116,6 +114,16 @@ class StateController extends Controller implements FilterArgumentsInterface
             $estates = $unfilteredEstates;
         }
 
+        $paginationBarSet = $this->get('app.pagination_bar')->setParameters(
+            count($estates), $results_per_page, $page, $pages_step
+        );
+
+        if( $paginationBarSet ) {
+            $this->get('app.pagination_bar')->setPaginationBar();
+        } else {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render('AppBundle:State:catalog.html.twig', [
             'estateType'        => $estateType->getStringId(),
             'estates'           => $estates,
@@ -123,6 +131,90 @@ class StateController extends Controller implements FilterArgumentsInterface
             'filterArguments'   => $filterArguments,
             'currency'          => $currency
         ]);
+    }
+
+    /**
+     * @Method({"POST"})
+     * @Route(
+     *      "/catalog_filter/{estateType}",
+     *      name="catalog_filter",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
+     * )
+     * @Route(
+     *      "/catalog_filter/{estateType}",
+     *      name="catalog_filter_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
+     * )
+     */
+    public function catalogFilterAction(Request $request, $estateType)
+    {
+        if( !$estateType )
+            return $this->redirectToRoute('catalog', [
+                'estateType' => 'commercial'
+            ]);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
+
+        if( !$estateType )
+            throw $this->createNotFoundException();
+
+        $parameters = ( $request->request->has(self::FILTER_ROOT) )
+            ? $request->request->get(self::FILTER_ROOT)
+            : []
+        ;
+
+        return $this->redirectToRoute('catalog', [
+            '_locale'    => $request->getLocale(),
+            'estateType' => $estateType->getStringId()
+        ] + $parameters);
+    }
+
+    /**
+     * @Method({"POST"})
+     * @Route(
+     *      "/catalog_search/{estateType}",
+     *      name="catalog_search",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
+     * )
+     * @Route(
+     *      "/catalog_search/{estateType}",
+     *      name="catalog_search_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%", "estateType" = null},
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
+     * )
+     */
+    public function catalogSearchAction(Request $request, $estateType)
+    {
+        if( !$estateType )
+            return $this->redirectToRoute('catalog', [
+                'estateType' => 'commercial'
+            ]);
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $estateType = $manager->getRepository('AppBundle:EstateType')->findOneBy(['stringId' => $estateType]);
+
+        if( !$estateType )
+            throw $this->createNotFoundException();
+
+        $parameters = ( !empty($request->request->get(self::FILTER_ROOT)[self::FILTER_SEARCH]) )
+            ? $request->request->get(self::FILTER_ROOT)
+            : []
+        ;
+
+        return $this->redirectToRoute('catalog', [
+            '_locale'    => $request->getLocale(),
+            'estateType' => $estateType->getStringId()
+        ] + $parameters);
     }
 
     /**

@@ -2,7 +2,8 @@
 // src/AppBundle/Entity/Repository/EstateRepository.php
 namespace AppBundle\Entity\Repository;
 
-use Doctrine\ORM\Query;
+use Doctrine\ORM\Query,
+    Doctrine\ORM\Tools\Pagination\Paginator;
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
     AppBundle\Entity\Repository\Contract\CustomEntityRepository,
@@ -35,104 +36,6 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         return $query->getOneOrNullResult();
     }
 
-    public function findByType(EstateType $estateType)
-    {
-        $query = $this->createQueryBuilder('e')
-            ->select('e, ep, et, ea, eat')
-            ->leftJoin('e.estatePhoto', 'ep')
-            ->leftJoin('e.estateType', 'et')
-            ->leftJoin('e.estateAttribute', 'ea')
-            ->leftJoin('ea.estateAttributeType', 'eat')
-            ->where('et.parent = :estateType')
-            ->setParameter('estateType', $estateType)
-            ->getQuery()
-        ;
-
-        $query->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
-
-        return $query->getResult();
-    }
-
-    public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments, $currency)
-    {
-        $query = $this->createQueryBuilder('e')
-            ->select('e, ep, et, ea, eat')
-            ->leftJoin('e.estatePhoto', 'ep')
-            ->leftJoin('e.estateType', 'et')
-            ->leftJoin('e.estateAttribute', 'ea')
-            ->leftJoin('ea.estateAttributeType', 'eat')
-            ->where('et.parent = :estateType')
-            ->setParameter('estateType', $estateType);
-        ;
-
-        if( !empty($filterArguments[self::FILTER_DISTRICTS]) )
-        {
-            $query
-                ->andWhere('e.district IN (:districts)')
-                ->setParameter('districts', $filterArguments[self::FILTER_DISTRICTS])
-            ;
-        }
-
-        if( !empty($filterArguments[self::FILTER_ESTATE_TYPE]) )
-        {
-            $query
-                ->andWhere('et.id = :estateTypeId')
-                ->setParameter('estateTypeId', $filterArguments[self::FILTER_ESTATE_TYPE])
-            ;
-        }
-
-        if( !empty($filterArguments[self::FILTER_TRADE_TYPE]) )
-        {
-            $query
-                ->andWhere('e.tradeType = :tradeType')
-                ->setParameter('tradeType', $filterArguments[self::FILTER_TRADE_TYPE])
-            ;
-        }
-
-        if( !empty($filterArguments[self::FILTER_PRICE]) )
-        {
-            if( $currency == Currency::CURRENCY_CODE_USD ) {
-                $field = 'priceUSD';
-            } else {
-                $field = 'priceUAH';
-            }
-
-            $query
-                ->andWhere("e.{$field} >= :price_min")
-                ->andWhere("e.{$field} <= :price_max")
-                ->setParameter('price_min', $filterArguments[self::FILTER_PRICE]['min'])
-                ->setParameter('price_max', $filterArguments[self::FILTER_PRICE]['max'])
-            ;
-        }
-
-        if( !empty($filterArguments[self::FILTER_SPACE]) )
-        {
-            $query
-                ->andWhere('e.space >= :space_min')
-                ->andWhere('e.space <= :space_max')
-                ->setParameter('space_min', $filterArguments[self::FILTER_SPACE]['min'])
-                ->setParameter('space_max', $filterArguments[self::FILTER_SPACE]['max'])
-            ;
-        }
-
-        if( !empty($filterArguments[self::FILTER_FEATURES]) )
-        {
-
-        }
-
-        $query = $query->getQuery();
-
-        $query->setHint(
-            Query::HINT_CUSTOM_OUTPUT_WALKER,
-            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
-        );
-
-        return $query->getResult();
-    }
-
     public function getNearestEstates($id)
     {
         $previous = $this->createQueryBuilder('e')
@@ -158,5 +61,239 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             'previous' => $previous,
             'next'     => $next
         ];
+    }
+
+    public function findByType(EstateType $estateType)
+    {
+        $query = $this->createQueryBuilder('e')
+            ->select('e, ep, et, ea, eat')
+            ->leftJoin('e.estatePhoto', 'ep')
+            ->leftJoin('e.estateType', 'et')
+            ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('ea.estateAttributeType', 'eat')
+            ->where('et.parent = :estateType')
+            ->setParameter('estateType', $estateType)
+            ->getQuery()
+        ;
+
+        $query->setHint(
+            Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
+
+        return $query->getResult();
+    }
+
+    public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments, $currency, $page, $results_per_page)
+    {
+        $first_record = ($page * $results_per_page) - $results_per_page;
+
+        $query = $this->createQueryBuilder('e')
+            ->select('e, ep, et, ef, ea, eat')
+            ->leftJoin('e.estatePhoto', 'ep')
+            ->leftJoin('e.estateType', 'et')
+            ->leftJoin('e.estateFeatures', 'ef')
+            ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('ea.estateAttributeType', 'eat')
+            ->where('et.parent = :estateType')
+            ->setParameter('estateType', $estateType);
+        ;
+
+        if( !empty($filterArguments[self::FILTER_SEARCH]) ) {
+            $query = $this->filterArgumentsSearch($query, $filterArguments);
+        } else {
+            $query = $this->filterArgumentsEstateType($query, $filterArguments);
+            $query = $this->filterArgumentsTradeType($query, $filterArguments);
+            $query = $this->filterArgumentsPrice($query, $filterArguments, $currency);
+            $query = $this->filterArgumentsSpace($query, $filterArguments);
+            $query = $this->filterArgumentsFeatures($query, $filterArguments);
+            $query = $this->filterArgumentsAttributes($query, $filterArguments);
+            $query = $this->filterArgumentsDistricts($query, $filterArguments);
+        }
+
+        $query = $query
+            ->setFirstResult($first_record)
+            ->setMaxResults($results_per_page)
+            ->getQuery()
+        ;
+
+        $query->setHint(
+            Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
+
+        return new Paginator($query);
+    }
+
+    private function filterArgumentsEstateType($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_ESTATE_TYPE]) )
+        {
+            $query
+                ->andWhere('et.id = :estateTypeId')
+                ->setParameter('estateTypeId', $filterArguments[self::FILTER_ESTATE_TYPE])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsTradeType($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_TRADE_TYPE]) )
+        {
+            $query
+                ->andWhere('e.tradeType = :tradeType')
+                ->setParameter('tradeType', $filterArguments[self::FILTER_TRADE_TYPE])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsPrice($query, $filterArguments, $currency)
+    {
+        if( !empty($filterArguments[self::FILTER_PRICE]) )
+        {
+            if( $currency == Currency::CURRENCY_CODE_USD ) {
+                $field = 'priceUSD';
+            } else {
+                $field = 'priceUAH';
+            }
+
+            $query
+                ->andWhere("e.{$field} >= :price_min")
+                ->andWhere("e.{$field} <= :price_max")
+                ->setParameter('price_min', $filterArguments[self::FILTER_PRICE]['min'])
+                ->setParameter('price_max', $filterArguments[self::FILTER_PRICE]['max'])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsSpace($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_SPACE]) )
+        {
+            $query
+                ->andWhere('e.space >= :space_min')
+                ->andWhere('e.space <= :space_max')
+                ->setParameter('space_min', $filterArguments[self::FILTER_SPACE]['min'])
+                ->setParameter('space_max', $filterArguments[self::FILTER_SPACE]['max'])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsFeatures($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_FEATURES]) )
+        {
+            $index = 0;
+
+            foreach( $filterArguments[self::FILTER_FEATURES] as $feature => $value )
+            {
+                $value = ( $value == 'yes' ) ? TRUE : FALSE;
+
+                $query
+                    ->andWhere("ef.{$feature} = :value_{$index}")
+                    ->setParameter("value_{$index}", $value)
+                ;
+
+                $index++;
+            }
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsAttributes($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_ATTRIBUTES]) )
+        {
+            $estateIdsDirty = [];
+
+            $index = 0;
+
+            foreach( $filterArguments[self::FILTER_ATTRIBUTES] as $attribute => $range )
+            {
+                $qb = $this->_em->createQueryBuilder();
+
+                $subQuery = $qb
+                    ->select("IDENTITY(ea.estate) as estate_id")
+                    ->from('AppBundle\Entity\EstateAttribute', "ea")
+                    ->andWhere(
+                        $qb->expr()->andX(
+                            $qb->expr()->eq("ea.estateAttributeType", ":attribute"),
+                            $qb->expr()->gte("ea.value", ":value_min"),
+                            $qb->expr()->lte("ea.value", ":value_max")
+                        )
+                    )
+                    ->groupBy('estate_id')
+                    ->setParameter("attribute", (int)$attribute)
+                    ->setParameter("value_min", (int)$range['min'])
+                    ->setParameter("value_max", (int)$range['max'])
+                    ->getQuery()
+                ;
+
+                // KLUDGY!
+                $estateIdsDirty[] = ( $subQuery->getScalarResult() ) ?: [0 => ['estate_id' => 0]];
+            }
+
+            if( $estateIdsDirty )
+            {
+                $estateIds = [];
+
+                foreach( $estateIdsDirty as $index => $scalarResult )
+                {
+                    foreach( $scalarResult as $estateAttribute )
+                        $estateIds[$index][] = $estateAttribute['estate_id'];
+                }
+
+                if( $estateIds )
+                {
+                    // KLUDGY!
+                    if( count($estateIds) > 1 )
+                        $estateIds = call_user_func_array('array_intersect', $estateIds);
+                    else
+                        $estateIds = $estateIds[0];
+
+                    $query
+                        ->andWhere('e.id IN (:estateIds)')
+                        ->setParameter('estateIds', $estateIds)
+                    ;
+                }
+            }
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsDistricts($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_DISTRICTS]) )
+        {
+            $query
+                ->andWhere('e.district IN (:districts)')
+                ->setParameter('districts', $filterArguments[self::FILTER_DISTRICTS])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsSearch($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_SEARCH]) )
+        {
+            $query
+                ->andWhere('e.code LIKE :code')
+                ->setParameter('code', '%' . $filterArguments[self::FILTER_SEARCH] . '%')
+            ;
+        }
+
+        return $query;
     }
 }

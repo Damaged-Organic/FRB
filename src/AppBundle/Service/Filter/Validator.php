@@ -53,6 +53,11 @@ class Validator implements FilterArgumentsInterface
             $filterArguments[self::FILTER_SPACE] = $this->sanitizeSpaceRange($filterArguments[self::FILTER_SPACE], $estates);
         }
 
+        if( !empty($filterArguments[self::FILTER_ATTRIBUTES]) )
+        {
+            $filterArguments[self::FILTER_ATTRIBUTES] = $this->sanitizeAttributes($filterArguments[self::FILTER_ATTRIBUTES], $estates);
+        }
+
         if( !empty($filterArguments[self::FILTER_FEATURES]) )
         {
             if( !$this->validateFeatures($filterArguments[self::FILTER_FEATURES]) )
@@ -92,41 +97,41 @@ class Validator implements FilterArgumentsInterface
         return TRUE;
     }
 
-    public function sanitizePriceRange($priceRange, $estates, $currency)
+    protected function sanitizePriceRange($priceRange, $estates, $currency)
     {
-        $existingPriceRange = $this->_availableValuesExtractor->availablePriceRange($estates, $currency);
-
         $notValid = function($value) {
             return ( empty($value) || !is_numeric($value) || ($value < 0) );
         };
 
-        if( $notValid($priceRange['min']) )
+        $existingPriceRange = $this->_availableValuesExtractor->availablePriceRange($estates, $currency);
+
+        if( !isset($priceRange['min']) || $notValid($priceRange['min']) )
             $priceRange['min'] = $existingPriceRange['min'];
 
-        if( $notValid($priceRange['max']) )
+        if( !isset($priceRange['max']) || $notValid($priceRange['max']) )
             $priceRange['max'] = $existingPriceRange['max'];
 
         return $priceRange;
     }
 
-    public function sanitizeSpaceRange($spaceRange, $estates)
+    protected function sanitizeSpaceRange($spaceRange, $estates)
     {
-        $existingSpaceRange = $this->_availableValuesExtractor->availableSpaceRange($estates);
-
         $notValid = function($value) {
             return ( empty($value) || !is_numeric($value) || ($value < 0) );
         };
 
-        if( $notValid($spaceRange['min']) )
+        $existingSpaceRange = $this->_availableValuesExtractor->availableSpaceRange($estates);
+
+        if( !isset($spaceRange['min']) || $notValid($spaceRange['min']) )
             $spaceRange['min'] = $existingSpaceRange['min'];
 
-        if( $notValid($spaceRange['max']) )
+        if( !isset($spaceRange['max']) || $notValid($spaceRange['max']) )
             $spaceRange['max'] = $existingSpaceRange['max'];
 
         return $spaceRange;
     }
 
-    public function validateFeatures($features)
+    protected function validateFeatures($features)
     {
         $existingEstateFeatures = EstateFeatures::getEstateFeatures();
 
@@ -140,6 +145,35 @@ class Validator implements FilterArgumentsInterface
         }
 
         return TRUE;
+    }
+
+    protected function sanitizeAttributes($attributes, $estates)
+    {
+        $notValid = function($value) {
+            return ( empty($value) || !is_numeric($value) || ($value < 0) );
+        };
+
+        $existingEstateAttributes = $this->_availableValuesExtractor->availableAttributes($estates);
+
+        foreach( $attributes as $attribute => $value )
+        {
+            if( !in_array($attribute, array_keys($existingEstateAttributes), TRUE) ) {
+                unset($attributes[$attribute]);
+            } else {
+                if( !isset($value['min']) || $notValid($value['min']) )
+                    $attributes[$attribute]['min'] = $existingEstateAttributes[$attribute]['min'];
+
+                if( !isset($value['max']) || $notValid($value['max']) )
+                    $attributes[$attribute]['max'] = $existingEstateAttributes[$attribute]['max'];
+
+                if( $attributes[$attribute]['min'] == $existingEstateAttributes[$attribute]['min'] &&
+                    $attributes[$attribute]['max'] == $existingEstateAttributes[$attribute]['max'] ) {
+                    unset($attributes[$attribute]);
+                }
+            }
+        }
+
+        return $attributes;
     }
 
     protected function validateDistricts(array $districts)

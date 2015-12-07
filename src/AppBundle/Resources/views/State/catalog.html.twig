@@ -43,10 +43,10 @@
                 <div class="btn-large flat white">
                     <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">Житлова</a>
                 </div>
-                <form action="#" method="POST" id="search-form">
-                    <div class="field-holder">
-                        <input type="text" name="search" value="" placeholder="Введіть адресу, ціну або ідентифікатор товару та натисніть введення">
-                    </div>
+                <form action="{{ path('catalog_search', { '_locale': app.request.locale, 'estateType': estateType }) }}" method="POST" id="search-form">
+
+                    {{ render(controller('AppBundle:Filter:searchFilter', { 'filterArguments': filterArguments })) }}
+
                 </form>
                 <div class="btn-square flat white">
                     <a href="#" class="icon icon-list-view"></a>
@@ -61,14 +61,17 @@
                 <aside class="filter-holder">
 
                     {% if app.request.query|length %}
+
+                        {% set clear_text = ( app.request.query.get('search') ) ? "Очистити пошук" : "Очистити фільтр" %}
+
                         <div class="btn-small flat">
-                            <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType }) }}">Очистити фільтр</a>
+                            <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType }) }}">{{ clear_text }}</a>
                         </div>
                     {% endif %}
 
                     {% set arguments = { 'filterArguments': filterArguments, 'estates': unfilteredEstates } %}
 
-                    <form action="" method="POST" id="filter-form">
+                    <form action="{{ path('catalog_filter', { '_locale': app.request.locale, 'estateType': estateType }) }}" method="POST" id="filter-form">
 
                         {% if unfilteredEstates|length %}
                             {{ render(controller('AppBundle:Filter:estateTypeFilter', arguments)) }}
@@ -155,17 +158,9 @@
 
                     </div>
                 </section>
-                <aside class="pagination-holder">
-                    <ul>
-                        <li><a href="#" class="icon icon-arrow-up"></a></li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#" class="icon icon-arrow-down"></a></li>
-                    </ul>
-                </aside>
+
+                {{ render(controller('AppBundle:Common:paginationBar')) }}
+
             </div>
         </div>
     </main>

@@ -101,7 +101,16 @@ class FilterController extends Controller implements FilterArgumentsInterface
 
     public function attributeFilterAction(array $filterArguments, array $estates)
     {
-        return $this->render('AppBundle:Filter:attribute.html.twig');
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $attributes = $filterAvailableValuesExtractor->availableAttributes($estates);
+
+        $values = ( !empty($filterArguments[self::FILTER_ATTRIBUTES]) ) ? $filterArguments[self::FILTER_ATTRIBUTES] : [];
+
+        return $this->render('AppBundle:Filter:attribute.html.twig', [
+            'attributes' => $attributes,
+            'values'     => $values
+        ]);
     }
 
     public function districtFilterAction(array $filterArguments, array $estates)
@@ -115,6 +124,15 @@ class FilterController extends Controller implements FilterArgumentsInterface
         return $this->render('AppBundle:Filter:district.html.twig', [
             'districts' => $districts,
             'checked'   => $checked
+        ]);
+    }
+
+    public function searchFilterAction(array $filterArguments)
+    {
+        $value = ( !empty($filterArguments[self::FILTER_SEARCH]) ) ? $filterArguments[self::FILTER_SEARCH] : '';
+
+        return $this->render('AppBundle:Filter:search.html.twig', [
+            'value' => $value
         ]);
     }
 }

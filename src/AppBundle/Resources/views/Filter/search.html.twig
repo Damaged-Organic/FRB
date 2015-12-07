@@ -1,0 +1,7 @@
+{# src/AppBundle/Resources/views/Filter/search.html.twig #}
+{% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+{% set FILTER_SEARCH = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_SEARCH') %}
+
+<div class="field-holder">
+    <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SEARCH }}]" value="{{ value }}" placeholder="Введіть адресу, ціну або ідентифікатор товару та натисніть введення">
+</div>

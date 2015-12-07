@@ -81,7 +81,7 @@ class EstateAttributeType implements Translatable
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -160,7 +160,7 @@ class EstateAttributeType implements Translatable
     /**
      * Get estateAttribute
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEstateAttribute()
     {

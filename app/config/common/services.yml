@@ -49,6 +49,9 @@ services:
     app.geo_coder:
         class: AppBundle\Service\GeoCoder
 
+    app.pagination_bar:
+        class: AppBundle\Service\PaginationBar
+
     app.filter.available_values_extractor:
         class: AppBundle\Service\Filter\AvailableValuesExtractor
 

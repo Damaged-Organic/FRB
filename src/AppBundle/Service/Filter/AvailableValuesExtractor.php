@@ -136,6 +136,48 @@ class AvailableValuesExtractor
         return $availableFeatures;
     }
 
+    public function availableAttributes(array $estates)
+    {
+        $availableAttributes = [];
+
+        foreach($estates as $estate)
+        {
+            if( $estate instanceof Estate )
+            {
+                if( $estate->getEstateAttribute() )
+                {
+                    foreach( $estate->getEstateAttribute() as $attribute )
+                    {
+                        if( is_numeric($attribute->getValue()) )
+                            $availableAttributes[$attribute->getEstateAttributeType()->getId()][] = $attribute->getValue();
+                    }
+                }
+            }
+        }
+
+        foreach( $availableAttributes as $attribute => $values )
+        {
+            if( $availableAttributes[$attribute] )
+            {
+                $min = min($availableAttributes[$attribute]);
+                $max = max($availableAttributes[$attribute]);
+
+
+                $availableAttributes[$attribute] = [
+                    'min' => ( $min != $max ) ? $min : 0,
+                    'max' => $max
+                ];
+            } else {
+                $availableAttributes[$attribute] = [
+                    'min' => NULL,
+                    'max' => NULL
+                ];
+            }
+        }
+
+        return $availableAttributes;
+    }
+
     public function availableDistricts(array $estates)
     {
         $availableDistricts = [];

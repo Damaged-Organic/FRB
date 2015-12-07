@@ -13,4 +13,7 @@ interface FilterArgumentsInterface
     const FILTER_PRICE       = 'price';
     const FILTER_SPACE       = 'space';
     const FILTER_FEATURES    = 'features';
+    const FILTER_ATTRIBUTES  = 'attributes';
+
+    const FILTER_SEARCH = 'search';
 }

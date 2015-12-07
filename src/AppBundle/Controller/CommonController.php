@@ -48,4 +48,13 @@ class CommonController extends Controller
             'services' => $services
         ]);
     }
+
+    public function paginationBarAction()
+    {
+        $paginationBar = $this->get('app.pagination_bar')->getPaginationBar();
+
+        return $this->render('AppBundle:Common:paginationBar.html.twig', [
+            'paginationBar' => $paginationBar
+        ]);
+    }
 }
