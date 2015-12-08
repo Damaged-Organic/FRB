@@ -1,12 +1,20 @@
 {# src/AppBundle/Resources/views/Common/paginationBar.html.twig #}
 <aside class="pagination-holder">
     <ul>
-        <li><a href="#" class="icon icon-arrow-up"></a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#" class="icon icon-arrow-down"></a></li>
+        {% set page_prev = ( paginationBar.side_buttons.page_prev ) ? paginationBar.side_buttons.page_prev : 1 %}
+        <li>
+            <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'page': page_prev }|merge(filterArguments)) }}" class="icon icon-arrow-up"></a>
+        </li>
+
+        {% for item in paginationBar.navigation_items %}
+            <li {{ (item == paginationBar.current_page) ? 'class="active"' : '' }}>
+                <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'page': item }|merge(filterArguments)) }}">{{ item }}</a>
+            </li>
+        {% endfor %}
+
+        {% set page_next = ( paginationBar.side_buttons.page_next ) ? paginationBar.side_buttons.page_next : paginationBar.pages_number %}
+        <li>
+            <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'page': page_next }|merge(filterArguments)) }}" class="icon icon-arrow-down"></a>
+        </li>
     </ul>
 </aside>

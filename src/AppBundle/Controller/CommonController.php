@@ -49,12 +49,14 @@ class CommonController extends Controller
         ]);
     }
 
-    public function paginationBarAction()
+    public function paginationBarAction($estateType, $filterArguments)
     {
         $paginationBar = $this->get('app.pagination_bar')->getPaginationBar();
 
         return $this->render('AppBundle:Common:paginationBar.html.twig', [
-            'paginationBar' => $paginationBar
+            'paginationBar'   => $paginationBar,
+            'estateType'      => $estateType,
+            'filterArguments' => $filterArguments
         ]);
     }
 }

@@ -81,8 +81,10 @@ class StateController extends Controller implements FilterArgumentsInterface
         $filterValidator = $this->get('app.filter.validator');
         $filterCurrency  = $this->get('app.filter.utility.currency');
 
-        $results_per_page = 9;
-        $pages_step       = 5;
+        $paginationParameters = [
+            'perPage'  => 2,
+            'pageStep' => 5
+        ];
 
         $unfilteredEstates = $manager->getRepository('AppBundle:Estate')->findByType($estateType);
 
@@ -103,7 +105,7 @@ class StateController extends Controller implements FilterArgumentsInterface
             if( !($filterArguments = $filterValidator->validateArguments($filterArguments, $unfilteredEstates, $currency)) )
                 throw new HttpException(418, "I'm a teapot");
 
-            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency, $page, $results_per_page);
+            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency, $page, $paginationParameters['perPage']);
         } else {
             $filterArguments = [];
 
@@ -111,11 +113,11 @@ class StateController extends Controller implements FilterArgumentsInterface
 
             $currency = $filterCurrency->getDefaultCurrency();
 
-            $estates = $unfilteredEstates;
+            $estates = $manager->getRepository('AppBundle:Estate')->findByType($estateType, $page, $paginationParameters['perPage']);
         }
 
         $paginationBarSet = $this->get('app.pagination_bar')->setParameters(
-            count($estates), $results_per_page, $page, $pages_step
+            count($estates), $paginationParameters['perPage'], $page, $paginationParameters['pageStep']
         );
 
         if( $paginationBarSet ) {
@@ -123,6 +125,10 @@ class StateController extends Controller implements FilterArgumentsInterface
         } else {
             throw $this->createNotFoundException();
         }
+
+        // echo "<pre>";
+        // var_dump($this->get('app.pagination_bar')->getPaginationBar());
+        // echo "</pre>";die;
 
         return $this->render('AppBundle:State:catalog.html.twig', [
             'estateType'        => $estateType->getStringId(),

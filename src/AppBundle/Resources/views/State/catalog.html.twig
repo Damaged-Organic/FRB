@@ -159,7 +159,7 @@
                     </div>
                 </section>
 
-                {{ render(controller('AppBundle:Common:paginationBar')) }}
+                {{ render(controller('AppBundle:Common:paginationBar', { 'estateType': estateType, 'filterArguments': filterArguments })) }}
 
             </div>
         </div>

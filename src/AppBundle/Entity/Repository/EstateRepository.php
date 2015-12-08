@@ -63,7 +63,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         ];
     }
 
-    public function findByType(EstateType $estateType)
+    public function findByType(EstateType $estateType, $page = NULL, $results_per_page = NULL)
     {
         $query = $this->createQueryBuilder('e')
             ->select('e, ep, et, ea, eat')
@@ -73,15 +73,30 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('et.parent = :estateType')
             ->setParameter('estateType', $estateType)
-            ->getQuery()
         ;
+
+        if( $page && $results_per_page )
+        {
+            $first_record = ($page * $results_per_page) - $results_per_page;
+
+            $query
+                ->setFirstResult($first_record)
+                ->setMaxResults($results_per_page)
+            ;
+        }
+
+        $query = $query->getQuery();
 
         $query->setHint(
             Query::HINT_CUSTOM_OUTPUT_WALKER,
             'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
         );
 
-        return $query->getResult();
+        if( $page && $results_per_page ) {
+            return new Paginator($query);
+        } else {
+            return $query->getResult();
+        }
     }
 
     public function findByTypeAndFilterArguments(EstateType $estateType, array $filterArguments, $currency, $page, $results_per_page)
