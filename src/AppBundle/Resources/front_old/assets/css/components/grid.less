@@ -1,0 +1,79 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	grid start								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.grid{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	.col{
+		width: 32.14285714285714%;
+		float: left;
+		background: @white;
+		margin-bottom: 20px;
+		overflow: hidden;
+		&:nth-child(3n+2){
+			margin: 0 1.785714285714286% 20px;
+		}
+		figure{
+			width: 100%;
+			height: auto;
+			overflow: hidden;
+		}
+		h2{
+			font-size: 1.125em;
+			text-align: center;
+			color: @red;
+			padding: 20px 0 0;
+			margin: 0;
+			text-transform: uppercase;
+		}
+		.role{
+			display: block;
+			padding: 0 20px 0;
+			height: 44px;
+			text-align: center;
+			color: @lightGrey;
+			text-transform: lowercase;
+		}
+		ul{
+			display: block;
+			padding: 0 20px 20px;
+			box-sizing: border-box;
+			overflow: hidden;
+			li{
+				display: block;
+				line-height: 40px;
+				overflow: hidden;
+				span.icon{
+					display: inline-block;
+					line-height: inherit;
+					color: @red;
+					font-size: 1.25em;
+					&:before{
+						display: inline-block;
+						vertical-align: middle;
+						line-height: inherit;
+					}
+				}
+				a{
+					display: inline-block;
+					line-height: 40px;
+					color: @black;
+					transition: all .5s @easing;
+					&:hover{ color: @red; }
+				}
+			}
+		}
+	}
+	&.dbl{
+		.col{
+			width: 48.21428571428571%;
+			margin-bottom: 20px;
+			&:nth-child(3n+2){ margin: 0; }
+			&:nth-child(odd){ margin: 0 1.785714285714286% 20px 0; }	
+		}
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	grid end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

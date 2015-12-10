@@ -97,14 +97,6 @@
 	&.inside-private{
 		background: transparent url("@{images}services-private-bg.jpg") no-repeat 50% 0%;
 		background-size: contain;
-		.benefits-holder{
-			& > .list-holder{
-				li{
-					max-width: 24%;
-					p{ padding: 20px 10px; }
-				}
-			}
-		}
 	}
 	&.inside-evaluation{
 		background: transparent url("@{images}services-evaluation-bg.jpg") no-repeat 50% 0%;
@@ -113,6 +105,17 @@
 	&.inside-management{
 		background: transparent url("@{images}services-management-bg.jpg") no-repeat 50% 0%;
 		background-size: contain;
+	}
+	&.inside-private,
+	&.inside-management{
+		.benefits-holder{
+			& > .list-holder{
+				li{
+					max-width: 24%;
+					p{ padding: 20px 10px; }
+				}
+			}
+		}
 	}
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

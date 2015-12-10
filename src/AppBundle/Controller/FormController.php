@@ -36,16 +36,4 @@ class FormController extends Controller
             'form'   => $commentForm->createView()
         ]);
     }
-
-    public function proposalAction(Request $request)
-    {
-        $_manager = $this->getDoctrine()->getManager();
-
-        $proposalForm = $this->createForm(new ProposalType($_manager), new Proposal);
-
-        return $this->render('AppBundle:Form:proposal.html.twig', [
-            'locale' => $request->getLocale(),
-            'form'   => $proposalForm->createView()
-        ]);
-    }
 }

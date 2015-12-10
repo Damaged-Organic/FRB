@@ -15,9 +15,9 @@
              data-max="{{ valueMax }}" data-range-max="{{ attributeRange['max'] }}">
         </div>
         <div class="field-holder text">
-            <span>від</span>
+            <span>{{ 'common.from'|trans }}</span>
             <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_ATTRIBUTES }}][{{ attribute }}][min]" value="{{ valueMin }}" id="{{ attribute }}-min" class="counter">
-            <span>до</span>
+            <span>{{ 'common.to'|trans }}</span>
             <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_ATTRIBUTES }}][{{ attribute }}][max]" value="{{ valueMax }}" id="{{ attribute }}-max" class="counter">
         </div>
     </div>

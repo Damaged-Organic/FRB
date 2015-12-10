@@ -9,7 +9,7 @@
 	left: 50%;
 	z-index: 999;
 	box-shadow: 1px 1px 3px fade(@black, 50%);
-	transform: translateX(-50%) translateY(-50%) scale(.5);
+	transform: translateX(-50%) translateY(-150%) scale(.5);
 	backface-visibility: hidden;
 	overflow: hidden;
 	& > .frb-cube-side{
@@ -42,15 +42,18 @@
 }
 @keyframes frbCube{
 	0% {
-		transform: translateX(-50%) translateY(-50%) scale(.5);
+		transform: translateX(-50%) translateY(-150%) scale(.5);
+		box-shadow: 1px 1px 3px fade(@black, 50%);
 	}
 	50% {
 		top: 15%;
-		transform: translateX(-50%) translateY(-50%) scale(1);
+		transform: translateX(-50%) translateY(-50%) scale(.75);
+		box-shadow: 1px 1px 20px fade(@black, 50%);
 	}
 	100% {
 		top: 15%;
 		transform: translateX(-50%) translateY(-50%) scale(.5);
+		box-shadow: 1px 1px 3px fade(@black, 50%);
 	}
 }
 

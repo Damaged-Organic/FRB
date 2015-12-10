@@ -34,28 +34,27 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Каталог нерухомості</h1>
+        <h1>{{ 'state.catalog.headline'|trans }}</h1>
         <div class="outer substrate top-panel-holder">
             <div class="inner">
                 <div class="btn-large flat white">
-                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'commercial' }) }}">Комерційна</a>
+                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'commercial' }) }}">{{ 'state.catalog.property.commercial'|trans }}</a>
                 </div>
                 <div class="btn-large flat white">
-                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">Житлова</a>
+                    <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">{{ 'state.catalog.property.residential'|trans }}</a>
                 </div>
                 <form action="{{ path('catalog_search', { '_locale': app.request.locale, 'estateType': estateType }) }}" method="POST" id="search-form">
 
                     {{ render(controller('AppBundle:Filter:searchFilter', { 'filterArguments': filterArguments })) }}
 
                 </form>
-                <div class="btn-square flat white">
-                    <a href="#" class="icon icon-list-view"></a>
-                </div>
-                <div class="btn-square flat white">
-                    <a href="#" class="icon icon-grid-view"></a>
-                </div>
             </div>
         </div>
+        {% if estateType == 'residential' %}
+            <div class="btn-long flat white">
+        		<a href="{{ path('catalog_proposal', { '_locale': app.request.locale }) }}">{{ 'state.catalog.proposal'|trans }}</a>
+        	</div>
+        {% endif %}
         <div class="outer substrate catalog-content">
             <div class="inner">
                 <aside class="filter-holder">
@@ -104,12 +103,12 @@
                         {% for estate in estates %}
                             <article class="col item">
                                 <div class="inner">
-                                    <a href="{{ path('catalog_item', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }) }}">
+                                    <a href="{{ path('catalog_item', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }|merge(filterArguments)) }}">
                                         <div class="photo-holder">
                                             <figure>
 
                                                 {% if estate.estatePhoto|length %}
-                                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+                                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_thumb') }}" alt="{{ estate.address }}">
                                                 {% endif %}
 
                                             </figure>

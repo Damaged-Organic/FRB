@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/district.html.twig #}
 <div class="item">
-    <h3>Район</h3>
+    <h3>{{ 'state.catalog.filter.district'|trans }}</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_DISTRICTS = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_DISTRICTS') %}

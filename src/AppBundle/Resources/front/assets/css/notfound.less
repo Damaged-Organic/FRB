@@ -1,0 +1,94 @@
+@import "components/common.less";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page,
+#content{
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+}
+#page{
+    position: relative;
+}
+#header{
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background: transparent;
+    .logo{
+        width: 220px;
+        margin: 60px auto;
+        float: none;
+        background: @white;
+        padding: 20px;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.frb-cube-holder{
+    width: 200%;
+    height: 0;
+    padding-bottom: 200%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(20deg);
+    backface-visibility: hidden;
+    & > span{
+        width: 50%;
+        height: 0;
+        padding-bottom: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        &:nth-child(1){
+            background: @black;
+        }
+        &:nth-child(2){
+            left: 50%;
+            background: @white;
+        }
+        &:nth-child(3){
+            top: 50%;
+            background: @lightGrey;
+        }
+        &:nth-child(4){
+            top: 50%;
+            left: 50%;
+             background: @red;
+        }
+    }
+}
+.text-holder{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    backface-visibility: hidden;
+    span{
+        display: block;
+        text-align: center;
+        font-size: 17.5em;
+        color: @red;
+    }
+}
+.btn-large{
+    width: 220px;
+    position: absolute;
+    left: 50%;
+    bottom: 60px;
+    z-index: 20;
+    margin: 0 0 0 -110px;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

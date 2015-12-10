@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/space.html.twig #}
 <div class="item">
-    <h3>Площа</h3>
+    <h3>{{ 'state.catalog.filter.space'|trans }}</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_SPACE = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_SPACE') %}
@@ -13,9 +13,9 @@
          data-max="{{ spaceMax }}" data-range-max="{{ spaceRange['max'] }}">
     </div>
     <div class="field-holder">
-        <span>від</span>
+        <span>{{ 'common.from'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE }}][min]" value="{{ spaceMin|number_format(0, '', '') }}" id="area-min" class="counter">
-        <span>до</span>
+        <span>{{ 'common.to'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE }}][max]" value="{{ spaceMax|number_format(0, '', '') }}" id="area-max" class="counter">
     </div>
 </div>

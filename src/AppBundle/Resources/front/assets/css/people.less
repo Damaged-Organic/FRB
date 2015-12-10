@@ -1,5 +1,6 @@
 @import "components/common.less";
 @import "components/grid.less";
+@import "components/lists.less";
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*	layout start							  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -15,6 +16,10 @@
 /*	categories start						  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .categories-holder{
+	width: 100%;
+	height: auto;
+	margin-bottom: 40px;
+	overflow: hidden;
 	.btn-long{
 		width: 23.66071428571429%;
 		float: left;
@@ -29,6 +34,20 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*	people start							  */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.about-holder{
+	p{
+		padding: 20px 20px 0;
+		&:last-child{ padding-bottom: 20px; }
+		& > span{
+			text-transform: uppercase;
+		}
+	}
+	ul.list-holder{
+		padding-left: 20px;
+		box-sizing: border-box;
+		margin: 20px 0 0;
+	}
+}
 .people-holder{
 	& > .inner{ margin-bottom: 20px; }
 	.grid{

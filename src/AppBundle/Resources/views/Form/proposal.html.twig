@@ -1,2 +1,160 @@
 {# src/AppBundle/Resources/views/Form/proposal.html.twig #}
 {{ form(form) }}
+<form action="{{ path('catalog_proposal', { '_locale': app.request.locale }) }}" method="POST" id="property-form">
+    <!--
+    classes: success or error
+    <div class="response-holder success|error">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit error sed tenetur hic obcaecati, autem rem quo sunt saepe mollitia velit fugiat, quos, dolorem culpa asperiores. Culpa voluptates quaerat deleniti.</p>
+    </div-->
+    <div class="field-holder">
+        <label for="property-username">Ім'я<sup>*</sup></label>
+        <input type="text" name="property[username]" value="" placeholder="Введіть ваше ім'я" id="property-username" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-userphone">Телефон<sup>*</sup></label>
+        <input type="text" name="property[userphone]" value="" placeholder="Введіть номер вашого телефону" id="property-userphone" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-mask="+38 (999) 999-99-99">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-useremail">Електронна пошта<sup>*</sup></label>
+        <input type="text" name="property[useremail]" value="" placeholder="Введіть вашу електронну пошту" id="property-useremail" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-email="true" data-msg-email="Це не схоже на справжню електронну пошту">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder dbl">
+        <p>Оберіть тип приміщення</p>
+        <div class="check-holder">
+            <input type="radio" name="property[type]" value="apartment" id="property-type-apartment" checked="checked">
+            <label for="property-type-apartment">
+                <span>Квартира</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            <input type="radio" name="property[type]" value="house" id="property-type-house">
+            <label for="property-type-house">
+                <span>Будинок</span>
+            </label>
+        </div>
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder dbl">
+        <p>Оберіть валюту</p>
+        <div class="check-holder">
+            <input type="radio" name="property[currency]" value="usd" id="property-currency-usd" checked="checked">
+            <label for="property-currency-usd">
+                <span>USD</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            <input type="radio" name="property[currency]" value="uah" id="property-currency-uah">
+            <label for="property-currency-uah">
+                <span>UAH</span>
+            </label>
+        </div>
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-price">Ціна<sup>*</sup></label>
+        <input type="text" name="property[price]" value="" placeholder="Введіть бажаєму ціну вашої нерухомості" id="property-price" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-mask="##,#0.00" data-mask-reverse="true">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-address">Адреса<sup>*</sup></label>
+        <input type="text" name="property[address]" value="" placeholder="Введіть адресу вашої нерухомості" id="property-address" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-square-area">Площа<sup>*</sup></label>
+        <input type="text" name="property[square-area]" value="" placeholder="Введіть площу вашої нерухомості" id="property-square-area" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-floor">Поверх<sup>*</sup></label>
+        <input type="text" name="property[floor]" value="" placeholder="Введіть поверх вашої квартири" id="property-floor" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-floor-count">Кількість поверхів<sup>*</sup></label>
+        <input type="text" name="property[floor-count]" value="" placeholder="Введіть загальну кількість поверхів вашого будинку" id="property-floor-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-rooms-count">Кількість кімнат<sup>*</sup></label>
+        <input type="text" name="property[rooms-count]" value="" placeholder="Введіть кількість кімнат" id="property-rooms-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder">
+        <label for="property-toilets-count">Кількість санвузлів<sup>*</sup></label>
+        <input type="text" name="property[toilets-count]" value="" placeholder="Введіть кількість санвузлів" id="property-toilets-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
+        <!--div class="error-holder">
+            <span>Це поле обов'язкове</span>
+        </div-->
+    </div>
+    <div class="field-holder dbl extra-top">
+        <div class="check-holder">
+            <input type="checkbox" name="property[cashless]" value="yes" id="property-cashless">
+            <label for="property-cashless">
+                <span>Безготівковий розрахунок</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            <input type="checkbox" name="property[new]" value="yes" id="property-new">
+            <label for="property-new">
+                <span>Нова будівля</span>
+            </label>
+        </div>
+    </div>
+    <div class="field-holder dbl extra-top">
+        <div class="check-holder">
+            <input type="checkbox" name="property[elevator]" value="yes" id="property-elevator">
+            <label for="property-elevator">
+                <span>Ліфт</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            <input type="checkbox" name="property[parking]" value="yes" id="property-parking">
+            <label for="property-parking">
+                <span>Парковка</span>
+            </label>
+        </div>
+    </div>
+    <div class="field-holder dbl extra-top">
+        <div class="check-holder">
+            <input type="checkbox" name="property[furnished]" value="yes" id="property-furnished">
+            <label for="property-furnished">
+                <span>Наявність меблів</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            <input type="checkbox" name="property[nonresident-registration]" value="yes" id="property-nonresident-registration">
+            <label for="property-nonresident-registration">
+                <span>Реєстрація для нерезидента</span>
+            </label>
+        </div>
+    </div>
+    <button type="submit">
+        <span>Розмістити</span>
+    </button>
+</form>

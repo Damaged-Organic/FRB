@@ -1,0 +1,66 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	vars start								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@black: #191919;
+@white: #fefefe;
+@lightGrey: #b2c2c3;
+@darkGrey: #545e5f;
+@red: #ab3333;
+
+@easing: cubic-bezier(0.645, 0.045, 0.355, 1);
+@images: "../images/";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	vars end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	system vars start						  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+@successLight: #DFF2BF;
+@successDark: #4F8A10;
+@errorLight: #FFBABA;
+@errorDark: #D8000C;
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	system vars end							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	mixins start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	mixins end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	helpers start							  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.clearfix:before{
+	display: table;
+	height: 0;
+	clear: both;
+	content: "";
+	overflow: hidden;
+}
+img, figure > img{
+	display: block;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+.icon{
+	display: block;
+	width: 40px;
+	height: 40px;
+	color: @white;
+	font-size: 1.75em;
+	text-align: center;
+	-webkit-transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+	-o-transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+	transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+	cursor: pointer;
+}
+.icon:before{ display: block; }
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	helpers end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

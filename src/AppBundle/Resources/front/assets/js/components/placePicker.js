@@ -23,7 +23,7 @@ export default class PlacePicker{
 	}
 	handleForm(e){
 		let checkedCount = this.getCheckedCount();
-		
+
 		checkedCount > 0 ? this.activateInfoView() : this.disableInfoView();
 		this.getPlaceData();
 
@@ -62,13 +62,13 @@ export default class PlacePicker{
 		.done((response) => {
 			response = JSON.parse(response);
 			let placesHtml = placeTpl({categories: response.categories});
-			
+
 			this.placesMap.setLocations(response.locations);
 			this.expatsHolder.find(".expats-location-info").html(placesHtml);
 		})
 		.fail((error) => {
 			error = JSON.parse(error.responseText);
-			
+
 			let placesHtml = placeTpl({error: error});
 			this.expatsHolder.find(".expats-location-info").html(placesHtml);
 

@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/price.html.twig #}
 <div class="item">
-    <h3>Ціна ({{ currency }})</h3>
+    <h3>{{ 'state.catalog.filter.price'|trans }} ({{ currency }})</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_PRICE = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_PRICE') %}
@@ -13,9 +13,9 @@
          data-max="{{ priceMax }}" data-range-max="{{ priceRange['max'] }}">
     </div>
     <div class="field-holder">
-        <span>від</span>
+        <span>{{ 'common.from'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_PRICE }}][min]" value="{{ priceMin|number_format(0, '', '') }}" id="price-min" class="counter">
-        <span>до</span>
+        <span>{{ 'common.to'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_PRICE }}][max]" value="{{ priceMax|number_format(0, '', '') }}" id="price-max" class="counter">
     </div>
 </div>

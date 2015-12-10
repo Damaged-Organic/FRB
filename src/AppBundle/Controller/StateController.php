@@ -12,7 +12,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
     Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
-    AppBundle\Entity\Article;
+    AppBundle\Entity\Article,
+    AppBundle\Model\Proposal,
+    AppBundle\Form\Type\ProposalType;
 
 class StateController extends Controller implements FilterArgumentsInterface
 {
@@ -105,7 +107,9 @@ class StateController extends Controller implements FilterArgumentsInterface
             if( !($filterArguments = $filterValidator->validateArguments($filterArguments, $unfilteredEstates, $currency)) )
                 throw new HttpException(418, "I'm a teapot");
 
-            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments($estateType, $filterArguments, $currency, $page, $paginationParameters['perPage']);
+            $estates = $manager->getRepository('AppBundle:Estate')->findByTypeAndFilterArguments(
+                $estateType, $filterArguments, $currency, $page, $paginationParameters['perPage']
+            );
         } else {
             $filterArguments = [];
 
@@ -125,10 +129,6 @@ class StateController extends Controller implements FilterArgumentsInterface
         } else {
             throw $this->createNotFoundException();
         }
-
-        // echo "<pre>";
-        // var_dump($this->get('app.pagination_bar')->getPaginationBar());
-        // echo "</pre>";die;
 
         return $this->render('AppBundle:State:catalog.html.twig', [
             'estateType'        => $estateType->getStringId(),
@@ -226,6 +226,71 @@ class StateController extends Controller implements FilterArgumentsInterface
     /**
      * @Method({"GET"})
      * @Route(
+     *      "/catalog/residential/proposal",
+     *      name="catalog_proposal",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     * )
+     * @Route(
+     *      "/catalog/residential/proposal",
+     *      name="catalog_proposal_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"domain" = "%domain%"}
+     * )
+     */
+    public function catalogProposalAction(Request $request)
+    {
+        $_manager = $this->getDoctrine()->getManager();
+
+        $message = NULL;
+
+        $proposalForm = $this->createForm(new ProposalType($_manager), ($proposal = new Proposal));
+
+        $proposalForm->handleRequest($request);
+
+        if( $proposalForm->isValid() )
+        {
+            $_translator     = $this->get('translator');
+            $_mailerShortcut = $this->get('app.mailer_shortcut');
+
+            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
+
+            $to = $this->container->getParameter('email')['proposal'];
+
+            $subject = $_translator->trans("proposal.subject", [], 'emails');
+
+            $body = $this->renderView('AppBundle:Email:proposal.html.twig', [
+                'proposal'  => $proposal
+            ]);
+
+            if( !$_mailerShortcut->sendMail($from, $to, $subject, $body) ) {
+                $message['fail'] = $_translator->trans("proposal.fail", [], 'responses');
+            } else {
+                $message['success'] = $_translator->trans("proposal.success", [], 'responses');
+            }
+
+            $this->get('session')->getFlashBag()->add('message_proposal', $message);
+
+            return $this->redirectToRoute('catalog_proposal', [
+                '_locale' => $request->getLocale()
+            ]);
+        }
+
+        $message = ( $this->get('session')->getFlashBag()->has('message_proposal') )
+            ? $this->get('session')->getFlashBag()->get('message_proposal')[0]
+            : NULL;
+
+        return $this->render('AppBundle:State:catalog_proposal.html.twig', [
+            'form'    => $proposalForm->createView(),
+            'message' => $message
+        ]);
+    }
+
+    /**
+     * @Method({"GET"})
+     * @Route(
      *      "/catalog/{estateType}/{id}/{slug}",
      *      name="catalog_item",
      *      host="{_locale}.{domain}",
@@ -240,7 +305,7 @@ class StateController extends Controller implements FilterArgumentsInterface
      *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
      * )
      */
-    public function catalogItemAction(Request $request, $estateType, $id)
+    public function catalogItemAction(Request $request, $estateType, $id, $slug)
     {
         $manager = $this->getDoctrine()->getManager();
 
@@ -254,17 +319,30 @@ class StateController extends Controller implements FilterArgumentsInterface
         if( !$estate )
             throw $this->createNotFoundException();
 
+        $geoCoder = $this->get('app.geo_coder');
+
         $filterCurrency = $this->get('app.filter.utility.currency');
 
         $currency = ( $filterCurrency->getCurrency() ) ?: $filterCurrency->getDefaultCurrency();
 
         $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id);
 
+        $informationObjects = $manager->getRepository('AppBundle:Information')->findAll();
+
+        $closestMarkers = ( $informationObjects )
+            ? $geoCoder->getClosestMarkers($estate, $informationObjects)
+            : []
+        ;
+
+        $filterArguments = ( $request->query->all() ) ?: [];
+
         return $this->render('AppBundle:State:catalog_item.html.twig', [
-            'estateType'     => $estateType->getStringId(),
-            'estate'         => $estate,
-            'currency'       => $currency,
-            'nearestEstates' => $nearestEstates
+            'estateType'      => $estateType->getStringId(),
+            'estate'          => $estate,
+            'currency'        => $currency,
+            'nearestEstates'  => $nearestEstates,
+            'closestMarkers'  => $closestMarkers,
+            'filterArguments' => $filterArguments
         ]);
     }
 

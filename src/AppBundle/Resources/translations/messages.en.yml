@@ -3,8 +3,10 @@ default:
     title: First Reality Brokerage
 
 common:
-    yes: Yes
-    no:  No
+    yes:  Yes
+    no:   No
+    from: From
+    to:   To
 
     header:
         menu: Menu
@@ -19,6 +21,8 @@ common:
 
 state:
     index:
+        loader: loading
+
         services: Services
 
         details: Details
@@ -32,6 +36,24 @@ state:
     catalog:
         headline:      Real estate objects
         headline_item: Object information
+
+        proposal: Propose your own property
+
+        property:
+            commercial:  Commercial
+            residential: Residential
+
+        filter:
+            search:
+                input:  Enter object's identification code and press "Search" button
+                button: Search
+            currency:    Currency
+            district:    District
+            estate_type: Object type
+            price:       Price
+            space:       Space
+            space_plot:  Land area
+            trade_type:  Deal type
 
         trade_type_sale: sale
         trade_type_rent: rent
@@ -118,6 +140,9 @@ state:
 
         empty:
             estate: No objects was found with such parameters
+
+    proposal:
+        headline: Property proposal
 
     services:
         headline: Our services

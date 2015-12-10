@@ -234,9 +234,27 @@
 	}
 	li{
 		display: block;
-		width: 25%;
+		width: 50%;
 		height: 60px;
 		float: left;
+		position: relative;
+		&:after{
+			display: block;
+			width: 1px;
+			height: 60px;
+			position: absolute;
+			top: 0;
+			right: 0;
+			content: "";
+			background: @black;
+			overflow: hidden;
+		}
+		&:last-child{
+			&:after{
+				right: auto;
+				left: 0;
+			}
+		}
 		a{
 			display: block;
 			width: 100%;
@@ -252,17 +270,6 @@
 			&:hover{
 				color: @red;
 				background: @lightGrey;
-			}
-		}
-		&:nth-child(2),
-		&:nth-child(3){
-			a{
-				color: @white;
-				background: fade(@black, 80%);
-				&:hover{
-					color: @red;
-					background: @black;
-				}
 			}
 		}
 	}

@@ -64,6 +64,7 @@
                             {{ 'state.index.menu.catalog_commercial'|trans }}
                         </a>
                     </li>
+                    {#
                     <li>
                         <a href="{{ path('news', { '_locale': app.request.locale }) }}">
                             {{ 'state.index.menu.news'|trans }}
@@ -74,6 +75,7 @@
                             {{ 'state.index.menu.expats_information'|trans }}
                         </a>
                     </li>
+                    #}
                     <li>
                         <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': 'residential' }) }}">
                             {{ 'state.index.menu.catalog_residential'|trans }}
@@ -84,11 +86,13 @@
         </section>
     </main>
     <div id="preloader-holder">
-        <span class="lane black"></span>
-        <span class="lane white"></span>
-        <span class="lane grey"></span>
-        <span class="lane red"></span>
-    </div>
+		<span class="lane black"></span>
+		<span class="lane grey"></span>
+		<span class="lane red"></span>
+		<div id="percents-holder">
+			<p>{{ 'state.index.loader'|trans }} <span id="percents">0%</span></p>
+		</div>
+	</div>
     <div id="frb-cube-holder">
         <span class="frb-cube-side"></span>
         <span class="frb-cube-side"></span>

@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/space_plot.html.twig #}
 <div class="item">
-    <h3>Площа ділянки</h3>
+    <h3>{{ 'state.catalog.filter.space_plot'|trans }}</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_SPACE_PLOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_SPACE_PLOT') %}
@@ -13,9 +13,9 @@
          data-max="{{ spacePlotMax }}" data-range-max="{{ spacePlotRange['max'] }}">
     </div>
     <div class="field-holder">
-        <span>від</span>
+        <span>{{ 'common.from'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][min]" value="{{ spacePlotMin|number_format(0, '', '') }}" id="area-plot-min" class="counter">
-        <span>до</span>
+        <span>{{ 'common.to'|trans }}</span>
         <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][max]" value="{{ spacePlotMax|number_format(0, '', '') }}" id="area-plot-max" class="counter">
     </div>
 </div>

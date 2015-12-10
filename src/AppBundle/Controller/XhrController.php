@@ -14,8 +14,6 @@ use AppBundle\Controller\Utility\Traits\FormErrorHandlerTrait,
     AppBundle\Form\Type\FeedbackType,
     AppBundle\Model\Comment,
     AppBundle\Form\Type\CommentType,
-    AppBundle\Model\Proposal,
-    AppBundle\Form\Type\ProposalType,
     AppBundle\Entity\Information,
     AppBundle\Entity\InformationCategory,
     AppBundle\Entity\Article;
@@ -136,68 +134,6 @@ class XhrController extends Controller
             } else {
                 $response = [
                     'data' => json_encode(['message' => $_translator->trans("feedback.success", [], 'responses')]),
-                    'code' => 200
-                ];
-            }
-        }
-
-        return new Response($response['data'], $response['code']);
-    }
-
-    /**
-     * @Method({"POST"})
-     * @Route(
-     *      "/proposal_send",
-     *      name="proposal_send",
-     *      host="{_locale}.{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"},
-     *      condition="request.isXmlHttpRequest()"
-     * )
-     * @Route(
-     *      "/proposal_send",
-     *      name="proposal_send_default",
-     *      host="{domain}",
-     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%"},
-     *      condition="request.isXmlHttpRequest()"
-     * )
-     */
-    public function proposalSendAction(Request $request)
-    {
-        $_manager = $this->getDoctrine()->getManager();
-
-        $proposalForm = $this->createForm(new ProposalType($_manager), ($proposal = new Proposal));
-
-        $proposalForm->handleRequest($request);
-
-        if( !($proposalForm->isValid()) ) {
-            $response = [
-                'data' => $this->stringifyFormErrors($proposalForm),
-                'code' => 500
-            ];
-        } else {
-            $_translator     = $this->get('translator');
-            $_mailerShortcut = $this->get('app.mailer_shortcut');
-
-            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
-
-            $to = $this->container->getParameter('email')['proposal'];
-
-            $subject = $_translator->trans("proposal.subject", [], 'emails');
-
-            $body = $this->renderView('AppBundle:Email:proposal.html.twig', [
-                'proposal'  => $proposal
-            ]);
-
-            if( !$_mailerShortcut->sendMail($from, $to, $subject, $body) ) {
-                $response = [
-                    'data' => $_translator->trans("proposal.fail", [], 'responses'),
-                    'code' => 500
-                ];
-            } else {
-                $response = [
-                    'data' => json_encode(['message' => $_translator->trans("proposal.success", [], 'responses')]),
                     'code' => 200
                 ];
             }

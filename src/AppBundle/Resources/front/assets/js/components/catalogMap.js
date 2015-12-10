@@ -18,7 +18,7 @@ export default class CatalogMap extends Map{
 	}
 	setMarkers(){
 		super.removeMarkers();
-		
+
 		for(let key in PLACES.markers){
 			let marker = PLACES.markers[key];
 

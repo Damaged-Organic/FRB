@@ -3,8 +3,10 @@ default:
     title: First Reality Brokerage
 
 common:
-    yes: Так
-    no:  Ні
+    yes:  Так
+    no:   Ні
+    from: Від
+    to:   До
 
     header:
         menu: Меню
@@ -19,6 +21,8 @@ common:
 
 state:
     index:
+        loader: завантаження
+
         services: Послуги
 
         details: Детальніше
@@ -32,6 +36,24 @@ state:
     catalog:
         headline:      Каталог об’єктів нерухомості
         headline_item: Інформація про об’єкт
+
+        proposal: Розмістити власну нерухомість
+
+        property:
+            commercial:  Комерційна
+            residential: Житлова
+
+        filter:
+            search:
+                input:  Введіть код ідентифікації об’єкта та натисніть кнопку "Пошук"
+                button: Пошук
+            currency:    Валюта
+            district:    Район
+            estate_type: Тип об’єкта
+            price:       Ціна
+            space:       Площа
+            space_plot:  Площа ділянки
+            trade_type:  Тип угоди
 
         trade_type_sale: продаж
         trade_type_rent: оренда
@@ -118,6 +140,9 @@ state:
 
         empty:
             estate: Об’єктів за заданими параметрами не знайдено
+
+    proposal:
+        headline: Розміщення нерухомості
 
     services:
         headline: Наші послуги

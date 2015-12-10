@@ -14,6 +14,11 @@ liip_imagine:
     filter_sets:
         cache: ~
 
+        catalog_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [500, 400], mode: outbound }
+
         staff_thumb:
             quality: 100
             filters:

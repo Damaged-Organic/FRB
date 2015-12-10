@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/trade_type.html.twig #}
 <div class="item">
-    <h3>Тип угоди</h3>
+    <h3>{{ 'state.catalog.filter.trade_type'|trans }}</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_TRADE_TYPE = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_TRADE_TYPE') %}

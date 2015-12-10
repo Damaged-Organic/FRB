@@ -1,6 +1,6 @@
 {# src/AppBundle/Resources/views/Filter/currency.html.twig #}
 <div class="item">
-    <h3>Валюта</h3>
+    <h3>{{ 'state.catalog.filter.currency'|trans }}</h3>
 
     {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
     {% set FILTER_CURRENCY = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_CURRENCY') %}

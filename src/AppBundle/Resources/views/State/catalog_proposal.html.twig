@@ -1,0 +1,58 @@
+{# src/AppBundle/Resources/views/State/catalog_proposal.html.twig #}
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% set metadata = getMetadata() %}
+
+{% block title %}
+    {{ metadata.title }} | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block metadata %}
+    {{ parent() }}
+    <meta name="description" content="{{ metadata.description }}">
+    <meta name="robots" content="{{ metadata.robots }}">
+{% endblock %}
+
+{% block locale %}
+    <link rel="canonical" href="{{ url('catalog_proposal_default') }}">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua" }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "en" }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua" }) }}" hreflang="uk-ua">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/property.bundle.min.css') }}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="common">
+
+        {{ render(controller('AppBundle:Common:header', { 'request': app.request, 'type': 'common' })) }}
+
+    </header>
+{% endblock %}
+
+{% block content %}
+    <main id="content" class="sticky">
+        <h1>{{ 'state.proposal.headline'|trans }}</h1>
+		<div class="outer substrate">
+			<div class="inner white-back">
+
+                {% include 'AppBundle:Form:proposal.html.twig' with { '_locale': app.request.locale, 'form': form } only %}
+
+			</div>
+		</div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <div id="footer">
+
+        {{ render(controller('AppBundle:Common:footer')) }}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/property.bundle.min.js') }}"></script>
+{% endblock %}
