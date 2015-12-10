@@ -53,6 +53,11 @@ class Validator implements FilterArgumentsInterface
             $filterArguments[self::FILTER_SPACE] = $this->sanitizeSpaceRange($filterArguments[self::FILTER_SPACE], $estates);
         }
 
+        if( !empty($filterArguments[self::FILTER_SPACE_PLOT]) )
+        {
+            $filterArguments[self::FILTER_SPACE_PLOT] = $this->sanitizeSpacePlotRange($filterArguments[self::FILTER_SPACE_PLOT], $estates);
+        }
+
         if( !empty($filterArguments[self::FILTER_ATTRIBUTES]) )
         {
             $filterArguments[self::FILTER_ATTRIBUTES] = $this->sanitizeAttributes($filterArguments[self::FILTER_ATTRIBUTES], $estates);
@@ -129,6 +134,23 @@ class Validator implements FilterArgumentsInterface
             $spaceRange['max'] = $existingSpaceRange['max'];
 
         return $spaceRange;
+    }
+
+    protected function sanitizeSpacePlotRange($spacePlotRange, $estates)
+    {
+        $notValid = function($value) {
+            return ( empty($value) || !is_numeric($value) || ($value < 0) );
+        };
+
+        $existingSpacePlotRange = $this->_availableValuesExtractor->availableSpacePlotRange($estates);
+
+        if( !isset($spacePlotRange['min']) || $notValid($spacePlotRange['min']) )
+            $spacePlotRange['min'] = $existingSpacePlotRange['min'];
+
+        if( !isset($spacePlotRange['max']) || $notValid($spacePlotRange['max']) )
+            $spacePlotRange['max'] = $existingSpacePlotRange['max'];
+
+        return $spacePlotRange;
     }
 
     protected function validateFeatures($features)

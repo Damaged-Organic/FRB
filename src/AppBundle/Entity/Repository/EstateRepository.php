@@ -121,6 +121,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             $query = $this->filterArgumentsTradeType($query, $filterArguments);
             $query = $this->filterArgumentsPrice($query, $filterArguments, $currency);
             $query = $this->filterArgumentsSpace($query, $filterArguments);
+            $query = $this->filterArgumentsSpacePlot($query, $filterArguments);
             $query = $this->filterArgumentsFeatures($query, $filterArguments);
             $query = $this->filterArgumentsAttributes($query, $filterArguments);
             $query = $this->filterArgumentsDistricts($query, $filterArguments);
@@ -196,6 +197,21 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                 ->andWhere('e.space <= :space_max')
                 ->setParameter('space_min', $filterArguments[self::FILTER_SPACE]['min'])
                 ->setParameter('space_max', $filterArguments[self::FILTER_SPACE]['max'])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsSpacePlot($query, $filterArguments)
+    {
+        if( !empty($filterArguments[self::FILTER_SPACE_PLOT]) )
+        {
+            $query
+                ->andWhere('e.spacePlot >= :space_plot_min')
+                ->andWhere('e.spacePlot <= :space_plot_max')
+                ->setParameter('space_plot_min', $filterArguments[self::FILTER_SPACE_PLOT]['min'])
+                ->setParameter('space_plot_max', $filterArguments[self::FILTER_SPACE_PLOT]['max'])
             ;
         }
 

@@ -26,8 +26,12 @@ class EstateAdmin extends Admin
             ->add("estateType", NULL, [
                 "label" => "Тип нерухомості"
             ])
-            ->add("price", "number", [
-                "label"       => "Ціна",
+            ->add("priceUAH", "number", [
+                "label"       => "Ціна (UAH)",
+                "precision"   => 2
+            ])
+            ->add("pricePerSquareUAH", "number", [
+                "label"       => "Ціна за м2 (UAH)",
                 "precision"   => 2
             ])
         ;
@@ -138,6 +142,11 @@ class EstateAdmin extends Admin
                     "label"     => "Площа",
                     "precision" => 2
                 ])
+                ->add("spacePlot", "number", [
+                    "required"  => FALSE,
+                    "label"     => "Площа ділянки",
+                    "precision" => 2
+                ])
                 ->add("priceUAH", "number", [
                     "label"       => "Ціна (UAH)",
                     "precision"   => 2,
@@ -147,6 +156,22 @@ class EstateAdmin extends Admin
                 ])
                 ->add("priceUSD", "number", [
                     "label"       => "Ціна (USD)",
+                    "precision"   => 2,
+                    "constraints" => [
+                        new Assert\Range(["min" => 0])
+                    ]
+                ])
+                ->add("pricePerSquareUAH", "number", [
+                    "required"    => FALSE,
+                    "label"       => "Ціна за м2 (UAH)",
+                    "precision"   => 2,
+                    "constraints" => [
+                        new Assert\Range(["min" => 0])
+                    ]
+                ])
+                ->add("pricePerSquareUSD", "number", [
+                    "required"    => FALSE,
+                    "label"       => "Ціна за м2 (USD)",
                     "precision"   => 2,
                     "constraints" => [
                         new Assert\Range(["min" => 0])

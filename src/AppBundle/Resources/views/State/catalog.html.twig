@@ -86,6 +86,8 @@
 
                             {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
 
+                            {{ render(controller('AppBundle:Filter:spacePlotFilter', arguments)) }}
+
                             {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
 
                             {{ render(controller('AppBundle:Filter:attributeFilter', arguments)) }}
@@ -134,7 +136,11 @@
                                                 <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
                                             </li>
 
-                                            {% for attribute in estate.estateAttribute[:3] %}
+                                            <li>
+                                                <p><span class="icon icon-sq"></span>{{ estate.spacePlot + 0 }} m<sup>2</sup></p>
+                                            </li>
+
+                                            {% for attribute in estate.estateAttribute[:2] %}
                                                 <li>
                                                     <p>
                                                         <span class="icon {{ attribute.estateAttributeType.icon }}"></span>

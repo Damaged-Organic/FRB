@@ -104,6 +104,11 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $space;
 
     /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     **/
+    protected $spacePlot;
+
+    /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      **/
     protected $priceUAH;
@@ -112,6 +117,16 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      **/
     protected $priceUSD;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     **/
+    protected $pricePerSquareUAH;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     **/
+    protected $pricePerSquareUSD;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -360,6 +375,29 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
+     * Set spacePlot
+     *
+     * @param string $spacePlot
+     * @return Estate
+     */
+    public function setSpacePlot($spacePlot)
+    {
+        $this->spacePlot = $spacePlot;
+
+        return $this;
+    }
+
+    /**
+     * Get spacePlot
+     *
+     * @return string
+     */
+    public function getSpacePlot()
+    {
+        return $this->spacePlot;
+    }
+
+    /**
      * Set priceUAH
      *
      * @param string $priceUAH
@@ -403,6 +441,52 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getPriceUSD()
     {
         return $this->priceUSD;
+    }
+
+    /**
+     * Set pricePerSquareUAH
+     *
+     * @param string $pricePerSquareUAH
+     * @return Estate
+     */
+    public function setPricePerSquareUAH($pricePerSquareUAH)
+    {
+        $this->pricePerSquareUAH = $pricePerSquareUAH;
+
+        return $this;
+    }
+
+    /**
+     * Get pricePerSquareUAH
+     *
+     * @return string
+     */
+    public function getPricePerSquareUAH()
+    {
+        return $this->pricePerSquareUAH;
+    }
+
+    /**
+     * Set pricePerSquareUSD
+     *
+     * @param string $pricePerSquareUSD
+     * @return Estate
+     */
+    public function setPricePerSquareUSD($pricePerSquareUSD)
+    {
+        $this->pricePerSquareUSD = $pricePerSquareUSD;
+
+        return $this;
+    }
+
+    /**
+     * Get pricePerSquareUSD
+     *
+     * @return string
+     */
+    public function getPricePerSquareUSD()
+    {
+        return $this->pricePerSquareUSD;
     }
 
     /**

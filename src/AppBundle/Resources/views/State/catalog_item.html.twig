@@ -97,7 +97,11 @@
 
                         <ul>
                             <li>
-                                <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
+                                <p><span class="icon icon-sq"></span>{{ 'state.catalog.attributes.space'|trans }}: {{ estate.space + 0 }} m<sup>2</sup></p>
+                            </li>
+
+                            <li>
+                                <p><span class="icon icon-sq"></span>{{ 'state.catalog.attributes.space_plot'|trans }}: {{ estate.spacePlot + 0 }} m<sup>2</sup></p>
                             </li>
 
                             {% for attribute in estate.estateAttribute %}
@@ -111,31 +115,15 @@
 
                         </ul>
                         <div class="features-holder">
+                            {% set features = estate.estateFeatures.getEstateFeatures(true) %}
 
-                            {% if estate.isCashless %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.is_cashless'|trans }}</span>
-                            {% endif %}
+                            {% for feature in features %}
 
-                            {% if estate.isNewBuilding %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.is_new_building'|trans }}</span>
-                            {% endif %}
+                                {% if estate.estateFeatures.getFeatureByName(feature, true) %}
+                                    <span class="icon icon-accept">{{ ('state.catalog.feature.' ~ feature ~ '.object')|trans }}</span>
+                                {% endif %}
 
-                            {% if estate.hasElevator %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_elevator'|trans }}</span>
-                            {% endif %}
-
-                            {% if estate.hasParking %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_parking'|trans }}</span>
-                            {% endif %}
-
-                            {% if estate.hasFurniture %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_furniture'|trans }}</span>
-                            {% endif %}
-
-                            {% if estate.hasRegistration %}
-                                <span class="icon icon-accept">{{ 'state.catalog.feature.has_registration'|trans }}</span>
-                            {% endif %}
-
+                            {% endfor %}
                         </div>
                     </div>
                     <aside id="map-holder">

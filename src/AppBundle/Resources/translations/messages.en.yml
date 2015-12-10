@@ -47,25 +47,70 @@ state:
             floor:    '{0} -|{1} %count% floor |[2, Inf] %count% floor'
             class:    '{0} -|{1} %count% class |[2, Inf] %count% class'
 
+        attributes:
+            space:      Space
+            space_plot: Land area
+            1: Number of floors    #floors
+            2: Floor               #floor
+            3: Number of rooms     #room
+            4: Number of bathrooms #bathroom
+            5: Number of bedrooms  #bedroom
+
         feature:
             isCashless:
-                catalog: cashless
-                object:  cashless payment
+                catalog: -
+                object:  Cashless payment
             isNewBuilding:
-                catalog: new building
-                object:  new building
+                catalog: New building
+                object:  New building
             hasElevator:
-                catalog: elevator
-                object:  elevator
+                catalog: -
+                object:  Elevator
             hasParking:
-                catalog: parking
-                object:  parking
+                catalog: -
+                object:  Parking
             hasFurniture:
-                catalog: furniture
-                object:  furniture
+                catalog: Furniture
+                object:  Furniture
             hasRegistration:
-                catalog: registration
-                object:  registration for non-residents
+                catalog: Registration
+                object:  Registration for non-residents
+            ownerPhysical:
+                catalog: -
+                object:  Owner - natural person
+            ownerLegal:
+                catalog: -
+                object:  Owner - legal person
+            hasSecurity:
+                catalog: -
+                object:  Concierge or security
+            hasUtility:
+                catalog: -
+                object:  Utilities
+            hasCommunications:
+                catalog: -
+                object:  Communications
+            hasHeatingSystem:
+                catalog: -
+                object:  Independent heating
+            hasPool:
+                catalog: -
+                object:  Swimming pool
+            isRenovated:
+                catalog: Renovated
+                object:  Renovated
+            hasGarage:
+                catalog: Garage
+                object:  Garage
+            isOperational:
+                catalog: Operational
+                object:  Operational
+            isJustRenovated:
+                catalog: -
+                object:  After construction
+            hasBalcony:
+                catalog: -
+                object:  Balcony
 
         next: next object
         back: back to catalog

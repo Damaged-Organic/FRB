@@ -34,9 +34,9 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
         // ---
 
         $estateAttributeType_2 = (new EstateAttributeType)
-            ->setIcon("icon-rooms")
-            ->setTitle("Кількість кімнат")
-            ->setPostfix("room")
+            ->setIcon("icon-floor")
+            ->setTitle("Поверх")
+            ->setPostfix("floor")
         ;
 
         $manager->persist($estateAttributeType_2);
@@ -44,20 +44,20 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_2
             ->setTranslatableLocale("en")
-            ->setTitle("Number of rooms")
+            ->setTitle("Floor")
         ;
 
         $manager->persist($estateAttributeType_2);
         $manager->flush();
 
-        $this->addReference('number_rooms', $estateAttributeType_2);
+        $this->addReference('floor', $estateAttributeType_2);
 
         // ---
 
         $estateAttributeType_3 = (new EstateAttributeType)
-            ->setIcon("icon-bathroom")
-            ->setTitle("Кількість санвузлів")
-            ->setPostfix("bathroom")
+            ->setIcon("icon-rooms")
+            ->setTitle("Кількість кімнат")
+            ->setPostfix("room")
         ;
 
         $manager->persist($estateAttributeType_3);
@@ -65,20 +65,20 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_3
             ->setTranslatableLocale("en")
-            ->setTitle("Number of bathrooms")
+            ->setTitle("Number of rooms")
         ;
 
         $manager->persist($estateAttributeType_3);
         $manager->flush();
 
-        $this->addReference('number_bathrooms', $estateAttributeType_3);
+        $this->addReference('number_rooms', $estateAttributeType_3);
 
         // ---
 
         $estateAttributeType_4 = (new EstateAttributeType)
-            ->setIcon("icon-bedroom")
-            ->setTitle("Кількість спальних кімнат")
-            ->setPostfix("bedroom")
+            ->setIcon("icon-bathroom")
+            ->setTitle("Кількість санвузлів")
+            ->setPostfix("bathroom")
         ;
 
         $manager->persist($estateAttributeType_4);
@@ -86,20 +86,20 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_4
             ->setTranslatableLocale("en")
-            ->setTitle("Number of bedrooms")
+            ->setTitle("Number of bathrooms")
         ;
 
         $manager->persist($estateAttributeType_4);
         $manager->flush();
 
-        $this->addReference('number_bedrooms', $estateAttributeType_4);
+        $this->addReference('number_bathrooms', $estateAttributeType_4);
 
         // ---
 
         $estateAttributeType_5 = (new EstateAttributeType)
-            ->setIcon("icon-floor")
-            ->setTitle("Поверх")
-            ->setPostfix("floor")
+            ->setIcon("icon-bedroom")
+            ->setTitle("Кількість спальних кімнат")
+            ->setPostfix("bedroom")
         ;
 
         $manager->persist($estateAttributeType_5);
@@ -107,20 +107,20 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_5
             ->setTranslatableLocale("en")
-            ->setTitle("Floor")
+            ->setTitle("Number of bedrooms")
         ;
 
         $manager->persist($estateAttributeType_5);
         $manager->flush();
 
-        $this->addReference('floor', $estateAttributeType_5);
+        $this->addReference('number_bedrooms', $estateAttributeType_5);
 
         // ---
 
         $estateAttributeType_6 = (new EstateAttributeType)
-            ->setIcon("icon-building")
-            ->setTitle("Клас будівлі")
-            ->setPostfix("class")
+            ->setIcon("icon-cash")
+            ->setTitle("Операційні витрати")
+            ->setPostfix(NULL)
         ;
 
         $manager->persist($estateAttributeType_6);
@@ -128,19 +128,19 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_6
             ->setTranslatableLocale("en")
-            ->setTitle("Building class")
+            ->setTitle("Operating expense")
         ;
 
         $manager->persist($estateAttributeType_6);
         $manager->flush();
 
-        $this->addReference('building_class', $estateAttributeType_6);
+        $this->addReference('running_cost', $estateAttributeType_6);
 
         // ---
 
         $estateAttributeType_7 = (new EstateAttributeType)
-            ->setIcon("icon-cash")
-            ->setTitle("Експлуатаційні витрати")
+            ->setIcon("icon-building")
+            ->setTitle("Клас будівлі")
             ->setPostfix(NULL)
         ;
 
@@ -149,13 +149,13 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_7
             ->setTranslatableLocale("en")
-            ->setTitle("Running cost")
+            ->setTitle("Building class")
         ;
 
         $manager->persist($estateAttributeType_7);
         $manager->flush();
 
-        $this->addReference('running_cost', $estateAttributeType_7);
+        $this->addReference('building_class', $estateAttributeType_7);
 
         // ---
 

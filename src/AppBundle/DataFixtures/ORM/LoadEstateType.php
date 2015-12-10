@@ -146,6 +146,63 @@ class LoadEstateType extends AbstractFixture implements OrderedFixtureInterface
         $manager->flush();
 
         // ---
+
+        $estateType_2_4 = (new EstateType)
+            ->setParent($this->getReference('commercial'))
+            ->setStringId("buildings")
+            ->setTitle("Будівлі")
+        ;
+
+        $manager->persist($estateType_2_4);
+        $manager->flush();
+
+        $estateType_2_4
+            ->setTranslatableLocale("en")
+            ->setTitle("Buildings")
+        ;
+
+        $manager->persist($estateType_2_4);
+        $manager->flush();
+
+        // ---
+
+        $estateType_2_5 = (new EstateType)
+            ->setParent($this->getReference('commercial'))
+            ->setStringId("premises")
+            ->setTitle("Приміщення")
+        ;
+
+        $manager->persist($estateType_2_5);
+        $manager->flush();
+
+        $estateType_2_5
+            ->setTranslatableLocale("en")
+            ->setTitle("Premises")
+        ;
+
+        $manager->persist($estateType_2_5);
+        $manager->flush();
+
+        // ---
+
+        $estateType_2_6 = (new EstateType)
+            ->setParent($this->getReference('commercial'))
+            ->setStringId("allotment")
+            ->setTitle("Ділянка")
+        ;
+
+        $manager->persist($estateType_2_6);
+        $manager->flush();
+
+        $estateType_2_6
+            ->setTranslatableLocale("en")
+            ->setTitle("Allotment")
+        ;
+
+        $manager->persist($estateType_2_6);
+        $manager->flush();
+
+        // ---
     }
 
     public function getOrder()

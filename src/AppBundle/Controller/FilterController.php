@@ -85,6 +85,20 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    public function spacePlotFilterAction(array $filterArguments, array $estates)
+    {
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $spacePlotRange = $filterAvailableValuesExtractor->availableSpacePlotRange($estates);
+
+        $values = ( !empty($filterArguments[self::FILTER_SPACE_PLOT]) ) ? $filterArguments[self::FILTER_SPACE_PLOT] : [];
+
+        return $this->render('AppBundle:Filter:space_plot.html.twig', [
+            'spacePlotRange' => $spacePlotRange,
+            'values'         => $values
+        ]);
+    }
+
     public function featureFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');

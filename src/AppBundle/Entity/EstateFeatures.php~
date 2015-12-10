@@ -2,8 +2,7 @@
 // src/AppBundle/Entity/EstateFeatures.php
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM,
-    Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 
 use AppBundle\Entity\Utility\DoctrineMapping\IdMapper;
 
@@ -50,6 +49,61 @@ class EstateFeatures
      * @ORM\Column(type="boolean", nullable=true)
      **/
     protected $hasRegistration;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $ownerPhysical;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $ownerLegal;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasSecurity;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasUtility;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasCommunications;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasHeatingSystem;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasPool;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $isRenovated;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $hasGarage;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $isOperational;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     **/
+    protected $isJustRenovated;
 
     /**
      * To string
@@ -195,5 +249,49 @@ class EstateFeatures
     public function getHasRegistration()
     {
         return $this->hasRegistration;
+    }
+
+    /**
+     * Set estate
+     *
+     * @param \AppBundle\Entity\Estate $estate
+     * @return EstateFeatures
+     */
+    public function setEstate(\AppBundle\Entity\Estate $estate = null)
+    {
+        $this->estate = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \AppBundle\Entity\Estate
+     */
+    public function getEstate()
+    {
+        return $this->estate;
+    }
+
+    public function getFeatureByName($featureName)
+    {
+        if( !in_array($featureName, self::getEstateFeatures(), TRUE) )
+            return NULL;
+
+        // Warning! Getting variable value by another string variable
+        return $this->{$featureName};
+    }
+
+    static public function getEstateFeatures()
+    {
+        return [
+            'isCashless',
+            'isNewBuilding',
+            'hasElevator',
+            'hasParking',
+            'hasFurniture',
+            'hasRegistration'
+        ];
     }
 }

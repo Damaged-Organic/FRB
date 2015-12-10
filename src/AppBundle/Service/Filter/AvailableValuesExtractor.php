@@ -110,6 +110,35 @@ class AvailableValuesExtractor
         return $availableSpaces;
     }
 
+    public function availableSpacePlotRange(array $estates)
+    {
+        $availablePlotSpaces = [];
+
+        foreach( $estates as $estate )
+        {
+            if( $estate instanceof Estate )
+                $availablePlotSpaces[] = $estate->getSpacePlot();
+        }
+
+        if( $availablePlotSpaces )
+        {
+            $spacePlotMin = min($availablePlotSpaces);
+            $spacePlotMax = max($availablePlotSpaces);
+
+            $availablePlotSpaces = [
+                'min' => ( $spacePlotMin != $spacePlotMax ) ? $spacePlotMin : 0,
+                'max' => $spacePlotMax
+            ];
+        } else {
+            $availablePlotSpaces = [
+                'min' => NULL,
+                'max' => NULL
+            ];
+        }
+
+        return $availablePlotSpaces;
+    }
+
     public function availableFeatures($estates)
     {
         $availableFeatures = [];
@@ -148,7 +177,7 @@ class AvailableValuesExtractor
                 {
                     foreach( $estate->getEstateAttribute() as $attribute )
                     {
-                        if( is_numeric($attribute->getValue()) )
+                        if( $attribute->getEstateAttributeType()->getPostfix() && is_numeric($attribute->getValue()) )
                             $availableAttributes[$attribute->getEstateAttributeType()->getId()][] = $attribute->getValue();
                     }
                 }

@@ -49,6 +49,54 @@ class EstateFeaturesAdmin extends Admin
                 "label"    => "Реєстрація для нерезидентів",
                 "required" => FALSE
             ])
+            ->add("ownerPhysical", "checkbox", [
+                "label"    => "Власник - фізична особа",
+                "required" => FALSE
+            ])
+            ->add("ownerLegal", "checkbox", [
+                "label"    => "Власник - юридична особа",
+                "required" => FALSE
+            ])
+            ->add("hasSecurity", "checkbox", [
+                "label"    => "Косьєрж або охорона",
+                "required" => FALSE
+            ])
+            ->add("hasUtility", "checkbox", [
+                "label"    => "Комунальні послуги",
+                "required" => FALSE
+            ])
+            ->add("hasCommunications", "checkbox", [
+                "label"    => "Заведені комунікації",
+                "required" => FALSE
+            ])
+            ->add("hasHeatingSystem", "checkbox", [
+                "label"    => "Автономне опалювання",
+                "required" => FALSE
+            ])
+            ->add("hasPool", "checkbox", [
+                "label"    => "Басейн",
+                "required" => FALSE
+            ])
+            ->add("isRenovated", "checkbox", [
+                "label"    => "Ремонт",
+                "required" => FALSE
+            ])
+            ->add("isJustRenovated", "checkbox", [
+                "label"    => "Після будівельників",
+                "required" => FALSE
+            ])
+            ->add("hasGarage", "checkbox", [
+                "label"    => "Гараж",
+                "required" => FALSE
+            ])
+            ->add("isOperational", "checkbox", [
+                "label"    => "Введено в експлуатацію",
+                "required" => FALSE
+            ])
+            ->add("hasBalcony", "checkbox", [
+                "label"    => "Балкон",
+                "required" => FALSE
+            ])
         ;
     }
 }

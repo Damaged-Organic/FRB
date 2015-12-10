@@ -12,6 +12,7 @@ interface FilterArgumentsInterface
     const FILTER_CURRENCY    = 'currency';
     const FILTER_PRICE       = 'price';
     const FILTER_SPACE       = 'space';
+    const FILTER_SPACE_PLOT  = 'space_plot';
     const FILTER_FEATURES    = 'features';
     const FILTER_ATTRIBUTES  = 'attributes';
 
