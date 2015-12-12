@@ -110,17 +110,6 @@ services:
     #        - [ setTranslationDomain, [MenuBundle] ]
     #        - [ setRouter, ["@router"] ]
 
-    sonata.admin.metadata:
-        class: AppBundle\Admin\MetadataAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "SEO", label: "Метадані" }
-        arguments:
-            - ~
-            - AppBundle\Entity\Metadata
-            - ~
-        calls:
-            - [ setTranslationDomain, [AppBundle] ]
-
     sonata.admin.estate:
         class: AppBundle\Admin\EstateAdmin
         tags:
@@ -349,6 +338,28 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\RelocationStepItem
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.contact:
+        class: AppBundle\Admin\ContactAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Про компанію / контакти" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Contact
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.metadata:
+        class: AppBundle\Admin\MetadataAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "SEO", label: "Метадані" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Metadata
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]

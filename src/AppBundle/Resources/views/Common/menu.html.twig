@@ -1,0 +1,40 @@
+{# src/AppBundle/Resources/views/Common/menu.html.twig #}
+<ul>
+    {% if menu.catalog is defined %}
+    	<li class="dropdown {{ ( menu.catalog.outer.active ) ? 'active' }}">
+    		<a href="{{ menu.catalog.outer.route }}">
+                {{ menu.catalog.outer.title }}<span class="icon icon-arrow-down"></span>
+            </a>
+    		<ul>
+                {% for item in menu.catalog.inner %}
+                    <li {{ ( item.active ) ? 'class="active"' }}>
+                        <a href="{{ item.route }}"><span>{{ item.title }}</span></a>
+                    </li>
+                {% endfor %}
+    		</ul>
+    	</li>
+    {% endif %}
+
+    {% if menu.services is defined %}
+    	<li class="dropdown {{ ( menu.services.outer.active ) ? 'active' }}">
+    		<a href="{{ menu.services.outer.route }}">
+                {{ menu.services.outer.title }}<span class="icon icon-arrow-down"></span>
+            </a>
+    		<ul>
+                {% for item in menu.services.inner %}
+                    <li {{ ( item.active ) ? 'class="active"' }}>
+                        <a href="{{ item.route }}"><span>{{ item.title }}</span></a>
+                    </li>
+                {% endfor %}
+    		</ul>
+    	</li>
+    {% endif %}
+
+    {% if menu.general is defined %}
+
+        {% for item in menu.general %}
+    	   <li {{ ( item.active ) ? 'class="active"' }}><a href="{{ item.route }}">{{ item.title }}</a></li>
+        {% endfor %}
+
+    {% endif %}
+</ul>

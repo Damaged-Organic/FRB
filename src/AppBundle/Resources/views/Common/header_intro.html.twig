@@ -28,7 +28,7 @@
 <div id="menu-holder" class="in-intro">
     <nav id="menu">
 
-        {{ knp_menu_render('main', {'currentClass': 'active'}) }}
+        {{ render(controller('AppBundle:Common:menu', { 'request': app.request, 'indented': false })) }}
 
     </nav>
 </div>

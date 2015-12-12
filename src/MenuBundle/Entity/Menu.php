@@ -36,6 +36,11 @@ class Menu implements Translatable
     protected $title;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    protected $block;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     protected $route;
@@ -72,11 +77,34 @@ class Menu implements Translatable
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set block
+     *
+     * @param string $block
+     * @return Menu
+     */
+    public function setBlock($block)
+    {
+        $this->block = $block;
+
+        return $this;
+    }
+
+    /**
+     * Get block
+     *
+     * @return string
+     */
+    public function getBlock()
+    {
+        return $this->block;
     }
 
     /**
@@ -95,7 +123,7 @@ class Menu implements Translatable
     /**
      * Get route
      *
-     * @return string 
+     * @return string
      */
     public function getRoute()
     {

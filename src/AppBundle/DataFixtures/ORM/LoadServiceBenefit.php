@@ -257,6 +257,68 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
                 ->setThesis("")
         );
         $manager->flush();
+
+        // ---
+
+        $manager->persist(
+            $benefit_4_1 = (new ServiceBenefit)
+                ->setService($this->getReference('service_management'))
+                ->setIcon("icon-connected")
+                ->setThesis("Виконання всіх функцій через одного провайдера: оптимізація щоденної роботи з підрядниками. Ми здійснюємо повне управління та контроль за виконанням робіт")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_1
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_2 = (new ServiceBenefit)
+                ->setService($this->getReference('service_management'))
+                ->setIcon("icon-support")
+                ->setThesis("24 * 7 інформаційна лінія підтримки")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_2
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_3 = (new ServiceBenefit)
+                ->setService($this->getReference('service_management'))
+                ->setIcon("icon-save-money")
+                ->setThesis("Зниження вартості придбання Клієнтом послуг / товарів за рахунок об'єднання об’ємів закупівель з об’ємами інших замовлень")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_3
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_4 = (new ServiceBenefit)
+                ->setService($this->getReference('service_management'))
+                ->setIcon("icon-folder")
+                ->setThesis("В кінці звітного місяця Клієнт має один консолідований пакет документів - один рахунок/один акт. Надаємо послуги списання товарів згідно Акту наданих послуг: кави, продуктів, води тощо")
+        );
+        $manager->flush();
+
+        $manager->persist(
+            $benefit_4_4
+                ->setTranslatableLocale("en")
+                ->setThesis("")
+        );
+        $manager->flush();
     }
 
     public function getOrder()

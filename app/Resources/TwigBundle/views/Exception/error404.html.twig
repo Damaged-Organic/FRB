@@ -1,2 +1,50 @@
 {# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
 {% extends '::base.html.twig' %}
+
+{% block title %}
+    404 - Not Found | {{ 'default.title'|trans }}
+{% endblock %}
+
+{% block favicons %}
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('bundles/app//images/favicons/favicon144x144.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/app//images/favicons/favicon152x152.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/app//images/favicons/favicon144x144.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/app//images/favicons/favicon120x120.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/app//images/favicons/favicon72x72.png') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('bundles/app//images/favicons/favicon57x57.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app//images/favicons/favicon128x128.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app//images/favicons/favicon96x96.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app//images/favicons/favicon32x32.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app//images/favicons/favicon16x16.png') }}">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/notfound.bundle.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div id="page">
+        <header id="header">
+            <div class="logo">
+                <a href="{{ path('index', { '_locale': app.request.locale }) }}">
+                    <img src="{{ asset('bundles/app/images/logo.png') }}" alt="{{ 'default.title'|trans }}">
+                </a>
+            </div>
+        </header>
+        <main id="content">
+            <div class="frb-cube-holder">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="text-holder">
+                <span>404</span>
+            </div>
+            <div class="btn-large flat">
+                <a href="{{ path('index', { '_locale': app.request.locale }) }}">Back to the good part</a>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -455,7 +455,13 @@ class StateController extends Controller implements FilterArgumentsInterface
             break;
         }
 
+        $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
+
+        if( !$contact )
+            throw $this->createNotFoundException();
+
         return $this->render('AppBundle:State:staff.html.twig', [
+            'contact' => $contact,
             'service' => $service,
             'staff'   => $staff
         ]);

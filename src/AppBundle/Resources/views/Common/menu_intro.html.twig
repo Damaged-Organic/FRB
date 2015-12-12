@@ -1,0 +1,24 @@
+{# src/AppBundle/Resources/views/Common/menu_intro.html.twig #}
+<ul>
+    {% if menu.catalog is defined %}
+        <li>
+            <a href="{{ menu.catalog.outer.route }}">{{ menu.catalog.outer.title }}</a>
+        </li>
+    {% endif %}
+
+    {% if menu.services is defined %}
+        <li>
+            <a href="{{ menu.services.outer.route }}">{{ menu.services.outer.title }}</a>
+        </li>
+    {% endif %}
+
+    {% if menu.general is defined %}
+
+        {% for item in menu.general %}
+            <li>
+                <a href="{{ item.route }}">{{ item.title }}</a>
+            </li>
+        {% endfor %}
+
+    {% endif %}
+</ul>

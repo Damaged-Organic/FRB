@@ -80,6 +80,54 @@ class Contact implements Translatable
     protected $updatedAt;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $headline;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $intro;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $rawIntro;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $introFormatter;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $list;
+
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
+     **/
+    protected $outro;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     **/
+    protected $rawOutro;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     **/
+    protected $outroFormatter;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -140,7 +188,7 @@ class Contact implements Translatable
     /**
      * Get address
      *
-     * @return string 
+     * @return string
      */
     public function getAddress()
     {
@@ -163,7 +211,7 @@ class Contact implements Translatable
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -186,7 +234,7 @@ class Contact implements Translatable
     /**
      * Get fax
      *
-     * @return string 
+     * @return string
      */
     public function getFax()
     {
@@ -209,7 +257,7 @@ class Contact implements Translatable
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -232,7 +280,7 @@ class Contact implements Translatable
     /**
      * Get pdfPreviewName
      *
-     * @return string 
+     * @return string
      */
     public function getPdfPreviewName()
     {
@@ -255,10 +303,194 @@ class Contact implements Translatable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set intro
+     *
+     * @param string $intro
+     * @return Contact
+     */
+    public function setIntro($intro)
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+
+    /**
+     * Get intro
+     *
+     * @return string
+     */
+    public function getIntro()
+    {
+        return $this->intro;
+    }
+
+    /**
+     * Set rawIntro
+     *
+     * @param string $rawIntro
+     * @return Contact
+     */
+    public function setRawIntro($rawIntro)
+    {
+        $this->rawIntro = $rawIntro;
+
+        return $this;
+    }
+
+    /**
+     * Get rawIntro
+     *
+     * @return string
+     */
+    public function getRawIntro()
+    {
+        return $this->rawIntro;
+    }
+
+    /**
+     * Set introFormatter
+     *
+     * @param string $introFormatter
+     * @return Contact
+     */
+    public function setIntroFormatter($introFormatter)
+    {
+        $this->introFormatter = $introFormatter;
+
+        return $this;
+    }
+
+    /**
+     * Get introFormatter
+     *
+     * @return string
+     */
+    public function getIntroFormatter()
+    {
+        return $this->introFormatter;
+    }
+
+    /**
+     * Set list
+     *
+     * @param string $list
+     * @return Contact
+     */
+    public function setList($list)
+    {
+        $this->list = $list;
+
+        return $this;
+    }
+
+    /**
+     * Get list
+     *
+     * @return string
+     */
+    public function getList()
+    {
+        return $this->list;
+    }
+
+    /**
+     * Set outro
+     *
+     * @param string $outro
+     * @return Contact
+     */
+    public function setOutro($outro)
+    {
+        $this->outro = $outro;
+
+        return $this;
+    }
+
+    /**
+     * Get outro
+     *
+     * @return string
+     */
+    public function getOutro()
+    {
+        return $this->outro;
+    }
+
+    /**
+     * Set rawOutro
+     *
+     * @param string $rawOutro
+     * @return Contact
+     */
+    public function setRawOutro($rawOutro)
+    {
+        $this->rawOutro = $rawOutro;
+
+        return $this;
+    }
+
+    /**
+     * Get rawOutro
+     *
+     * @return string
+     */
+    public function getRawOutro()
+    {
+        return $this->rawOutro;
+    }
+
+    /**
+     * Set outroFormatter
+     *
+     * @param string $outroFormatter
+     * @return Contact
+     */
+    public function setOutroFormatter($outroFormatter)
+    {
+        $this->outroFormatter = $outroFormatter;
+
+        return $this;
+    }
+
+    /**
+     * Get outroFormatter
+     *
+     * @return string
+     */
+    public function getOutroFormatter()
+    {
+        return $this->outroFormatter;
+    }
+
+    /**
+     * Set headline
+     *
+     * @param string $headline
+     * @return Contact
+     */
+    public function setHeadline($headline)
+    {
+        $this->headline = $headline;
+
+        return $this;
+    }
+
+    /**
+     * Get headline
+     *
+     * @return string 
+     */
+    public function getHeadline()
+    {
+        return $this->headline;
     }
 }

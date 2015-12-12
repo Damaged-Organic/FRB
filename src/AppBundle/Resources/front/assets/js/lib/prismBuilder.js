@@ -3,9 +3,9 @@
 import $ from "jquery";
 import vendorize from "./vendors";
 
-var sideClassNames = [
+let sideClassNames = [
 	"commercial",
-	"private",
+	"residential",
 	"evaluation",
 	"management"
 ];

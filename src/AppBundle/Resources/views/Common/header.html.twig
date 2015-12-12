@@ -4,7 +4,7 @@
 </div>
 <nav class="menu">
 
-    {{ knp_menu_render('main', {'currentClass': 'active'}) }}
+    {{ render(controller('AppBundle:Common:menu', { 'request': app.request, 'indented': true })) }}
 
 </nav>
 <div class="contact-info">
