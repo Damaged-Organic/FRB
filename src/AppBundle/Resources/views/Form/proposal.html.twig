@@ -1,160 +1,268 @@
 {# src/AppBundle/Resources/views/Form/proposal.html.twig #}
-{{ form(form) }}
 <form action="{{ path('catalog_proposal', { '_locale': app.request.locale }) }}" method="POST" id="property-form">
-    <!--
-    classes: success or error
-    <div class="response-holder success|error">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit error sed tenetur hic obcaecati, autem rem quo sunt saepe mollitia velit fugiat, quos, dolorem culpa asperiores. Culpa voluptates quaerat deleniti.</p>
-    </div-->
+
+    {% if message %}
+        <div class="response-holder {{ message.class }}">
+            <p>{{ message.text }}</p>
+        </div>
+    {% endif %}
+
     <div class="field-holder">
-        <label for="property-username">Ім'я<sup>*</sup></label>
-        <input type="text" name="property[username]" value="" placeholder="Введіть ваше ім'я" id="property-username" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.name.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "2", 'data-msg-minlength': 'proposal.name.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'proposal.name.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.name) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-userphone">Телефон<sup>*</sup></label>
-        <input type="text" name="property[userphone]" value="" placeholder="Введіть номер вашого телефону" id="property-userphone" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-mask="+38 (999) 999-99-99">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.phone.not_blank'|trans({}, "validators"),
+                'data-mask': "+38 (099) 999-99-99"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.phone) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-useremail">Електронна пошта<sup>*</sup></label>
-        <input type="text" name="property[useremail]" value="" placeholder="Введіть вашу електронну пошту" id="property-useremail" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-email="true" data-msg-email="Це не схоже на справжню електронну пошту">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.email.not_blank'|trans({}, "validators"),
+                'data-rule-email': "true", 'data-msg-email': 'proposal.email.valid'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.email) }}</span>
+        </div>
     </div>
+
     <div class="field-holder dbl">
-        <p>Оберіть тип приміщення</p>
+        <p>{{ form.type.vars.label|trans({}, "forms") }}</p>
         <div class="check-holder">
-            <input type="radio" name="property[type]" value="apartment" id="property-type-apartment" checked="checked">
-            <label for="property-type-apartment">
-                <span>Квартира</span>
+            {{ form_widget(form.type.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.type.0.vars.id }}">
+                <span>{{ form.type.0.vars.label }}</span>
             </label>
         </div>
         <div class="check-holder">
-            <input type="radio" name="property[type]" value="house" id="property-type-house">
-            <label for="property-type-house">
-                <span>Будинок</span>
+            {{ form_widget(form.type.1) }}
+            <label for="{{ form.type.1.vars.id }}">
+                <span>{{ form.type.1.vars.label }}</span>
             </label>
         </div>
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        <div class="error-holder">
+            <span>{{ form_errors(form.type) }}</span>
+        </div>
     </div>
+
     <div class="field-holder dbl">
-        <p>Оберіть валюту</p>
+        <p>{{ form.priceCurrency.vars.label|trans({}, "forms") }}</p>
         <div class="check-holder">
-            <input type="radio" name="property[currency]" value="usd" id="property-currency-usd" checked="checked">
-            <label for="property-currency-usd">
-                <span>USD</span>
+            {{ form_widget(form.priceCurrency.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.priceCurrency.0.vars.id }}">
+                <span>{{ form.priceCurrency.0.vars.label }}</span>
             </label>
         </div>
         <div class="check-holder">
-            <input type="radio" name="property[currency]" value="uah" id="property-currency-uah">
-            <label for="property-currency-uah">
-                <span>UAH</span>
+            {{ form_widget(form.priceCurrency.1) }}
+            <label for="{{ form.priceCurrency.1.vars.id }}">
+                <span>{{ form.priceCurrency.1.vars.label }}</span>
             </label>
         </div>
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        <div class="error-holder">
+            <span>{{ form_errors(form.priceCurrency) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-price">Ціна<sup>*</sup></label>
-        <input type="text" name="property[price]" value="" placeholder="Введіть бажаєму ціну вашої нерухомості" id="property-price" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-mask="##,#0.00" data-mask-reverse="true">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.priceValue) }}
+        {{ form_widget(form.priceValue, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.price_value.not_blank'|trans({}, "validators"),
+                'data-mask': "#00,00",
+                'data-mask-reverse': "true"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.priceValue) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-address">Адреса<sup>*</sup></label>
-        <input type="text" name="property[address]" value="" placeholder="Введіть адресу вашої нерухомості" id="property-address" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.address) }}
+        {{ form_widget(form.address, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.address.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "5", 'data-msg-minlength': 'proposal.address.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "500", 'data-msg-maxlength': 'proposal.address.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.address) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-square-area">Площа<sup>*</sup></label>
-        <input type="text" name="property[square-area]" value="" placeholder="Введіть площу вашої нерухомості" id="property-square-area" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.space) }}
+        {{ form_widget(form.space, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.space.not_blank'|trans({}, "validators"),
+                'data-rule-min': 1, 'data-msg-min': 'proposal.space.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000000, 'data-msg-max': 'proposal.space.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.space) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-floor">Поверх<sup>*</sup></label>
-        <input type="text" name="property[floor]" value="" placeholder="Введіть поверх вашої квартири" id="property-floor" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.spacePlot) }}
+        {{ form_widget(form.spacePlot, {
+            'attr': {
+                'data-rule-min': 1, 'data-msg-min': 'proposal.space_plot.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000000, 'data-msg-max': 'proposal.space_plot.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.spacePlot) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-floor-count">Кількість поверхів<sup>*</sup></label>
-        <input type="text" name="property[floor-count]" value="" placeholder="Введіть загальну кількість поверхів вашого будинку" id="property-floor-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.roomsNumber) }}
+        {{ form_widget(form.roomsNumber, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.rooms_number.not_blank'|trans({}, "validators"),
+                'data-rule-min': 1, 'data-msg-min': 'proposal.rooms_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.rooms_number.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.roomsNumber) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-rooms-count">Кількість кімнат<sup>*</sup></label>
-        <input type="text" name="property[rooms-count]" value="" placeholder="Введіть кількість кімнат" id="property-rooms-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.bathroomsNumber) }}
+        {{ form_widget(form.bathroomsNumber, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.bathrooms_number.not_blank'|trans({}, "validators"),
+                'data-rule-min': 1, 'data-msg-min': 'proposal.bathrooms_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.bathrooms_number.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.bathroomsNumber) }}</span>
+        </div>
     </div>
+
     <div class="field-holder">
-        <label for="property-toilets-count">Кількість санвузлів<sup>*</sup></label>
-        <input type="text" name="property[toilets-count]" value="" placeholder="Введіть кількість санвузлів" id="property-toilets-count" data-rule-required="true" data-msg-required="Ви не заповнили обов'язкове поле" data-rule-digits="true" data-msg-digits="Це поле приймає лише цифри">
-        <!--div class="error-holder">
-            <span>Це поле обов'язкове</span>
-        </div-->
+        {{ form_label(form.bedroomsNumber) }}
+        {{ form_widget(form.bedroomsNumber, {
+            'attr': {
+                'data-rule-min': 1, 'data-msg-min': 'proposal.bedrooms_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.bedrooms_number.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.bedroomsNumber) }}</span>
+        </div>
     </div>
+
+    <div class="field-holder">
+        {{ form_label(form.floor) }}
+        {{ form_widget(form.floor, {
+            'attr': {
+                'data-rule-min': 1, 'data-msg-min': 'proposal.floor.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.floor.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.floor) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.floorsNumber) }}
+        {{ form_widget(form.floorsNumber, {
+            'attr': {
+                'data-rule-min': 1, 'data-msg-min': 'proposal.floors_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.floors_number.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.floorsNumber) }}</span>
+        </div>
+    </div>
+
     <div class="field-holder dbl extra-top">
         <div class="check-holder">
-            <input type="checkbox" name="property[cashless]" value="yes" id="property-cashless">
-            <label for="property-cashless">
-                <span>Безготівковий розрахунок</span>
+            {{ form_widget(form.isCashless) }}
+            <label for="{{ form.isCashless.vars.id }}">
+                <span>{{ form.isCashless.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
         <div class="check-holder">
-            <input type="checkbox" name="property[new]" value="yes" id="property-new">
-            <label for="property-new">
-                <span>Нова будівля</span>
+            {{ form_widget(form.isNewBuilding) }}
+            <label for="{{ form.isNewBuilding.vars.id }}">
+                <span>{{ form.isNewBuilding.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
     </div>
+
     <div class="field-holder dbl extra-top">
         <div class="check-holder">
-            <input type="checkbox" name="property[elevator]" value="yes" id="property-elevator">
-            <label for="property-elevator">
-                <span>Ліфт</span>
+            {{ form_widget(form.hasElevator) }}
+            <label for="{{ form.hasElevator.vars.id }}">
+                <span>{{ form.hasElevator.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
         <div class="check-holder">
-            <input type="checkbox" name="property[parking]" value="yes" id="property-parking">
-            <label for="property-parking">
-                <span>Парковка</span>
+            {{ form_widget(form.hasParking) }}
+            <label for="{{ form.hasParking.vars.id }}">
+                <span>{{ form.hasParking.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
     </div>
+
     <div class="field-holder dbl extra-top">
         <div class="check-holder">
-            <input type="checkbox" name="property[furnished]" value="yes" id="property-furnished">
-            <label for="property-furnished">
-                <span>Наявність меблів</span>
+            {{ form_widget(form.hasFurniture) }}
+            <label for="{{ form.hasFurniture.vars.id }}">
+                <span>{{ form.hasFurniture.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
         <div class="check-holder">
-            <input type="checkbox" name="property[nonresident-registration]" value="yes" id="property-nonresident-registration">
-            <label for="property-nonresident-registration">
-                <span>Реєстрація для нерезидента</span>
+            {{ form_widget(form.hasRegistration) }}
+            <label for="{{ form.hasRegistration.vars.id }}">
+                <span>{{ form.hasRegistration.vars.label|trans({}, "forms") }}</span>
             </label>
         </div>
     </div>
+
+    {{ form_widget(form._token) }}
+
     <button type="submit">
-        <span>Розмістити</span>
+        <span>{{ 'proposal.submit.label'|trans({}, "forms") }}</span>
     </button>
 </form>

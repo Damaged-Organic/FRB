@@ -67,7 +67,7 @@
 			}
 			&:hover,
 			&.active{
-				figure:before{ transform: translateY(100%); }	
+				figure:before{ transform: translateY(100%); }
 			}
 		}
 		.arrow{
@@ -91,6 +91,14 @@
 			&:hover{
 				color: @red;
 			}
+		}
+	}
+}
+#gallery-holder.no-nav{
+	.navigation-holder{
+		padding: 0;
+		.arrow{
+			display: none;
 		}
 	}
 }

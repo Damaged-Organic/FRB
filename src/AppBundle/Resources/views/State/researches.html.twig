@@ -48,41 +48,43 @@
         </div>
         <section class="outer substrate research-holder">
             <div class="inner white-back">
-                <div class="grid dbl">
+
                     {% if researches %}
+                        <div class="grid dbl">
+                            {% for researchCategory in researchCategories %}
 
-                        {% for researchCategory in researchCategories %}
+                                {% if researches[researchCategory.id] is defined %}
+                                    <div class="col">
+                                        <figure>
+                                            <img src="{{ vich_uploader_asset(researchCategory, 'photoFile')|imagine_filter('research_category_thumb') }}" alt="{{ researchCategory.title }}">
+                                        </figure>
+                                        <div class="info-holder">
+                                            <h2>{{ researchCategory.title }}</h2>
+                                            <p>{{ researchCategory.description }}</p>
+                                        </div>
+                                        <div class="buttons-holder">
+                                            <p>{{ 'state.researches.reports'|trans }}</p>
 
-                            {% if researches[researchCategory.id] is defined %}
-                                <div class="col">
-                                    <figure>
-                                        <img src="{{ vich_uploader_asset(researchCategory, 'photoFile')|imagine_filter('research_category_thumb') }}" alt="{{ researchCategory.title }}">
-                                    </figure>
-                                    <div class="info-holder">
-                                        <h2>{{ researchCategory.title }}</h2>
-                                        <p>{{ researchCategory.description }}</p>
+                                            {% for research in researches[researchCategory.id] %}
+                                                <div class="btn-small flat">
+                                                    <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}">
+                                                        {{ research.quarter|roman_number }}
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
                                     </div>
-                                    <div class="buttons-holder">
-                                        <p>{{ 'state.researches.reports'|trans }}</p>
+                                {% endif %}
 
-                                        {% for research in researches[researchCategory.id] %}
-                                            <div class="btn-small flat">
-                                                <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}">
-                                                    {{ research.quarter|roman_number }}
-                                                </a>
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
-                                </div>
-                            {% endif %}
-
-                        {% endfor %}
-
+                            {% endfor %}
+                        </div>
                     {% else %}
-                        <p>{{ 'state.researches.empty.researches'|trans }}</p>
+                        <div class="empty-holder">
+                            <p>{{ 'state.researches.empty.researches'|trans }}</p>
+                        </div>
                     {% endif %}
-                </div>
+
             </div>
         </section>
     </main>

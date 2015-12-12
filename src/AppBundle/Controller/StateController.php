@@ -6,6 +6,7 @@ use DateTime;
 
 use Symfony\Component\HttpKernel\Exception\HttpException,
     Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpFoundation\Response,
     Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
@@ -84,7 +85,7 @@ class StateController extends Controller implements FilterArgumentsInterface
         $filterCurrency  = $this->get('app.filter.utility.currency');
 
         $paginationParameters = [
-            'perPage'  => 2,
+            'perPage'  => 10,
             'pageStep' => 5
         ];
 
@@ -224,7 +225,7 @@ class StateController extends Controller implements FilterArgumentsInterface
     }
 
     /**
-     * @Method({"GET"})
+     * @Method({"GET", "POST"})
      * @Route(
      *      "/catalog/residential/proposal",
      *      name="catalog_proposal",
@@ -266,16 +267,22 @@ class StateController extends Controller implements FilterArgumentsInterface
             ]);
 
             if( !$_mailerShortcut->sendMail($from, $to, $subject, $body) ) {
-                $message['fail'] = $_translator->trans("proposal.fail", [], 'responses');
+                $message = [
+                    'class' => 'error',
+                    'text'  => $_translator->trans("proposal.fail", [], 'responses')
+                ];
             } else {
-                $message['success'] = $_translator->trans("proposal.success", [], 'responses');
+                $message = [
+                    'class' => 'success',
+                    'text'  => $_translator->trans("proposal.success", [], 'responses')
+                ];
             }
 
             $this->get('session')->getFlashBag()->add('message_proposal', $message);
 
             return $this->redirectToRoute('catalog_proposal', [
                 '_locale' => $request->getLocale()
-            ]);
+            ], 301);
         }
 
         $message = ( $this->get('session')->getFlashBag()->has('message_proposal') )

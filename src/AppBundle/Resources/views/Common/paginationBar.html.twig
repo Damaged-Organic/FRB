@@ -10,6 +10,10 @@
             <li {{ (item == paginationBar.current_page) ? 'class="active"' : '' }}>
                 <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'page': item }|merge(filterArguments)) }}">{{ item }}</a>
             </li>
+        {% else %}
+            <li class="active">
+                <a href="{{ path('catalog', { '_locale': app.request.locale, 'estateType': estateType, 'page': 1 }|merge(filterArguments)) }}">1</a>
+            </li>
         {% endfor %}
 
         {% set page_next = ( paginationBar.side_buttons.page_next ) ? paginationBar.side_buttons.page_next : paginationBar.pages_number %}

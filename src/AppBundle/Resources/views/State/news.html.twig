@@ -72,7 +72,9 @@
                             <p>{{ article.content }}</p>
                         </article>
                     {% else %}
-                        <p>{{ 'state.news.empty.news'|trans }}</p>
+                        <div class="empty-holder extra-m large">
+                            <p>{{ 'state.news.empty.news'|trans }}</p>
+                        </div>
                     {% endfor %}
 
                 </div>

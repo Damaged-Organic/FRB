@@ -38,6 +38,24 @@ class MenuBuilder
                 $menu[$item->getTitle()]->setCurrent(TRUE);
         }
 
+        if( str_replace("_default", "", $currentRoute) == 'catalog_proposal' ||
+            str_replace("_default", "", $currentRoute) == 'catalog_item' ) {
+            foreach( $items as $item ) {
+                if( $item->getRoute() == 'catalog' )
+                    $menu[$item->getTitle()]->setCurrent(TRUE);
+            };
+        }
+
+        if( str_replace("_default", "", $currentRoute) == 'expats_relocation' ||
+            str_replace("_default", "", $currentRoute) == 'expats_information') {
+            foreach( $items as $item ) {
+                if( $item->getRoute() == 'services' )
+                    $menu[$item->getTitle()]->setCurrent(TRUE);
+            };
+        }
+
+        unset($this);
+
         return $menu;
     }
 }

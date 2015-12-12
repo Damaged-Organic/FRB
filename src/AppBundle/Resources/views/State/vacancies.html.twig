@@ -111,7 +111,9 @@
                         </div>
                     </article>
                 {% else %}
-                    <p>{{ 'state.vacancies.empty.vacancies'|trans }}</p>
+                    <div class="empty-holder">
+                        <p>{{ 'state.vacancies.empty.vacancies'|trans }}</p>
+                    </div>
                 {% endfor %}
 
             </div>

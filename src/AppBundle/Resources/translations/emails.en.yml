@@ -15,3 +15,11 @@ comment:
 
 proposal:
     subject: Proposal - new proposal from a property owner!
+
+    intro: New property proposal received from FRBrokerage.Net!
+    body:  User "%name%" (%contacts%):
+    outro: Message sent at %date%.
+
+    table:
+        apartment: Apartment
+        house:     House

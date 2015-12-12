@@ -100,9 +100,11 @@
                                 <p><span class="icon icon-sq"></span>{{ 'state.catalog.attributes.space'|trans }}: {{ estate.space + 0 }} m<sup>2</sup></p>
                             </li>
 
-                            <li>
-                                <p><span class="icon icon-sq"></span>{{ 'state.catalog.attributes.space_plot'|trans }}: {{ estate.spacePlot + 0 }} m<sup>2</sup></p>
-                            </li>
+                            {% if estate.spacePlot %}
+                                <li>
+                                    <p><span class="icon icon-sq"></span>{{ 'state.catalog.attributes.space_plot'|trans }}: {{ estate.spacePlot + 0 }} m<sup>2</sup></p>
+                                </li>
+                            {% endif %}
 
                             {% for attribute in estate.estateAttribute %}
                                 <li>
@@ -150,7 +152,7 @@
             </div>
 
             {% if nearestEstates.next %}
-                {% set nextLink = path('catalog_tem', { '_locale': "ua", 'estateType': estateType, 'id': nearestEstates.next.id, 'slug': nearestEstates.next.slug }|merge(filterArguments)) %}
+                {% set nextLink = path('catalog_item', { '_locale': "ua", 'estateType': estateType, 'id': nearestEstates.next.id, 'slug': nearestEstates.next.slug }|merge(filterArguments)) %}
             {% else %}
                 {% set nextLink = null %}
             {% endif %}

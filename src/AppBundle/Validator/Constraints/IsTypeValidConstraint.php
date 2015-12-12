@@ -10,4 +10,9 @@ use Symfony\Component\Validator\Constraint;
 class IsTypeValidConstraint extends Constraint
 {
     public $message = "proposal.type.valid";
+
+    public function validatedBy()
+    {
+        return 'is_type_valid';
+    }
 }

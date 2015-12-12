@@ -68,13 +68,9 @@ proposal:
         label:       Total space
         placeholder: Enter your estate total space
 
-    floor:
-        label:       Floor
-        placeholder: Enter estate floor
-
-    floors_number:
-        label:       Floors number
-        placeholder: Enter floors number
+    space_plot:
+        label:       Total land area
+        placeholder: Enter your estate land area
 
     rooms_number:
         label:       Rooms number
@@ -83,6 +79,18 @@ proposal:
     bathrooms_number:
         label:       Bathrooms number
         placeholder: Enter bathrooms number
+
+    bedrooms_number:
+        label:       Bedrooms number
+        placeholder: Enter bedrooms number
+
+    floor:
+        label:       Floor
+        placeholder: Enter estate floor
+
+    floors_number:
+        label:       Floors number
+        placeholder: Enter floors number
 
     is_cashless:
         label: Non-cash payment

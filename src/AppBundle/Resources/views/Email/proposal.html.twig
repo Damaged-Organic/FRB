@@ -1,1 +1,94 @@
 {# src/AppBundle/Resources/views/Email/proposal.html.twig #}
+{% set contacts = proposal.email ~ ', ' ~ proposal.phone %}
+
+<h3>{{ 'proposal.intro'|trans({}, 'emails') }}</h3>
+
+<p>{{ 'proposal.body'|trans({ '%name%': proposal.name, '%contacts%': contacts }, 'emails') }}</p>
+
+<table border=1 cellpadding=5>
+    <tr>
+        <td>{{ 'proposal.type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.type)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.price_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.priceValue ~ ' ' ~ proposal.priceCurrency }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.address.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.address }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.space.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.space ~ ' m2' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.space_plot.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.spacePlot ) ? proposal.spacePlot ~ ' m2' : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.rooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.roomsNumber }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.bathrooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.bathroomsNumber }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.bedrooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.bedroomsNumber ) ?: '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.floor.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.floor ) ?: '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.floors_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.floorsNumber ) ?: '-' }}</td>
+    </tr>
+
+    {% if proposal.isCashless %}
+        <tr>
+            <td>{{ 'proposal.is_cashless.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+    {% if proposal.isNewBuilding %}
+        <tr>
+            <td>{{ 'proposal.is_new_building.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+    {% if proposal.hasElevator %}
+        <tr>
+            <td>{{ 'proposal.has_elevator.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+    {% if proposal.hasParking %}
+        <tr>
+            <td>{{ 'proposal.has_parking.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+    {% if proposal.hasFurniture %}
+        <tr>
+            <td>{{ 'proposal.has_furniture.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+    {% if proposal.hasRegistration %}
+        <tr>
+            <td>{{ 'proposal.has_registration.label'|trans({}, 'forms') }}:</td>
+            <td>+</td>
+        </tr>
+    {% endif %}
+
+</table>
+
+<p>{{ 'proposal.outro'|trans({ '%date%': 'now'|date('Y-m-d, H:i') }, 'emails') }}</p>

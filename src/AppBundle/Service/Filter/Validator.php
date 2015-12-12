@@ -150,6 +150,11 @@ class Validator implements FilterArgumentsInterface
         if( !isset($spacePlotRange['max']) || $notValid($spacePlotRange['max']) )
             $spacePlotRange['max'] = $existingSpacePlotRange['max'];
 
+        if( $spacePlotRange['min'] == $existingSpacePlotRange['min'] &&
+            $spacePlotRange['max'] == $existingSpacePlotRange['max'] ) {
+            $spacePlotRange = NULL;
+        }
+
         return $spacePlotRange;
     }
 

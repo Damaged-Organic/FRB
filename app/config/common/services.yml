@@ -33,6 +33,8 @@ services:
         class: AppBundle\Validator\Constraints\IsTypeValidConstraintValidator
         arguments:
             - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: validator.constraint_validator, alias: is_type_valid }
 
     # Services
 

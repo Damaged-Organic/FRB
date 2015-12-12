@@ -77,15 +77,10 @@ proposal:
             min: Such space value is too small. Maybe you've made a mistake?
             max: Such space value is too large. Maybe you've made a mistake?
 
-    floor:
+    space_plot:
         range:
-            min: Such floor value is too small. Maybe you've made a mistake?
-            max: Such floor value is too large. Maybe you've made a mistake?
-
-    floorsNumber:
-        range:
-            min: Such floors number value is too small. Maybe you've made a mistake?
-            max: Such floors number value is too large. Maybe you've made a mistake?
+            min: Such land area value is too small. Maybe you've made a mistake?
+            max: Such land area value is too large. Maybe you've made a mistake?
 
     rooms_number:
         not_blank: Please, enter your property rooms nubmer
@@ -98,6 +93,21 @@ proposal:
         range:
             min: Such bathrooms number value is too small. Maybe you've made a mistake?
             max: Such bathrooms number value is too large. Maybe you've made a mistake?
+
+    bedrooms_number:
+        range:
+            min: Such bedrooms number value is too small. Maybe you've made a mistake?
+            max: Such bedrooms number value is too large. Maybe you've made a mistake?
+
+    floor:
+        range:
+            min: Such floor value is too small. Maybe you've made a mistake?
+            max: Such floor value is too large. Maybe you've made a mistake?
+
+    floorsNumber:
+        range:
+            min: Such floors number value is too small. Maybe you've made a mistake?
+            max: Such floors number value is too large. Maybe you've made a mistake?
 
     checkbox:
         valid: Checkbox value is invalid

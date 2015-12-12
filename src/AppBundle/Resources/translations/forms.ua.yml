@@ -68,13 +68,9 @@ proposal:
         label:       Площа приміщення
         placeholder: Введіть площу приміщення
 
-    floor:
-        label:       Поверх приміщення
-        placeholder: Введіть поверх приміщення
-
-    floors_number:
-        label:       Кількість поверхів
-        placeholder: Введіть кількість поверхів
+    space_plot:
+        label:       Площа ділянки
+        placeholder: Введіть площу ділянки
 
     rooms_number:
         label:       Кількість кімнат
@@ -83,6 +79,18 @@ proposal:
     bathrooms_number:
         label:       Кількість санвузлів
         placeholder: Введіть кількість санвузлів
+
+    bedrooms_number:
+        label:       Кількість спалень
+        placeholder: Введіть кількість спалень
+
+    floor:
+        label:       Поверх приміщення
+        placeholder: Введіть поверх приміщення
+
+    floors_number:
+        label:       Кількість поверхів
+        placeholder: Введіть кількість поверхів
 
     is_cashless:
         label: Безготівковий розрахунок

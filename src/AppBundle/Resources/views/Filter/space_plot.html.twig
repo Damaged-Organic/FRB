@@ -1,21 +1,23 @@
 {# src/AppBundle/Resources/views/Filter/space_plot.html.twig #}
-<div class="item">
-    <h3>{{ 'state.catalog.filter.space_plot'|trans }}</h3>
+{% if spacePlotRange['min'] or spacePlotRange['max'] %}
+    <div class="item">
+        <h3>{{ 'state.catalog.filter.space_plot'|trans }}</h3>
 
-    {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
-    {% set FILTER_SPACE_PLOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_SPACE_PLOT') %}
+        {% set FILTER_ROOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_ROOT') %}
+        {% set FILTER_SPACE_PLOT = constant('AppBundle\\Service\\Filter\\Utility\\Interfaces\\FilterArgumentsInterface::FILTER_SPACE_PLOT') %}
 
-    {% set spacePlotMin = ( values['min'] is defined ) ? values['min'] : spacePlotRange['min'] %}
-    {% set spacePlotMax = ( values['max'] is defined ) ? values['max'] : spacePlotRange['max'] %}
+        {% set spacePlotMin = ( values['min'] is defined ) ? values['min'] : spacePlotRange['min'] %}
+        {% set spacePlotMax = ( values['max'] is defined ) ? values['max'] : spacePlotRange['max'] %}
 
-    <div class="range-holder"
-         data-min="{{ spacePlotMin }}" data-range-min="{{ spacePlotRange['min'] }}"
-         data-max="{{ spacePlotMax }}" data-range-max="{{ spacePlotRange['max'] }}">
+        <div class="range-holder"
+             data-min="{{ spacePlotMin }}" data-range-min="{{ spacePlotRange['min'] }}"
+             data-max="{{ spacePlotMax }}" data-range-max="{{ spacePlotRange['max'] }}">
+        </div>
+        <div class="field-holder">
+            <span>{{ 'common.from'|trans }}</span>
+            <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][min]" value="{{ spacePlotMin|number_format(0, '', '') }}" id="area-plot-min" class="counter">
+            <span>{{ 'common.to'|trans }}</span>
+            <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][max]" value="{{ spacePlotMax|number_format(0, '', '') }}" id="area-plot-max" class="counter">
+        </div>
     </div>
-    <div class="field-holder">
-        <span>{{ 'common.from'|trans }}</span>
-        <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][min]" value="{{ spacePlotMin|number_format(0, '', '') }}" id="area-plot-min" class="counter">
-        <span>{{ 'common.to'|trans }}</span>
-        <input type="text" name="{{ FILTER_ROOT }}[{{ FILTER_SPACE_PLOT }}][max]" value="{{ spacePlotMax|number_format(0, '', '') }}" id="area-plot-max" class="counter">
-    </div>
-</div>
+{% endif %}

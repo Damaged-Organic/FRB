@@ -38,7 +38,7 @@
 		<div class="outer substrate">
 			<div class="inner white-back">
 
-                {% include 'AppBundle:Form:proposal.html.twig' with { '_locale': app.request.locale, 'form': form } only %}
+                {% include 'AppBundle:Form:proposal.html.twig' with { '_locale': app.request.locale, 'form': form, 'message': message } only %}
 
 			</div>
 		</div>

@@ -51,8 +51,20 @@ class ProposalType extends AbstractType
                 'attr'  => [
                     'placeholder' => "proposal.type.placeholder"
                 ],
-                'placeholder' => "...",
-                'choices'     => $propertyTypeChoices
+                'choices'     => $propertyTypeChoices,
+                'expanded'    => TRUE,
+                'multiple'    => FALSE,
+                'invalid_message' => "proposal.type.valid",
+            ])
+            ->add("priceCurrency", 'choice', [
+                'label'   => "proposal.price_currency.label",
+                'attr'  => [
+                    'placeholder' => "proposal.price_currency.placeholder"
+                ],
+                'choices'  => ['UAH' => "UAH", 'USD' => "USD"],
+                'expanded' => TRUE,
+                'multiple' => FALSE,
+                'invalid_message' => "proposal.price_currency.valid",
             ])
             ->add("priceValue", 'number', [
                 'label'     => "proposal.price_value.label",
@@ -60,13 +72,6 @@ class ProposalType extends AbstractType
                     'placeholder' => "proposal.price_value.placeholder"
                 ],
                 'precision' => 2
-            ])
-            ->add("priceCurrency", 'choice', [
-                'label'   => "proposal.price_currency.label",
-                'attr'  => [
-                    'placeholder' => "proposal.price_currency.placeholder"
-                ],
-                'choices' => ["UAH", "USD"]
             ])
             ->add("address", "text", [
                 'label'   => "proposal.address.label",
@@ -81,47 +86,70 @@ class ProposalType extends AbstractType
                 ],
                 'precision' => 2
             ])
-            ->add("floor", "integer", [
-                'label'   => "proposal.floor.label",
-                'attr'  => [
-                    'placeholder' => "proposal.floor.placeholder"
-                ]
+            ->add("spacePlot", "number", [
+                'required' => FALSE,
+                'label'    => "proposal.space_plot.label",
+                'attr' => [
+                    'placeholder' => "proposal.space_plot.placeholder"
+                ],
+                'precision' => 2
             ])
-            ->add("floorsNumber", "integer", [
-                'label'   => "proposal.floors_number.label",
-                'attr'  => [
-                    'placeholder' => "proposal.floors_number.placeholder"
-                ]
-            ])
-            ->add("roomsNumber", "integer", [
+            ->add("roomsNumber", "number", [
                 'label'   => "proposal.rooms_number.label",
                 'attr'  => [
                     'placeholder' => "proposal.rooms_number.placeholder"
                 ]
             ])
-            ->add("bathroomsNumber", "integer", [
+            ->add("bathroomsNumber", "number", [
                 'label'   => "proposal.bathrooms_number.label",
                 'attr'  => [
                     'placeholder' => "proposal.bathrooms_number.placeholder"
                 ]
             ])
+            ->add("bedroomsNumber", "number", [
+                'required' => FALSE,
+                'label'    => "proposal.bedrooms_number.label",
+                'attr'  => [
+                    'placeholder' => "proposal.bedrooms_number.placeholder"
+                ]
+            ])
+            ->add("floor", "number", [
+                'required' => FALSE,
+                'label'    => "proposal.floor.label",
+                'attr'  => [
+                    'placeholder' => "proposal.floor.placeholder"
+                ]
+            ])
+            ->add("floorsNumber", "number", [
+                'required' => FALSE,
+                'label'    => "proposal.floors_number.label",
+                'attr'  => [
+                    'placeholder' => "proposal.floors_number.placeholder"
+                ]
+            ])
             ->add("isCashless", "checkbox", [
-                'label'   => "proposal.is_cashless.label"
+                'required' => FALSE,
+                'label'    => "proposal.is_cashless.label"
             ])
             ->add("isNewBuilding", "checkbox", [
-                'label'   => "proposal.is_new_building.label"
+                'required' => FALSE,
+                'label'    => "proposal.is_new_building.label"
             ])
             ->add("hasElevator", "checkbox", [
-                'label'   => "proposal.has_elevator.label"
+                'required' => FALSE,
+                'label'    => "proposal.has_elevator.label"
             ])
             ->add("hasParking", "checkbox", [
-                'label'   => "proposal.has_parking.label"
+                'required' => FALSE,
+                'label'    => "proposal.has_parking.label"
             ])
             ->add("hasFurniture", "checkbox", [
-                'label'   => "proposal.has_furniture.label"
+                'required' => FALSE,
+                'label'    => "proposal.has_furniture.label"
             ])
             ->add("hasRegistration", "checkbox", [
-                'label'   => "proposal.has_registration.label"
+                'required' => FALSE,
+                'label'    => "proposal.has_registration.label"
             ])
             ->add("send", 'submit', [
                 'label' => "proposal.submit.label"

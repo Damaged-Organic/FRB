@@ -117,7 +117,7 @@ class AvailableValuesExtractor
         foreach( $estates as $estate )
         {
             if( $estate instanceof Estate )
-                $availablePlotSpaces[] = $estate->getSpacePlot();
+                $availablePlotSpaces[] = ( $estate->getSpacePlot() ) ?: 0;
         }
 
         if( $availablePlotSpaces )

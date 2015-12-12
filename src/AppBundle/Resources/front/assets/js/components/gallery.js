@@ -14,13 +14,15 @@ export default class Gallery{
 		this.nav = this.el.find(".navigation");
 		this.holder = this.el.find("ul");
 		this.items = this.holder.find("li");
-		
+
 		this._current = 0;
 		this._width = 0;
 		this._itemWidth = 0;
 		this._height = 0;
 		this._count = this.items.length;
 		this._visibleItems = 4;
+
+		if(this._count <= this._visibleItems) this.el.addClass('no-nav');
 
 		this._UIevents();
 		this.setWidth();
@@ -33,7 +35,7 @@ export default class Gallery{
 		$(window).on("resize", $.proxy(this.handleResize, this));
 	}
 	setWidth(){
-		this._width = this.nav.outerWidth();
+		this._width = this.nav.outerWidth(true);
 		this._itemWidth = this._width / this._visibleItems;
 
 		this.setCSS();

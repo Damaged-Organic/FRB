@@ -55,6 +55,10 @@ state:
             space_plot:  Площа ділянки
             trade_type:  Тип угоди
 
+        clear:
+            filter: Очистити фільтр
+            search: Очистити пошук
+
         trade_type_sale: продаж
         trade_type_rent: оренда
 
@@ -248,7 +252,7 @@ state:
             addresses: Адреси
 
         empty:
-            information: Нажаль, на даний час такої інформації не знайдено
+            information: На жаль, на даний час такої інформації не знайдено
 
             phones:      Не вказано
             addresses:   Не вказано

@@ -97,8 +97,8 @@ class Proposal
      *
      * @Assert\Range(
      *      min = 1,
-     *      max = 10000,
-     *      minMessage="proposal.space.range.min"
+     *      max = 1000000,
+     *      minMessage="proposal.space.range.min",
      *      maxMessage="proposal.space.range.max"
      * )
      */
@@ -107,22 +107,12 @@ class Proposal
     /**
      * @Assert\Range(
      *      min = 1,
-     *      max = 100,
-     *      minMessage="proposal.floor.range.min"
-     *      maxMessage="proposal.floor.range.max"
+     *      max = 1000000,
+     *      minMessage="proposal.space_plot.range.min",
+     *      maxMessage="proposal.space_plot.range.max"
      * )
      */
-    protected $floor;
-
-    /**
-     * @Assert\Range(
-     *      min = 1,
-     *      max = 100,
-     *      minMessage="proposal.floors_number.range.min"
-     *      maxMessage="proposal.floors_number.range.max"
-     * )
-     */
-    protected $floorsNumber;
+    protected $spacePlot;
 
     /**
      * @Assert\NotBlank(
@@ -130,9 +120,9 @@ class Proposal
      * )
      *
      * @Assert\Range(
-     *      min = 1,
-     *      max = 100,
-     *      minMessage="proposal.rooms_number.range.min"
+     *      min = 0,
+     *      max = 1000,
+     *      minMessage="proposal.rooms_number.range.min",
      *      maxMessage="proposal.rooms_number.range.max"
      * )
      */
@@ -145,12 +135,42 @@ class Proposal
      *
      * @Assert\Range(
      *      min = 0,
-     *      max = 100,
-     *      minMessage="proposal.bathrooms_number.range.min"
+     *      max = 1000,
+     *      minMessage="proposal.bathrooms_number.range.min",
      *      maxMessage="proposal.bathrooms_number.range.max"
      * )
      */
     protected $bathroomsNumber;
+
+    /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000,
+     *      minMessage="proposal.bedrooms_number.range.min",
+     *      maxMessage="proposal.bedrooms_number.range.max"
+     * )
+     */
+    protected $bedroomsNumber;
+
+    /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000,
+     *      minMessage="proposal.floor.range.min",
+     *      maxMessage="proposal.floor.range.max"
+     * )
+     */
+    protected $floor;
+
+    /**
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1000,
+     *      minMessage="proposal.floors_number.range.min",
+     *      maxMessage="proposal.floors_number.range.max"
+     * )
+     */
+    protected $floorsNumber;
 
     /**
      * @Assert\Type(
@@ -296,6 +316,18 @@ class Proposal
         return $this->space;
     }
 
+    public function setSpacePlot($spacePlot)
+    {
+        $this->spacePlot = $spacePlot;
+
+        return $this;
+    }
+
+    public function getSpacePlot()
+    {
+        return $this->spacePlot;
+    }
+
     public function setFloor($floor)
     {
         $this->floor = $floor;
@@ -342,6 +374,18 @@ class Proposal
     public function getBathroomsNumber()
     {
         return $this->bathroomsNumber;
+    }
+
+    public function setBedroomsNumber($bedroomsNumber)
+    {
+        $this->bedroomsNumber = $bedroomsNumber;
+
+        return $this;
+    }
+
+    public function getBedroomsNumber()
+    {
+        return $this->bedroomsNumber;
     }
 
     public function setIsCashless($isCashless)

@@ -119,12 +119,12 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $priceUSD;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      **/
     protected $pricePerSquareUAH;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
      **/
     protected $pricePerSquareUSD;
 

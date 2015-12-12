@@ -15,3 +15,11 @@ comment:
 
 proposal:
     subject: Пропозиція - нова пропозиція від власника нерухомості!
+
+    intro: Надійшла нова пропозиція власної нерухомості з веб-сайту FRBrokerage.Net!
+    body:  Користувач "%name%" (%contacts%):
+    outro: Повідомлення надіслано %date%.
+
+    table:
+        apartment: Квартира
+        house:     Будинок

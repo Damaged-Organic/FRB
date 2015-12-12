@@ -55,6 +55,10 @@ state:
             space_plot:  Land area
             trade_type:  Deal type
 
+        clear:
+            filter: Clear filter
+            search: Clear search
+
         trade_type_sale: sale
         trade_type_rent: rent
 
