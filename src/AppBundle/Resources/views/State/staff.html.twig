@@ -41,7 +41,7 @@
 				{{ contact.intro|raw }}
 				<ul class="list-holder numbered-list red-squares">
                     {% for item in contact.list|split(constant('PHP_EOL')) %}
-                        <li><p>item</p></li>
+                        <li><p>{{ item }}</p></li>
                     {% endfor %}
 				</ul>
 				{{ contact.outro|raw }}
