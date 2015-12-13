@@ -22,7 +22,9 @@
             <span class="icon-location"></span>
             {{ 'common.header.map.short'|trans }}
         </a>
-        <a href="tel:+380449999999"><span class="icon-phone"></span>+38 (044) 999-99-99</a>
+        <a href="tel:{{ contact.phone|replace({' ': '', '(': '', ')': ''}) }}">
+            <span class="icon-phone"></span>{{ contact.phone }}
+        </a>
     </div>
 </header>
 <div id="menu-holder" class="in-intro">

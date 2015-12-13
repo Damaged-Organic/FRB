@@ -2,6 +2,8 @@
 // src/AppBundle/Admin/ArticleAdmin.php
 namespace AppBundle\Admin;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\ListMapper,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
@@ -62,11 +64,17 @@ class ArticleAdmin extends Admin
                         "content" => [
                             "locale_options" => [
                                 "ua" => [
-                                    "label" => "Контент"
+                                    "label" => "Контент",
+                                    "constraints" => [
+                                        new Assert\Length(['max' => 270, 'maxMessage' => 'Текст новини занадто довгий. Будь ласка, скоротіть його до 270 символів.'])
+                                    ]
                                 ],
                                 "en" => [
                                     "required" => FALSE,
-                                    "label"    => "Content"
+                                    "label"    => "Content",
+                                    "constraints" => [
+                                        new Assert\Length(['max' => 270])
+                                    ]
                                 ]
                             ]
                         ]

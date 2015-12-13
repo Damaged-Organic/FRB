@@ -8,7 +8,8 @@ use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\ListMapper,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
     Sonata\AdminBundle\Form\FormMapper,
-    Sonata\AdminBundle\Show\ShowMapper;
+    Sonata\AdminBundle\Show\ShowMapper,
+    Sonata\AdminBundle\Route\RouteCollection;
 
 class MenuAdmin extends Admin
 {
@@ -22,6 +23,14 @@ class MenuAdmin extends Admin
         $this->_router = $router;
     }
 
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+            ->remove('create')
+            ->remove('delete')
+        ;
+    }
+
     protected function configureFormFields(FormMapper $formMapper)
     {
         //TODO: Kludgy because of shallow "_default" and unmapped help-only parameter
@@ -30,22 +39,24 @@ class MenuAdmin extends Admin
             : NULL;
 
         $formMapper
-            ->add('title', 'text', [
-                'label' => "Название пункта"
-            ])
-            ->add('route', 'text', [
-                'label'    => "Роутер (Системная настройка)",
-                'disabled' => TRUE
-            ])
-            ->add('path', 'text', [
-                'label'    => "Путь (Системная настройка)",
-                'mapped'   => FALSE,
-                'disabled' => TRUE,
-                'data'     => $path
-            ])
+            // ->add('title', 'text', [
+            //     'label' => "Название пункта"
+            // ])
+            // ->add('route', 'text', [
+            //     'label'    => "Роутер (Системная настройка)",
+            //     'disabled' => TRUE
+            // ])
+            // ->add('path', 'text', [
+            //     'label'    => "Путь (Системная настройка)",
+            //     'mapped'   => FALSE,
+            //     'disabled' => TRUE,
+            //     'data'     => $path
+            // ])
             ->add('translations', 'a2lix_translations_gedmo', [
-                'label' => "Локализации",
+                'label'              => "Меню - Локалізований контент",
+                "locales"            => ['ua', 'en'],
                 'translatable_class' => 'MenuBundle\Entity\Menu',
+                "required"           => TRUE,
                 'fields' => [
                     'title' => [
                         'locale_options' => [

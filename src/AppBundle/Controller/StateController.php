@@ -389,7 +389,7 @@ class StateController extends Controller implements FilterArgumentsInterface
             $serviceBenefits = $manager->getRepository('AppBundle:ServiceBenefit')->findBy(['service' => NULL]);
 
             $clients      = $manager->getRepository('AppBundle:Client')->findAll();
-            $clientsChits = $manager->getRepository('AppBundle:ClientChit')->findAll();
+            $clientsChits = $manager->getRepository('AppBundle:ClientChit')->findBy(['isActive' => TRUE]);
 
             $response = [
                 'view' => 'AppBundle:State:services.html.twig',
@@ -518,11 +518,11 @@ class StateController extends Controller implements FilterArgumentsInterface
 
         $news = $manager->getRepository('AppBundle:Article')->findBy([], ['publicationDate' => 'DESC'], Article::ARTICLES_PER_LIFT);
 
+        $articlesAmount = count($manager->getRepository('AppBundle:Article')->findAll());
+
         if( $news ) {
-            $articlesAmount   = count($news);
             $articlesLastDate = $news[0]->getPublicationDate();
         } else {
-            $articlesAmount   = 0;
             $articlesLastDate = new DateTime;
         }
 

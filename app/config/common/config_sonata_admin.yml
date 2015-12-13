@@ -98,18 +98,6 @@ services:
         abstract: true
         public: false
 
-    #sonata.admin.menu:
-    #    class: MenuBundle\Admin\MenuAdmin
-    #    tags:
-    #        - { name:  sonata.admin, manager_type: orm, group: "Меню", label: "Пункты меню"}
-    #    arguments:
-    #        - ~
-    #        - MenuBundle\Entity\Menu
-    #        - ~
-    #    calls:
-    #        - [ setTranslationDomain, [MenuBundle] ]
-    #        - [ setRouter, ["@router"] ]
-
     sonata.admin.estate:
         class: AppBundle\Admin\EstateAdmin
         tags:
@@ -363,3 +351,15 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.menu:
+       class: MenuBundle\Admin\MenuAdmin
+       tags:
+           - { name:  sonata.admin, manager_type: orm, group: "Меню", label: "Пункти меню"}
+       arguments:
+           - ~
+           - MenuBundle\Entity\Menu
+           - ~
+       calls:
+           - [ setTranslationDomain, [MenuBundle] ]
+           - [ setRouter, ["@router"] ]

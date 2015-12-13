@@ -69,7 +69,7 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist
         (
             $menuItem = (new Menu)
-                ->setTitle("Послуги")
+                ->setTitle("Види послуг")
                 ->setBlock('services')
                 ->setRoute("services")
         );
@@ -77,7 +77,7 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist
         (
-            $menuItem->setTitle("Services")
+            $menuItem->setTitle("Service types")
                 ->setTranslatableLocale('en')
         );
         $manager->flush();

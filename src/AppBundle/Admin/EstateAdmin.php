@@ -17,10 +17,10 @@ class EstateAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add("code", "text", [
+            ->addIdentifier("code", "text", [
                 "label" => "ID"
             ])
-            ->addIdentifier("title", "text", [
+            ->add("title", "text", [
                 "label" => "Назва об'єкту"
             ])
             ->add("estateType", NULL, [

@@ -15,11 +15,20 @@ class CommonController extends Controller
         switch($type)
         {
             case 'intro':
+                $manager = $this->getdoctrine()->getManager();
+
                 $template = 'AppBundle:Common:header_intro.html.twig';
+
+                $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
+
+                if( !$contact )
+                    throw $this->createNotFoundException();
             break;
 
             case 'common':
                 $template = 'AppBundle:Common:header.html.twig';
+
+                $contact = NULL;
             break;
 
             default:
@@ -28,7 +37,8 @@ class CommonController extends Controller
         }
 
         return $this->render($template, [
-            'path' => trim($request->getPathInfo(), '/')
+            'path'    => trim($request->getPathInfo(), '/'),
+            'contact' => $contact
         ]);
     }
 

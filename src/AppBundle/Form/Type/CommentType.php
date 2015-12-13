@@ -23,7 +23,7 @@ class CommentType extends AbstractType
                     'placeholder' => "comment.email.placeholder"
                 ]
             ])
-            ->add("comment", 'text', [
+            ->add("comment", 'textarea', [
                 'label' => "comment.comment.label",
                 'attr'  => [
                     'placeholder' => "comment.comment.placeholder"

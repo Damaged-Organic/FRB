@@ -62,12 +62,25 @@
                                             <h2>{{ researchCategory.title }}</h2>
                                             <p>{{ researchCategory.description }}</p>
                                         </div>
-                                        <div class="buttons-holder">
+
+                                        {% set itemsNumber = ( researches[researchCategory.id] is defined ) ? researches[researchCategory.id]|length : 0 %}
+
+                                        {% if itemsNumber == 1 %}
+                                            {% set itemsClass = 'signle' %}
+                                        {% elseif itemsNumber == 2 %}
+                                            {% set itemsClass = 'double' %}
+                                        {% elseif itemsNumber == 3 %}
+                                            {% set itemsClass = 'triple' %}
+                                        {% elseif itemsNumber == 4 %}
+                                            {% set itemsClass = '' %}
+                                        {% endif %}
+
+                                        <div class="buttons-holder {{ itemsClass }}">
                                             <p>{{ 'state.researches.reports'|trans }}</p>
 
                                             {% for research in researches[researchCategory.id] %}
                                                 <div class="btn-small flat">
-                                                    <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}">
+                                                    <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}" target="_blank">
                                                         {{ research.quarter|roman_number }}
                                                     </a>
                                                 </div>
