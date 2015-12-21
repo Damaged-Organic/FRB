@@ -14,10 +14,23 @@ liip_imagine:
     filter_sets:
         cache: ~
 
-        catalog_thumb:
+        catalog_thumb_watermark:
             quality: 100
             filters:
-                thumbnail: { size: [500, 400], mode: outbound }
+                thumbnail: { size: [300, 200], mode: outbound }
+                crop:      { start: [0, 0], size: [300, 200] }
+                watermark:
+                    image:    ../www/bundles/app/images/logo_watermark.png
+                    size:     0.2
+                    position: bottomright
+
+        catalog_watermark:
+            quality: 100
+            filters:
+                watermark:
+                    image:    ../www/bundles/app/images/logo_watermark.png
+                    size:     0.2
+                    position: bottomright
 
         staff_thumb:
             quality: 100
@@ -27,10 +40,9 @@ liip_imagine:
         article_thumb:
             quality: 100
             filters:
-                thumbnail: { size: [600, 337], mode: outbound }
-
+                thumbnail: { size: [600, 330], mode: outbound }
 
         research_category_thumb:
             quality: 100
             filters:
-                thumbnail: { size: [600, 337], mode: outbound }
+                thumbnail: { size: [600, 330], mode: outbound }

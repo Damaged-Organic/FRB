@@ -89,7 +89,7 @@
 
                             {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
 
-                            {{ render(controller('AppBundle:Filter:attributeFilter', arguments)) }}
+                            {{ render(controller('AppBundle:Filter:attributeFilter', arguments|merge({ 'estateAttributeType': estateAttributeType }))) }}
 
                             {{ render(controller('AppBundle:Filter:districtFilter', arguments)) }}
                         {% endif %}
@@ -108,7 +108,7 @@
                                             <figure>
 
                                                 {% if estate.estatePhoto|length %}
-                                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_thumb') }}" alt="{{ estate.address }}">
+                                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_thumb_watermark') }}" alt="{{ estate.address }}">
                                                 {% endif %}
 
                                             </figure>
@@ -136,12 +136,16 @@
                                             </li>
 
                                             {% if estate.spacePlot %}
+                                                {% set attributesOutput = 2 %}
+
                                                 <li>
                                                     <p><span class="icon icon-sq"></span>{{ estate.spacePlot + 0 }} m<sup>2</sup></p>
                                                 </li>
+                                            {% else %}
+                                                {% set attributesOutput = 3 %}
                                             {% endif %}
 
-                                            {% for attribute in estate.estateAttribute[:2] %}
+                                            {% for attribute in estate.estateAttribute[:attributesOutput] %}
                                                 <li>
                                                     <p>
                                                         <span class="icon {{ attribute.estateAttributeType.icon }}"></span>

@@ -36,11 +36,15 @@ class ResearchAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         if( $research = $this->getSubject() ){
-            $pdfPreviewRequired   = ( $research->getPdfPreviewName() ) ? FALSE : TRUE;
-            $pdfPreviewHelpOption = ( $research->getPdfPreviewName() ) ?: FALSE;
+            $pdfPreviewRequiredUA   = ( $research->getPdfPreviewNameUA() ) ? FALSE : TRUE;
+            $pdfPreviewHelpOptionUA = ( $research->getPdfPreviewNameUA() ) ?: FALSE;
+
+            $pdfPreviewHelpOptionEN = ( $research->getPdfPreviewNameEN() ) ?: FALSE;
         } else {
-            $pdfPreviewRequired   = TRUE;
-            $pdfPreviewHelpOption = FALSE;
+            $pdfPreviewRequiredUA   = TRUE;
+            $pdfPreviewHelpOptionUA = FALSE;
+
+            $pdfPreviewHelpOptionEN = FALSE;
         }
 
         $formMapper
@@ -67,12 +71,19 @@ class ResearchAdmin extends Admin
                     'label'         => 'Категорія',
                     'empty_value'   => 'Оберіть категорію...'
             ])
-            ->add('pdfPreviewFile', 'vich_file', [
-                'label'         => "PDF файл",
-                'required'      => $pdfPreviewRequired,
+            ->add('pdfPreviewFileUA', 'vich_file', [
+                'label'         => "PDF файл (UA)",
+                'required'      => $pdfPreviewRequiredUA,
                 'allow_delete'  => FALSE,
                 'download_link' => TRUE,
-                'help'          => $pdfPreviewHelpOption
+                'help'          => $pdfPreviewHelpOptionUA
+            ])
+            ->add('pdfPreviewFileEN', 'vich_file', [
+                'label'         => "PDF файл (EN)",
+                'required'      => FALSE,
+                'allow_delete'  => FALSE,
+                'download_link' => TRUE,
+                'help'          => $pdfPreviewHelpOptionEN
             ])
         ;
     }

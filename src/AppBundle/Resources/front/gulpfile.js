@@ -105,4 +105,4 @@ gulp.task("watchers", function(){
 
 });
 
-gulp.task("default", ["css", "fonts", "images", "js"]);
+gulp.task("default", ["css", "fonts", "images", "js", "templates"]);

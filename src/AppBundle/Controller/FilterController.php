@@ -113,7 +113,7 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
-    public function attributeFilterAction(array $filterArguments, array $estates)
+    public function attributeFilterAction(array $filterArguments, array $estates, $estateAttributeType)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
@@ -122,8 +122,9 @@ class FilterController extends Controller implements FilterArgumentsInterface
         $values = ( !empty($filterArguments[self::FILTER_ATTRIBUTES]) ) ? $filterArguments[self::FILTER_ATTRIBUTES] : [];
 
         return $this->render('AppBundle:Filter:attribute.html.twig', [
-            'attributes' => $attributes,
-            'values'     => $values
+            'attributes'          => $attributes,
+            'values'              => $values,
+            'estateAttributeType' => $estateAttributeType
         ]);
     }
 

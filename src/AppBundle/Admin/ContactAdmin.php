@@ -39,11 +39,15 @@ class ContactAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         if( $research = $this->getSubject() ){
-            $pdfPreviewRequired   = ( $research->getPdfPreviewName() ) ? FALSE : TRUE;
-            $pdfPreviewHelpOption = ( $research->getPdfPreviewName() ) ?: FALSE;
+            $pdfPreviewRequiredUA   = ( $research->getPdfPreviewNameUA() ) ? FALSE : TRUE;
+            $pdfPreviewHelpOptionUA = ( $research->getPdfPreviewNameUA() ) ?: FALSE;
+
+            $pdfPreviewHelpOptionEN = ( $research->getPdfPreviewNameEN() ) ?: FALSE;
         } else {
-            $pdfPreviewRequired   = TRUE;
-            $pdfPreviewHelpOption = FALSE;
+            $pdfPreviewRequiredUA   = TRUE;
+            $pdfPreviewHelpOptionUA = FALSE;
+
+            $pdfPreviewHelpOptionEN = FALSE;
         }
 
         $formMapper
@@ -57,12 +61,19 @@ class ContactAdmin extends Admin
                 ->add("email", "text", [
                     "label" => "E-mail"
                 ])
-                ->add('pdfPreviewFile', 'vich_file', [
-                    'label'         => "PDF файл зі схемою проїзду",
-                    'required'      => $pdfPreviewRequired,
+                ->add('pdfPreviewFileUA', 'vich_file', [
+                    'label'         => "PDF файл зі схемою проїзду (UA)",
+                    'required'      => $pdfPreviewRequiredUA,
                     'allow_delete'  => FALSE,
                     'download_link' => TRUE,
-                    'help'          => $pdfPreviewHelpOption
+                    'help'          => $pdfPreviewHelpOptionUA
+                ])
+                ->add('pdfPreviewFileEN', 'vich_file', [
+                    'label'         => "PDF файл зі схемою проїзду (EN)",
+                    'required'      => FALSE,
+                    'allow_delete'  => FALSE,
+                    'download_link' => TRUE,
+                    'help'          => $pdfPreviewHelpOptionEN
                 ])
             ->end()
             ->with("Контакти - Локалізований контент")

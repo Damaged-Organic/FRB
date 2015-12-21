@@ -66,7 +66,18 @@
                 </section>
                 <aside id="map-holder">
                     <div id="map"></div>
-                    <a href="{{ vich_uploader_asset(contact, 'pdfPreviewFile') }}" target="_blank">
+
+                    {%
+                        set pdf = ( app.request.locale == 'en' )
+                            ? vich_uploader_asset(contact, 'pdfPreviewFileEN')
+                            : vich_uploader_asset(contact, 'pdfPreviewFileUA')
+                    %}
+
+                    {% if pdf %}
+                        <a href="{{ pdf }}" target="_blank">
+                    {% else %}
+                        <a href="{{ path('contacts', { '_locale': app.request.locale }) ~ '#' }}">
+                    {% endif %}
                         {{ 'state.contacts.download'|trans }}
                     </a>
                 </aside>

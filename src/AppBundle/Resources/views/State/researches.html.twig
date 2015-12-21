@@ -79,8 +79,19 @@
                                             <p>{{ 'state.researches.reports'|trans }}</p>
 
                                             {% for research in researches[researchCategory.id] %}
+
+                                                {%
+                                                    set pdf = ( app.request.locale == 'en' )
+                                                        ? vich_uploader_asset(research, 'pdfPreviewFileEN')
+                                                        : vich_uploader_asset(research, 'pdfPreviewFileUA')
+                                                %}
+
                                                 <div class="btn-small flat">
-                                                    <a href="{{ vich_uploader_asset(research, 'pdfPreviewFile') }}" target="_blank">
+                                                    {% if pdf %}
+                                                        <a href="{{ pdf }}" target="_blank">
+                                                    {% else %}
+                                                        <a href="{{ path('researches', { '_locale': app.request.locale }) ~ '#' }}">
+                                                    {% endif %}
                                                         {{ research.quarter|roman_number }}
                                                     </a>
                                                 </div>

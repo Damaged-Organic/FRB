@@ -81,6 +81,10 @@ class StateController extends Controller implements FilterArgumentsInterface
         if( !$estateType )
             throw $this->createNotFoundException();
 
+        $estateAttributeType = [];
+        foreach($manager->getRepository('AppBundle:EstateAttributeType')->findAll() as $value)
+            $estateAttributeType[$value->getId()] = $value;
+
         $filterValidator = $this->get('app.filter.validator');
         $filterCurrency  = $this->get('app.filter.utility.currency');
 
@@ -132,11 +136,12 @@ class StateController extends Controller implements FilterArgumentsInterface
         }
 
         return $this->render('AppBundle:State:catalog.html.twig', [
-            'estateType'        => $estateType->getStringId(),
-            'estates'           => $estates,
-            'unfilteredEstates' => $unfilteredEstates,
-            'filterArguments'   => $filterArguments,
-            'currency'          => $currency
+            'estateType'          => $estateType->getStringId(),
+            'estates'             => $estates,
+            'unfilteredEstates'   => $unfilteredEstates,
+            'filterArguments'     => $filterArguments,
+            'estateAttributeType' => $estateAttributeType,
+            'currency'            => $currency
         ]);
     }
 

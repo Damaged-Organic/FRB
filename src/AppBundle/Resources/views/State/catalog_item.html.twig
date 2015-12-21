@@ -63,7 +63,7 @@
                             <figure>
 
                                 {% if estate.estatePhoto|length %}
-                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile') }}" alt="{{ estate.address }}">
+                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_watermark') }}" alt="{{ estate.address }}">
                                 {% endif %}
 
                             </figure>
@@ -75,9 +75,9 @@
                                     <ul>
 
                                         {% for estatePhoto in estate.estatePhoto %}
-                                            <li class="{{ ( loop.first ) ? 'active' }}" data-img="{{ vich_uploader_asset(estatePhoto, 'photoFile') }}">
+                                            <li class="{{ ( loop.first ) ? 'active' }}" data-img="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_watermark') }}">
                                                 <figure>
-                                                    <img src="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_thumb') }}" alt="{{ estate.address }}">
+                                                    <img src="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_thumb_watermark') }}" alt="{{ estate.address }}">
                                                 </figure>
                                             </li>
                                         {% endfor %}

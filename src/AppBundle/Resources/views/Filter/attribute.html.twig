@@ -9,7 +9,7 @@
     {% set valueMax = ( values[attribute]['max'] is defined ) ? values[attribute]['max'] : attributeRange['max'] %}
 
     <div class="item">
-        <h3>{{ ('state.catalog.attributes.' ~ attribute)|trans }}</h3>
+        <h3>{{ estateAttributeType[attribute].title }}</h3>
         <div class="range-holder"
              data-min="{{ valueMin }}" data-range-min="{{ attributeRange['min'] }}"
              data-max="{{ valueMax }}" data-range-max="{{ attributeRange['max'] }}">

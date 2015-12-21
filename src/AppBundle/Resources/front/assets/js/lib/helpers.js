@@ -3,7 +3,7 @@
 export default (() => {
 
 	Handlebars.registerHelper("clearPhone", function(phone){
-		return `+${ phone.replace(/\D/gi, "") }`;
+		return phone[0].replace(/\D/gi, "");
 	});
 
 })();

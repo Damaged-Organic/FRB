@@ -194,7 +194,7 @@ class Information implements Translatable
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -217,7 +217,7 @@ class Information implements Translatable
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -240,7 +240,7 @@ class Information implements Translatable
     /**
      * Get logoName
      *
-     * @return string 
+     * @return string
      */
     public function getLogoName()
     {
@@ -263,7 +263,7 @@ class Information implements Translatable
     /**
      * Get photoName
      *
-     * @return string 
+     * @return string
      */
     /*public function getPhotoName()
     {
@@ -286,7 +286,7 @@ class Information implements Translatable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -309,7 +309,7 @@ class Information implements Translatable
     /**
      * Get link
      *
-     * @return string 
+     * @return string
      */
     public function getLink()
     {
@@ -332,7 +332,7 @@ class Information implements Translatable
     /**
      * Get emails
      *
-     * @return string 
+     * @return string
      */
     public function getEmails()
     {
@@ -355,7 +355,7 @@ class Information implements Translatable
     /**
      * Get phones
      *
-     * @return string 
+     * @return string
      */
     public function getPhones()
     {
@@ -378,7 +378,7 @@ class Information implements Translatable
     /**
      * Get addresses
      *
-     * @return string 
+     * @return string
      */
     public function getAddresses()
     {
@@ -424,7 +424,7 @@ class Information implements Translatable
     /**
      * Get informationCategory
      *
-     * @return \AppBundle\Entity\InformationCategory 
+     * @return \AppBundle\Entity\InformationCategory
      */
     public function getInformationCategory()
     {

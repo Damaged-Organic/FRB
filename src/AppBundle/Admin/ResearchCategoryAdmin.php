@@ -58,7 +58,8 @@ class ResearchCategoryAdmin extends Admin
                             "field_type"     => 'textarea',
                             "locale_options" => [
                                 "ua" => [
-                                    "label" => "Опис категорії"
+                                    "required" => FALSE,
+                                    "label"    => "Опис категорії"
                                 ],
                                 "en" => [
                                     "required" => FALSE,

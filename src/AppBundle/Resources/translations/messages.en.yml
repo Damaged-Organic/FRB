@@ -5,8 +5,8 @@ default:
 common:
     yes:  Yes
     no:   No
-    from: From
-    to:   To
+    from: from
+    to:   to
 
     header:
         menu: Menu
@@ -76,11 +76,6 @@ state:
         attributes:
             space:      Space
             space_plot: Land area
-            1: Number of floors    #floors
-            2: Floor               #floor
-            3: Number of rooms     #room
-            4: Number of bathrooms #bathroom
-            5: Number of bedrooms  #bedroom
 
         feature:
             isCashless:
@@ -222,7 +217,7 @@ state:
         reports: Choose a quarterly report:
 
         empty:
-            researches: There are currently no reports found
+            researches: There are currently no reports available
 
     expats_relocation:
         headline: Expats relocation

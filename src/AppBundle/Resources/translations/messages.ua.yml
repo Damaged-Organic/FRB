@@ -5,8 +5,8 @@ default:
 common:
     yes:  Так
     no:   Ні
-    from: Від
-    to:   До
+    from: від
+    to:   до
 
     header:
         menu: Меню
@@ -76,11 +76,6 @@ state:
         attributes:
             space:      Площа
             space_plot: Площа ділянки
-            1: Кількість поверхів  #floors
-            2: Поверх              #floor
-            3: Кількість кімнат    #room
-            4: Кількість санвузлів #bathroom
-            5: Кількість спалень   #bedroom
 
         feature:
             isCashless:

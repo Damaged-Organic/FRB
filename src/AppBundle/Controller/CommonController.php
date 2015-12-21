@@ -12,29 +12,27 @@ class CommonController extends Controller
 {
     public function headerAction(Request $request, $type)
     {
+        $manager = $this->getdoctrine()->getManager();
+
+        $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
+
+        if( !$contact )
+            throw $this->createNotFoundException();
+
         switch($type)
         {
             case 'intro':
-                $manager = $this->getdoctrine()->getManager();
-
                 $template = 'AppBundle:Common:header_intro.html.twig';
-
-                $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
-
-                if( !$contact )
-                    throw $this->createNotFoundException();
             break;
 
             case 'common':
                 $template = 'AppBundle:Common:header.html.twig';
-
-                $contact = NULL;
             break;
 
             default:
                 throw $this->createNotFoundException();
             break;
-        }
+        } 
 
         return $this->render($template, [
             'path'    => trim($request->getPathInfo(), '/'),

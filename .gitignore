@@ -18,5 +18,6 @@
 
 /www/bundles/
 /www/uploads/
+/www/thumbs/
 
 /composer.lock

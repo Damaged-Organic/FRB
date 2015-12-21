@@ -59,14 +59,29 @@ class Research implements Translatable
      *     mimeTypes={"application/pdf"}
      * )
      *
-     * @Vich\UploadableField(mapping="researches_pdf", fileNameProperty="pdfPreviewName")
+     * @Vich\UploadableField(mapping="researches_pdf", fileNameProperty="pdfPreviewNameUA")
      */
-    protected $pdfPreviewFile;
+    protected $pdfPreviewFileUA;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    protected $pdfPreviewName;
+    protected $pdfPreviewNameUA;
+
+    /**
+     * @Assert\File(
+     *     maxSize="10M",
+     *     mimeTypes={"application/pdf"}
+     * )
+     *
+     * @Vich\UploadableField(mapping="researches_pdf", fileNameProperty="pdfPreviewNameEN")
+     */
+    protected $pdfPreviewFileEN;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $pdfPreviewNameEN;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -90,31 +105,60 @@ class Research implements Translatable
     }
 
     /**
-     * Vich set $pdfPreviewFile
+     * Vich set $pdfPreviewFileUA
      */
-    public function setPdfPreviewFile($pdfPreviewFile = NULL)
+    public function setPdfPreviewFileUA($pdfPreviewFileUA = NULL)
     {
-        $this->pdfPreviewFile = $pdfPreviewFile;
+        $this->pdfPreviewFileUA = $pdfPreviewFileUA;
 
-        if( $pdfPreviewFile instanceof File )
+        if( $pdfPreviewFileUA instanceof File )
             $this->updatedAt = new DateTime;
     }
 
     /**
-     * Vich get $pdfPreviewFile
+     * Vich get $pdfPreviewFileUA
      */
-    public function getPdfPreviewFile()
+    public function getPdfPreviewFileUA()
     {
-        return $this->pdfPreviewFile;
+        return $this->pdfPreviewFileUA;
     }
 
     /**
-     * Vich get pdfPreviewPath
+     * Vich get pdfPreviewPathUA
      */
-    public function getPdfPreviewPath()
+    public function getPdfPreviewPathUA()
     {
-        return ( $this->pdfPreviewName )
-            ? self::WEB_PDF_PREVIEW_PATH.$this->pdfPreviewName
+        return ( $this->pdfPreviewNameUA )
+            ? self::WEB_PDF_PREVIEW_PATH.$this->pdfPreviewNameUA
+            : FALSE;
+    }
+
+    /**
+     * Vich set $pdfPreviewFileEN
+     */
+    public function setPdfPreviewFileEN($pdfPreviewFileEN = NULL)
+    {
+        $this->pdfPreviewFileEN = $pdfPreviewFileEN;
+
+        if( $pdfPreviewFileEN instanceof File )
+            $this->updatedAt = new DateTime;
+    }
+
+    /**
+     * Vich get $pdfPreviewFileEN
+     */
+    public function getPdfPreviewFileEN()
+    {
+        return $this->pdfPreviewFileEN;
+    }
+
+    /**
+     * Vich get pdfPreviewPathEN
+     */
+    public function getPdfPreviewPathEN()
+    {
+        return ( $this->pdfPreviewNameEN )
+            ? self::WEB_PDF_PREVIEW_PATH.$this->pdfPreviewNameEN
             : FALSE;
     }
 
@@ -134,7 +178,7 @@ class Research implements Translatable
     /**
      * Get year
      *
-     * @return integer 
+     * @return integer
      */
     public function getYear()
     {
@@ -157,7 +201,7 @@ class Research implements Translatable
     /**
      * Get quarter
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuarter()
     {
@@ -165,26 +209,49 @@ class Research implements Translatable
     }
 
     /**
-     * Set pdfPreviewName
+     * Set pdfPreviewNameUA
      *
-     * @param string $pdfPreviewName
+     * @param string $pdfPreviewNameUA
      * @return Research
      */
-    public function setPdfPreviewName($pdfPreviewName)
+    public function setPdfPreviewNameUA($pdfPreviewNameUA)
     {
-        $this->pdfPreviewName = $pdfPreviewName;
+        $this->pdfPreviewNameUA = $pdfPreviewNameUA;
 
         return $this;
     }
 
     /**
-     * Get pdfPreviewName
+     * Get pdfPreviewNameUA
      *
-     * @return string 
+     * @return string
      */
-    public function getPdfPreviewName()
+    public function getPdfPreviewNameUA()
     {
-        return $this->pdfPreviewName;
+        return $this->pdfPreviewNameUA;
+    }
+
+    /**
+     * Set pdfPreviewNameEN
+     *
+     * @param string $pdfPreviewNameEN
+     * @return Research
+     */
+    public function setPdfPreviewNameEN($pdfPreviewNameEN)
+    {
+        $this->pdfPreviewNameEN = $pdfPreviewNameEN;
+
+        return $this;
+    }
+
+    /**
+     * Get pdfPreviewNameEN
+     *
+     * @return string
+     */
+    public function getPdfPreviewNameEN()
+    {
+        return $this->pdfPreviewNameEN;
     }
 
     /**
@@ -203,7 +270,7 @@ class Research implements Translatable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -226,7 +293,7 @@ class Research implements Translatable
     /**
      * Get researchCategory
      *
-     * @return \AppBundle\Entity\ResearchCategory 
+     * @return \AppBundle\Entity\ResearchCategory
      */
     public function getResearchCategory()
     {

@@ -8,5 +8,5 @@ comment:
     fail:    Something went wrong. Please, try to send your comment again
 
 proposal:
-    success: Thank you for your proposal! We will surely consider it as soon as possible.
+    success: Thank you for your proposal! We will surely consider it and contact you as soon as possible.
     fail:    Something went wrong. Please, try to send your proposal again.
