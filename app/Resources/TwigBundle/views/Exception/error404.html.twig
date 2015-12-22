@@ -1,8 +1,16 @@
 {# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
 {% extends '::base.html.twig' %}
 
+{# Fast "_locale" hack for 404 #}
+{% set host = app.request.getHost|split(".") %}
+{% if host[0] is defined %}
+    {% set locale = ( host[0] is sameas('en') ) ? 'en' : 'ua' %}
+{% else %}
+    {% set locale = 'ua' %}
+{% endif %}
+
 {% block title %}
-    404 - Not Found | {{ 'default.title'|trans }}
+    {{ '404.title'|trans({}, 'messages', locale) }} | {{ 'default.title'|trans({}, 'messages', locale) }}
 {% endblock %}
 
 {% block favicons %}
@@ -28,7 +36,7 @@
         <header id="header">
             <div class="logo">
                 <a href="{{ path('index', { '_locale': app.request.locale }) }}">
-                    <img src="{{ asset('bundles/app/images/logo.png') }}" alt="{{ 'default.title'|trans }}">
+                    <img src="{{ asset('bundles/app/images/logo.png') }}" alt="{{ 'default.title'|trans({}, 'messages', locale) }}">
                 </a>
             </div>
         </header>
@@ -43,7 +51,9 @@
                 <span>404</span>
             </div>
             <div class="btn-large flat">
-                <a href="{{ path('index', { '_locale': app.request.locale }) }}">Back to the good part</a>
+                <a href="{{ path('index', { '_locale': app.request.locale }) }}">
+                    {{ '404.back'|trans({}, 'messages', locale) }}
+                </a>
             </div>
         </main>
     </div>

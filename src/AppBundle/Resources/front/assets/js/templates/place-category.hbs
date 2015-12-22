@@ -12,22 +12,41 @@
 			{{#each this.places}}
 				<article class="item">
 					<div class="entitled">
-						<h3>{{ title }}</h3>
-						<figure><img src="uploads/information/logos/{{ photo }}" alt="{{ title }}"></figure>
+						<a href="#">{{ title }}</a>
+                        {{#if photo }}
+                            <figure><img src="uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}"></figure>
+                        {{/if}}
 					</div>
-					<div class="phones-holder">
-						<span class="icon icon-phone"></span>
-						<span class="text">{{ phone_label }}: </span>
-						{{#each phones}}
-							<a href="tel:{{clearPhone this}}">{{ this }}</a>
-						{{else}}
-							<span>{{ phones }}</span>
-						{{/each}}
-					</div>
+					{{#if phones.length}}
+    					<div class="phones-holder">
+    						<span class="icon icon-phone"></span>
+    						<span class="text">{{ phone_label }}: </span>
+    						{{#each phones}}
+    							<a href="tel:{{clearPhone this}}">{{ this }}</a>
+                            {{else}}
+                                <span>{{ phones }}</span>
+    						{{/each}}
+    					</div>
+                    {{/if}}
+                    {{#if emails.length}}
+    					<div class="emails-holder">
+    						<span class="icon icon-envelope"></span>
+    						<span class="text">{{ email_label }}: </span>
+    						{{#each emails}}
+    							<a href="mailto:{{ this }}">{{ this }}</a>
+                            {{else}}
+                                <span>{{ emails }}</span>
+    						{{/each}}
+    					</div>
+                    {{/if}}
 					<div class="address-holder">
 						<span class="icon icon-location"></span>
 						<span class="text">{{ address_label }}: </span>
-						<p>{{ address }}</p>
+						{{#each address}}
+							<p>{{ this }}</p>
+						{{else}}
+							<span>{{ address }}</span>
+						{{/each}}
 					</div>
 					<p>{{ text }}</p>
 				</article>

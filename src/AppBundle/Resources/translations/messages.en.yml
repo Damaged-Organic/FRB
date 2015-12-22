@@ -244,16 +244,24 @@ state:
 
         block:
             phones:    Phones
+            emails:    Emails
             addresses: Addresses
 
         empty:
             information: Unfortunately, there's no such information at this time
 
-            phones:      Not specified
-            addresses:   Not specified
             description: There's no description for this place yet
 
     contacts:
         headline: Contacts
 
         download: Download detailed location map
+
+fallback:
+    title:    Browser version is not supported
+    text:     Unfortunately, your browser version is too old for our website
+    download: Download latest version
+
+404:
+    title: 404 - Not Found
+    back:  Back to the good part

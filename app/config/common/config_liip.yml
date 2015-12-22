@@ -46,3 +46,8 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [600, 330], mode: outbound }
+
+        information_thumb:
+            quality: 100
+            filters:
+                thumbnail: { size: [80, 40], mode: inset }

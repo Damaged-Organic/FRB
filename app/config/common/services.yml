@@ -27,6 +27,22 @@ services:
         tags:
             - { name: twig.extension }
 
+    # Event listeners
+
+    app.listener.fallback.ie:
+        class: AppBundle\EventListener\Fallback\IeFallbackListener
+        calls:
+            - [setIeFallbackController, [ "@app.ie_fallback_controller" ]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    # Controller
+
+    app.ie_fallback_controller:
+        class: AppBundle\Controller\Fallback\IeFallbackController
+        calls:
+            - [setTemplating, [ "@templating" ]]
+
     # Constraints
 
     app.constraint.is_type_valid:

@@ -32,7 +32,9 @@ class Information implements Translatable
 {
     use IdMapper, TranslationMapper;
 
-    const WEB_PATH_LOGOS  = "/uploads/information/logos/";
+    const WEB_PATH_LOGOS        = "/uploads/information/logos/";
+    const WEB_PATH_LOGOS_THUMBS = "/uploads/information/logos/thumbs/";
+
     const WEB_PATH_PHOTOS = "/uploads/information/photos/";
 
     /**
@@ -153,6 +155,13 @@ class Information implements Translatable
     {
         return ( $this->logoName )
             ? self::WEB_PATH_LOGOS.$this->logoName
+            : FALSE;
+    }
+
+    public function getLogoThumbPath()
+    {
+        return ( $this->logoName )
+            ? self::WEB_PATH_LOGOS_THUMBS.$this->logoName
             : FALSE;
     }
 
@@ -455,12 +464,22 @@ class Information implements Translatable
             foreach($locations as $location)
             {
                 $phones = ( $location->getPhones() )
-                    ? explode(PHP_EOL, $location->getPhones())
-                    : $translator->trans('state.expats_information.empty.phones');
+                    ? array_map(function($item){
+                            return trim($item);
+                      }, explode(PHP_EOL, $location->getPhones()))
+                    : NULL;
+
+                $emails = ( $location->getEmails() )
+                    ? array_map(function($item){
+                            return trim($item);
+                      }, explode(PHP_EOL, $location->getEmails()))
+                    : NULL;
 
                 $address = ( $location->getAddresses() )
-                    ? str_replace(PHP_EOL, '; ', $location->getAddresses())
-                    : $translator->trans('state.expats_information.empty.addresses');
+                    ? array_map(function($item){
+                            return trim($item);
+                      }, explode(PHP_EOL, $location->getAddresses()))
+                    : NULL;
 
                 $text = ( $location->getDescription() )
                     ? $location->getDescription()
@@ -469,10 +488,13 @@ class Information implements Translatable
                 $places[] = [
                     'title'         => $location->getTitle(),
                     'photo'         => $location->getLogoName(),
+                    'link'          => $location->getLink(),
                     'phone_label'   => $translator->trans('state.expats_information.block.phones'),
                     'phones'        => $phones,
+                    'email_label'   => $translator->trans('state.expats_information.block.emails'),
+                    'emails'        => $emails,
                     'address_label' => $translator->trans('state.expats_information.block.addresses'),
-                    'address'       => $address,
+                    'address'       => implode('; ', $address),
                     'text'          => $text
                 ];
             }
@@ -507,8 +529,8 @@ class Information implements Translatable
                     $locations[] = [
                         'title' => $location->getTitle(),
                         'icon'  => $location->getInformationCategory()->getAlias(),
-                        'lat'   => $coordinate[0],
-                        'lng'   => $coordinate[1]
+                        'lat'   => ( !empty($coordinate[0]) ) ? $coordinate[0] : NULL,
+                        'lng'   => ( !empty($coordinate[1]) ) ? $coordinate[1] : NULL
                     ];
                 }
             }

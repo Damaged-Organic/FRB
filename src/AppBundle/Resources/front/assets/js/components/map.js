@@ -37,6 +37,13 @@ export default class Map{
 	addMarker(options = {}){
 		this.markers.push(new google.maps.Marker(options));
 	}
+	removeMarkers(){
+        for(let i in this.markers){
+            let marker = this.markers[i];
+            marker.setMap(null);
+        }
+		this.markers = [];
+	}
 	getSize(w = 32, h = 32){
 		return new google.maps.Size(w, h);
 	}
@@ -45,8 +52,5 @@ export default class Map{
 	}
 	getLatLng(lat = 0, lng = 0){
 		return new google.maps.LatLng(lat, lng);
-	}
-	removeMarkers(){
-		this.markers = [];
 	}
 }

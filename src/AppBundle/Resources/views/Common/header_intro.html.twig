@@ -4,6 +4,9 @@
         <a href="{{ path('index', { '_locale': app.request.locale }) }}"><img src="{{ asset('bundles/app/images/logo.png') }}" alt="First Realty Brokerage"></a>
     </div>
     <div class="items-right">
+        <div class="item social">
+			<a href="https://www.facebook.com/FRBrokerage" class="icon icon-facebook" target="_blank"></a>
+		</div>
         <div class="item lang">
 
             {% if app.request.locale == default_locale %}

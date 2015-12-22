@@ -152,6 +152,7 @@
 			color: @white;
 			text-align: center;
 			cursor: pointer;
+			animation: colorfull 4s @easing 0s infinite;
 			&:hover{ color: @red; }
 		}
 	}
@@ -188,6 +189,12 @@
 	&.state-3:after{
 		transform: translateY(300%);
 	}
+}
+
+@keyframes colorfull{
+    0% { color: @white; }
+    50% { color: @red; }
+    100% { color: @white; }
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*	prism end								  */

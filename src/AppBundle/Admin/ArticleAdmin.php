@@ -95,4 +95,48 @@ class ArticleAdmin extends Admin
             ->end()
         ;
     }
+
+    public function postPersist($article)
+    {
+        if( !($article instanceof Article) )
+            return;
+
+        $this->createThumbnail($article);
+    }
+
+    public function postUpdate($article)
+    {
+        if( !($article instanceof Article) )
+            return;
+
+        $rootPath = $this->getConfigurationPool()->getContainer()->get('kernel')->getRootDir() . '/../www';
+
+        if( !file_exists($rootPath . $article->getPhotoThumbPath()) )
+            $this->createThumbnail($article);
+    }
+
+    protected function createThumbnail($article)
+    {
+        $filter = 'article_thumb';
+
+        $dataManager   = $this->getConfigurationPool()->getContainer()->get('liip_imagine.data.manager');
+        $filterManager = $this->getConfigurationPool()->getContainer()->get('liip_imagine.filter.manager');
+
+        $rootPath = $this->getConfigurationPool()->getContainer()->get('kernel')->getRootDir() . '/../www';
+
+        $imagePath = $article->getPhotoPath();
+        $thumbPath = $rootPath . $article->getPhotoThumbPath();
+
+        $image    = $dataManager->find($filter, $imagePath);
+        $response = $filterManager->applyFilter($image, $filter);
+
+        $thumb = $response->getContent();
+
+        if( !is_dir(dirname($thumbPath)) )
+            mkdir(dirname($thumbPath), '755', TRUE);
+
+        $file = fopen($thumbPath, 'w');
+        fwrite($file, $thumb);
+        fclose($file);
+    }
 }

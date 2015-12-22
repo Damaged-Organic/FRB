@@ -32,7 +32,8 @@ class Article implements Translatable
 {
     use IdMapper, TranslationMapper;
 
-    const WEB_PATH = "/uploads/articles/photos/";
+    const WEB_PATH        = "/uploads/articles/photos/";
+    const WEB_PATH_THUMBS = "/uploads/articles/photos/thumbs/";
 
     const ARTICLES_PER_LIFT = 4;
 
@@ -118,6 +119,13 @@ class Article implements Translatable
             : FALSE;
     }
 
+    public function getPhotoThumbPath()
+    {
+        return ( $this->photoName )
+            ? self::WEB_PATH_THUMBS.$this->photoName
+            : FALSE;
+    }
+
     /* END Vich uploadable methods */
 
     /**
@@ -136,7 +144,7 @@ class Article implements Translatable
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -159,7 +167,7 @@ class Article implements Translatable
     /**
      * Get content
      *
-     * @return string 
+     * @return string
      */
     public function getContent()
     {
@@ -182,7 +190,7 @@ class Article implements Translatable
     /**
      * Get publicationDate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getPublicationDate()
     {
@@ -205,7 +213,7 @@ class Article implements Translatable
     /**
      * Get photoName
      *
-     * @return string 
+     * @return string
      */
     public function getPhotoName()
     {
@@ -228,7 +236,7 @@ class Article implements Translatable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
