@@ -104,7 +104,7 @@ state:
                 object:  Власник - юридична особа
             hasSecurity:
                 catalog: -
-                object:  Косьєрж або охорона
+                object:  Консьєрж або охорона
             hasUtility:
                 catalog: -
                 object:  Комунальні послуги
