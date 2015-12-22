@@ -51,7 +51,7 @@
                 <span>404</span>
             </div>
             <div class="btn-large flat">
-                <a href="{{ path('index', { '_locale': app.request.locale }) }}">
+                <a href="{{ path('index', { '_locale': locale }) }}">
                     {{ '404.back'|trans({}, 'messages', locale) }}
                 </a>
             </div>
