@@ -76,7 +76,7 @@ class ContactAdmin extends Admin
                     'help'          => $pdfPreviewHelpOptionEN
                 ])
             ->end()
-            ->with("Контакти - Локалізований контент")
+            ->with("Контакти / Про компанію - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
                     "locales"            => ['ua', 'en'],
                     "label"              => FALSE,

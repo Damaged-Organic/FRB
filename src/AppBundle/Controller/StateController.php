@@ -326,7 +326,7 @@ class StateController extends Controller implements FilterArgumentsInterface
         if( !$estateType )
             throw $this->createNotFoundException();
 
-        $estate = $manager->getRepository('AppBundle:Estate')->find($id);
+        $estate = $manager->getRepository('AppBundle:Estate')->findActive($id);
 
         if( !$estate )
             throw $this->createNotFoundException();

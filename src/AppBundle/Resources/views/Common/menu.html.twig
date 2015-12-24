@@ -1,5 +1,11 @@
 {# src/AppBundle/Resources/views/Common/menu.html.twig #}
 <ul>
+    {% if menu.general is defined %}
+        <li>
+            <a href="{{ menu.general[0].route }}">{{ menu.general[0].title }}</a>
+        </li>
+    {% endif %}
+
     {% if menu.catalog is defined %}
     	<li class="dropdown {{ ( menu.catalog.outer.active ) ? 'active' }}">
     		<a href="{{ menu.catalog.outer.route }}">
@@ -32,7 +38,7 @@
 
     {% if menu.general is defined %}
 
-        {% for item in menu.general %}
+        {% for item in menu.general[1:] %}
     	   <li {{ ( item.active ) ? 'class="active"' }}><a href="{{ item.route }}">{{ item.title }}</a></li>
         {% endfor %}
 

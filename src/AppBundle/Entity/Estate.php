@@ -134,6 +134,11 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $coordinates;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $isActive;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -141,6 +146,8 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
         $this->translations    = new ArrayCollection;
         $this->estateAttribute = new ArrayCollection;
         $this->estatePhoto     = new ArrayCollection;
+
+        $this->isActive = TRUE;
     }
 
     /**
@@ -533,6 +540,29 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Estate
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
     /**

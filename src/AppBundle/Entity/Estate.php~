@@ -48,7 +48,7 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $estateAttribute;
 
     /**
-     * @ORM\OneToOne(targetEntity="EstateFeatures", mappedBy="estate")
+     * @ORM\OneToOne(targetEntity="EstateFeatures", mappedBy="estate", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $estateFeatures;
 
@@ -104,6 +104,11 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $space;
 
     /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     **/
+    protected $spacePlot;
+
+    /**
      * @ORM\Column(type="decimal", precision=10, scale=2, nullable=false)
      **/
     protected $priceUAH;
@@ -114,9 +119,24 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $priceUSD;
 
     /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     **/
+    protected $pricePerSquareUAH;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     **/
+    protected $pricePerSquareUSD;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     protected $coordinates;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    protected $isActive;
 
     /**
      * Constructor
@@ -126,6 +146,8 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
         $this->translations    = new ArrayCollection;
         $this->estateAttribute = new ArrayCollection;
         $this->estatePhoto     = new ArrayCollection;
+
+        $this->isActive = TRUE;
     }
 
     /**
@@ -360,6 +382,29 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
+     * Set spacePlot
+     *
+     * @param string $spacePlot
+     * @return Estate
+     */
+    public function setSpacePlot($spacePlot)
+    {
+        $this->spacePlot = $spacePlot;
+
+        return $this;
+    }
+
+    /**
+     * Get spacePlot
+     *
+     * @return string
+     */
+    public function getSpacePlot()
+    {
+        return $this->spacePlot;
+    }
+
+    /**
      * Set priceUAH
      *
      * @param string $priceUAH
@@ -403,6 +448,52 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getPriceUSD()
     {
         return $this->priceUSD;
+    }
+
+    /**
+     * Set pricePerSquareUAH
+     *
+     * @param string $pricePerSquareUAH
+     * @return Estate
+     */
+    public function setPricePerSquareUAH($pricePerSquareUAH)
+    {
+        $this->pricePerSquareUAH = $pricePerSquareUAH;
+
+        return $this;
+    }
+
+    /**
+     * Get pricePerSquareUAH
+     *
+     * @return string
+     */
+    public function getPricePerSquareUAH()
+    {
+        return $this->pricePerSquareUAH;
+    }
+
+    /**
+     * Set pricePerSquareUSD
+     *
+     * @param string $pricePerSquareUSD
+     * @return Estate
+     */
+    public function setPricePerSquareUSD($pricePerSquareUSD)
+    {
+        $this->pricePerSquareUSD = $pricePerSquareUSD;
+
+        return $this;
+    }
+
+    /**
+     * Get pricePerSquareUSD
+     *
+     * @return string
+     */
+    public function getPricePerSquareUSD()
+    {
+        return $this->pricePerSquareUSD;
     }
 
     /**
@@ -540,5 +631,31 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getEstateAttribute()
     {
         return $this->estateAttribute;
+    }
+
+    /**
+     * Set estateFeatures
+     *
+     * @param \AppBundle\Entity\EstateFeatures $estateFeatures
+     * @return Estate
+     */
+    public function setEstateFeatures(\AppBundle\Entity\EstateFeatures $estateFeatures = null)
+    {
+        if( $estateFeatures instanceof EstateFeatures )
+            $estateFeatures->setEstate($this);
+
+        $this->estateFeatures = $estateFeatures;
+
+        return $this;
+    }
+
+    /**
+     * Get estateFeatures
+     *
+     * @return \AppBundle\Entity\EstateFeatures
+     */
+    public function getEstateFeatures()
+    {
+        return $this->estateFeatures;
     }
 }

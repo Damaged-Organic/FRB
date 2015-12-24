@@ -34,6 +34,9 @@ class EstateAdmin extends Admin
                 "label"       => "Ціна за м2 (UAH)",
                 "precision"   => 2
             ])
+            ->add('isActive', 'boolean', [
+                "label" => "Відображається"
+            ])
         ;
     }
 
@@ -177,6 +180,10 @@ class EstateAdmin extends Admin
                         new Assert\Range(["min" => 0])
                     ]
                 ])
+                ->add('isActive', 'checkbox', [
+                    "required" => FALSE,
+                    "label"    => "Відображається"
+                ])
             ->end()
             ->with("Нерухомість - Особливості")
                 ->add('estateFeatures', 'sonata_type_admin', [
@@ -197,9 +204,9 @@ class EstateAdmin extends Admin
             ->with("Нерухомість - Фотографії")
                 ->add('estatePhoto', 'sonata_type_collection', [
                     'required'     => TRUE,
-                    'label'        => "Управление изображениями",
+                    'label'        => "Керування зображеннями",
                     'by_reference' => FALSE,
-                    'btn_add'      => "Добавить изображение"
+                    'btn_add'      => "Додати зображення"
                 ], [
                     'edit'   => 'inline',
                     'inline' => 'table'

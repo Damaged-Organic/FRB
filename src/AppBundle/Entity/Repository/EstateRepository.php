@@ -36,12 +36,44 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         return $query->getOneOrNullResult();
     }
 
+    public function findActive($id)
+    {
+        //TODO: This is kludge for Sonata
+        $id = ( is_array($id) ) ? $id['id'] : $id;
+
+        $query = $this->createQueryBuilder('e')
+            ->select('e, ep, et, ea, eat')
+            ->leftJoin('e.estatePhoto', 'ep')
+            ->leftJoin('e.estateType', 'et')
+            ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('ea.estateAttributeType', 'eat')
+            ->where('e.id = :id')
+            ->andWhere('e.isActive = :isActive')
+            ->setParameters([
+                'id'       => $id,
+                'isActive' => TRUE
+            ])
+            ->getQuery()
+        ;
+
+        $query->setHint(
+            Query::HINT_CUSTOM_OUTPUT_WALKER,
+            'Gedmo\\Translatable\\Query\\TreeWalker\\TranslationWalker'
+        );
+
+        return $query->getOneOrNullResult();
+    }
+
     public function getNearestEstates($id)
     {
         $previous = $this->createQueryBuilder('e')
             ->select('e')
             ->where('e.id < :id')
-            ->setParameter('id', $id)
+            ->andWhere('e.isActive = :isActive')
+            ->setParameters([
+                'id'       => $id,
+                'isActive' => TRUE
+            ])
             ->orderBy('e.id', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
@@ -51,7 +83,11 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         $next = $this->createQueryBuilder('e')
             ->select('e')
             ->where('e.id > :id')
-            ->setParameter('id', $id)
+            ->andWhere('e.isActive = :isActive')
+            ->setParameters([
+                'id'       => $id,
+                'isActive' => TRUE
+            ])
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
@@ -72,7 +108,9 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             ->leftJoin('e.estateAttribute', 'ea')
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('et.parent = :estateType')
+            ->andWhere('e.isActive = :isActive')
             ->setParameter('estateType', $estateType)
+            ->setParameter('isActive', TRUE)
         ;
 
         if( $page && $results_per_page )
@@ -111,7 +149,9 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             ->leftJoin('e.estateAttribute', 'ea')
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('et.parent = :estateType')
-            ->setParameter('estateType', $estateType);
+            ->andWhere('e.isActive = :isActive')
+            ->setParameter('estateType', $estateType)
+            ->setParameter('isActive', TRUE)
         ;
 
         if( !empty($filterArguments[self::FILTER_SEARCH]) ) {
@@ -255,6 +295,8 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                 $subQuery = $qb
                     ->select("IDENTITY(ea.estate) as estate_id")
                     ->from('AppBundle\Entity\EstateAttribute', "ea")
+                    ->leftJoin('AppBundle\Entity\Estate', 'e')
+                    ->where('e.isActive = :isActive')
                     ->andWhere(
                         $qb->expr()->andX(
                             $qb->expr()->eq("ea.estateAttributeType", ":attribute"),
@@ -263,6 +305,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                         )
                     )
                     ->groupBy('estate_id')
+                    ->setParameter("isActive", TRUE)
                     ->setParameter("attribute", (int)$attribute)
                     ->setParameter("value_min", (int)$range['min'])
                     ->setParameter("value_max", (int)$range['max'])
