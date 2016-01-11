@@ -188,7 +188,7 @@ state:
             advantages:   Буде перевагою
 
         resume:
-            send: Отправить резюме
+            send: Відправити резюме
 
         empty:
             requirements: Вимоги не вказані

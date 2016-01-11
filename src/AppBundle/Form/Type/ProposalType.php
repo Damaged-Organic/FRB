@@ -73,10 +73,16 @@ class ProposalType extends AbstractType
                 ],
                 'precision' => 2
             ])
-            ->add("address", "text", [
-                'label'   => "proposal.address.label",
+            ->add("street", "text", [
+                'label' => "proposal.street.label",
                 'attr'  => [
-                    'placeholder' => "proposal.address.placeholder"
+                    'placeholder' => "proposal.street.placeholder"
+                ]
+            ])
+            ->add("house", "text", [
+                'label' => "proposal.house.label",
+                'attr'  => [
+                    'placeholder' => "proposal.house.placeholder"
                 ]
             ])
             ->add("space", "number", [
@@ -151,9 +157,14 @@ class ProposalType extends AbstractType
                 'required' => FALSE,
                 'label'    => "proposal.has_registration.label"
             ])
+            ->add("wasted", "checkbox", [
+                'required' => FALSE,
+                'label'    => "proposal.wasted.label"
+            ])
             ->add("send", 'submit', [
                 'label' => "proposal.submit.label"
-            ]);
+            ])
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

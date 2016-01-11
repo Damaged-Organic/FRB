@@ -53,16 +53,20 @@ proposal:
         placeholder: Enter your property type
 
     price_value:
-        label:       Rent price
+        label:       Rent price per month
         placeholder: Enter rent price
 
     price_currency:
         label:       Currency
         placeholder: Select currency
 
-    address:
-        label:      Address
-        placholder: Enter your estate address
+    street:
+        label:       Street
+        placeholder: Enter street name
+
+    house:
+        label:       House
+        placeholder: Enter house number
 
     space:
         label:       Total space
@@ -96,7 +100,7 @@ proposal:
         label: Non-cash payment
 
     is_new_building:
-        label: New building
+        label: Household electronics
 
     has_elevator:
         label: Elevator
@@ -109,6 +113,13 @@ proposal:
 
     has_registration:
         label: Registration for non-resident
+
+    wasted:
+        label: >
+            Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
+            та використання Ваших персональних даних, з метою обробки даного запиту,
+            відповідно до Закону України «Про захист персональних даних» від
+            01.06.2010р., № 2297-VI.
 
     submit:
         label: Propose

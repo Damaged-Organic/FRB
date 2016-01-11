@@ -57,19 +57,25 @@ proposal:
         valid:     Please, provide a valid property type
 
     price_value:
-        not_blank: Please, enter your price
+        not_blank: Please, enter your rent price
         range:
-            min: Please, enter correct price
+            min: Please, enter correct rent price
 
     price_currency:
         not_blank: Please, provide currency value
         valid:     Please, provide a correct currency value
 
-    address:
-        not_blank: Please, enter your property address
+    street:
+        not_blank: Please, enter your property street name
         length:
-            min: This address is too short. Maybe you've made a mistake?
-            max: This address is too long. Maybe you've made a mistake?
+            min: This street name is too short. Maybe you've made a mistake?
+            max: This street name is too long. Maybe you've made a mistake?
+
+    house:
+        not_blank: Please, enter house number
+        length:
+            min: This house number is too short. Maybe you've made a mistake?
+            max: This house number is too long. Maybe you've made a mistake?
 
     space:
         not_blank: Please, enter your property total space
@@ -108,6 +114,9 @@ proposal:
         range:
             min: Such floors number value is too small. Maybe you've made a mistake?
             max: Such floors number value is too large. Maybe you've made a mistake?
+
+    wasted:
+        checked: You must allow us to use your personal data first
 
     checkbox:
         valid: Checkbox value is invalid

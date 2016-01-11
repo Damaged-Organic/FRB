@@ -78,17 +78,31 @@ class Proposal
 
     /**
      * @Assert\NotBlank(
-     *      message="proposal.address.not_blank"
+     *      message="proposal.street.not_blank"
      * )
      *
      * @Assert\Length(
-     *      min = 5,
-     *      max = 500,
-     *      minMessage = "proposal.address.length.min",
-     *      maxMessage = "proposal.address.length.max"
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "proposal.street.length.min",
+     *      maxMessage = "proposal.street.length.max"
      * )
      */
-    protected $address;
+    protected $street;
+
+    /**
+     * @Assert\NotBlank(
+     *      message="proposal.house.not_blank"
+     * )
+     *
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 250,
+     *      minMessage = "proposal.house.length.min",
+     *      maxMessage = "proposal.house.length.max"
+     * )
+     */
+    protected $house;
 
     /**
      * @Assert\NotBlank(
@@ -220,6 +234,18 @@ class Proposal
      */
     protected $hasRegistration;
 
+    /**
+     * @Assert\NotBlank(
+     *      message="proposal.wasted.checked"
+     * )
+     *
+     * @Assert\Type(
+     *     type="bool",
+     *     message="proposal.checkbox"
+     * )
+     */
+    protected $wasted;
+
     public function setName($name)
     {
         $this->name = $name;
@@ -292,16 +318,28 @@ class Proposal
         return $this->priceCurrency;
     }
 
-    public function setAddress($address)
+    public function setStreet($street)
     {
-        $this->address = $address;
+        $this->street = $street;
 
         return $this;
     }
 
-    public function getAddress()
+    public function getStreet()
     {
-        return $this->address;
+        return $this->street;
+    }
+
+    public function setHouse($house)
+    {
+        $this->house = $house;
+
+        return $this;
+    }
+
+    public function getHouse()
+    {
+        return $this->house;
     }
 
     public function setSpace($space)
@@ -458,5 +496,17 @@ class Proposal
     public function getHasRegistration()
     {
         return $this->hasRegistration;
+    }
+
+    public function setWasted($wasted)
+    {
+        $this->wasted = $wasted;
+
+        return $this;
+    }
+
+    public function getWasted()
+    {
+        return $this->wasted;
     }
 }

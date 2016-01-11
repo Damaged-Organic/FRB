@@ -33,60 +33,6 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist
         (
             $menuItem = (new Menu)
-                ->setTitle("Об’єкти")
-                ->setBlock('catalog')
-                ->setRoute("catalog")
-        );
-        $manager->flush();
-
-        $manager->persist
-        (
-            $menuItem->setTitle("Objects")
-                ->setTranslatableLocale('en')
-        );
-        $manager->flush();
-
-        // ---
-
-        $manager->persist
-        (
-            $menuItem = (new Menu)
-                ->setTitle("Об’єкт нерухомості")
-                ->setBlock(NULL)
-                ->setRoute("catalog_item")
-        );
-        $manager->flush();
-
-        $manager->persist
-        (
-            $menuItem->setTitle("Property object")
-                ->setTranslatableLocale('en')
-        );
-        $manager->flush();
-
-        // ---
-
-        $manager->persist
-        (
-            $menuItem = (new Menu)
-                ->setTitle("Пропозиція власної нерухомості")
-                ->setBlock(NULL)
-                ->setRoute("catalog_proposal")
-        );
-        $manager->flush();
-
-        $manager->persist
-        (
-            $menuItem->setTitle("Own property proposal")
-                ->setTranslatableLocale('en')
-        );
-        $manager->flush();
-
-        // ---
-
-        $manager->persist
-        (
-            $menuItem = (new Menu)
                 ->setTitle("Види послуг")
                 ->setBlock('services')
                 ->setRoute("services")
@@ -132,6 +78,60 @@ class LoadMenu extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist
         (
             $menuItem->setTitle("Information for expats")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Об’єкти")
+                ->setBlock('catalog')
+                ->setRoute("catalog")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Objects")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Об’єкт нерухомості")
+                ->setBlock(NULL)
+                ->setRoute("catalog_item")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Property object")
+                ->setTranslatableLocale('en')
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $menuItem = (new Menu)
+                ->setTitle("Пропозиція власної нерухомості")
+                ->setBlock(NULL)
+                ->setRoute("catalog_proposal")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $menuItem->setTitle("Own property proposal")
                 ->setTranslatableLocale('en')
         );
         $manager->flush();

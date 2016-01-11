@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request,
+    Symfony\Component\HttpFoundation\RequestStack,
     Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
@@ -104,6 +105,18 @@ class FilterController extends Controller implements FilterArgumentsInterface
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $features = $filterAvailableValuesExtractor->availableFeatures($estates);
+
+        if( !empty($filterArguments['estate_type']) && ($filterArguments['estate_type'] == 3 || $filterArguments['estate_type'] == 4) )
+        {
+            if( $filterArguments['estate_type'] == 3 )
+            {
+                var_dump($features, $filterArguments);
+            }
+        } elseif( $estates ) {
+            echo '<pre>';
+            \Doctrine\Common\Util\Debug::dump($this->get('request_stack')->getMasterRequest(), 3);
+            echo '</pre>';
+        }
 
         $checked = ( !empty($filterArguments[self::FILTER_FEATURES]) ) ? $filterArguments[self::FILTER_FEATURES] : [];
 

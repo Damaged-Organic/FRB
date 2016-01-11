@@ -184,7 +184,7 @@ state:
 
         tabs:
             requirements: Requirements
-            tabs:         Main tasks
+            tasks:        Main tasks
             advantages:   Would be an advantage
 
         resume:

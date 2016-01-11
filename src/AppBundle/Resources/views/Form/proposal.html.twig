@@ -108,16 +108,30 @@
     </div>
 
     <div class="field-holder">
-        {{ form_label(form.address) }}
-        {{ form_widget(form.address, {
+        {{ form_label(form.street) }}
+        {{ form_widget(form.street, {
             'attr': {
-                'data-rule-required': "true", 'data-msg-required': 'proposal.address.not_blank'|trans({}, "validators"),
-                'data-rule-minlength': "5", 'data-msg-minlength': 'proposal.address.length.min'|trans({}, "validators"),
-                'data-rule-maxlength': "500", 'data-msg-maxlength': 'proposal.address.length.max'|trans({}, "validators")
+                'data-rule-required': "true", 'data-msg-required': 'proposal.street.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.street.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "250", 'data-msg-maxlength': 'proposal.street.length.max'|trans({}, "validators")
             }
         }) }}
         <div class="error-holder">
-            <span>{{ form_errors(form.address) }}</span>
+            <span>{{ form_errors(form.street) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.house) }}
+        {{ form_widget(form.house, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.house.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.house.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "250", 'data-msg-maxlength': 'proposal.house.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.house) }}</span>
         </div>
     </div>
 
@@ -257,6 +271,18 @@
             <label for="{{ form.hasRegistration.vars.id }}">
                 <span>{{ form.hasRegistration.vars.label|trans({}, "forms") }}</span>
             </label>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.wasted) }}
+        {{ form_widget(form.wasted, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.wasted.checked'|trans({}, "validators"),
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.wasted) }}</span>
         </div>
     </div>
 

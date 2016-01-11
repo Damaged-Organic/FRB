@@ -6,13 +6,13 @@
         </li>
     {% endif %}
 
-    {% if menu.catalog is defined %}
-    	<li class="dropdown {{ ( menu.catalog.outer.active ) ? 'active' }}">
-    		<a href="{{ menu.catalog.outer.route }}">
-                {{ menu.catalog.outer.title }}<span class="icon icon-arrow-down"></span>
+    {% if menu.services is defined %}
+    	<li class="dropdown {{ ( menu.services.outer.active ) ? 'active' }}">
+    		<a href="{{ menu.services.outer.route }}">
+                {{ menu.services.outer.title }}<span class="icon icon-arrow-down"></span>
             </a>
     		<ul>
-                {% for item in menu.catalog.inner %}
+                {% for item in menu.services.inner %}
                     <li {{ ( item.active ) ? 'class="active"' }}>
                         <a href="{{ item.route }}"><span>{{ item.title }}</span></a>
                     </li>
@@ -21,13 +21,13 @@
     	</li>
     {% endif %}
 
-    {% if menu.services is defined %}
-    	<li class="dropdown {{ ( menu.services.outer.active ) ? 'active' }}">
-    		<a href="{{ menu.services.outer.route }}">
-                {{ menu.services.outer.title }}<span class="icon icon-arrow-down"></span>
+    {% if menu.catalog is defined %}
+    	<li class="dropdown {{ ( menu.catalog.outer.active ) ? 'active' }}">
+    		<a href="{{ menu.catalog.outer.route }}">
+                {{ menu.catalog.outer.title }}<span class="icon icon-arrow-down"></span>
             </a>
     		<ul>
-                {% for item in menu.services.inner %}
+                {% for item in menu.catalog.inner %}
                     <li {{ ( item.active ) ? 'class="active"' }}>
                         <a href="{{ item.route }}"><span>{{ item.title }}</span></a>
                     </li>

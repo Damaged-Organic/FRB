@@ -53,16 +53,20 @@ proposal:
         placeholder: Вкажіть тип приміщення
 
     price_value:
-        label:       Ціна
-        placeholder: Введіть ціну
+        label:       Розмір орендної плати (місяць)
+        placeholder: Введіть розмір орендної плати
 
     price_currency:
         label:       Валюта
         placeholder: Вкажіть валюту
 
-    address:
-        label:       Адреса
-        placeholder: Введіть адресу
+    street:
+        label:       Вулиця
+        placeholder: Введіть назву вулиці
+
+    house:
+        label:       Будинок
+        placeholder: Введіть номер будинку
 
     space:
         label:       Площа приміщення
@@ -96,7 +100,7 @@ proposal:
         label: Безготівковий розрахунок
 
     is_new_building:
-        label: Нова будівля
+        label: Побутова техніка
 
     has_elevator:
         label: Ліфт
@@ -109,6 +113,13 @@ proposal:
 
     has_registration:
         label: Реєстрація для нерезидента
+
+    wasted:
+        label: >
+            Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
+            та використання Ваших персональних даних, з метою обробки даного запиту,
+            відповідно до Закону України «Про захист персональних даних» від
+            01.06.2010р., № 2297-VI.
 
     submit:
         label: Запропонувати

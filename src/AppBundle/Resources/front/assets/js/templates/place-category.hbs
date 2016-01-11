@@ -12,9 +12,15 @@
 			{{#each this.places}}
 				<article class="item">
 					<div class="entitled">
-						<a href="#">{{ title }}</a>
+						{{#if link }}
+							<a href="{{ link }}">{{ title }}</a>
+						{{else}}
+							{{ title }}
+						{{/if}}
                         {{#if photo }}
-                            <figure><img src="uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}"></figure>
+							<a href="{{ link }}">
+	                            <figure><img src="uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}"></figure>
+							</a>
                         {{/if}}
 					</div>
 					{{#if phones.length}}

@@ -72,6 +72,7 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
         );
         $manager->flush();
 
+        /*
         $manager->persist(
             $benefit_0_5 = (new ServiceBenefit)
                 ->setService(NULL)
@@ -101,6 +102,7 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
                 ->setThesis("")
         );
         $manager->flush();
+        */
 
         // ---
 
