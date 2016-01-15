@@ -248,46 +248,59 @@ class StateController extends Controller implements FilterArgumentsInterface
      */
     public function catalogProposalAction(Request $request)
     {
-        $_manager = $this->getDoctrine()->getManager();
+        $_manager    = $this->getDoctrine()->getManager();
+        $_translator = $this->get('translator');
 
         $message = NULL;
 
-        $proposalForm = $this->createForm(new ProposalType($_manager), ($proposal = new Proposal));
+        $proposalForm = $this->createForm(new ProposalType($_manager, $_translator), ($proposal = new Proposal));
 
         $proposalForm->handleRequest($request);
 
-        if( $proposalForm->isValid() )
+        if( $request->isMethod('POST') )
         {
-            $_translator     = $this->get('translator');
-            $_mailerShortcut = $this->get('app.mailer_shortcut');
-
-            $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
-
-            $to = $this->container->getParameter('email')['proposal'];
-
-            $subject = $_translator->trans("proposal.subject", [], 'emails');
-
-            $body = $this->renderView('AppBundle:Email:proposal.html.twig', [
-                'proposal'  => $proposal
-            ]);
-
-            if( !$_mailerShortcut->sendMail($from, $to, $subject, $body) ) {
+            if( !$proposalForm->get('wasted')->getData() )
+            {
                 $message = [
                     'class' => 'error',
-                    'text'  => $_translator->trans("proposal.fail", [], 'responses')
+                    'text'  => $_translator->trans("proposal.wasted", [], 'responses')
                 ];
-            } else {
-                $message = [
-                    'class' => 'success',
-                    'text'  => $_translator->trans("proposal.success", [], 'responses')
-                ];
+
+                $this->get('session')->getFlashBag()->add('message_proposal', $message);
             }
 
-            $this->get('session')->getFlashBag()->add('message_proposal', $message);
+            if( $proposalForm->isValid() )
+            {
+                $_mailerShortcut = $this->get('app.mailer_shortcut');
 
-            return $this->redirectToRoute('catalog_proposal', [
-                '_locale' => $request->getLocale()
-            ], 301);
+                $from = [$this->container->getParameter('email')['no-reply'] => 'FRBrokerage.Net'];
+
+                $to = $this->container->getParameter('email')['proposal'];
+
+                $subject = $_translator->trans("proposal.subject", [], 'emails');
+
+                $body = $this->renderView('AppBundle:Email:proposal.html.twig', [
+                    'proposal'  => $proposal
+                ]);
+
+                if( !$_mailerShortcut->sendMail($from, $to, $subject, $body) ) {
+                    $message = [
+                        'class' => 'error',
+                        'text'  => $_translator->trans("proposal.fail", [], 'responses')
+                    ];
+                } else {
+                    $message = [
+                        'class' => 'success',
+                        'text'  => $_translator->trans("proposal.success", [], 'responses')
+                    ];
+                }
+
+                $this->get('session')->getFlashBag()->add('message_proposal', $message);
+
+                return $this->redirectToRoute('catalog_proposal', [
+                    '_locale' => $request->getLocale()
+                ], 301);
+            }
         }
 
         $message = ( $this->get('session')->getFlashBag()->has('message_proposal') )

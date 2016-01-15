@@ -50,11 +50,19 @@ proposal:
 
     type:
         label:       Property type
-        placeholder: Enter your property type
+        placeholder: Select your property type
 
-    price_value:
+    trade_type:
+        label:       Type of deal
+        placeholder: Select type of deal
+
+    price_rent_value:
         label:       Rent price per month
         placeholder: Enter rent price
+
+    price_sale_value:
+        label:       Sale price
+        placeholder: Enter sale price
 
     price_currency:
         label:       Currency
@@ -113,6 +121,9 @@ proposal:
 
     has_registration:
         label: Registration for non-resident
+
+    description:
+        label: Additional information
 
     wasted:
         label: >

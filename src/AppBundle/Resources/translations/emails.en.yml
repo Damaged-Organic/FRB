@@ -23,3 +23,6 @@ proposal:
     table:
         apartment: Apartment
         house:     House
+
+        rent: Rent
+        sale: Sale

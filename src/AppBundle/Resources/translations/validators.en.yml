@@ -56,10 +56,19 @@ proposal:
         not_blank: Please, provide property type
         valid:     Please, provide a valid property type
 
-    price_value:
+    trade_type:
+        not_blank: Please, provide type of deal
+        valid:     Please, provide a valid type of deal
+
+    price_rent_value:
         not_blank: Please, enter your rent price
         range:
             min: Please, enter correct rent price
+
+    price_sale_value:
+        not_blank: Please, enter your sale price
+        range:
+            min: Please, enter correct sale price
 
     price_currency:
         not_blank: Please, provide currency value
@@ -114,6 +123,11 @@ proposal:
         range:
             min: Such floors number value is too small. Maybe you've made a mistake?
             max: Such floors number value is too large. Maybe you've made a mistake?
+
+    description:
+        length:
+            min: Additional information is too short. Maybe you've made a mistake?
+            max: Additional information is too long. Please, shorten it.
 
     wasted:
         checked: You must allow us to use your personal data first

@@ -15,6 +15,7 @@ use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
 
 class FilterController extends Controller implements FilterArgumentsInterface
 {
+    // All
     public function estateTypeFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -29,6 +30,7 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // All
     public function tradeTypeFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -43,6 +45,7 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // All
     public function currencyFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -57,6 +60,7 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // All
     public function priceFilterAction(array $filterArguments, array $estates, $currency)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -72,6 +76,80 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // Variable
+    public function pricePerSquareFilterAction(array $filterArguments, array $estates, $currency)
+    {
+        $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
+
+        $pricePerSquareRange = $filterAvailableValuesExtractor->availablePricePerSquareRange($estates, $currency);
+
+        # BIG FAT KLUDGE
+        $pricePerSquareRange = $this->featurePricePerSquareRangeKludge($pricePerSquareRange, $filterArguments);
+        # KLUDGES NEVER END
+
+        $values = ( !empty($filterArguments[self::FILTER_PRICE_PER_SQUARE]) ) ? $filterArguments[self::FILTER_PRICE_PER_SQUARE] : [];
+
+        return $this->render('AppBundle:Filter:price_per_square.html.twig', [
+            'currency'            => $currency,
+            'pricePerSquareRange' => $pricePerSquareRange,
+            'values'              => $values
+        ]);
+    }
+
+    private function featurePricePerSquareRangeKludge($pricePerSquareRange = [], $filterArguments)
+    {
+        $estateType = $this->get('request_stack')->getMasterRequest()->attributes->get('_route_params')['estateType'];
+
+        if( $estateType == 'residential' )
+        {
+            if( empty($filterArguments['estate_type']) )
+                return $pricePerSquareRange;
+
+            if( $filterArguments['estate_type'] == 3 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return $pricePerSquareRange;
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return ['min' => NULL, 'max' => NULL];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return $pricePerSquareRange;
+                }
+            }
+
+            if( $filterArguments['estate_type'] == 4 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return $pricePerSquareRange;
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return ['min' => NULL, 'max' => NULL];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return $pricePerSquareRange;
+                }
+            }
+        }
+
+        if( $estateType == 'commercial' )
+        {
+            if( empty($filterArguments['trade_type']) )
+                return $pricePerSquareRange;
+
+            if( $filterArguments['trade_type'] == 'trade_type_rent' ){
+                return $pricePerSquareRange;
+            }
+
+            if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                return $pricePerSquareRange;
+            }
+        }
+    }
+
+    // All
     public function spaceFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -86,6 +164,7 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // Exclude
     public function spacePlotFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
@@ -100,23 +179,16 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    // Variable
     public function featureFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $features = $filterAvailableValuesExtractor->availableFeatures($estates);
 
-        if( !empty($filterArguments['estate_type']) && ($filterArguments['estate_type'] == 3 || $filterArguments['estate_type'] == 4) )
-        {
-            if( $filterArguments['estate_type'] == 3 )
-            {
-                var_dump($features, $filterArguments);
-            }
-        } elseif( $estates ) {
-            echo '<pre>';
-            \Doctrine\Common\Util\Debug::dump($this->get('request_stack')->getMasterRequest(), 3);
-            echo '</pre>';
-        }
+        # BIG FAT KLUDGE
+        $features = $this->featureFilterKludge($features, $filterArguments);
+        # KLUDGES NEVER END
 
         $checked = ( !empty($filterArguments[self::FILTER_FEATURES]) ) ? $filterArguments[self::FILTER_FEATURES] : [];
 
@@ -126,11 +198,69 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    private function featureFilterKludge($features = [], array $filterArguments)
+    {
+        $estateType = $this->get('request_stack')->getMasterRequest()->attributes->get('_route_params')['estateType'];
+
+        if( $estateType == 'residential' )
+        {
+            if( empty($filterArguments['estate_type']) )
+                return ( isset($features['isNewBuilding']) ) ? ['isNewBuilding' => $features['isNewBuilding']] : [];
+
+            if( $filterArguments['estate_type'] == 3 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return ( isset($features['isNewBuilding']) ) ? ['isNewBuilding' => $features['isNewBuilding']] : [];
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return ( isset($features['isNewBuilding']) ) ? ['isNewBuilding' => $features['isNewBuilding']] : [];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return ( isset($features['isNewBuilding']) ) ? ['isNewBuilding' => $features['isNewBuilding']] : [];
+                }
+            }
+
+            if( $filterArguments['estate_type'] == 4 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return [];
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return [];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return [];
+                }
+            }
+        }
+
+        if( $estateType == 'commercial' )
+        {
+            if( empty($filterArguments['trade_type']) )
+                return [];
+
+            if( $filterArguments['trade_type'] == 'trade_type_rent' ){
+                return [];
+            }
+
+            if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                return [];
+            }
+        }
+    }
+
+    // Variable
     public function attributeFilterAction(array $filterArguments, array $estates, $estateAttributeType)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');
 
         $attributes = $filterAvailableValuesExtractor->availableAttributes($estates);
+
+        # BIG FAT KLUDGE
+        $attributes = $this->attributeFilterKludge($attributes, $filterArguments);
+        # KLUDGES NEVER END
 
         $values = ( !empty($filterArguments[self::FILTER_ATTRIBUTES]) ) ? $filterArguments[self::FILTER_ATTRIBUTES] : [];
 
@@ -141,6 +271,60 @@ class FilterController extends Controller implements FilterArgumentsInterface
         ]);
     }
 
+    private function attributeFilterKludge($attributes = [], array $filterArguments)
+    {
+        $estateType = $this->get('request_stack')->getMasterRequest()->attributes->get('_route_params')['estateType'];
+
+        if( $estateType == 'residential' )
+        {
+            if( empty($filterArguments['estate_type']) )
+                return [1 => $attributes[1], 3 => $attributes[3]];
+
+            if( $filterArguments['estate_type'] == 3 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return [3 => $attributes[3]];
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return [3 => $attributes[3]];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return [3 => $attributes[3]];
+                }
+            }
+
+            if( $filterArguments['estate_type'] == 4 )
+            {
+                if( empty($filterArguments['trade_type']) )
+                    return [1 => $attributes[1]];
+
+                if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
+                    return [1 => $attributes[1]];
+                }
+
+                if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                    return [1 => $attributes[1]];
+                }
+            }
+        }
+
+        if( $estateType == 'commercial' )
+        {
+            if( empty($filterArguments['trade_type']) )
+                return [1 => $attributes[1], 2 => $attributes[2]];
+
+            if( $filterArguments['trade_type'] == 'trade_type_rent' ){
+                return [1 => $attributes[1], 2 => $attributes[2]];
+            }
+
+            if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
+                return [1 => $attributes[1], 2 => $attributes[2]];
+            }
+        }
+    }
+
+    // All
     public function districtFilterAction(array $filterArguments, array $estates)
     {
         $filterAvailableValuesExtractor = $this->get('app.filter.available_values_extractor');

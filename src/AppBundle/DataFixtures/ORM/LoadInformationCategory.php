@@ -16,8 +16,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_1 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_HOSPITAL)
-                ->setTitle("Лікарні")
+                ->setAlias(self::CATEGORY_SCHOOL)
+                ->setTitle("Міжнародні школи")
         );
         $manager->flush();
 
@@ -25,7 +25,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_1
                 ->setTranslatableLocale("en")
-                ->setTitle("Hospitals")
+                ->setTitle("International schools")
         );
         $manager->flush();
 
@@ -34,8 +34,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_2 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_SCHOOL)
-                ->setTitle("Школи")
+                ->setAlias(self::CATEGORY_KINDERGARDEN)
+                ->setTitle("Дитячі садочки")
         );
         $manager->flush();
 
@@ -43,7 +43,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_2
                 ->setTranslatableLocale("en")
-                ->setTitle("Schools")
+                ->setTitle("International kindergartens")
         );
         $manager->flush();
 
@@ -52,8 +52,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_3 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_ENTERTAINMENT)
-                ->setTitle("Розваги")
+                ->setAlias(self::CATEGORY_MALL)
+                ->setTitle("Торгівельні центри")
         );
         $manager->flush();
 
@@ -61,7 +61,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_3
                 ->setTranslatableLocale("en")
-                ->setTitle("Fun")
+                ->setTitle("Shopping malls")
         );
         $manager->flush();
 
@@ -70,8 +70,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_4 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_METRO)
-                ->setTitle("Метро")
+                ->setAlias(self::CATEGORY_HOSPITAL)
+                ->setTitle("Медичні заклади")
         );
         $manager->flush();
 
@@ -79,7 +79,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_4
                 ->setTranslatableLocale("en")
-                ->setTitle("Metro")
+                ->setTitle("Health care")
         );
         $manager->flush();
 
@@ -88,8 +88,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_5 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_SHOP)
-                ->setTitle("Магазини")
+                ->setAlias(self::CATEGORY_ENTERTAINMENT)
+                ->setTitle("Розваги")
         );
         $manager->flush();
 
@@ -97,7 +97,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_5
                 ->setTranslatableLocale("en")
-                ->setTitle("Shops")
+                ->setTitle("Entertainment")
         );
         $manager->flush();
 
@@ -106,8 +106,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_6 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_GYM)
-                ->setTitle("Спортзали")
+                ->setAlias(self::CATEGORY_KIDS)
+                ->setTitle("Для дітей")
         );
         $manager->flush();
 
@@ -115,7 +115,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_6
                 ->setTranslatableLocale("en")
-                ->setTitle("Gyms")
+                ->setTitle("For children")
         );
         $manager->flush();
 
@@ -124,6 +124,24 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_7 = (new InformationCategory)
+                ->setAlias(self::CATEGORY_GYM)
+                ->setTitle("Спортклуби та спортзали")
+        );
+        $manager->flush();
+
+        $manager->persist
+        (
+            $informationCategory_7
+                ->setTranslatableLocale("en")
+                ->setTitle("Sport clubs and gyms")
+        );
+        $manager->flush();
+
+        // ---
+
+        $manager->persist
+        (
+            $informationCategory_8 = (new InformationCategory)
                 ->setAlias(self::CATEGORY_CAR_RENT)
                 ->setTitle("Оренда авто")
         );
@@ -131,7 +149,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
 
         $manager->persist
         (
-            $informationCategory_7
+            $informationCategory_8
                 ->setTranslatableLocale("en")
                 ->setTitle("Car rent")
         );
@@ -141,27 +159,9 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
 
         $manager->persist
         (
-            $informationCategory_8 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_PRESS)
-                ->setTitle("Преса")
-        );
-        $manager->flush();
-
-        $manager->persist
-        (
-            $informationCategory_8
-                ->setTranslatableLocale("en")
-                ->setTitle("Press")
-        );
-        $manager->flush();
-
-        // ---
-
-        $manager->persist
-        (
             $informationCategory_9 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_TAXI)
-                ->setTitle("Таксі")
+                ->setAlias(self::CATEGORY_COMMUNITY)
+                ->setTitle("Міжнародні спільноти")
         );
         $manager->flush();
 
@@ -169,7 +169,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_9
                 ->setTranslatableLocale("en")
-                ->setTitle("Taxi")
+                ->setTitle("International communities")
         );
         $manager->flush();
 
@@ -178,8 +178,8 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         $manager->persist
         (
             $informationCategory_10 = (new InformationCategory)
-                ->setAlias(self::CATEGORY_COMMUNITY)
-                ->setTitle("Спільноти")
+                ->setAlias(self::CATEGORY_TAXI)
+                ->setTitle("Таксі")
         );
         $manager->flush();
 
@@ -187,7 +187,7 @@ class LoadInformationCategory extends AbstractFixture implements OrderedFixtureI
         (
             $informationCategory_10
                 ->setTranslatableLocale("en")
-                ->setTitle("Communities")
+                ->setTitle("Taxi")
         );
         $manager->flush();
     }

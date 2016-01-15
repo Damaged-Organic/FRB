@@ -52,9 +52,17 @@ proposal:
         label:       Тип приміщення
         placeholder: Вкажіть тип приміщення
 
-    price_value:
+    trade_type:
+        label:       Тип угоди
+        placeholder: Вкажіть тип угоди
+
+    price_rent_value:
         label:       Розмір орендної плати (місяць)
         placeholder: Введіть розмір орендної плати
+
+    price_sale_value:
+        label:       Ціна продажу
+        placeholder: Введіть ціну продажу
 
     price_currency:
         label:       Валюта
@@ -113,6 +121,9 @@ proposal:
 
     has_registration:
         label: Реєстрація для нерезидента
+
+    description:
+        label: Додатково
 
     wasted:
         label: >

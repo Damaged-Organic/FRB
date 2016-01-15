@@ -15,45 +15,45 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
         $manager->persist(
             $benefit_0_1 = (new ServiceBenefit)
                 ->setService(NULL)
-                ->setIcon("icon-connected")
-                ->setThesis("Виконання всіх функцій через одного провайдера")
+                ->setIcon("icon-clock")
+                ->setThesis("Розуміння потреб/вимог/уподобань наших клієнтів")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_1
                 ->setTranslatableLocale("en")
-                ->setThesis("")
+                ->setThesis("Understanding our client needs/requirements/preferences")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_2 = (new ServiceBenefit)
                 ->setService(NULL)
-                ->setIcon("icon-clock")
-                ->setThesis("Oптимізація щоденної роботи з підрядниками. Ми здійснюємо повне управління та контроль за виконанням робіт")
+                ->setIcon("icon-credit-card")
+                ->setThesis("Здійснення усієї необхідної аналітичної роботи щодо пошуку можливих доступних варіантів нерухомості")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_2
                 ->setTranslatableLocale("en")
-                ->setThesis("")
+                ->setThesis("Undertaking of all necessary analytical work as to available property options")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_3 = (new ServiceBenefit)
                 ->setService(NULL)
-                ->setIcon("icon-credit-card")
-                ->setThesis("Зниження вартості придбання Клієнтом товарів та послуг за рахунок об'єднання об’ємів закупівель з об’ємами інших замовлень")
+                ->setIcon("icon-abacus")
+                ->setThesis("Виконання порівняльного, технічного, юридичного, фінансового аналізу щодо варіантів для потреб наших клієнтів")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_3
                 ->setTranslatableLocale("en")
-                ->setThesis("")
+                ->setThesis("Executing comparative technical, legal, financial analysis for our client needs")
         );
         $manager->flush();
 
@@ -61,48 +61,18 @@ class LoadServiceBenefit extends AbstractFixture implements OrderedFixtureInterf
             $benefit_0_4 = (new ServiceBenefit)
                 ->setService(NULL)
                 ->setIcon("icon-staff")
-                ->setThesis("Залучення як власного висококваліфікованого персоналу і спеціалізованих субпідрядників, так і аут-стафінг персоналу клієнта")
+                ->setThesis("Ведення переговорів, використовуючи при цьому всі наші знання, досвід та професійні навички щодо отримання найкращих умов")
         );
         $manager->flush();
 
         $manager->persist(
             $benefit_0_4
                 ->setTranslatableLocale("en")
-                ->setThesis("")
+                ->setThesis("Leading the negotiation process on behalf of our client, using all our experience and professional skills to get the best possible terms of conditions")
         );
         $manager->flush();
 
-        /*
-        $manager->persist(
-            $benefit_0_5 = (new ServiceBenefit)
-                ->setService(NULL)
-                ->setIcon("icon-abacus")
-                ->setThesis("Зменшення об’ємів роботи бухгалтерії Клієнта - надання послуги списання товарів згідно Акту наданих послуг: кави, продуктів, води тощо")
-        );
-        $manager->flush();
-
-        $manager->persist(
-            $benefit_0_5
-                ->setTranslatableLocale("en")
-                ->setThesis("")
-        );
-        $manager->flush();
-
-        $manager->persist(
-            $benefit_0_6 = (new ServiceBenefit)
-                ->setService(NULL)
-                ->setIcon("icon-package")
-                ->setThesis("В кінці звітного місяця Клієнт має один консолідований пакет документів - один рахунок/один акт")
-        );
-        $manager->flush();
-
-        $manager->persist(
-            $benefit_0_6
-                ->setTranslatableLocale("en")
-                ->setThesis("")
-        );
-        $manager->flush();
-        */
+        // icons - connected, package
 
         // ---
 

@@ -11,50 +11,56 @@
 			<h2><span class="icon icon-location-{{ this.icon }}"></span>{{ this.title }}</h2>
 			{{#each this.places}}
 				<article class="item">
-					<div class="entitled">
-						{{#if link }}
-							<a href="{{ link }}">{{ title }}</a>
-						{{else}}
-							{{ title }}
-						{{/if}}
-                        {{#if photo }}
-							<a href="{{ link }}">
-	                            <figure><img src="uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}"></figure>
-							</a>
-                        {{/if}}
+					{{#if link }}
+						<h3><a href="{{ link }}" target="_blank">{{ title }}</a></h3>
+					{{else}}
+						<h3>{{ title }}</h3>
+					{{/if}}
+					<div class="info-holder">
+                        <div class="info">
+							{{#if phones.length}}
+		    					<div class="phones-holder">
+		    						<span class="icon icon-phone"></span>
+		    						<span class="text">{{ phone_label }}: </span>
+		    						{{#each phones}}
+		    							<a href="tel:{{clearPhone this}}">{{ this }}</a>
+		                            {{else}}
+		                                <span>{{ phones }}</span>
+		    						{{/each}}
+		    					</div>
+		                    {{/if}}
+		                    {{#if emails.length}}
+		    					<div class="emails-holder">
+		    						<span class="icon icon-envelope"></span>
+		    						<span class="text">{{ email_label }}: </span>
+		    						{{#each emails}}
+		    							<a href="mailto:{{ this }}">{{ this }}</a>
+		                            {{else}}
+		                                <span>{{ emails }}</span>
+		    						{{/each}}
+		    					</div>
+		                    {{/if}}
+							<div class="address-holder">
+								<span class="icon icon-location"></span>
+								<span class="text">{{ address_label }}: </span>
+								{{#each address}}
+									<p>{{ this }}</p>
+								{{else}}
+									<span>{{ address }}</span>
+								{{/each}}
+							</div>
+							<p>{{ text }}</p>
+						</div>
+						<div class="photo-holder">
+							{{#if photo }}
+								<a href="{{ link }}" target="_blank">
+									<figure>
+										<img src="uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}">
+									</figure>
+								</a>
+							{{/if}}
+						</div>
 					</div>
-					{{#if phones.length}}
-    					<div class="phones-holder">
-    						<span class="icon icon-phone"></span>
-    						<span class="text">{{ phone_label }}: </span>
-    						{{#each phones}}
-    							<a href="tel:{{clearPhone this}}">{{ this }}</a>
-                            {{else}}
-                                <span>{{ phones }}</span>
-    						{{/each}}
-    					</div>
-                    {{/if}}
-                    {{#if emails.length}}
-    					<div class="emails-holder">
-    						<span class="icon icon-envelope"></span>
-    						<span class="text">{{ email_label }}: </span>
-    						{{#each emails}}
-    							<a href="mailto:{{ this }}">{{ this }}</a>
-                            {{else}}
-                                <span>{{ emails }}</span>
-    						{{/each}}
-    					</div>
-                    {{/if}}
-					<div class="address-holder">
-						<span class="icon icon-location"></span>
-						<span class="text">{{ address_label }}: </span>
-						{{#each address}}
-							<p>{{ this }}</p>
-						{{else}}
-							<span>{{ address }}</span>
-						{{/each}}
-					</div>
-					<p>{{ text }}</p>
 				</article>
 			{{/each}}
 		</div>

@@ -81,6 +81,41 @@ class AvailableValuesExtractor
         return $availablePrices;
     }
 
+    public function availablePricePerSquareRange(array $estates, $currency)
+    {
+        $availablePricesPerSquare = [];
+
+        foreach( $estates as $estate )
+        {
+            if( $estate instanceof Estate )
+            {
+                if( $currency == Currency::CURRENCY_CODE_USD ) {
+                    $availablePricesPerSquare[] = $estate->getPricePerSquareUSD();
+                } else {
+                    $availablePricesPerSquare[] = $estate->getPricePerSquareUAH();
+                }
+            }
+        }
+
+        if( $availablePricesPerSquare )
+        {
+            $pricePerSquareMin = min($availablePricesPerSquare);
+            $pricePerSquareMax = max($availablePricesPerSquare);
+
+            $availablePricesPerSquare = [
+                'min' => ( $pricePerSquareMin != $pricePerSquareMax ) ? $pricePerSquareMin : 0,
+                'max' => $pricePerSquareMax
+            ];
+        } else {
+            $availablePricesPerSquare = [
+                'min' => NULL,
+                'max' => NULL
+            ];
+        }
+
+        return $availablePricesPerSquare;
+    }
+
     public function availableSpaceRange(array $estates)
     {
         $availableSpaces = [];

@@ -47,13 +47,14 @@ state:
             search:
                 input:  Введіть код ідентифікації об’єкта та натисніть кнопку "Пошук"
                 button: Пошук
-            currency:    Валюта
-            district:    Район
-            estate_type: Тип об’єкта
-            price:       Ціна
-            space:       Площа
-            space_plot:  Площа ділянки
-            trade_type:  Тип угоди
+            currency:         Валюта
+            district:         Район
+            estate_type:      Тип об’єкта
+            price:            Ціна
+            price_per_square: Ціна за m²
+            space:            Площа
+            space_plot:       Площа ділянки
+            trade_type:       Тип угоди
 
         clear:
             filter: Очистити фільтр
@@ -143,6 +144,23 @@ state:
     proposal:
         headline: Розміщення нерухомості
 
+        form:
+            top: >
+                Наша компанія спеціалізується на довгостроковій оренді квартир та
+                будинків представницького класу, що розташовані у центральних районах
+                Києва. Наші основні клієнти – це топ-менеджери міжнародних компаній
+                та співробітники посольств.
+            bottom: >
+                Фотографії або опис об’єктів – відправляйте, будь ласка, на
+                info@frbrokerage.net, з вказанням адреси обєкту.
+            wasted:
+                text: >
+                    Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше
+                    зберігання та використання Ваших персональних даних, з метою
+                    обробки даного запиту, відповідно до Закону України «Про захист
+                    персональних даних» від 01.06.2010р., № 2297-VI:
+                button: Погоджуюсь
+
     services:
         headline: Наші послуги
 
@@ -226,14 +244,18 @@ state:
         subtitle: складається з наступних етапів
 
     expats_information:
-        headline: Lorem ipsum dolor sit amet, consectetur adipisicing elit
+        headline: Інформація для експатів
 
         text: >
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum eveniet, repellat doloribus non iusto ipsum
-            voluptatum ut odit inventore temporibus dolores expedita, quidem quo, velit quam quos ipsam molestiae
-            quibusdam!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus sunt nostrum placeat est
-            dolores ab ea provident quibusdam eaque odio. Natus recusandae laudantium nobis earum pariatur dolore ullam
-            optio qui.
+            Ми, можливо, не плануємо змінювати місце проживання, але життя
+            завжди рухається та переносе нас в нові місця...
+            Так, після переїзду до Києва, перші кілька днів можуть бути цікавими,
+            розчаровувати, чи все відразу. Бажаючи Вам приємного відпочинку в Києві,
+            ми склали перелік порад, які допоможуть вам адаптуватися до життя в
+            новому місті.
+            У цьому розділі Ви можете знайти корисну інформацію про міжнародних
+            співтовариства, охорону здоров'я, розваги та інші важливі питання
+            для експатріантів в Києві.
 
         benefits:
             1: Дізнайтеся що знаходится у місті та за його межами

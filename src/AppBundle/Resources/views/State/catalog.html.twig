@@ -51,7 +51,7 @@
             </div>
         </div>
         {% if estateType == 'residential' %}
-            <div class="btn-long flat white">
+            <div class="btn-long flat white inverse">
         		<a href="{{ path('catalog_proposal', { '_locale': app.request.locale }) }}">{{ 'state.catalog.proposal'|trans }}</a>
         	</div>
         {% endif %}
@@ -83,9 +83,11 @@
                         {% if unfilteredEstates|length %}
                             {{ render(controller('AppBundle:Filter:priceFilter', arguments|merge({ 'currency': currency }))) }}
 
+                            {{ render(controller('AppBundle:Filter:pricePerSquareFilter', arguments|merge({ 'currency': currency }))) }}
+
                             {{ render(controller('AppBundle:Filter:spaceFilter', arguments)) }}
 
-                            {{ render(controller('AppBundle:Filter:spacePlotFilter', arguments)) }}
+                            {# render(controller('AppBundle:Filter:spacePlotFilter', arguments)) #}
 
                             {{ render(controller('AppBundle:Filter:featureFilter', arguments)) }}
 
@@ -131,22 +133,51 @@
                                         <p class="address">{{ estate.address }}</p>
                                         <ul>
 
-                                            <li>
+                                            <li title='{{ 'state.catalog.attributes.space'|trans }}'>
                                                 <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
                                             </li>
 
-                                            {% if estate.spacePlot %}
-                                                {% set attributesOutput = 2 %}
-
-                                                <li>
+                                            {% if estate.estateType.id == 4 %}
+                                                <li title='{{ 'state.catalog.attributes.space_plot'|trans }}'>
                                                     <p><span class="icon icon-sq"></span>{{ estate.spacePlot + 0 }} m<sup>2</sup></p>
                                                 </li>
-                                            {% else %}
-                                                {% set attributesOutput = 3 %}
                                             {% endif %}
 
-                                            {% for attribute in estate.estateAttribute[:attributesOutput] %}
-                                                <li>
+                                            {# BIG FAT KLUDGE #}
+                                            {% for attribute in estate.estateAttribute %}
+
+                                                {% set make_it_happen = false %}
+
+                                                {% if estate.estateType.id == 3 %}
+                                                    {% if attribute.id == 3 or attribute.id == 4 or attribute.id == 5 %}
+
+                                                        {% set make_it_happen = true %}
+
+                                                    {% endif %}
+                                                {% elseif estate.estateType.id == 4 %}
+                                                    {% if attribute.id == 1 or attribute.id == 3 or attribute.id == 4 or attribute.id == 5 %}
+
+                                                        {% set make_it_happen = true %}
+
+                                                    {% endif %}
+                                                {% else %}
+                                                    {% if attribute.id == 1 or attribute.id == 2 or attribute.id == 6 %}
+
+                                                        {% set make_it_happen = true %}
+
+                                                    {% endif %}
+
+                                                    {% if estate.estateType.id == 5 %}
+                                                        {% if attribute.id == 7 or attribute.id == 8 %}
+
+                                                            {% set make_it_happen = true %}
+
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                {% if make_it_happen %}
+                                                <li title='{{ attribute.estateAttributeType.title }}'>
                                                     <p>
                                                         <span class="icon {{ attribute.estateAttributeType.icon }}"></span>
 
@@ -157,8 +188,10 @@
                                                         {% endif %}
                                                     </p>
                                                 </li>
-                                            {% endfor %}
+                                                {% endif %}
 
+                                            {% endfor %}
+                                            {# KLUDGES NEVER END #}
                                         </ul>
                                     </a>
                                 </div>

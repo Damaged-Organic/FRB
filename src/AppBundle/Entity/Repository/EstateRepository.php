@@ -160,6 +160,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             $query = $this->filterArgumentsEstateType($query, $filterArguments);
             $query = $this->filterArgumentsTradeType($query, $filterArguments);
             $query = $this->filterArgumentsPrice($query, $filterArguments, $currency);
+            $query = $this->filterArgumentsPricePerSquareRange($query, $filterArguments, $currency);
             $query = $this->filterArgumentsSpace($query, $filterArguments);
             $query = $this->filterArgumentsSpacePlot($query, $filterArguments);
             $query = $this->filterArgumentsFeatures($query, $filterArguments);
@@ -222,6 +223,27 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                 ->andWhere("e.{$field} <= :price_max")
                 ->setParameter('price_min', $filterArguments[self::FILTER_PRICE]['min'])
                 ->setParameter('price_max', $filterArguments[self::FILTER_PRICE]['max'])
+            ;
+        }
+
+        return $query;
+    }
+
+    private function filterArgumentsPricePerSquareRange($query, $filterArguments, $currency)
+    {
+        if( !empty($filterArguments[self::FILTER_PRICE_PER_SQUARE]) )
+        {
+            if( $currency == Currency::CURRENCY_CODE_USD ) {
+                $field = 'pricePerSquareUSD';
+            } else {
+                $field = 'pricePerSquareUAH';
+            }
+
+            $query
+                ->andWhere("e.{$field} >= :price_per_square_min")
+                ->andWhere("e.{$field} <= :price_per_square_max")
+                ->setParameter('price_per_square_min', $filterArguments[self::FILTER_PRICE_PER_SQUARE]['min'])
+                ->setParameter('price_per_square_max', $filterArguments[self::FILTER_PRICE_PER_SQUARE]['max'])
             ;
         }
 

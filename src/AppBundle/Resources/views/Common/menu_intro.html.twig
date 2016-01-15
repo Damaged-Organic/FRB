@@ -11,6 +11,12 @@
         <li>
             <a href="{{ menu.services.outer.route }}">{{ menu.services.outer.title }}</a>
         </li>
+
+        {% if menu.services.inner is defined %}
+            <li>
+                <a href="{{ menu.services.inner.1.route }}">{{ menu.services.inner.1.title }}</a>
+            </li>
+        {% endif %}
     {% endif %}
 
     {% if menu.catalog is defined %}

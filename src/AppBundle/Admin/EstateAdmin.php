@@ -151,6 +151,7 @@ class EstateAdmin extends Admin
                     "precision" => 2
                 ])
                 ->add("priceUAH", "number", [
+                    "required"    => FALSE,
                     "label"       => "Ціна (UAH)",
                     "precision"   => 2,
                     "constraints" => [
@@ -221,6 +222,7 @@ class EstateAdmin extends Admin
             return;
 
         $this->setCoordinates($estate);
+        $this->convertPrices($estate);
     }
 
     public function preUpdate($estate)
@@ -229,6 +231,7 @@ class EstateAdmin extends Admin
             return;
 
         $this->setCoordinates($estate);
+        $this->convertPrices($estate);
     }
 
     protected function setCoordinates($estate)
@@ -239,6 +242,25 @@ class EstateAdmin extends Admin
 
         if( $coordinates )
             $estate->setCoordinates($coordinates);
+    }
+
+    protected function convertPrices($estate)
+    {
+        $currencyConverter = $this->getConfigurationPool()->getContainer()->get('app.currency_converter');
+
+        if( $estate->getPriceUSD() && !$estate->getPriceUAH() )
+        {
+            $estate->setPriceUAH(
+                $currencyConverter->USD_UAH()->convert($estate->getPriceUSD())
+            );
+        }
+
+        if( $estate->getPricePerSquareUSD() && !$estate->getPricePerSquareUAH() )
+        {
+            $estate->setPricePerSquareUAH(
+                $currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())
+            );
+        }
     }
 
     public function getFormTheme()

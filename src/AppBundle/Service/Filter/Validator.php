@@ -48,6 +48,11 @@ class Validator implements FilterArgumentsInterface
             $filterArguments[self::FILTER_PRICE] = $this->sanitizePriceRange($filterArguments[self::FILTER_PRICE], $estates, $currency);
         }
 
+        if( !empty($filterArguments[self::FILTER_PRICE_PER_SQUARE]) )
+        {
+            $filterArguments[self::FILTER_PRICE_PER_SQUARE] = $this->sanitizePricePerSquareRange($filterArguments[self::FILTER_PRICE_PER_SQUARE], $estates, $currency);
+        }
+
         if( !empty($filterArguments[self::FILTER_SPACE]) )
         {
             $filterArguments[self::FILTER_SPACE] = $this->sanitizeSpaceRange($filterArguments[self::FILTER_SPACE], $estates);
@@ -117,6 +122,23 @@ class Validator implements FilterArgumentsInterface
             $priceRange['max'] = $existingPriceRange['max'];
 
         return $priceRange;
+    }
+
+    protected function sanitizePricePerSquareRange($pricePerSquareRange, $estates, $currency)
+    {
+        $notValid = function($value) {
+            return ( empty($value) || !is_numeric($value) || ($value < 0) );
+        };
+
+        $existingPricePerSquareRange = $this->_availableValuesExtractor->availablePricePerSquareRange($estates, $currency);
+
+        if( !isset($pricePerSquareRange['min']) || $notValid($pricePerSquareRange['min']) )
+            $pricePerSquareRange['min'] = $existingPricePerSquareRange['min'];
+
+        if( !isset($pricePerSquareRange['max']) || $notValid($pricePerSquareRange['max']) )
+            $pricePerSquareRange['max'] = $existingPricePerSquareRange['max'];
+
+        return $pricePerSquareRange;
     }
 
     protected function sanitizeSpaceRange($spaceRange, $estates)

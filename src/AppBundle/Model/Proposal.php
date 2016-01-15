@@ -54,15 +54,28 @@ class Proposal
 
     /**
      * @Assert\NotBlank(
-     *      message="proposal.price_value.not_blank"
+     *      message="proposal.trade_type.not_blank"
      * )
      *
+     * @CustomAssert\IsTradeTypeValidConstraint
+     */
+    protected $tradeType;
+
+    /**
      * @Assert\Range(
      *      min = 1,
-     *      minMessage="proposal.price_value.range.min"
+     *      minMessage="proposal.price_rent_value.range.min"
      * )
      */
-    protected $priceValue;
+    protected $priceRentValue;
+
+    /**
+     * @Assert\Range(
+     *      min = 1,
+     *      minMessage="proposal.price_sale_value.range.min"
+     * )
+     */
+    protected $priceSaleValue;
 
     /**
      * @Assert\NotBlank(
@@ -235,6 +248,16 @@ class Proposal
     protected $hasRegistration;
 
     /**
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 1000,
+     *      minMessage = "proposal.description.length.min",
+     *      maxMessage = "proposal.description.length.max"
+     * )
+     */
+    protected $description;
+
+    /**
      * @Assert\NotBlank(
      *      message="proposal.wasted.checked"
      * )
@@ -294,16 +317,40 @@ class Proposal
         return $this->type;
     }
 
-    public function setPriceValue($priceValue)
+    public function setTradeType($tradeType)
     {
-        $this->priceValue = $priceValue;
+        $this->tradeType = $tradeType;
 
         return $this;
     }
 
-    public function getPriceValue()
+    public function getTradeType()
     {
-        return $this->priceValue;
+        return $this->tradeType;
+    }
+
+    public function setPriceRentValue($priceRentValue)
+    {
+        $this->priceRentValue = $priceRentValue;
+
+        return $this;
+    }
+
+    public function getPriceRentValue()
+    {
+        return $this->priceRentValue;
+    }
+
+    public function setPriceSaleValue($priceSaleValue)
+    {
+        $this->priceSaleValue = $priceSaleValue;
+
+        return $this;
+    }
+
+    public function getPriceSaleValue()
+    {
+        return $this->priceSaleValue;
     }
 
     public function setPriceCurrency($priceCurrency)
@@ -496,6 +543,18 @@ class Proposal
     public function getHasRegistration()
     {
         return $this->hasRegistration;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     public function setWasted($wasted)

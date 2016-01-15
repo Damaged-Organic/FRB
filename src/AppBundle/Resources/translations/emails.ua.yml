@@ -23,3 +23,6 @@ proposal:
     table:
         apartment: Квартира
         house:     Будинок
+
+        rent: Оренда
+        sale: Продаж

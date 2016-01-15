@@ -50,5 +50,5 @@ liip_imagine:
         information_thumb:
             quality: 100
             filters:
-                thumbnail: { size: [80, 40], mode: inset }
-                background: { size: [80, 40], color: '#fff' }
+                thumbnail: { size: [200, 200], mode: inset }
+                background: { size: [200, 200], color: '#fff' }

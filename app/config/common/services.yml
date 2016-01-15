@@ -33,6 +33,8 @@ services:
         class: AppBundle\EventListener\Fallback\IeFallbackListener
         calls:
             - [setIeFallbackController, [ "@app.ie_fallback_controller" ]]
+            - [setManager, [ "@doctrine.orm.entity_manager" ]]
+            - [setCurrencyConverter, [ "@app.currency_converter" ]]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
@@ -52,6 +54,13 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: is_type_valid }
 
+    app.constraint.is_trade_type_valid:
+        class: AppBundle\Validator\Constraints\IsTradeTypeValidConstraintValidator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: validator.constraint_validator, alias: is_trade_type_valid }
+
     # Services
 
     app.backlink:
@@ -69,6 +78,9 @@ services:
 
     app.pagination_bar:
         class: AppBundle\Service\PaginationBar
+
+    app.currency_converter:
+        class: AppBundle\Service\CurrencyConverter
 
     app.filter.available_values_extractor:
         class: AppBundle\Service\Filter\AvailableValuesExtractor

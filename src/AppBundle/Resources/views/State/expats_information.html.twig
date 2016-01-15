@@ -34,7 +34,7 @@
 
 {% block content %}
     <main id="content" class="sticky">
-        <h1>Інформація для експатів</h1>
+        <h1>{{ 'state.expats_information.headline'|trans }}</h1>
         <section class="outer substrate location-categories-holder">
             <div class="inner">
                 <form action="{{ path('expats_information_load', { '_locale': app.request.locale }) }}" method="POST" id="location-form">
@@ -77,11 +77,11 @@
                         </li>
                         <li>
                             <span class="icon icon-information"></span>
-                            <p>{{ 'state.expats_information.benefits.1'|trans }}</p>
+                            <p>{{ 'state.expats_information.benefits.2'|trans }}</p>
                         </li>
                         <li>
                             <span class="icon icon-map"></span>
-                            <p>{{ 'state.expats_information.benefits.1'|trans }}</p>
+                            <p>{{ 'state.expats_information.benefits.3'|trans }}</p>
                         </li>
                     </ul>
                 </section>

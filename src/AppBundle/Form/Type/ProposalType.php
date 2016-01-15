@@ -8,13 +8,17 @@ use Symfony\Component\Form\AbstractType,
 
 use Doctrine\ORM\EntityManager;
 
+use AppBundle\Entity\Estate;
+
 class ProposalType extends AbstractType
 {
     protected $_entityManager;
+    protected $_translator;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, $translator)
     {
         $this->_entityManager = $entityManager;
+        $this->_translator    = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -25,6 +29,10 @@ class ProposalType extends AbstractType
 
         foreach($propertyTypes as $propertyType) {
             $propertyTypeChoices[$propertyType['stringId']] = $propertyType['title'];
+        }
+
+        foreach(Estate::getTradeTypes() as $tradeType) {
+            $propertyTradeTypeChoices[$tradeType] = mb_convert_case($this->_translator->trans('state.catalog.trade_type_' . $tradeType), MB_CASE_TITLE, "UTF-8");
         }
 
         $builder
@@ -56,6 +64,16 @@ class ProposalType extends AbstractType
                 'multiple'    => FALSE,
                 'invalid_message' => "proposal.type.valid",
             ])
+            ->add("tradeType", 'choice', [
+                'label'       => "proposal.trade_type.label",
+                'attr'  => [
+                    'placeholder' => "proposal.trade_type.placeholder"
+                ],
+                'choices'     => $propertyTradeTypeChoices,
+                'expanded'    => TRUE,
+                'multiple'    => FALSE,
+                'invalid_message' => "proposal.trade_type.valid",
+            ])
             ->add("priceCurrency", 'choice', [
                 'label'   => "proposal.price_currency.label",
                 'attr'  => [
@@ -66,10 +84,19 @@ class ProposalType extends AbstractType
                 'multiple' => FALSE,
                 'invalid_message' => "proposal.price_currency.valid",
             ])
-            ->add("priceValue", 'number', [
-                'label'     => "proposal.price_value.label",
-                'attr'  => [
-                    'placeholder' => "proposal.price_value.placeholder"
+            ->add("priceRentValue", 'number', [
+                'required' => FALSE,
+                'label'    => "proposal.price_rent_value.label",
+                'attr'     => [
+                    'placeholder' => "proposal.price_rent_value.placeholder"
+                ],
+                'precision' => 2
+            ])
+            ->add("priceSaleValue", 'number', [
+                'required' => FALSE,
+                'label'    => "proposal.price_sale_value.label",
+                'attr'     => [
+                    'placeholder' => "proposal.price_sale_value.placeholder"
                 ],
                 'precision' => 2
             ])
@@ -157,9 +184,12 @@ class ProposalType extends AbstractType
                 'required' => FALSE,
                 'label'    => "proposal.has_registration.label"
             ])
-            ->add("wasted", "checkbox", [
+            ->add("description", "textarea", [
                 'required' => FALSE,
-                'label'    => "proposal.wasted.label"
+                'label'    => "proposal.description.label"
+            ])
+            ->add("wasted", "checkbox", [
+                'label' => "proposal.wasted.label"
             ])
             ->add("send", 'submit', [
                 'label' => "proposal.submit.label"

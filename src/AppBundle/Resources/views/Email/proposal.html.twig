@@ -11,8 +11,16 @@
         <td>{{ ('proposal.table.' ~ proposal.type)|trans({}, 'emails') }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.price_value.label'|trans({}, 'forms') }}:</td>
-        <td>{{ proposal.priceValue ~ ' ' ~ proposal.priceCurrency }}</td>
+        <td>{{ 'proposal.trade_type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.tradeType)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.price_rent_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.priceRentValue ) ? proposal.priceRentValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.price_sale_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.priceSaleValue ) ? proposal.priceSaleValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
     </tr>
     <tr>
         <td>{{ 'proposal.street.label'|trans({}, 'forms') }}:</td>
@@ -93,6 +101,10 @@
         </tr>
     {% endif %}
 
+    <tr>
+        <td>{{ 'proposal.description.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.description ) ?: '-' }}</td>
+    </tr>
 </table>
 
 <p>{{ 'proposal.outro'|trans({ '%date%': 'now'|date('Y-m-d, H:i') }, 'emails') }}</p>
