@@ -259,9 +259,9 @@ state:
             for expatriates in Kiev.
 
         benefits:
-            1: Дізнайтеся що знаходится у місті та за його межами
-            2: Отримайте детальну інформацію про місця, які вас цікавлять
-            3: Подивітся місцезнаходження об’єктів на мапі
+            1: Discover what you can find in Kiev
+            2: Get information about this places
+            3: Look where they are located
 
         map: See locations on map
 
