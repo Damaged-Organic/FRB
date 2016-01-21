@@ -169,7 +169,7 @@ class LoadEstateType extends AbstractFixture implements OrderedFixtureInterface
         $estateType_2_5 = (new EstateType)
             ->setParent($this->getReference('commercial'))
             ->setStringId("premises")
-            ->setTitle("Приміщення")
+            ->setTitle("Приміщення вільного призначення")
         ;
 
         $manager->persist($estateType_2_5);
@@ -188,7 +188,7 @@ class LoadEstateType extends AbstractFixture implements OrderedFixtureInterface
         $estateType_2_6 = (new EstateType)
             ->setParent($this->getReference('commercial'))
             ->setStringId("allotment")
-            ->setTitle("Ділянка")
+            ->setTitle("Земельна ділянка")
         ;
 
         $manager->persist($estateType_2_6);

@@ -51,7 +51,7 @@ state:
             district:         District
             estate_type:      Object type
             price:            Price
-            price_per_square: Price per m²
+            price_per_square: Price per sq.m.
             space:            Space
             space_plot:       Land area
             trade_type:       Deal type
@@ -76,12 +76,12 @@ state:
 
         attributes:
             space:      Space
-            space_plot: Land area
+            space_plot: Land plot area
 
         feature:
             isCashless:
                 catalog: -
-                object:  Cashless payment
+                object:  Non-cash payment
             isNewBuilding:
                 catalog: New building
                 object:  New building
@@ -99,10 +99,10 @@ state:
                 object:  Registration for non-residents
             ownerPhysical:
                 catalog: -
-                object:  Owner - natural person
+                object:  Owner - private person
             ownerLegal:
                 catalog: -
-                object:  Owner - legal person
+                object:  Owner - legal entity
             hasSecurity:
                 catalog: -
                 object:  Concierge or security
@@ -111,25 +111,25 @@ state:
                 object:  Utilities
             hasCommunications:
                 catalog: -
-                object:  Communications
+                object:  Equipped utilities lines
             hasHeatingSystem:
                 catalog: -
-                object:  Independent heating
+                object:  Heating
             hasPool:
                 catalog: -
                 object:  Swimming pool
             isRenovated:
-                catalog: Renovated
-                object:  Renovated
+                catalog: Fit-out
+                object:  Fit-out
             hasGarage:
                 catalog: Garage
                 object:  Garage
             isOperational:
-                catalog: Operational
-                object:  Operational
+                catalog: Commissioned
+                object:  Commissioned
             isJustRenovated:
                 catalog: -
-                object:  After construction
+                object:  Shell&core
             hasBalcony:
                 catalog: -
                 object:  Balcony

@@ -273,38 +273,49 @@ class FilterController extends Controller implements FilterArgumentsInterface
 
     private function attributeFilterKludge($attributes = [], array $filterArguments)
     {
+        $fill = function(array $input, array $indexes) {
+            $output = [];
+
+            foreach( $indexes as $index ) {
+                if( !empty($input[$index]) )
+                    $output[$index] = $input[$index];
+            }
+
+            return $output;
+        };
+
         $estateType = $this->get('request_stack')->getMasterRequest()->attributes->get('_route_params')['estateType'];
 
         if( $estateType == 'residential' )
         {
             if( empty($filterArguments['estate_type']) )
-                return [1 => $attributes[1], 3 => $attributes[3]];
+                return $fill($attributes, [1, 3]);
 
             if( $filterArguments['estate_type'] == 3 )
             {
                 if( empty($filterArguments['trade_type']) )
-                    return [3 => $attributes[3]];
+                    return $fill($attributes, [3]);
 
                 if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
-                    return [3 => $attributes[3]];
+                    return $fill($attributes, [3]);
                 }
 
                 if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
-                    return [3 => $attributes[3]];
+                    return $fill($attributes, [3]);
                 }
             }
 
             if( $filterArguments['estate_type'] == 4 )
             {
                 if( empty($filterArguments['trade_type']) )
-                    return [1 => $attributes[1]];
+                    return $fill($attributes, [1]);
 
                 if( $filterArguments['trade_type'] == 'trade_type_rent' ) {
-                    return [1 => $attributes[1]];
+                    return $fill($attributes, [1]);
                 }
 
                 if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
-                    return [1 => $attributes[1]];
+                    return $fill($attributes, [1]);
                 }
             }
         }
@@ -312,14 +323,14 @@ class FilterController extends Controller implements FilterArgumentsInterface
         if( $estateType == 'commercial' )
         {
             if( empty($filterArguments['trade_type']) )
-                return [1 => $attributes[1], 2 => $attributes[2]];
+                return $fill($attributes, [1, 2]);
 
             if( $filterArguments['trade_type'] == 'trade_type_rent' ){
-                return [1 => $attributes[1], 2 => $attributes[2]];
+                return $fill($attributes, [1, 2]);
             }
 
             if( $filterArguments['trade_type'] == 'trade_type_sale' ) {
-                return [1 => $attributes[1], 2 => $attributes[2]];
+                return $fill($attributes, [1, 2]);
             }
         }
     }

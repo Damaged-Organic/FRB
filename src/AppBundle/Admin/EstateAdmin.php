@@ -248,14 +248,14 @@ class EstateAdmin extends Admin
     {
         $currencyConverter = $this->getConfigurationPool()->getContainer()->get('app.currency_converter');
 
-        if( $estate->getPriceUSD() && !$estate->getPriceUAH() )
+        if( $estate->getPriceUSD() && empty($estate->getPriceUAH()) )
         {
             $estate->setPriceUAH(
                 $currencyConverter->USD_UAH()->convert($estate->getPriceUSD())
             );
         }
 
-        if( $estate->getPricePerSquareUSD() && !$estate->getPricePerSquareUAH() )
+        if( $estate->getPricePerSquareUSD() && empty($estate->getPricePerSquareUAH()) )
         {
             $estate->setPricePerSquareUAH(
                 $currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())

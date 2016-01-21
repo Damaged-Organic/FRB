@@ -149,7 +149,7 @@ class LoadEstateAttributeType extends AbstractFixture implements OrderedFixtureI
 
         $estateAttributeType_7
             ->setTranslatableLocale("en")
-            ->setTitle("Building class")
+            ->setTitle("Class")
         ;
 
         $manager->persist($estateAttributeType_7);

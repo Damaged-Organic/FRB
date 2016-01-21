@@ -81,10 +81,10 @@ proposal:
             max: This street name is too long. Maybe you've made a mistake?
 
     house:
-        not_blank: Please, enter house number
+        not_blank: Please, enter number of the building
         length:
-            min: This house number is too short. Maybe you've made a mistake?
-            max: This house number is too long. Maybe you've made a mistake?
+            min: This number of the building is too short. Maybe you've made a mistake?
+            max: This number of the building is too long. Maybe you've made a mistake?
 
     space:
         not_blank: Please, enter your property total space

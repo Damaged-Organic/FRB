@@ -26,75 +26,75 @@ class EstateFeaturesAdmin extends Admin
     {
         $formMapper
             ->add("isCashless", "checkbox", [
-                "label"    => "Безготівковий розрахунок",
+                "label"    => "Безготівковий розрахунок (Non-cash payment)",
                 "required" => FALSE
             ])
             ->add("isNewBuilding", "checkbox", [
-                "label"    => "Нова будівля",
+                "label"    => "Нова будівля (New building)",
                 "required" => FALSE
             ])
             ->add("hasElevator", "checkbox", [
-                "label"    => "Наявність ліфту",
+                "label"    => "Наявність ліфту (Elevator)",
                 "required" => FALSE
             ])
             ->add("hasParking", "checkbox", [
-                "label"    => "Наявність парковки",
+                "label"    => "Наявність парковки (Parking)",
                 "required" => FALSE
             ])
             ->add("hasFurniture", "checkbox", [
-                "label"    => "Наявність меблів",
+                "label"    => "Наявність меблів (Furniture)",
                 "required" => FALSE
             ])
             ->add("hasRegistration", "checkbox", [
-                "label"    => "Реєстрація для нерезидентів",
+                "label"    => "Реєстрація для нерезидентів (Registration for non-residents)",
                 "required" => FALSE
             ])
             ->add("ownerPhysical", "checkbox", [
-                "label"    => "Власник - фізична особа",
+                "label"    => "Власник - фізична особа (Owner - private person)",
                 "required" => FALSE
             ])
             ->add("ownerLegal", "checkbox", [
-                "label"    => "Власник - юридична особа",
+                "label"    => "Власник - юридична особа (Owner - legal entity)",
                 "required" => FALSE
             ])
             ->add("hasSecurity", "checkbox", [
-                "label"    => "Косьєрж або охорона",
+                "label"    => "Косьєрж або охорона (Concierge or security)",
                 "required" => FALSE
             ])
             ->add("hasUtility", "checkbox", [
-                "label"    => "Комунальні послуги",
+                "label"    => "Комунальні послуги (Utilities)",
                 "required" => FALSE
             ])
             ->add("hasCommunications", "checkbox", [
-                "label"    => "Заведені комунікації",
+                "label"    => "Заведені комунікації (Communications)",
                 "required" => FALSE
             ])
             ->add("hasHeatingSystem", "checkbox", [
-                "label"    => "Автономне опалювання",
+                "label"    => "Автономне опалювання (Heating)",
                 "required" => FALSE
             ])
             ->add("hasPool", "checkbox", [
-                "label"    => "Басейн",
+                "label"    => "Басейн (Swimming pool)",
                 "required" => FALSE
             ])
             ->add("isRenovated", "checkbox", [
-                "label"    => "Ремонт",
+                "label"    => "Ремонт (Fit-out)",
                 "required" => FALSE
             ])
             ->add("isJustRenovated", "checkbox", [
-                "label"    => "Після будівельників",
+                "label"    => "Після будівельників (After construction)",
                 "required" => FALSE
             ])
             ->add("hasGarage", "checkbox", [
-                "label"    => "Гараж",
+                "label"    => "Гараж (Garage)",
                 "required" => FALSE
             ])
             ->add("isOperational", "checkbox", [
-                "label"    => "Введено в експлуатацію",
+                "label"    => "Введено в експлуатацію (Operational)",
                 "required" => FALSE
             ])
             ->add("hasBalcony", "checkbox", [
-                "label"    => "Балкон",
+                "label"    => "Балкон (Balcony)",
                 "required" => FALSE
             ])
         ;

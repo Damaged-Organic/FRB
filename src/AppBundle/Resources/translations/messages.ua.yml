@@ -129,7 +129,7 @@ state:
                 object:  Введено в експлуатацію
             isJustRenovated:
                 catalog: -
-                object:  Після будівельників
+                object:  Стан після будівельників
             hasBalcony:
                 catalog: -
                 object:  Балкон

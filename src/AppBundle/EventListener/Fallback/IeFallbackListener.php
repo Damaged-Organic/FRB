@@ -41,7 +41,7 @@ class IeFallbackListener
 
         if( $conversionTime )
         {
-            if( !$conversionTime->getLastConversionTime() || ($conversionTime->getLastConversionTime() <= (new DateTime('now'))) )
+            if( !$conversionTime->getLastConversionTime() || ($conversionTime->getLastConversionTime() < (new DateTime('now'))->modify('midnight')) )
             {
                 $estates = $this->_manager->getRepository('AppBundle:Estate')->findAll();
 
@@ -64,14 +64,14 @@ class IeFallbackListener
                     $this->_manager->persist($estate);
                 }
 
-                $conversionTime->setLastConversionTime((new DateTime('now'))->modify('+1 day'));
+                $conversionTime->setLastConversionTime((new DateTime('now')));
                 $this->_manager->persist($conversionTime);
 
                 $this->_manager->flush();
             }
         } else {
             $this->_manager->persist(
-                (new ConversionTime())->setLastConversionTime((new DateTime('now'))->modify('+1 day'))
+                (new ConversionTime())->setLastConversionTime((new DateTime('now')))
             );
 
             $this->_manager->flush();

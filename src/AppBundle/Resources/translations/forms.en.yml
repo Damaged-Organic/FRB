@@ -73,8 +73,8 @@ proposal:
         placeholder: Enter street name
 
     house:
-        label:       House
-        placeholder: Enter house number
+        label:       Number of the building
+        placeholder: Enter number of the building
 
     space:
         label:       Total space
