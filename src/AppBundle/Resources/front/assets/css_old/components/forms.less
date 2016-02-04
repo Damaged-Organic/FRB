@@ -1,0 +1,243 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	forms start								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+form{
+	width: 100%;
+	height: auto;
+	padding: 20px 40px;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.response-holder{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	p{ padding: 10px; }
+	&.success{
+		background: @successLight;
+		p{ color: @successDark; }
+	}
+	&.error{
+		background: @errorLight;
+		p{ color: @errorDark; }
+	}
+}
+
+.field-holder,
+.check-holder,
+.range-holder{
+	width: 100%;
+	height: auto;
+	position: relative;
+	margin-bottom: 20px;
+	overflow: hidden;
+	&:last-child{
+		margin-bottom: 0;
+	}
+}
+.check-holder{ position: static; }
+
+::-webkit-input-placeholder{
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @lightGrey;
+}
+:-moz-placeholder{
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @lightGrey;
+}
+::-moz-placeholder{
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @lightGrey;
+}
+:-ms-input-placeholder{
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @lightGrey;
+}
+
+label,
+.error-holder{
+	display: block;
+	width: 100%;
+	height: auto;
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @black;
+	padding: 10px 0;
+	overflow: hidden;
+	&.error,
+	span{
+		padding: 0px 0px 10px;
+		color: @red;
+	}
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"]{
+	width: 100%;
+	height: 50px;
+	outline: none;
+	border: 2px solid @lightGrey;
+	box-sizing: border-box;
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @black;
+	line-height: 50px;
+	text-indent: 10px;
+	box-shadow: inset 0px 0px 5px @lightGrey;
+	background: @white;
+	transition: all .5s @easing;
+	&:hover,
+	&:focus{
+		background: fade(@lightGrey, 35%);
+	}
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+	display: none;
+	& + label{
+		display: block;
+		width: 100%;
+		height: 40px;
+		position: relative;
+		padding: 0;
+		background: @white;
+		cursor: pointer;
+		overflow: hidden;
+		&:before,
+		& > span{
+			display: block;
+			width: 100%;
+			height: 40px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 0;
+			transition: all .5s @easing;
+			backface-visibility: hidden;
+			overflow: hidden;
+		}
+		&:before{
+			content: "";
+			top: -2px;
+			transform: translateY(100%);
+			background: @red;
+		}
+		& > span{
+			text-align: center;
+			line-height: 40px;
+			z-index: 5;
+			color: @black;
+			background: transparent;
+		}
+	}
+	& + label:hover,
+	&:checked + label{
+		&:before{
+			top: 0;
+			transform: translateY(0);
+		}
+		& > span{ color: @white; }
+	}
+}
+
+
+textarea{
+	width: 100%;
+	height: 125px;
+	resize: none;
+	font-family: "PT Sans", sans-serif;
+	font-weight: normal;
+	font-size: 1em;
+	color: @black;
+	box-shadow: inset 0px 0px 10px @lightGrey;
+	outline: none;
+	border: 2px solid @lightGrey;
+	padding: 10px;
+	box-sizing: border-box;
+	transition: all .5s @easing;
+	&:hover,
+	&:focus{
+		background: fade(@lightGrey, 35%);
+	}
+}
+
+button[type="submit"]{
+	display: block;
+	width: 180px;
+	height: 50px;
+	background: transparent;
+	border: none;
+	outline: none;
+	margin: 40px auto 20px;
+	overflow: hidden;
+	span{
+		display: block;
+		width: 100%;
+		height: 50px;
+		position: relative;
+		background: @lightGrey;
+		font-family: "PT Sans", sans-serif;
+		font-weight: normal;
+		font-size: 1em;
+		color: @white;
+		line-height: 50px;
+		text-transform: uppercase;
+		transition: all .5s @easing;
+	}
+	&:hover,
+	&:focus{
+		span{ color: @red; }
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	forms end								  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	range slider start						  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.range-holder{
+	width: 100%;
+	height: 8px;
+	position: relative;
+	background: @lightGrey;
+	overflow: visible;
+	.ui-slider-range{
+		width: 100%;
+		height: 100%;
+		background: @red;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	.ui-slider-handle{
+		width: 16px;
+		height: 16px;
+		position: absolute;
+		top: -4px;
+		left: 0;
+		border: 1px solid @black;
+		background: @white;
+		box-sizing: border-box;
+		outline: none;
+		transform: translateX(-8px);
+		overflow: hidden;
+	}
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*	range slider end						  */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

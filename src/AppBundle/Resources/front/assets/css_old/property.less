@@ -1,0 +1,57 @@
+@import "components/common.less";
+@import "components/forms.less";
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout start                              */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page{
+    background: transparent url("@{images}catalog-bg.jpg") no-repeat 50% 0 fixed;
+    background-size: auto 75%;
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  layout end                                */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  add property start                        */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#property-form{
+    & > p{
+        padding: 20px 0;
+    }
+    .response-holder{
+        margin: 20px 0;
+    }
+    label > sup{
+        font-family: inherit;
+        font-size: inherit;
+        color: @red;
+        padding: 5px 3px; 
+    }
+    .field-holder{
+        & > p{
+            padding: 10px 0;
+        }
+        &.dbl{
+            .check-holder{
+                width: 49.10714285714286%;
+                float: left;
+                margin-bottom: 0;
+                &:last-child{
+                    margin-left: 1.785714285714286%;
+                }
+            }
+        }
+        &.extra-top{
+            margin-top: 30px;
+        }
+    }
+    & > .check-holder{
+        margin-top: 40px;
+    }
+    .agreement-check{
+        margin-top: 0;
+    }
+}
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*  add property end                          */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
