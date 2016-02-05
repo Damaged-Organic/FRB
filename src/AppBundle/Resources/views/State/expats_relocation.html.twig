@@ -53,9 +53,24 @@
                                 {% endfor %}
 
                             </ul>
-                            <div class="btn-long white inverse">
-                                <a href="#">Ololo</a>
-                            </div>
+
+                            {% if relocationStep.fileUA or relocationStep.fileEN %}
+                                {% if app.request.locale is same as('ua') %}
+                                    {% set file = ( relocationStep.fileUA ) ? 'fileUA' : 'fileEN' %}
+                                {% endif %}
+
+                                {% if app.request.locale is same as('en') %}
+                                    {% set file = ( relocationStep.fileEN ) ? 'fileEN' : 'fileUA' %}
+                                {% endif %}
+                            {% else %}
+                                {% set file = null %}
+                            {% endif %}
+
+                            {% if file %}
+                                <div class="btn-long white inverse">
+                                    <a href="{{ vich_uploader_asset(relocationStep, file) }}" target="_blank">{{ 'state.expats_relocation.file'|trans }}</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}

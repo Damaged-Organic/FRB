@@ -45,6 +45,8 @@ class ClientChit implements Translatable
 
     /**
      * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
      */
     protected $text;
 
