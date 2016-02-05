@@ -16,7 +16,7 @@ common:
             short: Ми на мапі
 
     footer: >
-        © First Reality Brokerage. Створено в <a href="%developers.link%">%developers.name%</a>, 2015.
+        © First Reality Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2015.
         Використання власних матеріалів сайту без згоди власників заборонено.
 
 state:
@@ -62,6 +62,13 @@ state:
 
         trade_type_sale: продаж
         trade_type_rent: оренда
+
+        fit_out_type_shell_and_core: після будівельників
+        fit_out_type_after_tenant:   після попереднього орендаря
+        fit_out_type_renovated:      відремонтовано
+
+        layout_type_cabinets:   кабінети
+        layout_type_open_space: відкрите
 
         month: місяць
         code:  Код об’єкта
@@ -174,6 +181,7 @@ state:
 
         chits:
             headline: Відгуки наших кліентів
+            file:     Рекомендаційний лист
             send:     Залишити відгук
 
         feedback:
@@ -256,6 +264,8 @@ state:
             У цьому розділі Ви можете знайти корисну інформацію про міжнародних
             співтовариства, охорону здоров'я, розваги та інші важливі питання
             для експатріантів в Києві.
+
+        file: Завантажити путівник
 
         benefits:
             1: Дізнайтеся, що знаходиться у Києві

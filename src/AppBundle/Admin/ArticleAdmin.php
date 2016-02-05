@@ -83,7 +83,12 @@ class ArticleAdmin extends Admin
             ->end()
             ->with("Новина - Загальні дані")
                 ->add("publicationDate", "sonata_type_date_picker", [
-                    'label' => "Дата публікації"
+                    'label'       => "Дата публікації",
+                    'dp_language' => 'ru',
+                    'format'      => 'dd.MM.yyyy',
+                    'attr' => [
+                        'data-date-format' => 'DD.MM.YYYY',
+                    ]
                 ])
                 ->add('photoFile', 'vich_file', [
                     'label'         => "Зображення",

@@ -104,6 +104,26 @@
                                     <span class="sprtr-h"></span>
                                     <p>{{ clientsChit.text }}</p>
                                     <span>{{ clientsChit.client.name }}</span>
+
+                                    {% if clientsChit.fileUA or clientsChit.fileEN %}
+                                        {% if app.request.locale is same as('ua') %}
+                                            {% set file = ( clientsChit.fileUA ) ? 'fileUA' : 'fileEN' %}
+                                        {% endif %}
+
+                                        {% if app.request.locale is same as('en') %}
+                                            {% set file = ( clientsChit.fileEN ) ? 'fileEN' : 'fileUA' %}
+                                        {% endif %}
+                                    {% else %}
+                                        {% set file = null %}
+                                    {% endif %}
+
+                                    {% if file %}
+                                        <div class="btn-long white inverse">
+        									<a href="{{ vich_uploader_asset(clientsChit, file) }}" target="_blank">
+                                                {{ 'state.services.chits.file'|trans }}
+                                            </a>
+        								</div>
+                                    {% endif %}
                                 </li>
                             {% endfor %}
 

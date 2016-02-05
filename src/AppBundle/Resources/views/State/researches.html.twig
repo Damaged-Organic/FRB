@@ -90,7 +90,7 @@
                                                     {% if pdf %}
                                                         <a href="{{ pdf }}" target="_blank">
                                                     {% else %}
-                                                        <a href="{{ path('researches', { '_locale': app.request.locale }) ~ '#' }}">
+                                                        <a href="{{ path('researches', { '_locale': app.request.locale, 'year': app.request.attributes.get('year') }) }}">
                                                     {% endif %}
                                                         {{ research.quarter|roman_number }}
                                                     </a>

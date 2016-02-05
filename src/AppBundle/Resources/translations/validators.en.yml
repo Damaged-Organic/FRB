@@ -39,98 +39,129 @@ comment:
             max: Comment is too long. Please, shorten it to at least 1500 symbols
 
 proposal:
-    name:
-        not_blank:  Please, state yourself
-        length:
-            min: This name is too short. Maybe you've made a mistake?
-            max: This name is too long. Maybe you've made a mistake?
+    common:
+        name:
+            not_blank:  Please, state your name or contact person's name
+            length:
+                min: This name is too short. Maybe you've made a mistake?
+                max: This name is too long. Maybe you've made a mistake?
 
-    phone:
-        not_blank: Please, provide your phone number
+        phone:
+            not_blank: Please, provide your phone number
 
-    email:
-        not_blank: Please, provide your e-mail
-        valid:     Please, provide a valid email address
+        email:
+            not_blank: Please, provide your e-mail
+            valid:     Please, provide a valid email address
 
-    type:
-        not_blank: Please, provide property type
-        valid:     Please, provide a valid property type
+        type:
+            not_blank: Please, provide property type
+            valid:     Please, provide a valid property type
 
-    trade_type:
-        not_blank: Please, provide type of deal
-        valid:     Please, provide a valid type of deal
+        trade_type:
+            not_blank: Please, provide type of deal
+            valid:     Please, provide a valid type of deal
 
-    price_rent_value:
-        not_blank: Please, enter your rent price
-        range:
-            min: Please, enter correct rent price
+        price_currency:
+            not_blank: Please, provide currency value
+            valid:     Please, provide a correct currency value
 
-    price_sale_value:
-        not_blank: Please, enter your sale price
-        range:
-            min: Please, enter correct sale price
+        price_rent_value:
+            not_blank: Please, enter your rent price
+            range:
+                min: Please, enter correct rent price
 
-    price_currency:
-        not_blank: Please, provide currency value
-        valid:     Please, provide a correct currency value
+        price_sale_value:
+            not_blank: Please, enter your sale price
+            range:
+                min: Please, enter correct sale price
 
-    street:
-        not_blank: Please, enter your property street name
-        length:
-            min: This street name is too short. Maybe you've made a mistake?
-            max: This street name is too long. Maybe you've made a mistake?
+        city:
+            not_blank: Please, enter your property city name
+            length:
+                min: This city name is too short. Maybe you've made a mistake?
+                max: This city name is too long. Maybe you've made a mistake?
 
-    house:
-        not_blank: Please, enter number of the building
-        length:
-            min: This number of the building is too short. Maybe you've made a mistake?
-            max: This number of the building is too long. Maybe you've made a mistake?
+        street:
+            not_blank: Please, enter your property street name
+            length:
+                min: This street name is too short. Maybe you've made a mistake?
+                max: This street name is too long. Maybe you've made a mistake?
 
-    space:
-        not_blank: Please, enter your property total space
-        range:
-            min: Such space value is too small. Maybe you've made a mistake?
-            max: Such space value is too large. Maybe you've made a mistake?
+        house:
+            not_blank: Please, enter number of the building
+            length:
+                min: This number of the building is too short. Maybe you've made a mistake?
+                max: This number of the building is too long. Maybe you've made a mistake?
 
-    space_plot:
-        range:
-            min: Such land area value is too small. Maybe you've made a mistake?
-            max: Such land area value is too large. Maybe you've made a mistake?
+        space:
+            not_blank: Please, enter your property total space
+            range:
+                min: Such space value is too small. Maybe you've made a mistake?
+                max: Such space value is too large. Maybe you've made a mistake?
 
-    rooms_number:
-        not_blank: Please, enter your property rooms nubmer
-        range:
-            min: Such rooms number value is too small. Maybe you've made a mistake?
-            max: Such rooms number value is too large. Maybe you've made a mistake?
+        description:
+            length:
+                min: Additional information is too short. Maybe you've made a mistake?
+                max: Additional information is too long. Please, shorten it.
 
-    bathrooms_number:
-        not_blank: Please, enter your property bathrooms number
-        range:
-            min: Such bathrooms number value is too small. Maybe you've made a mistake?
-            max: Such bathrooms number value is too large. Maybe you've made a mistake?
+        wasted:
+            checked: You must allow us to use your personal data first
 
-    bedrooms_number:
-        range:
-            min: Such bedrooms number value is too small. Maybe you've made a mistake?
-            max: Such bedrooms number value is too large. Maybe you've made a mistake?
+        checkbox:
+            valid: Checkbox value is invalid
 
-    floor:
-        range:
-            min: Such floor value is too small. Maybe you've made a mistake?
-            max: Such floor value is too large. Maybe you've made a mistake?
+    residential:
+        space_plot:
+            range:
+                min: Such land area value is too small. Maybe you've made a mistake?
+                max: Such land area value is too large. Maybe you've made a mistake?
 
-    floorsNumber:
-        range:
-            min: Such floors number value is too small. Maybe you've made a mistake?
-            max: Such floors number value is too large. Maybe you've made a mistake?
+        rooms_number:
+            not_blank: Please, enter your property rooms nubmer
+            range:
+                min: Such rooms number value is too small. Maybe you've made a mistake?
+                max: Such rooms number value is too large. Maybe you've made a mistake?
 
-    description:
-        length:
-            min: Additional information is too short. Maybe you've made a mistake?
-            max: Additional information is too long. Please, shorten it.
+        bathrooms_number:
+            not_blank: Please, enter your property bathrooms number
+            range:
+                min: Such bathrooms number value is too small. Maybe you've made a mistake?
+                max: Such bathrooms number value is too large. Maybe you've made a mistake?
 
-    wasted:
-        checked: You must allow us to use your personal data first
+        bedrooms_number:
+            range:
+                min: Such bedrooms number value is too small. Maybe you've made a mistake?
+                max: Such bedrooms number value is too large. Maybe you've made a mistake?
 
-    checkbox:
-        valid: Checkbox value is invalid
+        floor:
+            range:
+                min: Such floor value is too small. Maybe you've made a mistake?
+                max: Such floor value is too large. Maybe you've made a mistake?
+
+        floorsNumber:
+            range:
+                min: Such floors number value is too small. Maybe you've made a mistake?
+                max: Such floors number value is too large. Maybe you've made a mistake?
+
+proposal:
+    commercial:
+        layout_type:
+            not_blank: Please, provide layout type
+            valid:     Please, provide a valid layout type
+
+        fit_out_type:
+            not_blank: Please, provide fit out type
+            valid:     Please, provide a valid fit out type
+
+        operating_expense_value:
+            range:
+                min: Please, enter correct OpEx value
+
+        parking_bay_number:
+            range:
+                min: Such parking bays number value is too small. Maybe you've made a mistake?
+                max: Such parking bays number value is too large. Maybe you've made a mistake?
+
+        parking_bay_price_value:
+            range:
+                min: Please, enter correct parking bay price

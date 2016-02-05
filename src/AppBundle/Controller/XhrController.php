@@ -208,7 +208,7 @@ class XhrController extends Controller
                 'code' => 200
             ];
         }
-
+        
         return new Response(json_encode($response['data']), $response['code']);
     }
 

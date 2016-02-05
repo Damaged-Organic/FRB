@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Validator/Constraints/IsTypeValidConstraintValidator.php
+// src/AppBundle/Validator/Constraints/IsTypeCommercialValidConstraintValidator.php
 namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint,
@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraint,
 
 use Doctrine\ORM\EntityManager;
 
-class IsTypeValidConstraintValidator extends ConstraintValidator
+class IsTypeCommercialValidConstraintValidator extends ConstraintValidator
 {
     protected $_entityManager;
 
@@ -20,7 +20,7 @@ class IsTypeValidConstraintValidator extends ConstraintValidator
     {
         $validStringIds = [];
 
-        $validTypes = $this->_entityManager->getRepository("AppBundle:EstateType")->findSpecificType(1);
+        $validTypes = $this->_entityManager->getRepository("AppBundle:EstateType")->findSpecificType(2);
 
         foreach($validTypes as $validType) {
             $validStringIds[] = $validType['stringId'];

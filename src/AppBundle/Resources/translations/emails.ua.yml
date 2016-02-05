@@ -21,8 +21,21 @@ proposal:
     outro: Повідомлення надіслано %date%.
 
     table:
-        apartment: Квартира
-        house:     Будинок
-
         rent: Оренда
         sale: Продаж
+
+        apartment: Квартира
+        house:     Будинок
+        office:    Офісні приміщення
+        retail:    Торгові приміщення
+        warehouse: Складські приміщення
+        buildings: Будівлі
+        premises:  Інші приміщення
+        allotment: Земельна ділянка
+
+        cabinets:   Кабінети
+        open_space: Відкрите
+
+        shell_and_core: Після будівельників
+        after_tenant:   Після попереднього орендаря
+        renovated:      Відремонтовано

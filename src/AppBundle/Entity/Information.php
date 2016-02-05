@@ -57,6 +57,8 @@ class Information implements Translatable
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Gedmo\Translatable
      */
     protected $description;
 
@@ -112,6 +114,8 @@ class Information implements Translatable
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     *
+     * @Gedmo\Translatable
      */
     protected $addresses;
 

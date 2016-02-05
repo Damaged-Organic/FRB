@@ -1,0 +1,342 @@
+{# AppBundle/Resources/views/Form/proposal_commercial.html.twig #}
+<form action="{{ path('catalog_proposal', { '_locale': app.request.locale, 'estateType': estateType }) }}" method="POST" id="property-form">
+    {% if message %}
+        <div class="response-holder {{ message.class }}">
+            <p>{{ message.text }}</p>
+        </div>
+    {% endif %}
+
+    <p>{{ 'state.proposal.form.top'|trans }}</p>
+
+    <div class="field-holder">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.name.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "2", 'data-msg-minlength': 'proposal.common.name.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "200", 'data-msg-maxlength': 'proposal.common.name.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.name) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.phone.not_blank'|trans({}, "validators"),
+                'data-mask': "+38 (099) 999-99-99"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.phone) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.email.not_blank'|trans({}, "validators"),
+                'data-rule-email': "true", 'data-msg-email': 'proposal.common.email.valid'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.email) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder dbl">
+        <p>{{ form.type.vars.label|trans({}, "forms") }}</p>
+        <div class="check-holder">
+            {{ form_widget(form.type.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.type.0.vars.id }}">
+                <span>{{ form.type.0.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.type.1) }}
+            <label for="{{ form.type.1.vars.id }}">
+                <span>{{ form.type.1.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.type.2) }}
+            <label for="{{ form.type.2.vars.id }}">
+                <span>{{ form.type.2.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.type.4) }}
+            <label for="{{ form.type.4.vars.id }}">
+                <span>{{ form.type.4.vars.label }}</span>
+            </label>
+        </div>
+        <div class="error-holder">
+            <span>{{ form_errors(form.type) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder dbl">
+        <p>{{ form.tradeType.vars.label|trans({}, "forms") }}</p>
+        <div class="check-holder">
+            {{ form_widget(form.tradeType.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.tradeType.0.vars.id }}">
+                <span>{{ form.tradeType.0.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.tradeType.1) }}
+            <label for="{{ form.tradeType.1.vars.id }}">
+                <span>{{ form.tradeType.1.vars.label }}</span>
+            </label>
+        </div>
+        <div class="error-holder">
+            <span>{{ form_errors(form.tradeType) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.city) }}
+        {{ form_widget(form.city, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.city.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.common.city.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "250", 'data-msg-maxlength': 'proposal.common.city.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.city) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.street) }}
+        {{ form_widget(form.street, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.street.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.common.street.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "250", 'data-msg-maxlength': 'proposal.common.street.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.street) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.house) }}
+        {{ form_widget(form.house, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.house.not_blank'|trans({}, "validators"),
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.common.house.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "250", 'data-msg-maxlength': 'proposal.common.house.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.house) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.space) }}
+        {{ form_widget(form.space, {
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.space.not_blank'|trans({}, "validators"),
+                'data-rule-min': 1, 'data-msg-min': 'proposal.common.space.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000000, 'data-msg-max': 'proposal.common.space.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.space) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder dbl">
+        <p>{{ form.layoutType.vars.label|trans({}, "forms") }}</p>
+        <div class="check-holder">
+            {{ form_widget(form.layoutType.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.layoutType.0.vars.id }}">
+                <span>{{ form.layoutType.0.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.layoutType.1) }}
+            <label for="{{ form.layoutType.1.vars.id }}">
+                <span>{{ form.layoutType.1.vars.label }}</span>
+            </label>
+        </div>
+        <div class="error-holder">
+            <span>{{ form_errors(form.layoutType) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder dbl">
+        <p>{{ form.fitOutType.vars.label|trans({}, "forms") }}</p>
+        <div class="check-holder">
+            {{ form_widget(form.fitOutType.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.fitOutType.0.vars.id }}">
+                <span>{{ form.fitOutType.0.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.fitOutType.1) }}
+            <label for="{{ form.fitOutType.1.vars.id }}">
+                <span>{{ form.fitOutType.1.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.fitOutType.2) }}
+            <label for="{{ form.fitOutType.2.vars.id }}">
+                <span>{{ form.fitOutType.2.vars.label }}</span>
+            </label>
+        </div>
+        <div class="error-holder">
+            <span>{{ form_errors(form.fitOutType) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder dbl">
+        <p>{{ form.priceCurrency.vars.label|trans({}, "forms") }}</p>
+        <div class="check-holder">
+            {{ form_widget(form.priceCurrency.0, {
+                'attr': {
+                    'checked': 'true'
+                }
+            }) }}
+            <label for="{{ form.priceCurrency.0.vars.id }}">
+                <span>{{ form.priceCurrency.0.vars.label }}</span>
+            </label>
+        </div>
+        <div class="check-holder">
+            {{ form_widget(form.priceCurrency.1) }}
+            <label for="{{ form.priceCurrency.1.vars.id }}">
+                <span>{{ form.priceCurrency.1.vars.label }}</span>
+            </label>
+        </div>
+        <div class="error-holder">
+            <span>{{ form_errors(form.priceCurrency) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.priceRentValue) }}
+        {{ form_widget(form.priceRentValue, {
+            'attr': {
+                'data-mask': "#00,00",
+                'data-mask-reverse': "true"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.priceRentValue) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.priceSaleValue) }}
+        {{ form_widget(form.priceSaleValue, {
+            'attr': {
+                'data-mask': "#00,00",
+                'data-mask-reverse': "true"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.priceSaleValue) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.operatingExpenseValue) }}
+        {{ form_widget(form.operatingExpenseValue, {
+            'attr': {
+                'data-mask': "#00,00",
+                'data-mask-reverse': "true"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.operatingExpenseValue) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.parkingBayNumber) }}
+        {{ form_widget(form.parkingBayNumber, {
+            'attr': {
+                'data-rule-min': 1, 'data-msg-min': 'proposal.residential.parking_bay_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.residential.parking_bay_number.range.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.parkingBayNumber) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.parkingBayPriceValue) }}
+        {{ form_widget(form.parkingBayPriceValue, {
+            'attr': {
+                'data-mask': "#00,00",
+                'data-mask-reverse': "true"
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.parkingBayPriceValue) }}</span>
+        </div>
+    </div>
+
+    <div class="field-holder">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {
+            'attr': {
+                'data-rule-minlength': "2", 'data-msg-minlength': 'proposal.common.description.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "1000", 'data-msg-maxlength': 'proposal.common.description.length.max'|trans({}, "validators")
+            }
+        }) }}
+        <div class="error-holder">
+            <span>{{ form_errors(form.description) }}</span>
+        </div>
+    </div>
+
+    <p>{{ 'state.proposal.form.wasted.text'|trans }}</p>
+
+    <div class="check-holder agreement-check">
+        {{ form_widget(form.wasted, {
+            'id': "property-agreement",
+            'attr': {
+                'data-rule-required': "true", 'data-msg-required': 'proposal.common.wasted.checked'|trans({}, "validators"),
+            }
+        }) }}
+        <label for="property-agreement">
+            <span>{{ 'state.proposal.form.wasted.button'|trans }}</span>
+        </label>
+        <div class="error-holder">
+            <span>{{ form_errors(form.wasted) }}</span>
+        </div>
+    </div>
+
+    <p>{{ 'state.proposal.form.bottom'|trans }}</p>
+
+    {{ form_widget(form._token) }}
+
+    <button type="submit">
+        <span>{{ 'proposal.common.submit.label'|trans({}, "forms") }}</span>
+    </button>
+</form>

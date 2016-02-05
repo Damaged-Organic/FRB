@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Form/Type/ProposalType.php
+// src/AppBundle/Form/Type/ProposalResidentialType.php
 namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType,
@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityManager;
 
 use AppBundle\Entity\Estate;
 
-class ProposalType extends AbstractType
+class ProposalResidentialType extends AbstractType
 {
     protected $_entityManager;
     protected $_translator;
@@ -37,162 +37,162 @@ class ProposalType extends AbstractType
 
         $builder
             ->add("name", 'text', [
-                'label' => "proposal.name.label",
+                'label' => "proposal.common.name.label",
                 'attr'  => [
-                    'placeholder' => "proposal.name.placeholder"
+                    'placeholder' => "proposal.common.name.placeholder"
                 ]
             ])
             ->add("phone", 'text', [
-                'label' => "proposal.phone.label",
+                'label' => "proposal.common.phone.label",
                 'attr'  => [
-                    'placeholder' => "proposal.phone.placeholder"
+                    'placeholder' => "proposal.common.phone.placeholder"
                 ]
             ])
             ->add("email", 'email', [
-                'label' => "proposal.email.label",
+                'label' => "proposal.common.email.label",
                 'attr'  => [
-                    'placeholder' => "proposal.email.placeholder"
+                    'placeholder' => "proposal.common.email.placeholder"
                 ]
             ])
             ->add("type", 'choice', [
-                'label'       => "proposal.type.label",
+                'label'       => "proposal.common.type.label",
                 'attr'  => [
-                    'placeholder' => "proposal.type.placeholder"
+                    'placeholder' => "proposal.common.type.placeholder"
                 ],
                 'choices'     => $propertyTypeChoices,
                 'expanded'    => TRUE,
                 'multiple'    => FALSE,
-                'invalid_message' => "proposal.type.valid",
+                'invalid_message' => "proposal.common.type.valid",
             ])
             ->add("tradeType", 'choice', [
-                'label'       => "proposal.trade_type.label",
+                'label'       => "proposal.common.trade_type.label",
                 'attr'  => [
-                    'placeholder' => "proposal.trade_type.placeholder"
+                    'placeholder' => "proposal.common.trade_type.placeholder"
                 ],
                 'choices'     => $propertyTradeTypeChoices,
                 'expanded'    => TRUE,
                 'multiple'    => FALSE,
-                'invalid_message' => "proposal.trade_type.valid",
+                'invalid_message' => "proposal.common.trade_type.valid",
             ])
             ->add("priceCurrency", 'choice', [
-                'label'   => "proposal.price_currency.label",
+                'label'   => "proposal.common.price_currency.label",
                 'attr'  => [
-                    'placeholder' => "proposal.price_currency.placeholder"
+                    'placeholder' => "proposal.common.price_currency.placeholder"
                 ],
                 'choices'  => ['UAH' => "UAH", 'USD' => "USD"],
                 'expanded' => TRUE,
                 'multiple' => FALSE,
-                'invalid_message' => "proposal.price_currency.valid",
+                'invalid_message' => "proposal.common.price_currency.valid",
             ])
             ->add("priceRentValue", 'number', [
                 'required' => FALSE,
-                'label'    => "proposal.price_rent_value.label",
+                'label'    => "proposal.residential.price_rent_value.label",
                 'attr'     => [
-                    'placeholder' => "proposal.price_rent_value.placeholder"
+                    'placeholder' => "proposal.residential.price_rent_value.placeholder"
                 ],
                 'precision' => 2
             ])
             ->add("priceSaleValue", 'number', [
                 'required' => FALSE,
-                'label'    => "proposal.price_sale_value.label",
+                'label'    => "proposal.common.price_sale_value.label",
                 'attr'     => [
-                    'placeholder' => "proposal.price_sale_value.placeholder"
+                    'placeholder' => "proposal.common.price_sale_value.placeholder"
                 ],
                 'precision' => 2
             ])
             ->add("street", "text", [
-                'label' => "proposal.street.label",
+                'label' => "proposal.common.street.label",
                 'attr'  => [
-                    'placeholder' => "proposal.street.placeholder"
+                    'placeholder' => "proposal.common.street.placeholder"
                 ]
             ])
             ->add("house", "text", [
-                'label' => "proposal.house.label",
+                'label' => "proposal.common.house.label",
                 'attr'  => [
-                    'placeholder' => "proposal.house.placeholder"
+                    'placeholder' => "proposal.common.house.placeholder"
                 ]
             ])
             ->add("space", "number", [
-                'label'     => "proposal.space.label",
+                'label'     => "proposal.common.space.label",
                 'attr'  => [
-                    'placeholder' => "proposal.space.placeholder"
+                    'placeholder' => "proposal.common.space.placeholder"
                 ],
                 'precision' => 2
             ])
             ->add("spacePlot", "number", [
                 'required' => FALSE,
-                'label'    => "proposal.space_plot.label",
+                'label'    => "proposal.residential.space_plot.label",
                 'attr' => [
-                    'placeholder' => "proposal.space_plot.placeholder"
+                    'placeholder' => "proposal.residential.space_plot.placeholder"
                 ],
                 'precision' => 2
             ])
             ->add("roomsNumber", "number", [
-                'label'   => "proposal.rooms_number.label",
+                'label'   => "proposal.residential.rooms_number.label",
                 'attr'  => [
-                    'placeholder' => "proposal.rooms_number.placeholder"
+                    'placeholder' => "proposal.residential.rooms_number.placeholder"
                 ]
             ])
             ->add("bathroomsNumber", "number", [
-                'label'   => "proposal.bathrooms_number.label",
+                'label'   => "proposal.residential.bathrooms_number.label",
                 'attr'  => [
-                    'placeholder' => "proposal.bathrooms_number.placeholder"
+                    'placeholder' => "proposal.residential.bathrooms_number.placeholder"
                 ]
             ])
             ->add("bedroomsNumber", "number", [
                 'required' => FALSE,
-                'label'    => "proposal.bedrooms_number.label",
+                'label'    => "proposal.residential.bedrooms_number.label",
                 'attr'  => [
-                    'placeholder' => "proposal.bedrooms_number.placeholder"
+                    'placeholder' => "proposal.residential.bedrooms_number.placeholder"
                 ]
             ])
             ->add("floor", "number", [
                 'required' => FALSE,
-                'label'    => "proposal.floor.label",
+                'label'    => "proposal.residential.floor.label",
                 'attr'  => [
-                    'placeholder' => "proposal.floor.placeholder"
+                    'placeholder' => "proposal.residential.floor.placeholder"
                 ]
             ])
             ->add("floorsNumber", "number", [
                 'required' => FALSE,
-                'label'    => "proposal.floors_number.label",
+                'label'    => "proposal.residential.floors_number.label",
                 'attr'  => [
-                    'placeholder' => "proposal.floors_number.placeholder"
+                    'placeholder' => "proposal.residential.floors_number.placeholder"
                 ]
             ])
             ->add("isCashless", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.is_cashless.label"
+                'label'    => "proposal.residential.is_cashless.label"
             ])
             ->add("isNewBuilding", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.is_new_building.label"
+                'label'    => "proposal.residential.is_new_building.label"
             ])
             ->add("hasElevator", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.has_elevator.label"
+                'label'    => "proposal.residential.has_elevator.label"
             ])
             ->add("hasParking", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.has_parking.label"
+                'label'    => "proposal.residential.has_parking.label"
             ])
             ->add("hasFurniture", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.has_furniture.label"
+                'label'    => "proposal.residential.has_furniture.label"
             ])
             ->add("hasRegistration", "checkbox", [
                 'required' => FALSE,
-                'label'    => "proposal.has_registration.label"
+                'label'    => "proposal.residential.has_registration.label"
             ])
             ->add("description", "textarea", [
                 'required' => FALSE,
-                'label'    => "proposal.description.label"
+                'label'    => "proposal.common.description.label"
             ])
             ->add("wasted", "checkbox", [
-                'label' => "proposal.wasted.label"
+                'label' => "proposal.common.wasted.label"
             ])
             ->add("send", 'submit', [
-                'label' => "proposal.submit.label"
+                'label' => "proposal.common.submit.label"
             ])
         ;
     }
@@ -200,13 +200,13 @@ class ProposalType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class'         => 'AppBundle\Model\Proposal',
+            'data_class'         => 'AppBundle\Model\ProposalResidential',
             'translation_domain' => 'forms'
         ]);
     }
 
     public function getName()
     {
-        return "proposal_type";
+        return "proposal_residential_type";
     }
 }

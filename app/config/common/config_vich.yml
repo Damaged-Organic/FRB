@@ -59,9 +59,41 @@ vich_uploader:
             delete_on_remove:   true
             delete_on_update:   true
 
+        information_intro_guide:
+            uri_prefix:         /uploads/information_intro/guide
+            upload_destination: %kernel.root_dir%/../www/uploads/information_intro/guide
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
         client_logo:
             uri_prefix:         /uploads/clients/logos
             upload_destination: %kernel.root_dir%/../www/uploads/clients/logos
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        client_chit_file:
+            uri_prefix:         /uploads/clients_chits/files
+            upload_destination: %kernel.root_dir%/../www/uploads/clients_chits/files
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        service_list_item_file:
+            uri_prefix:         /uploads/services_lists_items/files
+            upload_destination: %kernel.root_dir%/../www/uploads/services_lists_items/files
+            namer:              vich_uploader.namer_uniqid
+            inject_on_load:     true
+            delete_on_remove:   true
+            delete_on_update:   true
+
+        relocation_step_file:
+            uri_prefix:         /uploads/relocation_steps/files
+            upload_destination: %kernel.root_dir%/../www/uploads/relocation_steps/files
             namer:              vich_uploader.namer_uniqid
             inject_on_load:     true
             delete_on_remove:   true

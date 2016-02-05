@@ -47,19 +47,34 @@ services:
 
     # Constraints
 
-    app.constraint.is_type_valid:
-        class: AppBundle\Validator\Constraints\IsTypeValidConstraintValidator
+    app.constraint.is_type_residential_valid:
+        class: AppBundle\Validator\Constraints\IsTypeResidentialValidConstraintValidator
         arguments:
             - "@doctrine.orm.entity_manager"
         tags:
-            - { name: validator.constraint_validator, alias: is_type_valid }
+            - { name: validator.constraint_validator, alias: is_type_residential_valid }
+
+    app.constraint.is_type_commercial_valid:
+        class: AppBundle\Validator\Constraints\IsTypeCommercialValidConstraintValidator
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: validator.constraint_validator, alias: is_type_commercial_valid }
 
     app.constraint.is_trade_type_valid:
         class: AppBundle\Validator\Constraints\IsTradeTypeValidConstraintValidator
-        arguments:
-            - "@doctrine.orm.entity_manager"
         tags:
             - { name: validator.constraint_validator, alias: is_trade_type_valid }
+
+    app.constraint.is_layout_type_valid:
+        class: AppBundle\Validator\Constraints\IsLayoutTypeValidConstraintValidator
+        tags:
+            - { name: validator.constraint_validator, alias: is_layout_type_valid }
+
+    app.constraint.is_fit_out_type_valid:
+        class: AppBundle\Validator\Constraints\IsFitOutTypeValidConstraintValidator
+        tags:
+            - { name: validator.constraint_validator, alias: is_fit_out_type_valid }
 
     # Services
 

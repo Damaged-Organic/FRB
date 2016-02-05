@@ -13,6 +13,14 @@ class ClientChitAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        if( $clientChit = $this->getSubject() ){
+            $fileHelpOptionUA = ( $clientChit->getFileNameUA() ) ?: FALSE;
+            $fileHelpOptionEN = ( $clientChit->getFileNameEN() ) ?: FALSE;
+        } else {
+            $fileHelpOptionUA = FALSE;
+            $fileHelpOptionEN = FALSE;
+        }
+
         $formMapper
             ->add("translations", "a2lix_translations_gedmo", [
                 "locales"            => ['ua', 'en'],
@@ -32,6 +40,20 @@ class ClientChitAdmin extends Admin
                         ]
                     ]
                 ]
+            ])
+            ->add('fileUA', 'vich_file', [
+                'label'         => "Рекомендаційний лист (UA)",
+                'required'      => FALSE,
+                'allow_delete'  => TRUE,
+                'download_link' => TRUE,
+                'help'          => $fileHelpOptionUA
+            ])
+            ->add('fileEN', 'vich_file', [
+                'label'         => "Рекомендаційний лист (EN)",
+                'required'      => FALSE,
+                'allow_delete'  => TRUE,
+                'download_link' => TRUE,
+                'help'          => $fileHelpOptionEN
             ])
             ->add("isActive", "checkbox", [
                 "required" => FALSE,

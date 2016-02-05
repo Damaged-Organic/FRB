@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsTradeTypeValidConstraint extends Constraint
 {
-    public $message = "proposal.trade_type.valid";
+    public $message = "proposal.common.trade_type.valid";
 
     public function validatedBy()
     {

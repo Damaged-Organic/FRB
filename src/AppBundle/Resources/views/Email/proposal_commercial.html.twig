@@ -1,0 +1,67 @@
+{# AppBundle/Resources/views/Email/proposal_commercial.html.twig #}
+{% set contacts = proposal.email ~ ', ' ~ proposal.phone %}
+
+<h3>{{ 'proposal.intro'|trans({}, 'emails') }}</h3>
+
+<p>{{ 'proposal.body'|trans({ '%name%': proposal.name, '%contacts%': contacts }, 'emails') }}</p>
+
+<table border=1 cellpadding=5>
+    <tr>
+        <td>{{ 'proposal.common.type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.type)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.trade_type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.tradeType)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.city.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.city }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.street.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.street }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.house.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.house }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.space.label'|trans({}, 'forms') }}:</td>
+        <td>{{ proposal.space ~ ' m2' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.layout_type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.layoutType)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.fit_out_type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ('proposal.table.' ~ proposal.fitOutType)|trans({}, 'emails') }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.price_rent_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.priceRentValue ) ? proposal.priceRentValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.price_sale_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.priceSaleValue ) ? proposal.priceSaleValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.operating_expense_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.operatingExpenseValue ) ? proposal.operatingExpenseValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.parking_bay_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.parkingBayNumber ) ?: '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.commercial.parking_bay_price_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.parkingBayPriceValue ) ? proposal.parkingBayPriceValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
+    </tr>
+    <tr>
+        <td>{{ 'proposal.common.description.label'|trans({}, 'forms') }}:</td>
+        <td>{{ ( proposal.description ) ?: '-' }}</td>
+    </tr>
+</table>
+
+<p>{{ 'proposal.outro'|trans({ '%date%': 'now'|date('Y-m-d, H:i') }, 'emails') }}</p>

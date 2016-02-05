@@ -116,16 +116,17 @@ class InformationAdmin extends Admin
                     'help'          => $logoHelpOption
                 ])*/
                 ->add("link", "text", [
-                    'label' => "Посилання"
+                    'required' => FALSE,
+                    'label'    => "Посилання"
                 ])
                 ->add("emails", "textarea", [
-                    'label'    => "Електронна пошта",
                     'required' => FALSE,
+                    'label'    => "Електронна пошта",
                     'help'     => "Введіть електронні адреси по одній у рядок (через Enter)"
                 ])
                 ->add("phones", "textarea", [
-                    'label'    => "Телефони",
                     'required' => FALSE,
+                    'label'    => "Телефони",
                     'help'     => "Введіть телефони по одному у рядок (через Enter)"
                 ])
             ->end()

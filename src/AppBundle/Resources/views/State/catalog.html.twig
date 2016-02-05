@@ -50,11 +50,11 @@
                 </form>
             </div>
         </div>
-        {% if estateType == 'residential' %}
-            <div class="btn-long flat white inverse">
-        		<a href="{{ path('catalog_proposal', { '_locale': app.request.locale }) }}">{{ 'state.catalog.proposal'|trans }}</a>
-        	</div>
-        {% endif %}
+
+        <div class="btn-long flat white inverse">
+    		<a href="{{ path('catalog_proposal', { '_locale': app.request.locale, 'estateType': estateType }) }}">{{ 'state.catalog.proposal'|trans }}</a>
+    	</div>
+
         <div class="outer substrate catalog-content">
             <div class="inner">
                 <aside class="filter-holder">

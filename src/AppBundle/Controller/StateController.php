@@ -14,8 +14,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
 
 use AppBundle\Service\Filter\Utility\Interfaces\FilterArgumentsInterface,
     AppBundle\Entity\Article,
-    AppBundle\Model\Proposal,
-    AppBundle\Form\Type\ProposalType;
+    AppBundle\Model\ProposalResidential,
+    AppBundle\Form\Type\ProposalResidentialType,
+    AppBundle\Model\ProposalCommercial,
+    AppBundle\Form\Type\ProposalCommercialType;
 
 class StateController extends Controller implements FilterArgumentsInterface
 {
@@ -232,28 +234,41 @@ class StateController extends Controller implements FilterArgumentsInterface
     /**
      * @Method({"GET", "POST"})
      * @Route(
-     *      "/catalog/residential/proposal",
+     *      "/catalog/proposal/{estateType}",
      *      name="catalog_proposal",
      *      host="{_locale}.{domain}",
      *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential"}
      * )
      * @Route(
-     *      "/catalog/residential/proposal",
+     *      "/catalog/proposal/{estateType}",
      *      name="catalog_proposal_default",
      *      host="{domain}",
      *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%"}
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential"}
      * )
      */
-    public function catalogProposalAction(Request $request)
+    public function catalogProposalAction(Request $request, $estateType)
     {
         $_manager    = $this->getDoctrine()->getManager();
         $_translator = $this->get('translator');
 
         $message = NULL;
 
-        $proposalForm = $this->createForm(new ProposalType($_manager, $_translator), ($proposal = new Proposal));
+        switch($estateType)
+        {
+            case 'residential':
+                $proposalForm = $this->createForm(new ProposalResidentialType($_manager, $_translator), ($proposal = new ProposalResidential));
+            break;
+
+            case 'commercial':
+                $proposalForm = $this->createForm(new ProposalCommercialType($_manager, $_translator), ($proposal = new ProposalCommercial));
+            break;
+
+            default:
+                throw $this->createNotFoundException();
+            break;
+        }
 
         $proposalForm->handleRequest($request);
 
@@ -279,7 +294,22 @@ class StateController extends Controller implements FilterArgumentsInterface
 
                 $subject = $_translator->trans("proposal.subject", [], 'emails');
 
-                $body = $this->renderView('AppBundle:Email:proposal.html.twig', [
+                switch($estateType)
+                {
+                    case 'residential':
+                        $view = 'AppBundle:Email:proposal_residential.html.twig';
+                    break;
+
+                    case 'commercial':
+                        $view = 'AppBundle:Email:proposal_commercial.html.twig';
+                    break;
+
+                    default:
+                        throw $this->createNotFoundException();
+                    break;
+                }
+
+                $body = $this->renderView($view, [
                     'proposal'  => $proposal
                 ]);
 
@@ -298,7 +328,8 @@ class StateController extends Controller implements FilterArgumentsInterface
                 $this->get('session')->getFlashBag()->add('message_proposal', $message);
 
                 return $this->redirectToRoute('catalog_proposal', [
-                    '_locale' => $request->getLocale()
+                    '_locale'    => $request->getLocale(),
+                    'estateType' => $estateType
                 ], 301);
             }
         }
@@ -308,8 +339,9 @@ class StateController extends Controller implements FilterArgumentsInterface
             : NULL;
 
         return $this->render('AppBundle:State:catalog_proposal.html.twig', [
-            'form'    => $proposalForm->createView(),
-            'message' => $message
+            'estateType' => $estateType,
+            'form'       => $proposalForm->createView(),
+            'message'    => $message
         ]);
     }
 
@@ -660,9 +692,15 @@ class StateController extends Controller implements FilterArgumentsInterface
     {
         $manager = $this->getDoctrine()->getManager();
 
+        $informationIntro = $manager->getRepository('AppBundle:InformationIntro')->findOneBy([], []);
+
+        if( !$informationIntro )
+            throw $this->createNotFoundException();
+
         $informationCategories = $manager->getRepository('AppBundle:InformationCategory')->findAll();
 
         return $this->render('AppBundle:State:expats_information.html.twig', [
+            'informationIntro'      => $informationIntro,
             'informationCategories' => $informationCategories
         ]);
     }
@@ -688,7 +726,7 @@ class StateController extends Controller implements FilterArgumentsInterface
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], [], 1);
+        $contact = $manager->getRepository('AppBundle:Contact')->findOneBy([], []);
 
         if( !$contact )
             throw $this->createNotFoundException();

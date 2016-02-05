@@ -36,101 +36,132 @@ comment:
         label: Надіслати
 
 proposal:
-    name:
-        label:       Ім’я
-        placeholder: Введіть ваше ім’я
+    common:
+        name:
+            label:       Ім’я
+            placeholder: Введіть ваше ім’я
 
-    phone:
-        label:       Телефон
-        placeholder: Введіть ваш номер телефону
+        phone:
+            label:       Телефон
+            placeholder: Введіть ваш номер телефону
 
-    email:
-        label:       Електронна пошта
-        placeholder: Введіть адресу електронної пошти
+        email:
+            label:       Електронна пошта
+            placeholder: Введіть адресу електронної пошти
 
-    type:
-        label:       Тип приміщення
-        placeholder: Вкажіть тип приміщення
+        type:
+            label:       Тип приміщення
+            placeholder: Вкажіть тип приміщення
 
-    trade_type:
-        label:       Тип угоди
-        placeholder: Вкажіть тип угоди
+        trade_type:
+            label:       Тип угоди
+            placeholder: Вкажіть тип угоди
 
-    price_rent_value:
-        label:       Розмір орендної плати (місяць)
-        placeholder: Введіть розмір орендної плати
+        price_sale_value:
+            label:       Ціна продажу
+            placeholder: Введіть ціну продажу
 
-    price_sale_value:
-        label:       Ціна продажу
-        placeholder: Введіть ціну продажу
+        price_currency:
+            label:       Валюта
+            placeholder: Вкажіть валюту
 
-    price_currency:
-        label:       Валюта
-        placeholder: Вкажіть валюту
+        city:
+            label:       Місто
+            placeholder: Вкажіть місто
 
-    street:
-        label:       Вулиця
-        placeholder: Введіть назву вулиці
+        street:
+            label:       Вулиця
+            placeholder: Введіть назву вулиці
 
-    house:
-        label:       Будинок
-        placeholder: Введіть номер будинку
+        house:
+            label:       Будинок
+            placeholder: Введіть номер будинку
 
-    space:
-        label:       Площа приміщення
-        placeholder: Введіть площу приміщення
+        space:
+            label:       Площа приміщення
+            placeholder: Введіть площу приміщення
 
-    space_plot:
-        label:       Площа ділянки
-        placeholder: Введіть площу ділянки
+        description:
+            label: Додатково
 
-    rooms_number:
-        label:       Кількість кімнат
-        placeholder: Введіть кількість кімнат
+        wasted:
+            label: >
+                Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
+                та використання Ваших персональних даних, з метою обробки даного запиту,
+                відповідно до Закону України «Про захист персональних даних» від
+                01.06.2010р., № 2297-VI.
 
-    bathrooms_number:
-        label:       Кількість санвузлів
-        placeholder: Введіть кількість санвузлів
+        submit:
+            label: Запропонувати
 
-    bedrooms_number:
-        label:       Кількість спалень
-        placeholder: Введіть кількість спалень
+    residential:
+        price_rent_value:
+            label:       Розмір орендної плати (місяць)
+            placeholder: Введіть розмір орендної плати
 
-    floor:
-        label:       Поверх приміщення
-        placeholder: Введіть поверх приміщення
+        space_plot:
+            label:       Площа ділянки
+            placeholder: Введіть площу ділянки
 
-    floors_number:
-        label:       Кількість поверхів
-        placeholder: Введіть кількість поверхів
+        rooms_number:
+            label:       Кількість кімнат
+            placeholder: Введіть кількість кімнат
 
-    is_cashless:
-        label: Безготівковий розрахунок
+        bathrooms_number:
+            label:       Кількість санвузлів
+            placeholder: Введіть кількість санвузлів
 
-    is_new_building:
-        label: Побутова техніка
+        bedrooms_number:
+            label:       Кількість спалень
+            placeholder: Введіть кількість спалень
 
-    has_elevator:
-        label: Ліфт
+        floor:
+            label:       Поверх приміщення
+            placeholder: Введіть поверх приміщення
 
-    has_parking:
-        label: Парковка
+        floors_number:
+            label:       Кількість поверхів
+            placeholder: Введіть кількість поверхів
 
-    has_furniture:
-        label: Наявність меблів
+        is_cashless:
+            label: Безготівковий розрахунок
 
-    has_registration:
-        label: Реєстрація для нерезидента
+        is_new_building:
+            label: Побутова техніка
 
-    description:
-        label: Додатково
+        has_elevator:
+            label: Ліфт
 
-    wasted:
-        label: >
-            Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
-            та використання Ваших персональних даних, з метою обробки даного запиту,
-            відповідно до Закону України «Про захист персональних даних» від
-            01.06.2010р., № 2297-VI.
+        has_parking:
+            label: Парковка
 
-    submit:
-        label: Запропонувати
+        has_furniture:
+            label: Наявність меблів
+
+        has_registration:
+            label: Реєстрація для нерезидента
+
+    commercial:
+        price_rent_value:
+            label:       Розмір орендної плати за м.кв. (місяць)
+            placeholder: Введіть розмір орендної плати
+
+        fit_out_type:
+            label:       Тип ремонту
+            placeholder: Вкажіть тип ремонту
+
+        layout_type:
+            label:       Тип планування
+            placeholder: Вкажіть тип планування
+
+        operating_expense_value:
+            label:       Операцийні витрати за м.кв. (місяць)
+            placeholder: Вкажіть розмір операційних витрат
+
+        parking_bay_number:
+            label:       Кількість паркомісць
+            placeholder: Вкажіть кількість паркомісць
+
+        parking_bay_price_value:
+            label:       Ціна за паркомісце
+            placeholder: Вкажіть ціну за паркомісце

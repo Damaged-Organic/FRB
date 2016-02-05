@@ -79,7 +79,27 @@
                                                 <ul class="list-holder numbered-list">
 
                                                     {% for serviceListItem in serviceList.serviceListItems %}
-                                                        <li><p>{{ serviceListItem.text }}</p></li>
+                                                        <li>
+                                                            <p>{{ serviceListItem.text }}</p>
+
+                                                            {% if serviceListItem.fileUA or serviceListItem.fileEN %}
+                                                                {% if app.request.locale is same as('ua') %}
+                                                                    {% set file = ( serviceListItem.fileUA ) ? 'fileUA' : 'fileEN' %}
+                                                                {% endif %}
+
+                                                                {% if app.request.locale is same as('en') %}
+                                                                    {% set file = ( serviceListItem.fileEN ) ? 'fileEN' : 'fileUA' %}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {% set file = null %}
+                                                            {% endif %}
+
+                                                            {% if file %}
+                                                                <div class="btn-download">
+                													<a href="{{ vich_uploader_asset(serviceListItem, file) }}" class="icon icon-download" target="_blank"></a>
+                												</div>
+                                                            {% endif %}
+                                                        </li>
                                                     {% endfor %}
 
                                                 </ul>

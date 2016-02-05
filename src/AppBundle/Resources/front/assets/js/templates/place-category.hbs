@@ -53,11 +53,17 @@
 						</div>
 						<div class="photo-holder">
 							{{#if photo }}
-								<a href="{{ link }}" target="_blank">
+								{{#if link }}
+									<a href="{{ link }}" target="_blank">
+										<figure>
+											<img src="/uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}">
+										</figure>
+									</a>
+								{{else}}
 									<figure>
 										<img src="/uploads/information/logos/thumbs/{{ photo }}" alt="{{ title }}">
 									</figure>
-								</a>
+								{{/if}}
 							{{/if}}
 						</div>
 					</div>

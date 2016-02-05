@@ -12,6 +12,14 @@ class ServiceListItemAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
+        if( $serviceListItem = $this->getSubject() ){
+            $fileHelpOptionUA = ( $serviceListItem->getFileNameUA() ) ?: FALSE;
+            $fileHelpOptionEN = ( $serviceListItem->getFileNameEN() ) ?: FALSE;
+        } else {
+            $fileHelpOptionUA = FALSE;
+            $fileHelpOptionEN = FALSE;
+        }
+
         $formMapper
             ->add("translations", "a2lix_translations_gedmo", [
                 "locales"            => ['ua', 'en'],
@@ -31,6 +39,20 @@ class ServiceListItemAdmin extends Admin
                         ]
                     ]
                 ]
+            ])
+            ->add('fileUA', 'vich_file', [
+                'label'         => "Документ (UA)",
+                'required'      => FALSE,
+                'allow_delete'  => TRUE,
+                'download_link' => TRUE,
+                'help'          => $fileHelpOptionUA
+            ])
+            ->add('fileEN', 'vich_file', [
+                'label'         => "Документ (EN)",
+                'required'      => FALSE,
+                'allow_delete'  => TRUE,
+                'download_link' => TRUE,
+                'help'          => $fileHelpOptionEN
             ])
         ;
     }

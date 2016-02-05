@@ -68,8 +68,11 @@
         <div class="outer substrate" id="expats-holder">
             <div class="inner white-back">
                 <section class="expats-intro-holder">
-                    <h2>{{ 'state.expats_information.headline'|trans }}</h2>
-                    <p>{{ 'state.expats_information.text'|trans }}</p>
+                    <h2>{{ informationIntro.title }}</h2>
+                    {# <h2>{{ 'state.expats_information.headline'|trans }}</h2> #}
+                    <p>{{ informationIntro.text }}</p>
+                    {# <p>{{ 'state.expats_information.text'|trans }}</p> #}
+
                     <ul class="list-holder icon-list">
                         <li>
                             <span class="icon icon-building"></span>
@@ -84,6 +87,26 @@
                             <p>{{ 'state.expats_information.benefits.3'|trans }}</p>
                         </li>
                     </ul>
+
+                    {% if informationIntro.fileUA or informationIntro.fileEN %}
+                        {% if app.request.locale is same as('ua') %}
+                            {% set file = ( informationIntro.fileUA ) ? 'fileUA' : 'fileEN' %}
+                        {% endif %}
+
+                        {% if app.request.locale is same as('en') %}
+                            {% set file = ( informationIntro.fileEN ) ? 'fileEN' : 'fileUA' %}
+                        {% endif %}
+                    {% else %}
+                        {% set file = null %}
+                    {% endif %}
+
+                    {% if file %}
+                        <div class="btn-long white inverse">
+                            <a href="{{ vich_uploader_asset(informationIntro, file) }}" target="_blank">
+                                {{ 'state.expats_information.file'|trans }}
+                            </a>
+                        </div>
+                    {% endif %}
                 </section>
                 <section class="expats-location-info"></section>
             </div>

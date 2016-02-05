@@ -21,8 +21,21 @@ proposal:
     outro: Message sent at %date%.
 
     table:
-        apartment: Apartment
-        house:     House
-
         rent: Rent
         sale: Sale
+
+        apartment: Apartment
+        house:     House
+        office:    Offices
+        retail:    Retail
+        warehouse: Warehouses
+        buildings: Buildings
+        premises:  Premises
+        allotment: Allotment
+
+        cabinets:   Cabinets
+        open_space: Open space
+
+        shell_and_core: Shell&Core
+        after_tenant:   After previous tenant
+        renovated:      Renovated

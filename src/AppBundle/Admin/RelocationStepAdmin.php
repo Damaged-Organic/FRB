@@ -32,6 +32,14 @@ class RelocationStepAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        if( $relocationStep = $this->getSubject() ){
+            $fileHelpOptionUA = ( $relocationStep->getFileNameUA() ) ?: FALSE;
+            $fileHelpOptionEN = ( $relocationStep->getFileNameEN() ) ?: FALSE;
+        } else {
+            $fileHelpOptionUA = FALSE;
+            $fileHelpOptionEN = FALSE;
+        }
+
         $formMapper
             ->with("Релокація експатів - Локалізований контент")
                 ->add("translations", "a2lix_translations_gedmo", [
@@ -52,6 +60,20 @@ class RelocationStepAdmin extends Admin
                             ]
                         ]
                     ]
+                ])
+                ->add('fileUA', 'vich_file', [
+                    'label'         => "Документ (UA)",
+                    'required'      => FALSE,
+                    'allow_delete'  => TRUE,
+                    'download_link' => TRUE,
+                    'help'          => $fileHelpOptionUA
+                ])
+                ->add('fileEN', 'vich_file', [
+                    'label'         => "Документ (EN)",
+                    'required'      => FALSE,
+                    'allow_delete'  => TRUE,
+                    'download_link' => TRUE,
+                    'help'          => $fileHelpOptionEN
                 ])
             ->end()
             ->with("Пункти списку")

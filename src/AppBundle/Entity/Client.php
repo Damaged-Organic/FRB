@@ -149,7 +149,7 @@ class Client implements Translatable
     /**
      * Get logoName
      *
-     * @return string 
+     * @return string
      */
     public function getLogoName()
     {
@@ -172,7 +172,7 @@ class Client implements Translatable
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -206,7 +206,7 @@ class Client implements Translatable
     /**
      * Get clientChits
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getClientChits()
     {

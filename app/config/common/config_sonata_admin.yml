@@ -77,9 +77,23 @@ sonata_admin:
                         <p>
                             Пункти та категорії інформації для експатів.
                         </p>
-                        <h4>Контент</h4>
+                        <h4>Релокація експатів</h4>
                         <p>
-                            Статичний та динамічний контент сайту.
+                            Пункти та списки розділу релокації експатів.
+                        </p>
+                        <h4>Послуги</h4>
+                        <p>
+                            Послуги та списки послуг, що надає компанія.
+                        </p>
+                        <h4>Клієнти</h4>
+                        <p>
+                            Клієнти та Їх відгуки для сторінки послуг.
+                        </p>
+                        <h4>Інший контент</h4>
+                        <p>
+                            Статичний та динамічний контент сайту: <br> співробітники,
+                            вакансії, новини, текстове наповнення для сторінок <br>
+                            інформації для експатів, про компанію та контакти.
                         </p>
                         <h4>SEO (Пошукова оптимізація)</h4>
                         <p>
@@ -197,11 +211,32 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
 
+    sonata.admin.relocation_step:
+        class: AppBundle\Admin\RelocationStepAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Релокація експатів", label: "Пункти" }
+        arguments:
+            - ~
+            - AppBundle\Entity\RelocationStep
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
+
+    sonata.admin.relocation_step_item:
+        class: AppBundle\Admin\RelocationStepItemAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
+        arguments:
+            - ~
+            - AppBundle\Entity\RelocationStepItem
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle] ]
 
     sonata.admin.service:
         class: AppBundle\Admin\ServiceAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Послуги" }
+            - { name: sonata.admin, manager_type: orm, group: "Послуги", label: "Послуги" }
         arguments:
             - ~
             - AppBundle\Entity\Service
@@ -223,7 +258,7 @@ services:
     sonata.admin.service_list:
         class: AppBundle\Admin\ServiceListAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Списки послуг" }
+            - { name: sonata.admin, manager_type: orm, group: "Послуги", label: "Списки послуг" }
         arguments:
             - ~
             - AppBundle\Entity\ServiceList
@@ -245,7 +280,7 @@ services:
     sonata.admin.client:
         class: AppBundle\Admin\ClientAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Клієнти" }
+            - { name: sonata.admin, manager_type: orm, group: "Клієнти", label: "Клієнти та відгуки" }
         arguments:
             - ~
             - AppBundle\Entity\Client
@@ -267,7 +302,7 @@ services:
     sonata.admin.staff:
         class: AppBundle\Admin\StaffAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Співробітники" }
+            - { name: sonata.admin, manager_type: orm, group: "Інший контент", label: "Співробітники" }
         arguments:
             - ~
             - AppBundle\Entity\Staff
@@ -278,7 +313,7 @@ services:
     sonata.admin.vacancy:
         class: AppBundle\Admin\VacancyAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Вакансії" }
+            - { name: sonata.admin, manager_type: orm, group: "Інший контент", label: "Вакансії" }
         arguments:
             - ~
             - AppBundle\Entity\Vacancy
@@ -300,7 +335,7 @@ services:
     sonata.admin.article:
         class: AppBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Новини" }
+            - { name: sonata.admin, manager_type: orm, group: "Інший контент", label: "Новини" }
         arguments:
             - ~
             - AppBundle\Entity\Article
@@ -308,24 +343,13 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle] ]
 
-    sonata.admin.relocation_step:
-        class: AppBundle\Admin\RelocationStepAdmin
+    sonata.admin.information_intro:
+        class: AppBundle\Admin\InformationIntroAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Релокація експатів" }
+            - { name: sonata.admin, manager_type: orm, group: "Інший контент", label: "Інформація для експатів" }
         arguments:
             - ~
-            - AppBundle\Entity\RelocationStep
-            - ~
-        calls:
-            - [ setTranslationDomain, [AppBundle] ]
-
-    sonata.admin.relocation_step_item:
-        class: AppBundle\Admin\RelocationStepItemAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "", label: "", show_in_dashboard: false }
-        arguments:
-            - ~
-            - AppBundle\Entity\RelocationStepItem
+            - AppBundle\Entity\InformationIntro
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle] ]
@@ -333,7 +357,7 @@ services:
     sonata.admin.contact:
         class: AppBundle\Admin\ContactAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Контент", label: "Про компанію / контакти" }
+            - { name: sonata.admin, manager_type: orm, group: "Інший контент", label: "Про компанію / контакти" }
         arguments:
             - ~
             - AppBundle\Entity\Contact

@@ -58,29 +58,31 @@
         <div class="outer substrate catalog-content inside">
             <div class="inner white-back">
                 <article class="catalog-item">
-                    <div id="gallery-holder">
-                        <div class="photo-view">
-                            <figure>
-
+                    <div id="gallery-holder" {{ ( estate.estatePhoto|length <= 1 ) ? 'class="no-nav"' : null }}>
+                        <div id="photo-view-holder">
+                            <div class="photo-view">
                                 {% if estate.estatePhoto|length %}
-                                    <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_watermark') }}" alt="{{ estate.address }}">
+                                    <figure>
+                                        <img src="{{ vich_uploader_asset(estate.estatePhoto.0, 'photoFile')|imagine_filter('catalog_watermark') }}" alt="{{ estate.address }}">
+                                    </figure>
                                 {% endif %}
-
-                            </figure>
+                            </div>
+                            <span class="arrow arrow-left icon icon-arrow-left"></span>
+                            <span class="arrow arrow-right icon icon-arrow-right"></span>
                         </div>
 
                         {% if estate.estatePhoto|length %}
-                            <div class="navigation-holder">
+                            <div id="navigation-holder">
                                 <div class="navigation">
                                     <ul>
 
-                                        {% for estatePhoto in estate.estatePhoto %}
-                                            <li class="{{ ( loop.first ) ? 'active' }}" data-img="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_watermark') }}">
-                                                <figure>
-                                                    <img src="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_thumb_watermark') }}" alt="{{ estate.address }}">
-                                                </figure>
-                                            </li>
-                                        {% endfor %}
+                                    {% for estatePhoto in estate.estatePhoto %}
+                                        <li class="{{ ( loop.first ) ? 'active' }}" data-img="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_watermark') }}">
+                                            <figure>
+                                                <img src="{{ vich_uploader_asset(estatePhoto, 'photoFile')|imagine_filter('catalog_thumb_watermark') }}" alt="{{ estate.address }}">
+                                            </figure>
+                                        </li>
+                                    {% endfor %}
 
                                     </ul>
                                 </div>

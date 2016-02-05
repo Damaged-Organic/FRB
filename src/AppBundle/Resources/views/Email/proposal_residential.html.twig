@@ -1,4 +1,4 @@
-{# src/AppBundle/Resources/views/Email/proposal.html.twig #}
+{# src/AppBundle/Resources/views/Email/proposal_residential.html.twig #}
 {% set contacts = proposal.email ~ ', ' ~ proposal.phone %}
 
 <h3>{{ 'proposal.intro'|trans({}, 'emails') }}</h3>
@@ -7,102 +7,102 @@
 
 <table border=1 cellpadding=5>
     <tr>
-        <td>{{ 'proposal.type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.type.label'|trans({}, 'forms') }}:</td>
         <td>{{ ('proposal.table.' ~ proposal.type)|trans({}, 'emails') }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.trade_type.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.trade_type.label'|trans({}, 'forms') }}:</td>
         <td>{{ ('proposal.table.' ~ proposal.tradeType)|trans({}, 'emails') }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.price_rent_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.price_rent_value.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.priceRentValue ) ? proposal.priceRentValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.price_sale_value.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.price_sale_value.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.priceSaleValue ) ? proposal.priceSaleValue ~ ' ' ~ proposal.priceCurrency : '-' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.street.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.street.label'|trans({}, 'forms') }}:</td>
         <td>{{ proposal.street }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.house.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.house.label'|trans({}, 'forms') }}:</td>
         <td>{{ proposal.house }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.space.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.space.label'|trans({}, 'forms') }}:</td>
         <td>{{ proposal.space ~ ' m2' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.space_plot.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.space_plot.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.spacePlot ) ? proposal.spacePlot ~ ' m2' : '-' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.rooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.rooms_number.label'|trans({}, 'forms') }}:</td>
         <td>{{ proposal.roomsNumber }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.bathrooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.bathrooms_number.label'|trans({}, 'forms') }}:</td>
         <td>{{ proposal.bathroomsNumber }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.bedrooms_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.bedrooms_number.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.bedroomsNumber ) ?: '-' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.floor.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.floor.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.floor ) ?: '-' }}</td>
     </tr>
     <tr>
-        <td>{{ 'proposal.floors_number.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.residential.floors_number.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.floorsNumber ) ?: '-' }}</td>
     </tr>
 
     {% if proposal.isCashless %}
         <tr>
-            <td>{{ 'proposal.is_cashless.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.is_cashless.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     {% if proposal.isNewBuilding %}
         <tr>
-            <td>{{ 'proposal.is_new_building.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.is_new_building.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     {% if proposal.hasElevator %}
         <tr>
-            <td>{{ 'proposal.has_elevator.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.has_elevator.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     {% if proposal.hasParking %}
         <tr>
-            <td>{{ 'proposal.has_parking.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.has_parking.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     {% if proposal.hasFurniture %}
         <tr>
-            <td>{{ 'proposal.has_furniture.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.has_furniture.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     {% if proposal.hasRegistration %}
         <tr>
-            <td>{{ 'proposal.has_registration.label'|trans({}, 'forms') }}:</td>
+            <td>{{ 'proposal.residential.has_registration.label'|trans({}, 'forms') }}:</td>
             <td>+</td>
         </tr>
     {% endif %}
 
     <tr>
-        <td>{{ 'proposal.description.label'|trans({}, 'forms') }}:</td>
+        <td>{{ 'proposal.common.description.label'|trans({}, 'forms') }}:</td>
         <td>{{ ( proposal.description ) ?: '-' }}</td>
     </tr>
 </table>

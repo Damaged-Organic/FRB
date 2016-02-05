@@ -11,9 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method,
 use AppBundle\Model\Feedback,
     AppBundle\Form\Type\FeedbackType,
     AppBundle\Model\Comment,
-    AppBundle\Form\Type\CommentType,
-    AppBundle\Model\Proposal,
-    AppBundle\Form\Type\ProposalType;
+    AppBundle\Form\Type\CommentType;
 
 class FormController extends Controller
 {

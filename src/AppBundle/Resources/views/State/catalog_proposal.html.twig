@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block locale %}
-    <link rel="canonical" href="{{ url('catalog_proposal_default') }}">
-    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua" }) }}" hreflang="x-default">
-    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "en" }) }}" hreflang="en-us">
-    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua" }) }}" hreflang="uk-ua">
+    <link rel="canonical" href="{{ url('catalog_proposal_default', { 'estateType': estateType }) }}">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua", 'estateType': estateType }) }}" hreflang="x-default">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "en", 'estateType': estateType }) }}" hreflang="en-us">
+    <link rel="alternate" href="{{ url('catalog_proposal', { '_locale': "ua", 'estateType': estateType }) }}" hreflang="uk-ua">
 {% endblock %}
 
 {% block stylesheets %}
@@ -38,7 +38,13 @@
 		<div class="outer substrate">
 			<div class="inner white-back">
 
-                {% include 'AppBundle:Form:proposal.html.twig' with { '_locale': app.request.locale, 'form': form, 'message': message } only %}
+                {% if estateType is same as('residential') %}
+                    {% set proposalForm = 'AppBundle:Form:proposal_residential.html.twig' %}
+                {% elseif estateType is same as('commercial') %}
+                    {% set proposalForm = 'AppBundle:Form:proposal_commercial.html.twig'  %}
+                {% endif %}
+
+                {% include proposalForm with { '_locale': app.request.locale, 'form': form, 'message': message, 'estateType': estateType } only %}
 
 			</div>
 		</div>

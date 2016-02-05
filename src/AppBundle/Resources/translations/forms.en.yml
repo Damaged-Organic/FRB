@@ -36,101 +36,132 @@ comment:
         label: Send
 
 proposal:
-    name:
-        label:       Name
-        placeholder: Enter your name
+    common:
+        name:
+            label:       Name
+            placeholder: Enter your name
 
-    phone:
-        label:       Phone number
-        placeholder: Enter your phone number
+        phone:
+            label:       Phone number
+            placeholder: Enter your phone number
 
-    email:
-        label:       E-mail
-        placeholder: Enter your e-mail
+        email:
+            label:       E-mail
+            placeholder: Enter your e-mail
 
-    type:
-        label:       Property type
-        placeholder: Select your property type
+        type:
+            label:       Property type
+            placeholder: Select your property type
 
-    trade_type:
-        label:       Type of deal
-        placeholder: Select type of deal
+        trade_type:
+            label:       Type of deal
+            placeholder: Select type of deal
 
-    price_rent_value:
-        label:       Rent price per month
-        placeholder: Enter rent price
+        price_sale_value:
+            label:       Sale price
+            placeholder: Enter sale price
 
-    price_sale_value:
-        label:       Sale price
-        placeholder: Enter sale price
+        price_currency:
+            label:       Currency
+            placeholder: Select currency
 
-    price_currency:
-        label:       Currency
-        placeholder: Select currency
+        city:
+            label:       City
+            placeholder: Enter city name
 
-    street:
-        label:       Street
-        placeholder: Enter street name
+        street:
+            label:       Street
+            placeholder: Enter street name
 
-    house:
-        label:       Number of the building
-        placeholder: Enter number of the building
+        house:
+            label:       Number of the building
+            placeholder: Enter number of the building
 
-    space:
-        label:       Total space
-        placeholder: Enter your estate total space
+        space:
+            label:       Total space
+            placeholder: Enter your estate total space
 
-    space_plot:
-        label:       Total land area
-        placeholder: Enter your estate land area
+        description:
+            label: Additional information
 
-    rooms_number:
-        label:       Rooms number
-        placeholder: Enter rooms number
+        wasted:
+            label: >
+                Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
+                та використання Ваших персональних даних, з метою обробки даного запиту,
+                відповідно до Закону України «Про захист персональних даних» від
+                01.06.2010р., № 2297-VI.
 
-    bathrooms_number:
-        label:       Bathrooms number
-        placeholder: Enter bathrooms number
+        submit:
+            label: Propose
 
-    bedrooms_number:
-        label:       Bedrooms number
-        placeholder: Enter bedrooms number
+    residential:
+        price_rent_value:
+            label:       Rent price per month
+            placeholder: Enter rent price
 
-    floor:
-        label:       Floor
-        placeholder: Enter estate floor
+        space_plot:
+            label:       Total land area
+            placeholder: Enter your estate land area
 
-    floors_number:
-        label:       Floors number
-        placeholder: Enter floors number
+        rooms_number:
+            label:       Rooms number
+            placeholder: Enter rooms number
 
-    is_cashless:
-        label: Non-cash payment
+        bathrooms_number:
+            label:       Bathrooms number
+            placeholder: Enter bathrooms number
 
-    is_new_building:
-        label: Household electronics
+        bedrooms_number:
+            label:       Bedrooms number
+            placeholder: Enter bedrooms number
 
-    has_elevator:
-        label: Elevator
+        floor:
+            label:       Floor
+            placeholder: Enter estate floor
 
-    has_parking:
-        label: Parking
+        floors_number:
+            label:       Floors number
+            placeholder: Enter floors number
 
-    has_furniture:
-        label: Furnishing
+        is_cashless:
+            label: Non-cash payment
 
-    has_registration:
-        label: Registration for non-resident
+        is_new_building:
+            label: Household electronics
 
-    description:
-        label: Additional information
+        has_elevator:
+            label: Elevator
 
-    wasted:
-        label: >
-            Заповнюючи дану форму, Ви автоматично надаєте згоду на подальше зберігання
-            та використання Ваших персональних даних, з метою обробки даного запиту,
-            відповідно до Закону України «Про захист персональних даних» від
-            01.06.2010р., № 2297-VI.
+        has_parking:
+            label: Parking
 
-    submit:
-        label: Propose
+        has_furniture:
+            label: Furnishing
+
+        has_registration:
+            label: Registration for non-resident
+
+    commercial:
+        price_rent_value:
+            label:       Rent price per 1 sq.m. (month)
+            placeholder: Enter rent price
+
+        fit_out_type:
+            label:       Fit out type
+            placeholder: Select fit out type
+
+        layout_type:
+            label:       Layout type
+            placeholder: Select layout type
+
+        operating_expense_value:
+            label:       OpEx per 1 sq.m. (month)
+            placeholder: Enter OpEx value
+
+        parking_bay_number:
+            label:       Available parking slots
+            placeholder: Enter parking slots number
+
+        parking_bay_price_value:
+            label:       Price per 1 parking slot
+            placeholder: Enter price per parking slot
