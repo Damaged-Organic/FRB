@@ -33,6 +33,11 @@ class GeoCoder
         return $coordinates;
     }
 
+    public function getCoordinatesManual($lat, $lng)
+    {
+        return $lat . ";" . $lng;
+    }
+
     public function getClosestMarkers(Estate $estate, array $informationObjects)
     {
         $coordinatesObject = $estate->getCoordinates();

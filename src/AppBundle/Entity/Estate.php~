@@ -13,8 +13,10 @@ use Gedmo\Mapping\Annotation as Gedmo,
 use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
     AppBundle\Entity\Utility\DoctrineMapping\TranslationMapper,
     AppBundle\Entity\Utility\DoctrineMapping\SlugMapper,
+    AppBundle\Entity\Utility\DistrictsListInterface,
     AppBundle\Entity\Utility\TradeTypesListInterface,
-    AppBundle\Entity\Utility\DistrictsListInterface;
+    AppBundle\Entity\Utility\FitOutTypeListInterface,
+    AppBundle\Entity\Utility\LayoutTypeListInterface;
 
 /**
  * @ORM\Table(name="estate")
@@ -22,7 +24,12 @@ use AppBundle\Entity\Utility\DoctrineMapping\IdMapper,
  *
  * @Gedmo\TranslationEntity(class="AppBundle\Entity\EstateTranslation")
  */
-class Estate implements Translatable, TradeTypesListInterface, DistrictsListInterface
+class Estate implements
+    Translatable,
+    DistrictsListInterface,
+    TradeTypesListInterface,
+    FitOutTypeListInterface,
+    LayoutTypeListInterface
 {
     use IdMapper, TranslationMapper, SlugMapper;
 
@@ -134,6 +141,16 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     protected $coordinates;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $coordinatesManualLat;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $coordinatesManualLng;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isActive;
@@ -159,19 +176,6 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     }
 
     /**
-     * Get tradeTypes
-     *
-     * @return array
-     */
-    static public function getTradeTypes()
-    {
-        return [
-            self::TRADE_TYPE_RENT => "rent",
-            self::TRADE_TYPE_SALE => "sale"
-        ];
-    }
-
-    /**
      * Get districts
      *
      * @return array
@@ -191,6 +195,19 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
             self::DISTRICT_SH    => "shevchenkivskyi",
             self::DISTRICT_KO    => "kiev_oblast",
             self::DISTRICT_OTHER => "other"
+        ];
+    }
+
+    /**
+     * Get tradeTypes
+     *
+     * @return array
+     */
+    static public function getTradeTypes()
+    {
+        return [
+            self::TRADE_TYPE_RENT => "rent",
+            self::TRADE_TYPE_SALE => "sale"
         ];
     }
 
@@ -218,6 +235,85 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getTradeType()
     {
         return $this->tradeType;
+    }
+
+    /**
+     * Get fitOutTypes
+     *
+     * @return array
+     */
+    static public function getFitOutTypes()
+    {
+        return [
+            self::FIT_OUT_TYPE_SHELL_AND_CORE => "shell_and_core",
+            self::FIT_OUT_TYPE_AFTER_TENANT   => "after_tenant",
+            self::FIT_OUT_TYPE_RENOVATED      => "renovated"
+        ];
+    }
+
+    /**
+     * Set fitOutType
+     *
+     * @param boolean $fitOutType
+     * @return Estate
+     */
+    public function setFitOutType($fitOutType)
+    {
+        if( !in_array($fitOutType, array_keys(self::getFitOutTypes())) )
+            throw new InvalidArgumentException("Wrong fitOutType parameter");
+
+        $this->fitOutType = $fitOutType;
+
+        return $this;
+    }
+
+    /**
+     * Get fitOutType
+     *
+     * @return boolean
+     */
+    public function getFitOutType()
+    {
+        return $this->fitOutType;
+    }
+
+    /**
+     * Get layoutTypes
+     *
+     * @return array
+     */
+    static public function getLayoutTypes()
+    {
+        return [
+            self::LAYOUT_TYPE_CABINETS   => "cabinets",
+            self::LAYOUT_TYPE_OPEN_SPACE => "open_space",
+        ];
+    }
+
+    /**
+     * Set layoutType
+     *
+     * @param boolean $layoutType
+     * @return Estate
+     */
+    public function setLayoutType($layoutType)
+    {
+        if( !in_array($layoutType, array_keys(self::getLayoutTypes())) )
+            throw new InvalidArgumentException("Wrong layoutType parameter");
+
+        $this->layoutType = $layoutType;
+
+        return $this;
+    }
+
+    /**
+     * Get layoutType
+     *
+     * @return boolean
+     */
+    public function getLayoutType()
+    {
+        return $this->layoutType;
     }
 
     /**
@@ -540,6 +636,29 @@ class Estate implements Translatable, TradeTypesListInterface, DistrictsListInte
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Set isActive
+     *
+     * @param boolean $isActive
+     * @return Estate
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive
+     *
+     * @return boolean
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 
     /**

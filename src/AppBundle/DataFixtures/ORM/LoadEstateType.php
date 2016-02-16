@@ -177,7 +177,7 @@ class LoadEstateType extends AbstractFixture implements OrderedFixtureInterface
 
         $estateType_2_5
             ->setTranslatableLocale("en")
-            ->setTitle("Premises")
+            ->setTitle("Other premises")
         ;
 
         $manager->persist($estateType_2_5);

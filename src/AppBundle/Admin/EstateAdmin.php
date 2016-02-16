@@ -118,6 +118,16 @@ class EstateAdmin extends Admin
                     ]
                 ])
             ->end()
+            ->with("Нерухомість - Ручне введення координат")
+                ->add("coordinatesManualLat", "text", [
+                    'required' => FALSE,
+                    'label'    => "Широта"
+                ])
+                ->add("coordinatesManualLng", "text", [
+                    'required' => FALSE,
+                    'label'    => "Довгота"
+                ])
+            ->end()
             ->with("Нерухомість - Загальні дані")
                 ->add("code", "text", [
                     "label" => "ID"
@@ -238,7 +248,16 @@ class EstateAdmin extends Admin
     {
         $geoCoder = $this->getConfigurationPool()->getContainer()->get('app.geo_coder');
 
-        $coordinates = $geoCoder->getCoordinates($estate->getAddress());
+        if( $estate->getCoordinatesManualLat() && $estate->getCoordinatesManualLng() ) {
+            $coordinates = $geoCoder->getCoordinatesManual(
+                $estate->getCoordinatesManualLat(),
+                $estate->getCoordinatesManualLng()
+            );
+        } else {
+            $coordinates = $geoCoder->getCoordinates(
+                $estate->getAddress()
+            );
+        }
 
         if( $coordinates )
             $estate->setCoordinates($coordinates);

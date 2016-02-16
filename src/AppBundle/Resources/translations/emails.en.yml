@@ -30,7 +30,7 @@ proposal:
         retail:    Retail
         warehouse: Warehouses
         buildings: Buildings
-        premises:  Premises
+        premises:  Other premises
         allotment: Allotment
 
         cabinets:   Cabinets

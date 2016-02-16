@@ -141,6 +141,16 @@ class Estate implements
     protected $coordinates;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $coordinatesManualLat;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $coordinatesManualLng;
+
+    /**
      * @ORM\Column(type="boolean", nullable=false)
      */
     protected $isActive;
@@ -603,6 +613,52 @@ class Estate implements
     public function getCoordinates()
     {
         return $this->coordinates;
+    }
+
+    /**
+     * Set coordinatesManualLat
+     *
+     * @param string $coordinatesManualLat
+     * @return Estate
+     */
+    public function setCoordinatesManualLat($coordinatesManualLat)
+    {
+        $this->coordinatesManualLat = $coordinatesManualLat;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinatesManualLat
+     *
+     * @return string
+     */
+    public function getCoordinatesManualLat()
+    {
+        return $this->coordinatesManualLat;
+    }
+
+    /**
+     * Set coordinatesManualLng
+     *
+     * @param string $coordinatesManualLng
+     * @return Estate
+     */
+    public function setCoordinatesManualLng($coordinatesManualLng)
+    {
+        $this->coordinatesManualLng = $coordinatesManualLng;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinatesManualLng
+     *
+     * @return string
+     */
+    public function getCoordinatesManualLng()
+    {
+        return $this->coordinatesManualLng;
     }
 
     /**
