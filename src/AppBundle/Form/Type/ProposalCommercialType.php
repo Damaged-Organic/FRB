@@ -100,12 +100,11 @@ class ProposalCommercialType extends AbstractType
                     'placeholder' => "proposal.common.house.placeholder"
                 ]
             ])
-            ->add("space", "number", [
+            ->add("space", "text", [
                 'label'     => "proposal.common.space.label",
                 'attr'  => [
                     'placeholder' => "proposal.common.space.placeholder"
-                ],
-                'precision' => 2
+                ]
             ])
             ->add("fitOutType", 'choice', [
                 'label'       => "proposal.commercial.fit_out_type.label",

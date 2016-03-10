@@ -32,11 +32,11 @@
     </tr>
     <tr>
         <td>{{ 'proposal.common.space.label'|trans({}, 'forms') }}:</td>
-        <td>{{ proposal.space ~ ' m2' }}</td>
+        <td>{{ proposal.space }}</td>
     </tr>
     <tr>
         <td>{{ 'proposal.residential.space_plot.label'|trans({}, 'forms') }}:</td>
-        <td>{{ ( proposal.spacePlot ) ? proposal.spacePlot ~ ' m2' : '-' }}</td>
+        <td>{{ ( proposal.spacePlot ) ?: '-' }}</td>
     </tr>
     <tr>
         <td>{{ 'proposal.residential.rooms_number.label'|trans({}, 'forms') }}:</td>

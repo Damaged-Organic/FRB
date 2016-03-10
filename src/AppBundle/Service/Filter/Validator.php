@@ -138,6 +138,11 @@ class Validator implements FilterArgumentsInterface
         if( !isset($pricePerSquareRange['max']) || $notValid($pricePerSquareRange['max']) )
             $pricePerSquareRange['max'] = $existingPricePerSquareRange['max'];
 
+        if( $pricePerSquareRange['min'] == round($existingPricePerSquareRange['min']) &&
+            $pricePerSquareRange['max'] == round($existingPricePerSquareRange['max']) ) {
+            $pricePerSquareRange = NULL;
+        }
+
         return $pricePerSquareRange;
     }
 
@@ -154,6 +159,11 @@ class Validator implements FilterArgumentsInterface
 
         if( !isset($spaceRange['max']) || $notValid($spaceRange['max']) )
             $spaceRange['max'] = $existingSpaceRange['max'];
+
+        if( $spaceRange['min'] == round($existingSpaceRange['min']) &&
+            $spaceRange['max'] == round($existingSpaceRange['max']) ) {
+            $spaceRange = NULL;
+        }
 
         return $spaceRange;
     }
@@ -172,8 +182,8 @@ class Validator implements FilterArgumentsInterface
         if( !isset($spacePlotRange['max']) || $notValid($spacePlotRange['max']) )
             $spacePlotRange['max'] = $existingSpacePlotRange['max'];
 
-        if( $spacePlotRange['min'] == $existingSpacePlotRange['min'] &&
-            $spacePlotRange['max'] == $existingSpacePlotRange['max'] ) {
+        if( $spacePlotRange['min'] == round($existingSpacePlotRange['min']) &&
+            $spacePlotRange['max'] == round($existingSpacePlotRange['max']) ) {
             $spacePlotRange = NULL;
         }
 

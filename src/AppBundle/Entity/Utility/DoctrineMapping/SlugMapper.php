@@ -16,7 +16,6 @@ trait SlugMapper
      *      separator="_",
      *      style="lower"
      * )
-     * @Gedmo\Translatable
      */
     protected $slug;
 
@@ -28,5 +27,12 @@ trait SlugMapper
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $slug;
     }
 }

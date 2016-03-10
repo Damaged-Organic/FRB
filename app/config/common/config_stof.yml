@@ -11,6 +11,7 @@ stof_doctrine_extensions:
             translatable: true
             sluggable:    true
             uploadable:   true
+            sortable:     true
 
 doctrine:
     orm:

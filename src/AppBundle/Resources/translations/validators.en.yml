@@ -95,7 +95,7 @@ proposal:
 
         space:
             not_blank: Please, enter your property total space
-            range:
+            length:
                 min: Such space value is too small. Maybe you've made a mistake?
                 max: Such space value is too large. Maybe you've made a mistake?
 
@@ -112,7 +112,7 @@ proposal:
 
     residential:
         space_plot:
-            range:
+            length:
                 min: Such land area value is too small. Maybe you've made a mistake?
                 max: Such land area value is too large. Maybe you've made a mistake?
 

@@ -112,20 +112,18 @@ class ProposalResidentialType extends AbstractType
                     'placeholder' => "proposal.common.house.placeholder"
                 ]
             ])
-            ->add("space", "number", [
+            ->add("space", "text", [
                 'label'     => "proposal.common.space.label",
                 'attr'  => [
                     'placeholder' => "proposal.common.space.placeholder"
-                ],
-                'precision' => 2
+                ]
             ])
-            ->add("spacePlot", "number", [
+            ->add("spacePlot", "text", [
                 'required' => FALSE,
                 'label'    => "proposal.residential.space_plot.label",
                 'attr' => [
                     'placeholder' => "proposal.residential.space_plot.placeholder"
-                ],
-                'precision' => 2
+                ]
             ])
             ->add("roomsNumber", "number", [
                 'label'   => "proposal.residential.rooms_number.label",

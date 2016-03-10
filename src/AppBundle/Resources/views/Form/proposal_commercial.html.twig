@@ -151,8 +151,8 @@
         {{ form_widget(form.space, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'proposal.common.space.not_blank'|trans({}, "validators"),
-                'data-rule-min': 1, 'data-msg-min': 'proposal.common.space.range.min'|trans({}, "validators"),
-                'data-rule-max': 1000000, 'data-msg-max': 'proposal.common.space.range.max'|trans({}, "validators")
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.common.space.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "1000", 'data-msg-maxlength': 'proposal.common.space.length.max'|trans({}, "validators")
             }
         }) }}
         <div class="error-holder">
@@ -278,8 +278,8 @@
         {{ form_label(form.parkingBayNumber) }}
         {{ form_widget(form.parkingBayNumber, {
             'attr': {
-                'data-rule-min': 1, 'data-msg-min': 'proposal.residential.parking_bay_number.range.min'|trans({}, "validators"),
-                'data-rule-max': 1000, 'data-msg-max': 'proposal.residential.parking_bay_number.range.max'|trans({}, "validators")
+                'data-rule-min': 1, 'data-msg-min': 'proposal.commercial.parking_bay_number.range.min'|trans({}, "validators"),
+                'data-rule-max': 1000, 'data-msg-max': 'proposal.commercial.parking_bay_number.range.max'|trans({}, "validators")
             }
         }) }}
         <div class="error-holder">

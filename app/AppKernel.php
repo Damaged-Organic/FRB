@@ -45,6 +45,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new Sonata\FormatterBundle\SonataFormatterBundle(),
+            // Pix Digital
+            new Pix\SortableBehaviorBundle\PixSortableBehaviorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

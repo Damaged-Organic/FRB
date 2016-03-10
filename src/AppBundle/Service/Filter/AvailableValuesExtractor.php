@@ -64,12 +64,17 @@ class AvailableValuesExtractor
 
         if( $availablePrices )
         {
-            $priceMin = min($availablePrices);
-            $priceMax = max($availablePrices);
+            $priceMin = ( min($availablePrices) ) ?: 0;
+            $priceMax = ( max($availablePrices) ) ?: 0;
 
             $availablePrices = [
                 'min' => ( $priceMin != $priceMax ) ? $priceMin : 0,
                 'max' => $priceMax
+            ];
+
+            $availablePrices = [
+                'min' => ceil($availablePrices['min']),
+                'max' => ceil($availablePrices['max'])
             ];
         } else {
             $availablePrices = [
@@ -99,12 +104,17 @@ class AvailableValuesExtractor
 
         if( $availablePricesPerSquare )
         {
-            $pricePerSquareMin = min($availablePricesPerSquare);
-            $pricePerSquareMax = max($availablePricesPerSquare);
+            $pricePerSquareMin = ( min($availablePricesPerSquare) ) ?: 0;
+            $pricePerSquareMax = ( max($availablePricesPerSquare) ) ?: 0;
 
             $availablePricesPerSquare = [
                 'min' => ( $pricePerSquareMin != $pricePerSquareMax ) ? $pricePerSquareMin : 0,
                 'max' => $pricePerSquareMax
+            ];
+
+            $availablePricesPerSquare = [
+                'min' => ceil($availablePricesPerSquare['min']),
+                'max' => ceil($availablePricesPerSquare['max'])
             ];
         } else {
             $availablePricesPerSquare = [
@@ -157,8 +167,8 @@ class AvailableValuesExtractor
 
         if( $availablePlotSpaces )
         {
-            $spacePlotMin = min($availablePlotSpaces);
-            $spacePlotMax = max($availablePlotSpaces);
+            $spacePlotMin = ( min($availablePlotSpaces) ) ?: 0;
+            $spacePlotMax = ( max($availablePlotSpaces) ) ?: 0;
 
             $availablePlotSpaces = [
                 'min' => ( $spacePlotMin != $spacePlotMax ) ? $spacePlotMin : 0,

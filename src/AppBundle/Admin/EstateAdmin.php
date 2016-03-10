@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Admin\Admin,
     Sonata\AdminBundle\Datagrid\DatagridMapper,
     Sonata\AdminBundle\Form\FormMapper;
 
+use Gedmo\Sluggable\Util as Sluggable;
+
 use AppBundle\Entity\Estate,
     AppBundle\Service\GeoCoder;
 
@@ -22,6 +24,9 @@ class EstateAdmin extends Admin
             ])
             ->add("title", "text", [
                 "label" => "Назва об'єкту"
+            ])
+            ->add("address", "text", [
+                "label" => "Адреса об'єкту"
             ])
             ->add("estateType", NULL, [
                 "label" => "Тип нерухомості"
@@ -219,8 +224,9 @@ class EstateAdmin extends Admin
                     'by_reference' => FALSE,
                     'btn_add'      => "Додати зображення"
                 ], [
-                    'edit'   => 'inline',
-                    'inline' => 'table'
+                    'edit'     => 'inline',
+                    'inline'   => 'table',
+                    'sortable' => 'position'
                 ])
             ->end()
         ;
@@ -231,6 +237,7 @@ class EstateAdmin extends Admin
         if( !($estate instanceof Estate) )
             return;
 
+        $this->setSlug($estate);
         $this->setCoordinates($estate);
         $this->convertPrices($estate);
     }
@@ -240,8 +247,26 @@ class EstateAdmin extends Admin
         if( !($estate instanceof Estate) )
             return;
 
+        $this->setSlug($estate);
         $this->setCoordinates($estate);
         $this->convertPrices($estate);
+    }
+
+    protected function setSlug($estate)
+    {
+        $originalAddress = $estate->getAddress();
+
+        $estate->setTranslatableLocale('en');
+
+        $_manager = $this->getConfigurationPool()->getContainer()->get('Doctrine')->getManager();
+        $_manager->refresh($estate);
+
+        $slug = ( $estate->getAddress() )
+            ? $estate->getAddress()
+            : $originalAddress
+        ;
+
+        $estate->setSlug(Sluggable\Urlizer::urlize($slug, '_'));
     }
 
     protected function setCoordinates($estate)

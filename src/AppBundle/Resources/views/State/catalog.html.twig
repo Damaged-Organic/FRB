@@ -105,7 +105,15 @@
                         {% for estate in estates %}
                             <article class="col item">
                                 <div class="inner">
-                                    <a href="{{ path('catalog_item', { '_locale': app.request.locale, 'estateType': estateType, 'id': estate.id, 'slug': estate.slug }|merge(filterArguments)) }}">
+
+                                    {# Bastard-kludge, I was forced to #}
+                                    {% if estate.tradeType == 'trade_type_rent' %}
+                                        {% set tradeType = 'kiev_rent' %}
+                                    {% elseif estate.tradeType == 'trade_type_sale' %}
+                                        {% set tradeType = 'kiev_sale' %}
+                                    {% endif %}
+
+                                    <a href="{{ path('catalog_item', { '_locale': app.request.locale, 'estateType': estateType, 'tradeType': tradeType, 'id': estate.id, 'slug': estate.slug }|merge(filterArguments)) }}">
                                         <div class="photo-holder">
                                             <figure>
 

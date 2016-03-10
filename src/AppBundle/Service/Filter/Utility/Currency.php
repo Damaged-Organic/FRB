@@ -44,8 +44,13 @@ class Currency
                 : NULL;
     }
 
+    public function setDefaultCurrency()
+    {
+        $this->_session->set(self::CURRENCY, self::getDefaultCurrency());
+    }
+
     static public function getDefaultCurrency()
     {
-        return self::CURRENCY_CODE_UAH;
+        return self::CURRENCY_CODE_USD;
     }
 }

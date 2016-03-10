@@ -23,11 +23,9 @@
                                         </th>
                                     {% endif %}
                                 {% endfor %}
-                                {% if nested_group_field.children.photoPath is defined %}
-                                    <th>
-                                        Зображення
-                                    </th>
-                                {% endif %}
+                                <th>
+                                    Зображення
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="sonata-ba-tbody">
@@ -56,7 +54,7 @@
                                     {% if nested_group_field.children.photoPath is defined %}
                                         {% if nested_group_field.children.photoPath.vars.value %}
                                             <td>
-                                                <img width="500px" src="{{ nested_group_field.children.photoPath.vars.value }}">
+                                                <img width="250px" src="{{ nested_group_field.children.photoPath.vars.value }}">
                                             </td>
                                         {% endif %}
                                     {% endif %}

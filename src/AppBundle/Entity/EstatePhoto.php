@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\File\File,
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 use AppBundle\Entity\Utility\DoctrineMapping\IdMapper;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\Table(name="estate_photos")
  *
  * @Vich\Uploadable
@@ -26,6 +28,7 @@ class EstatePhoto
     const WEB_PATH = "/uploads/estate/photos/";
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="Estate", inversedBy="estatePhoto")
      * @ORM\JoinColumn(name="estate_id", referencedColumnName="id")
      */
@@ -50,6 +53,18 @@ class EstatePhoto
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updatedAt;
+
+    /**
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position;
+
+    /**
+     * @Gedmo\SortableGroup
+     * @ORM\Column(length=128)
+     */
+    private $category;
 
     /**
      * To string
@@ -99,7 +114,7 @@ class EstatePhoto
     /**
      * Get photoName
      *
-     * @return string 
+     * @return string
      */
     public function getPhotoName()
     {
@@ -122,11 +137,31 @@ class EstatePhoto
     /**
      * Get updatedAt
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     /**
@@ -145,7 +180,7 @@ class EstatePhoto
     /**
      * Get estate
      *
-     * @return \AppBundle\Entity\Estate 
+     * @return \AppBundle\Entity\Estate
      */
     public function getEstate()
     {

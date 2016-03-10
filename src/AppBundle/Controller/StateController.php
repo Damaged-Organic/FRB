@@ -103,8 +103,16 @@ class StateController extends Controller implements FilterArgumentsInterface
 
             if( !empty($filterArguments[self::FILTER_CURRENCY]) )
             {
-                if( !$filterCurrency->getCurrency() || ($filterCurrency->getCurrency() !== $filterArguments[self::FILTER_CURRENCY]) )
-                    $filterArguments[self::FILTER_PRICE] = [];
+                if( !$filterCurrency->getCurrency() )
+                    $filterCurrency->setDefaultCurrency();
+
+                if( $filterCurrency->getCurrency() )
+                {
+                    if( $filterCurrency->getCurrency() !== $filterArguments[self::FILTER_CURRENCY] ){
+                        $filterArguments[self::FILTER_PRICE] = [];
+                        $filterArguments[self::FILTER_PRICE_PER_SQUARE] = [];
+                    }
+                }
 
                 $filterCurrency->setCurrency($filterArguments[self::FILTER_CURRENCY]);
             }
@@ -348,18 +356,18 @@ class StateController extends Controller implements FilterArgumentsInterface
     /**
      * @Method({"GET"})
      * @Route(
-     *      "/catalog/{estateType}/{id}/{slug}",
+     *      "/catalog/{estateType}/{tradeType}/{id}/{slug}",
      *      name="catalog_item",
      *      host="{_locale}.{domain}",
      *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%", "estateType" = "commercial|residential", "tradeType" = "kiev_rent|kiev_sale", "id" = "\d+", "slug" = "[a-z0-9_]+"}
      * )
      * @Route(
-     *      "/catalog/{estateType}/{id}/{slug}",
+     *      "/catalog/{estateType}/{tradeType}/{id}/{slug}",
      *      name="catalog_item_default",
      *      host="{domain}",
      *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
-     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "id" = "\d+", "slug" = "[a-z0-9_]+"}
+     *      requirements={"domain" = "%domain%", "estateType" = "commercial|residential", "tradeType" = "kiev_rent|kiev_sale", "id" = "\d+", "slug" = "[a-z0-9_]+"}
      * )
      */
     public function catalogItemAction(Request $request, $estateType, $id, $slug)

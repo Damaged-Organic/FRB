@@ -177,8 +177,8 @@
         {{ form_widget(form.space, {
             'attr': {
                 'data-rule-required': "true", 'data-msg-required': 'proposal.common.space.not_blank'|trans({}, "validators"),
-                'data-rule-min': 1, 'data-msg-min': 'proposal.common.space.range.min'|trans({}, "validators"),
-                'data-rule-max': 1000000, 'data-msg-max': 'proposal.common.space.range.max'|trans({}, "validators")
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.common.space.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "1000", 'data-msg-maxlength': 'proposal.common.space.length.max'|trans({}, "validators")
             }
         }) }}
         <div class="error-holder">
@@ -190,8 +190,8 @@
         {{ form_label(form.spacePlot) }}
         {{ form_widget(form.spacePlot, {
             'attr': {
-                'data-rule-min': 1, 'data-msg-min': 'proposal.residential.space_plot.range.min'|trans({}, "validators"),
-                'data-rule-max': 1000000, 'data-msg-max': 'proposal.residential.space_plot.range.max'|trans({}, "validators")
+                'data-rule-minlength': "1", 'data-msg-minlength': 'proposal.residential.space_plot.length.min'|trans({}, "validators"),
+                'data-rule-maxlength': "1000", 'data-msg-maxlength': 'proposal.residential.space_plot.length.max'|trans({}, "validators")
             }
         }) }}
         <div class="error-holder">

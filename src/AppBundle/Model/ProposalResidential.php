@@ -122,21 +122,21 @@ class ProposalResidential
      *      message="proposal.common.space.not_blank"
      * )
      *
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 1,
-     *      max = 1000000,
-     *      minMessage="proposal.common.space.range.min",
-     *      maxMessage="proposal.common.space.range.max"
+     *      max = 1000,
+     *      minMessage="proposal.common.space.length.min",
+     *      maxMessage="proposal.common.space.length.max"
      * )
      */
     protected $space;
 
     /**
-     * @Assert\Range(
+     * @Assert\Length(
      *      min = 1,
-     *      max = 1000000,
-     *      minMessage="proposal.residential.space_plot.range.min",
-     *      maxMessage="proposal.residential.space_plot.range.max"
+     *      max = 1000,
+     *      minMessage="proposal.residential.space_plot.length.min",
+     *      maxMessage="proposal.residential.space_plot.length.max"
      * )
      */
     protected $spacePlot;

@@ -31,7 +31,7 @@ class Estate implements
     FitOutTypeListInterface,
     LayoutTypeListInterface
 {
-    use IdMapper, TranslationMapper, SlugMapper;
+    use IdMapper, TranslationMapper;
 
     /**
      * @ORM\OneToMany(targetEntity="EstateTranslation", mappedBy="object", cascade={"persist", "remove"})
@@ -40,6 +40,7 @@ class Estate implements
 
     /**
      * @ORM\OneToMany(targetEntity="EstatePhoto", mappedBy="estate", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      **/
     protected $estatePhoto;
 
@@ -715,7 +716,11 @@ class Estate implements
      */
     public function addEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
     {
-        $estatePhoto->setEstate($this);
+        $estatePhoto
+            ->setEstate($this)
+            ->setCategory($this->getId()
+        );
+
         $this->estatePhoto[] = $estatePhoto;
 
         return $this;
@@ -822,5 +827,29 @@ class Estate implements
     public function getEstateFeatures()
     {
         return $this->estateFeatures;
+    }
+
+    // Setting slug manually due to evil technical assignment
+
+    /**
+     * @ORM\Column(length=255, unique=true)
+     */
+    protected $slug;
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $slug;
     }
 }

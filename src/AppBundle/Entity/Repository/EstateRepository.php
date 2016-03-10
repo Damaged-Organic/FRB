@@ -317,7 +317,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                 $subQuery = $qb
                     ->select("IDENTITY(ea.estate) as estate_id")
                     ->from('AppBundle\Entity\EstateAttribute', "ea")
-                    ->leftJoin('AppBundle\Entity\Estate', 'e')
+                    ->leftJoin('AppBundle\Entity\Estate', 'e', 'WITH', 'e.id = ea.estate')
                     ->where('e.isActive = :isActive')
                     ->andWhere(
                         $qb->expr()->andX(
@@ -327,10 +327,12 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                         )
                     )
                     ->groupBy('estate_id')
-                    ->setParameter("isActive", TRUE)
-                    ->setParameter("attribute", (int)$attribute)
-                    ->setParameter("value_min", (int)$range['min'])
-                    ->setParameter("value_max", (int)$range['max'])
+                    ->setParameters([
+                        "isActive"  => TRUE,
+                        "attribute" => (int)$attribute,
+                        "value_min" => (int)$range['min'],
+                        "value_max" => (int)$range['max']
+                    ])
                     ->getQuery()
                 ;
 
