@@ -53,6 +53,7 @@ a{ text-decoration: none; }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #header{
 	width: 100%;
+	min-width: 1280px;
 	height: 90px;
 	overflow: hidden;
 	.logo{
@@ -329,6 +330,21 @@ a{ text-decoration: none; }
             }
         }
 	}
+}
+@media only screen and (max-width: 1365px){
+
+	#header{
+		&.common{
+			.menu{
+				& > ul{
+					& > li{
+						margin-right: 10px;
+					}
+				}
+			}
+		}
+	}
+
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*	header end								  */

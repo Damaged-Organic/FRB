@@ -1,7 +1,7 @@
 {# src/AppBundle/Resources/views/State/news.html.twig #}
 {% extends 'AppBundle::layout.html.twig' %}
 
-{% set intl_locale = ( app.request.locale != 'ua' ) ?: 'uk' %}
+{% set intl_locale = ( app.request.locale != 'ua' ) ? app.request.locale : 'uk' %}
 
 {% set metadata = getMetadata() %}
 

@@ -716,11 +716,7 @@ class Estate implements
      */
     public function addEstatePhoto(\AppBundle\Entity\EstatePhoto $estatePhoto)
     {
-        $estatePhoto
-            ->setEstate($this)
-            ->setCategory($this->getId()
-        );
-
+        $estatePhoto->setEstate($this);
         $this->estatePhoto[] = $estatePhoto;
 
         return $this;
@@ -832,7 +828,7 @@ class Estate implements
     // Setting slug manually due to evil technical assignment
 
     /**
-     * @ORM\Column(length=255, unique=true)
+     * @ORM\Column(length=255, nullable=true)
      */
     protected $slug;
 

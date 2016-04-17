@@ -16,7 +16,7 @@ common:
             short: Our location
 
     footer: >
-        © First Reality Brokerage. Created by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2015.
+        © First Reality Brokerage. Created by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Website personal materials usage without owners' permission is prohibited.
 
 state:
@@ -191,6 +191,7 @@ state:
 
     service:
         benefits: Our benefits
+        download: Download
 
     staff:
         headline: About us
@@ -219,7 +220,7 @@ state:
 
         empty:
             requirements: Requirements not specified
-            tabs:         Tasks not specified
+            tasks:        Tasks not specified
             advantages:   Advantages not specified
 
             vacancies:    No vacancies at this time

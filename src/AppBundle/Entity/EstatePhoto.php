@@ -61,12 +61,6 @@ class EstatePhoto
     private $position;
 
     /**
-     * @Gedmo\SortableGroup
-     * @ORM\Column(length=128)
-     */
-    private $category;
-
-    /**
      * To string
      */
     public function __toString()
@@ -152,16 +146,6 @@ class EstatePhoto
     public function getPosition()
     {
         return $this->position;
-    }
-
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
-
-    public function getCategory()
-    {
-        return $this->category;
     }
 
     /**

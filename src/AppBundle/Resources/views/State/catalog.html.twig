@@ -145,7 +145,7 @@
                                                 <p><span class="icon icon-sq"></span>{{ estate.space + 0 }} m<sup>2</sup></p>
                                             </li>
 
-                                            {% if estate.estateType.id == 4 %}
+                                            {% if estate.estateType.id == 4 and estate.spacePlot != 0 %}
                                                 <li title='{{ 'state.catalog.attributes.space_plot'|trans }}'>
                                                     <p><span class="icon icon-sq"></span>{{ estate.spacePlot + 0 }} m<sup>2</sup></p>
                                                 </li>
@@ -157,26 +157,26 @@
                                                 {% set make_it_happen = false %}
 
                                                 {% if estate.estateType.id == 3 %}
-                                                    {% if attribute.id == 3 or attribute.id == 4 or attribute.id == 5 %}
+                                                    {% if attribute.estateAttributeType.id == 3 or attribute.estateAttributeType.id == 4 or attribute.estateAttributeType.id == 5 %}
 
                                                         {% set make_it_happen = true %}
 
                                                     {% endif %}
                                                 {% elseif estate.estateType.id == 4 %}
-                                                    {% if attribute.id == 1 or attribute.id == 3 or attribute.id == 4 or attribute.id == 5 %}
+                                                    {% if attribute.estateAttributeType.id == 1 or attribute.estateAttributeType.id == 3 or attribute.estateAttributeType.id == 4 or attribute.estateAttributeType.id == 5 %}
 
                                                         {% set make_it_happen = true %}
 
                                                     {% endif %}
                                                 {% else %}
-                                                    {% if attribute.id == 1 or attribute.id == 2 or attribute.id == 6 %}
+                                                    {% if attribute.estateAttributeType.id == 1 or attribute.estateAttributeType.id == 2 or attribute.estateAttributeType.id == 6 %}
 
                                                         {% set make_it_happen = true %}
 
                                                     {% endif %}
 
                                                     {% if estate.estateType.id == 5 %}
-                                                        {% if attribute.id == 7 or attribute.id == 8 %}
+                                                        {% if attribute.estateAttributeType.id == 7 or attribute.estateAttributeType.id == 8 %}
 
                                                             {% set make_it_happen = true %}
 
@@ -216,6 +216,9 @@
                 {{ render(controller('AppBundle:Common:paginationBar', { 'estateType': estateType, 'filterArguments': filterArguments })) }}
 
             </div>
+        </div>
+        <div id="to-up">
+            <span class="icon icon-arrow-up"></span>
         </div>
     </main>
 {% endblock %}

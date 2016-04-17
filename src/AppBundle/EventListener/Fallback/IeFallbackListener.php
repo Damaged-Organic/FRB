@@ -33,50 +33,55 @@ class IeFallbackListener
 
     public function onKernelRequest($event)
     {
-        if( preg_match('/(?i)msie [5-8]/',$_SERVER['HTTP_USER_AGENT']) )
-            $event->setResponse($this->_ieFallbackController->ieFallbackAction());
-
-        # BIG FAT KLUDGE
-        $conversionTime = $this->_manager->getRepository('AppBundle:ConversionTime')->findOneBy([], [], 1);
-
-        if( $conversionTime )
+        if( $event->isMasterRequest() )
         {
-            if( !$conversionTime->getLastConversionTime() || ($conversionTime->getLastConversionTime() < (new DateTime('now'))->modify('midnight')) )
+            if( preg_match('/(?i)msie [5-8]/',$_SERVER['HTTP_USER_AGENT']) )
+                $event->setResponse($this->_ieFallbackController->ieFallbackAction());
+
+            # BIG FAT KLUDGE
+            $conversionTime = $this->_manager->getRepository('AppBundle:ConversionTime')->findOneBy([], [], 1);
+
+            if( $conversionTime )
             {
-                $estates = $this->_manager->getRepository('AppBundle:Estate')->findAll();
-
-                foreach( $estates as $estate )
+                if( !$conversionTime->getLastConversionTime() || ($conversionTime->getLastConversionTime() < (new DateTime('now'))->modify('midnight')) )
                 {
-                    if( $estate->getPriceUSD() )
+                    $estates = $this->_manager->getRepository('AppBundle:Estate')->findAll();
+
+                    foreach( $estates as $estate )
                     {
-                        $estate->setPriceUAH(
-                            $this->_currencyConverter->USD_UAH()->convert($estate->getPriceUSD())
-                        );
+                        if( $estate->getPriceUSD() )
+                        {
+                            if( ($priceUAH = $this->_currencyConverter->USD_UAH()->convert($estate->getPriceUSD())) )
+                            {
+                                $estate->setPriceUAH($priceUAH);
+                            }
+                        }
+
+                        if( $estate->getPricePerSquareUSD() )
+                        {
+                            if( ($priceUAH = $this->_currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())) )
+                            {
+                                $estate->setPricePerSquareUAH($priceUAH);
+                            }
+                        }
+
+                        $this->_manager->persist($estate);
                     }
 
-                    if( $estate->getPricePerSquareUSD() )
-                    {
-                        $estate->setPricePerSquareUAH(
-                            $this->_currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())
-                        );
-                    }
+                    $conversionTime->setLastConversionTime((new DateTime('now')));
+                    $this->_manager->persist($conversionTime);
 
-                    $this->_manager->persist($estate);
+                    $this->_manager->flush();
                 }
-
-                $conversionTime->setLastConversionTime((new DateTime('now')));
-                $this->_manager->persist($conversionTime);
+            } else {
+                $this->_manager->persist(
+                    (new ConversionTime())->setLastConversionTime((new DateTime('now')))
+                );
 
                 $this->_manager->flush();
             }
-        } else {
-            $this->_manager->persist(
-                (new ConversionTime())->setLastConversionTime((new DateTime('now')))
-            );
 
-            $this->_manager->flush();
+            # KLUDGES NEVER END
         }
-
-        # KLUDGES NEVER END
     }
 }

@@ -16,7 +16,7 @@ common:
             short: Ми на мапі
 
     footer: >
-        © First Reality Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2015.
+        © First Reality Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Використання власних матеріалів сайту без згоди власників заборонено.
 
 state:
@@ -190,6 +190,7 @@ state:
 
     service:
         benefits: Наші переваги
+        download: Скачати
 
     staff:
         headline: Про нас

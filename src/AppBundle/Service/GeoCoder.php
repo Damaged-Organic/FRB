@@ -80,6 +80,9 @@ class GeoCoder
 
     private function isCloseEnough($coordinatesObject, array $coordinatesMarkers)
     {
+        $coordinatesObject[0] = (float)$coordinatesObject[0];
+        $coordinatesObject[1] = (float)$coordinatesObject[1];
+
         $startLat = deg2rad($coordinatesObject[0]);
         $startLng = deg2rad($coordinatesObject[1]);
 

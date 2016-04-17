@@ -237,9 +237,16 @@ class EstateAdmin extends Admin
         if( !($estate instanceof Estate) )
             return;
 
-        $this->setSlug($estate);
         $this->setCoordinates($estate);
         $this->convertPrices($estate);
+    }
+
+    public function postPersist($estate)
+    {
+        if( !($estate instanceof Estate) )
+            return;
+
+        $this->setSlug($estate);
     }
 
     public function preUpdate($estate)
@@ -247,9 +254,16 @@ class EstateAdmin extends Admin
         if( !($estate instanceof Estate) )
             return;
 
-        $this->setSlug($estate);
         $this->setCoordinates($estate);
         $this->convertPrices($estate);
+    }
+
+    public function postUpdate($estate)
+    {
+        if( !($estate instanceof Estate) )
+            return;
+
+        $this->setSlug($estate);
     }
 
     protected function setSlug($estate)
@@ -266,7 +280,12 @@ class EstateAdmin extends Admin
             : $originalAddress
         ;
 
+        $slug = Sluggable\Urlizer::transliterate($slug, '_');
+
         $estate->setSlug(Sluggable\Urlizer::urlize($slug, '_'));
+
+        $_manager->persist($estate);
+        $_manager->flush();
     }
 
     protected function setCoordinates($estate)
@@ -294,16 +313,18 @@ class EstateAdmin extends Admin
 
         if( $estate->getPriceUSD() && empty($estate->getPriceUAH()) )
         {
-            $estate->setPriceUAH(
-                $currencyConverter->USD_UAH()->convert($estate->getPriceUSD())
-            );
+            if( ($priceUAH = $currencyConverter->USD_UAH()->convert($estate->getPriceUSD())) )
+            {
+                $estate->setPriceUAH($priceUAH);
+            }
         }
 
         if( $estate->getPricePerSquareUSD() && empty($estate->getPricePerSquareUAH()) )
         {
-            $estate->setPricePerSquareUAH(
-                $currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())
-            );
+            if( ($priceUAH = $currencyConverter->USD_UAH()->convert($estate->getPricePerSquareUSD())) )
+            {
+                $estate->setPricePerSquareUAH($priceUAH);
+            }
         }
     }
 

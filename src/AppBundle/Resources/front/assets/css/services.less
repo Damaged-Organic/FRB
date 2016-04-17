@@ -11,6 +11,8 @@
 }
 .extra-buttons-holder{
 	width: 620px;
+	min-width: auto;
+	max-width: auto;
 	margin: 0 auto;
 	overflow: hidden;
 	.btn-long{
@@ -98,13 +100,25 @@
 			margin-bottom: 40px;
 			.list-holder{
 				p{
-					width: ~"calc(100% - 60px)";
+					width: ~"calc(100% - 140px)";
 					float: left;
 					box-sizing: border-box;
 				}
 				.btn-download{
 					float: right;
+					width: 120px;
 					margin: 0;
+					a{
+						font-size: 1em;
+						text-transform: none;
+						color: @red;
+						&:before{
+							margin-right: 5px;
+						}
+						&:hover{
+							color: @black;
+						}
+					}
 				}
 			}
 		}

@@ -24,6 +24,28 @@ class StateController extends Controller implements FilterArgumentsInterface
     /**
      * @Method({"GET"})
      * @Route(
+     *      "/uk/",
+     *      name="index_seo_kludge",
+     *      host="{_locale}.{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"_locale" = "%locale%|en", "domain" = "%domain%"}
+     * )
+     * @Route(
+     *      "/uk/",
+     *      name="index_seo_kludge_default",
+     *      host="{domain}",
+     *      defaults={"_locale" = "%locale%", "domain" = "%domain%"},
+     *      requirements={"domain" = "%domain%"}
+     * )
+     */
+    public function indexSeoKludgeAction(Request $request)
+    {
+        return $this->redirectToRoute('index');
+    }
+
+    /**
+     * @Method({"GET"})
+     * @Route(
      *      "/",
      *      name="index",
      *      host="{_locale}.{domain}",

@@ -51,6 +51,8 @@ class Article implements Translatable
 
     /**
      * @ORM\Column(type="text", nullable=false)
+     *
+     * @Gedmo\Translatable
      */
     protected $content;
 
@@ -246,7 +248,7 @@ class Article implements Translatable
     static public function getTransformedArticles(array $news, $isLast, $locale)
     {
         // Dirty hack
-        $locale = ( $locale != 'ua' ) ?: 'uk';
+        $locale = ( $locale != 'ua' ) ? $locale : 'uk';
 
         $articles = [];
 

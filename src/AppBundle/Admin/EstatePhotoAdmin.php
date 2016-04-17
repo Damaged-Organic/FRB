@@ -16,13 +16,7 @@ class EstatePhotoAdmin extends Admin
 {
     public $last_position = 0;
 
-    private $container;
     private $positionService;
-
-    public function setContainer(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
 
     public function setPositionService(PositionHandler $positionHandler)
     {

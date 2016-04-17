@@ -13,9 +13,16 @@ class CurrencyConverter
 
     private $conversionCode = NULL;
 
+    private $rates;
+
+    public function __construct()
+    {
+        $this->rates = file_get_contents(self::API_LINK);
+    }
+
     private function requestRates()
     {
-        $rates = file_get_contents(self::API_LINK);
+        $rates = $this->rates;
 
         if( !$rates )
             return FALSE;
@@ -24,7 +31,7 @@ class CurrencyConverter
 
         foreach ($rates as $rate)
         {
-            if( $rate->bankName === self::LOOKUP_BANK &&
+            if( //$rate->bankName == self::LOOKUP_BANK &&
                 $rate->codeNumeric === $this->conversionCode )
                 return $rate->rateBuy;
         }

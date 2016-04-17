@@ -18,10 +18,11 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         $id = ( is_array($id) ) ? $id['id'] : $id;
 
         $query = $this->createQueryBuilder('e')
-            ->select('e, ep, et, ea, eat')
+            ->select('e, ep, et, ea, eat, ef')
             ->leftJoin('e.estatePhoto', 'ep')
             ->leftJoin('e.estateType', 'et')
             ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('e.estateFeatures', 'ef')
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('e.id = :id')
             ->setParameter('id', $id)
@@ -42,10 +43,11 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         $id = ( is_array($id) ) ? $id['id'] : $id;
 
         $query = $this->createQueryBuilder('e')
-            ->select('e, ep, et, ea, eat')
+            ->select('e, ep, et, ea, eat, ef')
             ->leftJoin('e.estatePhoto', 'ep')
             ->leftJoin('e.estateType', 'et')
             ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('e.estateFeatures', 'ef')
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('e.id = :id')
             ->andWhere('e.isActive = :isActive')
@@ -102,10 +104,11 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
     public function findByType(EstateType $estateType, $page = NULL, $results_per_page = NULL)
     {
         $query = $this->createQueryBuilder('e')
-            ->select('e, ep, et, ea, eat')
+            ->select('e, ep, et, ea, eat, ef')
             ->leftJoin('e.estatePhoto', 'ep')
             ->leftJoin('e.estateType', 'et')
             ->leftJoin('e.estateAttribute', 'ea')
+            ->leftJoin('e.estateFeatures', 'ef')
             ->leftJoin('ea.estateAttributeType', 'eat')
             ->where('et.parent = :estateType')
             ->andWhere('e.isActive = :isActive')

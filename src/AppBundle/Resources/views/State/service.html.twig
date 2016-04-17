@@ -96,7 +96,9 @@
 
                                                             {% if file %}
                                                                 <div class="btn-download">
-                													<a href="{{ vich_uploader_asset(serviceListItem, file) }}" class="icon icon-download" target="_blank"></a>
+                													<a href="{{ vich_uploader_asset(serviceListItem, file) }}" class="icon icon-download" target="_blank">
+                													    {{ 'state.service.download'|trans }}
+                													</a>
                 												</div>
                                                             {% endif %}
                                                         </li>

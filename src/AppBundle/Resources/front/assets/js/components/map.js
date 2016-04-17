@@ -10,7 +10,8 @@ let mapOptions = {
 	minZoom: 6,
 	maxZoom: 18,
 	mapTypeControl: false,
-	streetViewControl: false
+	streetViewControl: false,
+	scrollwheel: false
 }
 
 export default class Map{
