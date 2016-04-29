@@ -50,6 +50,14 @@
                         {% else %}
                             <span>{{ estate.priceUAH|number_format(0, '.', ',') ~ '₴' }}</span>{{ month }}
                         {% endif %}
+
+                        {% if estate.pricePerSquareUSD %}
+                            {% if currency == 'USD' %}
+                                ({{ estate.pricePerSquareUSD|number_format(0, '.', ',') ~ '$' }}/m²)
+                            {% else %}
+                                ({{ estate.pricePerSquareUAH|number_format(0, '.', ',') ~ '₴' }}/m²)
+                            {% endif %}
+                        {% endif %}
                     </p>
 
                 </div>
