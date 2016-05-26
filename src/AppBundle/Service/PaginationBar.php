@@ -111,27 +111,29 @@ class PaginationBar
 
         $pagination = array();
 
-        if( in_array($current_page, range(1, $pages_step)) )
-        {
-            if( $pages_number <= $pages_step ) {
-                $pagination = range(1, $pages_number);
-            } else {
-                $pagination = array_merge(range(1, $pages_step+1), array('separator',$pages_number));
-            }
-        } elseif( in_array($current_page, range($pages_number-$pages_step+1, $pages_number)) ) {
-            $pagination = array_merge(
-                array(1,'separator'),
-                range($pages_number-$pages_step, $pages_number)
-            );
-        } elseif( in_array($current_page, range($pages_step+1, $pages_number-$pages_step)) ) {
-            $side_step = ceil($pages_step / 2) - 1;
+        $pagination = range(1, $pages_number);
 
-            $pagination = array_merge(
-                array(1,'separator'),
-                range($current_page - $side_step, $current_page + $side_step),
-                array('separator',$pages_number)
-            );
-        }
+        // if( in_array($current_page, range(1, $pages_step)) )
+        // {
+        //     if( $pages_number <= $pages_step ) {
+        //         $pagination = range(1, $pages_number);
+        //     } else {
+        //         $pagination = array_merge(range(1, $pages_step+1), array('separator',$pages_number));
+        //     }
+        // } elseif( in_array($current_page, range($pages_number-$pages_step+1, $pages_number)) ) {
+        //     $pagination = array_merge(
+        //         array(1,'separator'),
+        //         range($pages_number-$pages_step, $pages_number)
+        //     );
+        // } elseif( in_array($current_page, range($pages_step+1, $pages_number-$pages_step)) ) {
+        //     $side_step = ceil($pages_step / 2) - 1;
+        //
+        //     $pagination = array_merge(
+        //         array(1,'separator'),
+        //         range($current_page - $side_step, $current_page + $side_step),
+        //         array('separator',$pages_number)
+        //     );
+        // }
 
         return ( !empty($pagination) ) ? $pagination : FALSE;
     }
