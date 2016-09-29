@@ -1,6 +1,6 @@
 # src/AppBundle/Resources/translations/messages.en.yml
 default:
-    title: First Reality Brokerage
+    title: First Realty Brokerage
 
 common:
     yes:  Yes
@@ -16,7 +16,7 @@ common:
             short: Our location
 
     footer: >
-        © First Reality Brokerage. Created by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
+        © First Realty Brokerage. Created by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Website personal materials usage without owners' permission is prohibited.
 
 state:

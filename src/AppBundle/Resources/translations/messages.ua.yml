@@ -1,6 +1,6 @@
 # src/AppBundle/Resources/translations/messages.ua.yml
 default:
-    title: First Reality Brokerage
+    title: First Realty Brokerage
 
 common:
     yes:  Так
@@ -16,7 +16,7 @@ common:
             short: Ми на мапі
 
     footer: >
-        © First Reality Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
+        © First Realty Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Використання власних матеріалів сайту без згоди власників заборонено.
 
 state:

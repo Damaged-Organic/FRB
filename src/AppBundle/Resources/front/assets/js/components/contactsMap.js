@@ -3,8 +3,8 @@
 import Map from "./map";
 
 const frb = {
-	lat: 50.4310347,
-	lng: 30.5415553
+	lat: 50.426078,
+	lng: 30.536912
 }
 
 export default class ContactsMap extends Map{

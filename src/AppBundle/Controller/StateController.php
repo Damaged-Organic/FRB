@@ -412,7 +412,7 @@ class StateController extends Controller implements FilterArgumentsInterface
 
         $currency = ( $filterCurrency->getCurrency() ) ?: $filterCurrency->getDefaultCurrency();
 
-        $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id);
+        $nearestEstates = $manager->getRepository('AppBundle:Estate')->getNearestEstates($id, $estateType);
 
         $informationObjects = $manager->getRepository('AppBundle:Information')->findAll();
 

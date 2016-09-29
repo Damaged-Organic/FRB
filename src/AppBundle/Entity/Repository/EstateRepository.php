@@ -55,6 +55,7 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
                 'id'       => $id,
                 'isActive' => TRUE
             ])
+            ->orderBy('e.id', 'DESC')
             ->getQuery()
         ;
 
@@ -66,15 +67,18 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
         return $query->getOneOrNullResult();
     }
 
-    public function getNearestEstates($id)
+    public function getNearestEstates($id, EstateType $estateType)
     {
         $previous = $this->createQueryBuilder('e')
             ->select('e')
+            ->leftJoin('e.estateType', 'et')
             ->where('e.id < :id')
+            ->andWhere('et.parent = :estateType')
             ->andWhere('e.isActive = :isActive')
             ->setParameters([
-                'id'       => $id,
-                'isActive' => TRUE
+                'id'         => $id,
+                'estateType' => $estateType,
+                'isActive'   => TRUE,
             ])
             ->orderBy('e.id', 'DESC')
             ->setMaxResults(1)
@@ -84,12 +88,16 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
 
         $next = $this->createQueryBuilder('e')
             ->select('e')
+            ->leftJoin('e.estateType', 'et')
             ->where('e.id > :id')
+            ->andWhere('et.parent = :estateType')
             ->andWhere('e.isActive = :isActive')
             ->setParameters([
-                'id'       => $id,
-                'isActive' => TRUE
+                'id'         => $id,
+                'estateType' => $estateType,
+                'isActive'   => TRUE,
             ])
+            ->orderBy('e.id', 'ASC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
@@ -126,7 +134,10 @@ class EstateRepository extends CustomEntityRepository implements FilterArguments
             ;
         }
 
-        $query = $query->getQuery();
+        $query = $query
+            ->orderBy('e.id', 'DESC')
+            ->getQuery()
+        ;
 
         $query->setHint(
             Query::HINT_CUSTOM_OUTPUT_WALKER,
