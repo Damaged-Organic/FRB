@@ -16,7 +16,7 @@ common:
             short: Our location
 
     footer: >
-        © First Realty Brokerage. Created by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
+        © First Realty Brokerage. Web Production by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Website personal materials usage without owners' permission is prohibited.
 
 state:

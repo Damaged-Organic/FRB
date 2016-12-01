@@ -16,7 +16,7 @@ common:
             short: Ми на мапі
 
     footer: >
-        © First Realty Brokerage. Створено в <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
+        © First Realty Brokerage. Web Production by <a href="%developers.link%" target="_blank">%developers.name%</a>, 2016.
         Використання власних матеріалів сайту без згоди власників заборонено.
 
 state:
